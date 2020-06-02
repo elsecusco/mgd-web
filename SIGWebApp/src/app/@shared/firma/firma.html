@@ -1,0 +1,40 @@
+<iframe frameborder="0" name="iframeFirma" id="iframeFirma" width="550px"
+        height="320px" style="position:absolute"></iframe>
+<form #form ngNoForm method="post" id="ssoForm" name="ssoForm" type="POST"
+      target="iframeFirma" [action]="f.urlServicio"
+      style="display: none"
+      accept-charset="ISO-8859-1">
+  <input type="hidden" name="cargo" [value]="f.cargo">
+  <input type="hidden" name="comentario" [value]="f.comentario">
+  <input type="hidden" name="razon" [value]="f.razon">
+  <input type="hidden" name="ubicacion" [value]="f.ubicacion">
+  <input type="hidden" name="rutaOrigen" [value]="f.rutaOrigen">
+  <input type="hidden" name="rutaDestino" [value]="f.rutaDestino">
+  <input type="hidden" name="rutaImagen" [value]="f.rutaImagen">
+  <input type="hidden" name="imagen" [value]="f.imagen">
+  <input type="hidden" name="nombreArchivos" [value]="f.nombreArchivos">
+  <input type="hidden" name="altoRubrica" [value]="f.altoRubrica">
+  <input type="hidden" name="anchoRubrica" [value]="f.anchoRubrica">
+  <input type="hidden" name="activarDescripcion"
+         [value]="f.activarDescripcion">
+  <input type="hidden" name="posicionFirma" [value]="f.posicionFirma">
+  <input type="hidden" id="nombreTag" name="nombreTag"
+         [value]="f.nombreTag" />
+  <input type="hidden" name="estiloFirma" [value]="f.estiloFirma">
+  <input type="hidden" name="ubicacionPagina" [value]="f.ubicacionPagina">
+  <input type="hidden" name="aplicarImagen" [value]="f.aplicarImagen">
+  <input type="hidden" name="usarPersonalizado"
+         [value]="f.usarPersonalizado">
+  <input type="hidden" name="tipoFirma" [value]="f.tipoFirma" />
+  <input type="hidden" name="listarArchivos" [value]="f.listarArchivos" />
+  <input type="hidden" name="nomarch" [value]="f.nomarch" />
+  <input type="hidden" name="nombreTag" [value]="f.nombreTag" />
+  <input type="hidden" name="tamanoFuente" [value]="f.tamanoFuente" />
+  <input type="hidden" name="alias" [value]="f.alias" />
+  <input type="hidden" name="session" [value]="f.session" />
+  <input type="hidden" name="coordenadas" [value]="f.coordenadas" />
+  <input type="hidden" name="invisible" [value]="f.invisible" />
+  <input type="hidden" name="numeroPagina" [value]="f.numeroPagina" />
+  <input type="submit" name="numeroPagina" id="btnFirmar" name="btnFirmar"
+         style="display:none" />
+</form>

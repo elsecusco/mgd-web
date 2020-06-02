@@ -1,0 +1,53 @@
+<mat-card fxLayout="row"
+          fxLayoutAlign="space-between"
+          fxLayoutGap="16px"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="start">
+ 
+     <!--Filtro de Usuario de Bandeja-->
+
+  <!--Bandejas del usuario-->
+  <mat-form-field fxFlex="32"
+                  appearance="outline"
+                  color="primary">
+    <mat-label>Bandeja</mat-label>
+    <mat-select placeholder="Bandeja"
+                [(value)]="bandejaf.bandeja"
+                (selectionChange)="actualizar()">
+      <!-- <mat-option value="1"> Mesa de Partes</mat-option> -->
+      <mat-option value="e"> Doc. Entrada</mat-option>
+      <mat-option value="a"> Doc. Atendidos</mat-option>
+      <mat-option value="s"> Doc. Emitidos</mat-option>
+      <!-- <mat-option [value]="0"> Todas las bandejas del Usuario</mat-option> -->
+    </mat-select>
+  </mat-form-field>
+
+
+    <two-picker class="wd-100"
+                [fechaInicio]="bandejaf.fechaInicio"
+                [fechaFin]="bandejaf.fechaFin"
+                (changeFecha)="changeFecha($event)"></two-picker>
+
+                <!-- [disabled]="buzonActual.permiso<3" -->
+
+    <button mat-mini-fab
+            matTooltip="Actualizar"
+            (click)="actualizar()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button mat-mini-fab
+            matTooltip="Nuevo Documento"
+           (click)="documentoNuevoInterno()">
+      <mat-icon>description</mat-icon>
+    </button>
+  <!-- </div> -->
+
+</mat-card>
+
+
+<!-- Orden de Restriccion -->
+<!-- 0- sin permiso 
+     1- lectura
+     2- derivar y atender
+     3- derivar y atender y crear nuevo documento -->

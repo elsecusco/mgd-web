@@ -1,0 +1,121 @@
+<div fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+  <span class="fs-16 fw-500">Atenciones</span>
+  <button mat-icon-button
+          matTooltip="Ver gráfico"
+          color="primary"
+          (click)="verReporteGrafo()">
+    <mat-icon >graphic_eq</mat-icon>
+  </button>
+  <button *ngIf="atencion"
+           mat-icon-button
+           color="primary"
+           (click)="guardarAtencion()"
+           matTooltip="Atender Documento">
+    <mat-icon>border_color</mat-icon>
+  </button>
+</div>
+<!-- LEYENDA PRIMERO -->
+<div class="clearfix">
+  <div class=" izquierda">
+    <p>Leyenda para Destinatarios</p>
+    <p style="color:#0b643a">
+      ► Verde: Principal</p>
+      <p style="color:#185175">
+      ►  Azul: Con Copia</p>
+  </div>
+  <div class="derecha">
+      <p>Leyenda para las Atenciones</p>
+    <p style="color:#e69605">
+      ►  Ambar: Atención Final</p>
+    <p style="color:#905835">
+      ► Marrón: Atención Informativa - Lectura</p>
+  </div>
+</div>
+<!-- FIN PRIMERA LEYENDA -->
+
+<div style="clear:both"> </div>
+
+<mat-table class="wd-120"
+           [dataSource]="atenciones">
+
+  <ng-container matColumnDef="nombreUsuarioOrigen">
+    <mat-header-cell *matHeaderCellDef style="color: black"> De </mat-header-cell>
+    <mat-cell *matCellDef="let e"> {{e.de}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="nombreUsuarioDestino">
+    <mat-header-cell *matHeaderCellDef style="color: black">Destinatario(s)</mat-header-cell>
+      <mat-cell *matCellDef="let e">
+        <ul>
+          <li *ngFor="let l of e.listaDetalles">
+              <span [ngClass]="l.tipoDerivacion">{{l.usuarioDestino}}</span>
+          </li>
+      </ul>
+      </mat-cell>
+ </ng-container>
+
+  <ng-container matColumnDef="fechaDerivacion">
+    <mat-header-cell *matHeaderCellDef style="color: black"> Fecha Derivacion </mat-header-cell>
+    <mat-cell *matCellDef="let e"> {{e.fechaDerivacion}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcionSolicitudAtencion">
+    <mat-header-cell *matHeaderCellDef style="color: black; text-align: center"> Proveído </mat-header-cell>
+      <mat-cell *matCellDef="let e" >
+          {{e.descripcionSolicitudAtencion}}
+      </mat-cell>
+   </ng-container>
+
+   <ng-container matColumnDef="plazoAtencion">
+    <mat-header-cell *matHeaderCellDef style="color: black"> Plazo Atención </mat-header-cell>
+    <mat-cell *matCellDef="let e" style="color:rgb(255, 87, 51)">
+      <mat-icon *ngIf="e.plazoAtencion">notification_important</mat-icon>
+        {{e.plazoAtencion}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaAtencion">
+      <mat-header-cell *matHeaderCellDef style="color: black; text-align: center"> Fecha Atención</mat-header-cell>
+      <mat-cell *matCellDef="let e" >
+        <ul>
+          <li *ngFor="let l of e.listaDetalles">
+              <span *ngIf="(l.tipoAtendido=='D'); else spanAten"><br /><br /></span>
+              <ng-template #spanAten>
+                <span [ngClass]="l.tipoAtendido">
+                   {{l.fechaAtencion}}
+                </span>
+              </ng-template>
+          </li>
+        </ul>
+      </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="masDetalle">
+    <mat-header-cell *matHeaderCellDef style="color: black"> Atención </mat-header-cell>
+    <mat-cell *matCellDef="let e" class="columnIcons" >
+      <ul>
+        <li *ngFor="let l of e.listaDetalles">
+            <span *ngIf="l.descripcionAtencion; else notDes">
+              <button mat-icon-button
+                [matTooltip]="'Atención '+l.usuarioDestino"
+                (click)="verDetalleAtencion(l,e)">
+              <mat-icon>event_available</mat-icon>
+              </button>
+            </span>
+            <ng-template #notDes>
+                <button mat-icon-button  style="color: grey"
+                [matTooltip]="'Sin atención '+l.usuarioDestino">
+              <mat-icon>event_busy</mat-icon>
+            </button>
+            </ng-template>
+        </li>
+      </ul>
+    </mat-cell>
+</ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+</mat-table>

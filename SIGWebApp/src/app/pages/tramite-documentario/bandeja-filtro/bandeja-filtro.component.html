@@ -1,0 +1,89 @@
+<mat-card fxLayout="row"
+          fxLayoutAlign="space-between"
+          fxLayoutGap="16px"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="start">
+ 
+     <!--Filtro de Usuario de Bandeja-->
+
+        <mat-form-field fxFlex="25"
+                        fxFlex.xs="auto"
+                        class="mg-bot-8"
+                        appearance="outline"
+                        color="primary">
+            <mat-label>Buzones de Usuario</mat-label>
+            <mat-select placeholder="Buzon"
+                        [(value)]="buzonActual"
+                        (selectionChange)="changeBuzon()">
+                <mat-option *ngFor="let t of listaBuzones"
+                            [value]="t">
+                    {{t.nombreUsuarioBuzon}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+  <!--Bandejas del usuario-->
+  <mat-form-field fxFlex
+                  appearance="outline"
+                  color="primary">
+    <mat-label>Bandeja</mat-label>
+    <mat-select placeholder="Bandeja"
+                [(value)]="bandejaf.bandeja"
+                (selectionChange)="actualizar()">
+      <!-- <mat-option value="1"> Mesa de Partes</mat-option> -->
+      <mat-option value="e"> Bandeja de Entrada</mat-option>
+      <mat-option value="a"> Documentos Atendidos</mat-option>
+      <mat-option value="s"> Documentos Derivados</mat-option>
+      <!-- <mat-option [value]="0"> Todas las bandejas del Usuario</mat-option> -->
+    </mat-select>
+  </mat-form-field>
+
+  <!--Formato dentro de la fecha-->
+      <!-- <div fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="start end"> -->
+      <!--Cambio de filtro de fechas-->
+        <mat-form-field fxFlex
+                        [style.width]="'250px'"
+                        appearance="outline"
+                        color="primary">
+          <mat-label>Fechas</mat-label>
+            <input matInput placeholder="Click para indicar la fecha"
+                  (dateTimeChange)="changeFecha()"
+                  [(ngModel)]="dateTimeRange"
+                  [selectMode]="'range'"
+                  [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+              <owl-date-time [pickerType]="'calendar'"#dtRange1></owl-date-time>
+        </mat-form-field>
+
+    <!-- <two-picker class="wd-100"
+                [fechaInicio]="bandejaf.fechaInicio"
+                [fechaFin]="bandejaf.fechaFin"
+                (changeFecha)="changeFecha($event)"></two-picker> -->
+
+                <!-- [disabled]="buzonActual.permiso<3" -->
+
+    <button mat-mini-fab
+            matTooltip="Actualizar"
+            (click)="actualizar()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button mat-mini-fab
+            [disabled]="buzonActual.mesaPartes==null"
+            matTooltip="Nuevo Documento"
+           (click)="documentoNuevo()">
+      <mat-icon>description</mat-icon>
+    </button>
+  <!-- </div> -->
+
+</mat-card>
+
+
+<!-- Orden de Restriccion -->
+<!-- 0- sin permiso 
+     1- lectura
+     2- derivar y atender
+     3- derivar y atender y crear nuevo documento -->

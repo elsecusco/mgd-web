@@ -1,0 +1,39 @@
+<form [formGroup]="form" novalidate>
+  <h1 mat-dialog-title>{{titulo}}</h1>
+  <mat-divider class="mg-bot-8"></mat-divider>
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Tipo de Aprobación</mat-label>
+      <input
+        matInput
+        readonly
+        placeholder="Aprobación"
+        formControlName="aprobacion"/>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Descripción Rechazo</mat-label>
+      <textarea
+        matInput
+        placeholder="Ingrese Descripción..."
+        formControlName="descripcionRechazo"
+        rows="2">
+      </textarea>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="rechazarDocumento()"
+      [disabled]="form.invalid"
+    >
+      Rechazar Documento
+    </button>
+
+    <button mat-button color="warn" [mat-dialog-close]="" cdkFocusInitial>
+      Cancelar
+    </button>
+  </div>
+</form>

@@ -1,0 +1,261 @@
+<ng-container *ngIf="doc.tipoDerivacion == 'P' && bandejaActiva == 'e'">
+  <row-container>
+    <span class="fs-16 fw-500 mg-bot-8">Atención Requerida:</span>
+    <div fxFlex="60"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary">
+        <mat-form-field fxFlex="100"
+            fxFlex.xs="auto"
+            appearance="outline"
+            class="mg-bot-8"
+            color="primary">
+            <mat-label>Atención</mat-label>
+            <input matInput
+                   readonly
+                   value="Principal destinatario">
+        </mat-form-field>
+    </div>
+    <div
+       *ngIf="aprobado"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+       <mat-icon>assignment_turned_in</mat-icon> Aprobado
+    </div>
+    <div
+       *ngIf="rechazado"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+       <mat-icon>stop_screen_share</mat-icon> Rechazado
+    </div>
+    <div
+       *ngIf="!(aprobado) && !(rechazado)"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+        <button mat-mini-fab
+            matTooltip="Descargar"
+            type="button"
+            color="primary"
+            (click)="descargar(archivoPrincipal)">
+        <mat-icon>cloud_download</mat-icon>
+        </button>
+        <button mat-mini-fab
+              color="primary"
+              type="button"
+              style="background-color:#07802d"
+              (click)="aprobar()"
+              matTooltip="Atender Documento">
+        <mat-icon>check_circle</mat-icon>
+      </button>
+      <button mat-mini-fab 
+              matTooltip="Rechazar Archivo"
+              type="button"
+              style="background-color:#d61f1f"
+              (click)="rechazar()">
+              <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </row-container>  
+</ng-container>
+ <row-container>
+  <span class="fs-16 fw-500 mg-bot-8">Documento Principal:</span>
+  <div fxFlex="60"
+      appearance="outline"
+      class="mg-bot-8"
+      color="primary">
+      <mat-form-field fxFlex="100"
+          fxFlex.xs="auto"
+          appearance="outline"
+          class="mg-bot-8"
+          color="primary">
+          <mat-label>Adjunte documento ...</mat-label>
+          <input matInput
+                 readonly
+                 [value]="archivoPrincipal.nombreArchivo">
+      </mat-form-field>
+  </div>
+  <div
+     *ngIf="archivoPrincipal.codigoDocumentoAdjunto == 0"
+     fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+    <button mat-icon-button
+            color="primary"
+            type="button"
+            (click)="adjuntar(1)"
+            matTooltip="Adjuntar/Subir Archivo">
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  </div>
+  <div
+    *ngIf="archivoPrincipal.codigoDocumentoAdjunto"
+     fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+    <button mat-icon-button 
+            matTooltip="Descargar"
+            type="button"
+            color="primary"
+            (click)="descargar(archivoPrincipal)">
+      <mat-icon>cloud_download</mat-icon>
+    </button>
+    <button mat-icon-button 
+            matTooltip="Eliminar"
+            type="button"
+            (click)="eliminar(archivoPrincipal)"
+            [style.visibility]="(doc.tipoDerivacion =='R' && archivoPrincipal.eliminable)? 'visible' : 'hidden'">
+            <mat-icon>delete_forever</mat-icon>
+    </button>
+  </div>
+</row-container>
+
+<div fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+  <span class="fs-16 fw-500">Archivos Anexos</span>
+  <button mat-icon-button
+          *ngIf="doc.tipoDerivacion == 'R'"
+          color="primary"
+          type="button"
+          (click)="adjuntar(2)"
+          matTooltip="Adjuntar/Subir Archivo">
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+</div>
+
+<table mat-table
+       class="wd-100"
+       [dataSource]="archivos">
+
+  <ng-container matColumnDef="nombreArchivo">
+    <th mat-header-cell
+        *matHeaderCellDef>Archivo</th>
+    <td mat-cell
+        *matCellDef="let e"> {{e.nombreArchivo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcionArchivo">
+    <th mat-header-cell
+        *matHeaderCellDef>Descripción Archivo</th>
+    <td mat-cell
+        *matCellDef="let e"> {{e.descripcionArchivo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaArchivo">
+    <th mat-header-cell
+        *matHeaderCellDef>Fecha Archivo</th>
+    <td mat-cell
+        *matCellDef="let e"> {{e.fechaArchivo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="accion">
+    <th mat-header-cell
+        *matHeaderCellDef>Acciones</th>
+    <td mat-cell
+        *matCellDef="let e">
+      <div>
+        <button mat-icon-button 
+                matTooltip="Descargar"
+                color="primary"
+                type="button"
+                (click)="descargar(e)">
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+        <!-- <button mat-icon-button 
+                matTooltip="AbrirPDF"
+                (click)="openPDF(e)">
+                <mat-icon>launch</mat-icon>
+        </button> -->
+        <button mat-icon-button 
+                matTooltip="Eliminar"
+                (click)="eliminar(e)"
+                type="button"
+                [style.visibility]="(doc.tipoDerivacion =='R' && e.eliminable)? 'visible' : 'hidden'">
+                <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row
+      *matHeaderRowDef="columnas"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: columnas;"></tr>
+</table>
+<ng-container *ngIf="screenAprobacion && bandejaActiva == 'e'">
+  <row-container>
+    <span class="fs-16 fw-500 mg-bot-8">Aprobación Requerida:</span>
+    <div fxFlex="60"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary">
+        <mat-form-field fxFlex="100"
+            fxFlex.xs="auto"
+            appearance="outline"
+            class="mg-bot-8"
+            color="primary">
+            <mat-label>Aprobación</mat-label>
+            <input matInput
+                   readonly
+                   [value]="doc.nombreDerivacion">
+        </mat-form-field>
+    </div>
+    <div
+       *ngIf="aprobado"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+       <mat-icon>assignment_turned_in</mat-icon> Aprobado
+    </div>
+    <div
+       *ngIf="rechazado"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+       <mat-icon>stop_screen_share</mat-icon> Rechazado
+    </div>
+    <div
+       *ngIf="!(aprobado) && !(rechazado)"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+       <button mat-mini-fab
+       matTooltip="Descargar"
+       type="button"
+       color="primary"
+       (click)="descargar(archivoPrincipal)">
+   <mat-icon>cloud_download</mat-icon>
+   </button>
+   <button mat-mini-fab
+         color="primary"
+         type="button"
+         style="background-color:#07802d"
+         (click)="aprobar()"
+         matTooltip="Aprobar Documento">
+   <mat-icon>check_circle</mat-icon>
+ </button>
+ <button mat-mini-fab 
+         matTooltip="Rechazar Archivo"
+         type="button"
+         style="background-color:#d61f1f"
+         (click)="rechazar()">
+         <mat-icon>cancel</mat-icon>
+ </button>
+    </div>
+  </row-container>  
+</ng-container>
+
+<a #link style="display: none"
+   class="a-link-file"></a>
+   

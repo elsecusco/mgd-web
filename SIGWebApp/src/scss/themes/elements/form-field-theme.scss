@@ -1,0 +1,40 @@
+// estilo botones
+@mixin form-field-theme($theme) {
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    // padding: 0.5em 0 0.5em 0;
+  }
+
+  .input-baseline-mini-fab {
+    // margin-top: 0.4em;
+  }
+
+  .mat-form-field-appearance-outline {
+
+    // padding: 0.5em 0 0.5em 0;
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    mat-hint {
+      margin-top: 1.34375em;
+    }
+  }
+
+
+  mat-form-field.mat-form-field {
+    font-size: 14px;
+
+    // .mat-form-field-wrapper {
+    //   padding-bottom: 0;
+    // }
+
+  }
+
+  // mat-paginator {
+  //   .mat-form-field-wrapper {
+  //     padding-bottom: 1.25em !important;
+  //   }
+
+  // }
+
+}

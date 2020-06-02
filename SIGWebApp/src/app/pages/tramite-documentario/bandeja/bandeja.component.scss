@@ -1,0 +1,82 @@
+table {
+  width: 100%;
+
+}
+
+.normal:hover, li:hover {
+  background-color: #97c3d5;
+ 
+  border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  border: 0px solid #000000;
+ 
+}
+
+.salida{
+  cursor: default;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0 0.3em 0;
+  padding: 0;
+  // font-weight: bold;
+  text-align: left;
+}
+
+li:last-child {
+  border: none;
+}
+
+li span {
+  text-decoration: none;
+  color: black;
+  vertical-align: middle;
+  display: table-cell;
+  height: 35px;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.mat-column-asunto{
+
+    max-width: 310px;
+}
+
+ tr.nuevoDoc td{
+  background-color:#355877 ;
+  color: rgb(207, 204, 204) !important;
+  
+  
+}
+
+.titulo{
+ font-size: 13px;
+ font-weight: bold;
+}
+ 
+//  .texto{
+//   font-size: 12px;
+//   display: flex;
+//   justify-content: space-evenly;
+//  }
+ .contenedor{
+  font-size: 11px;
+  width:100%;
+  display:flex;
+  justify-content: space-between;
+  
+}
+.contenido{
+  font-size: 11px;
+  height:80px;
+  width:10%;
+  float:left;
+  margin: 10px;
+}
+.derivado{
+  color: #5fadde;
+}
+.paginas{
+  color: black;
+}

@@ -1,0 +1,55 @@
+// estilo botones
+@mixin button-theme($theme) {
+  .mat-raised-button,
+  .mat-button {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase !important;
+  }
+  .mat-success {
+    background: $success;
+    color: white;
+  }
+  .mat-warning {
+    background: $warning;
+    color: white;
+  }
+  .mat-danger,
+  .mat-error {
+    background: $danger;
+    color: white;
+  }
+  .mat-info {
+    background: $info;
+    color: white;
+  }
+
+  .mat-dark {
+    background: $dark;
+    color: white;
+  }
+  .mat-question {
+    background: $question;
+    color: white;
+  }
+  // color de los iconos
+  .mat-i-success {
+    color: $success;
+  }
+  .mat-i-warning {
+    color: $warning;
+  }
+  .mat-i-danger,
+  .mat-i-error {
+    color: $danger;
+  }
+  .mat-i-info {
+    color: $info;
+  }
+  .mat-i-dark {
+    color: $dark;
+  }
+  .mat-i-question {
+    color: $question;
+  }
+}

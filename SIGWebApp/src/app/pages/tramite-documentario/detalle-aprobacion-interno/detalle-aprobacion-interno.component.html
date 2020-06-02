@@ -1,0 +1,69 @@
+<form [formGroup]="form" novalidate>
+  <div class="backdropFirma" *ngIf="firmando"></div>
+  <firma
+    *ngIf="isSave"
+    #firma
+    [f]="fields"
+    style="position:absolute;z-index:2000"
+    (resultado)="resultadoFirma($event)"></firma>
+  <h1 mat-dialog-title>{{titulo}}</h1>
+  <mat-divider class="mg-bot-8"></mat-divider>
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
+    <upload-file (file)="changeFile($event)"></upload-file>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Tipo de Aprobación</mat-label>
+      <input
+        matInput
+        readonly
+        placeholder="Aprobación"
+        formControlName="aprobacion"/>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Descripción Documento</mat-label>
+      <textarea
+        matInput
+        placeholder="Ingrese Descripción..."
+        formControlName="descripcionAprobacion"
+        rows="2">
+      </textarea>
+    </mat-form-field>
+    <!-- 
+    <mat-form-field
+      appearance="outline"
+      color="primary"
+      floatLabel="always">
+      <mat-label>Razón Firma Documento (Solo si va a firmar el documento)</mat-label>
+      <input
+        matInput
+        placeholder="Ingrese Razón Firma..."
+        formControlName="razon" />
+    </mat-form-field> -->
+
+    <ng-container *ngIf="file">
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="fw-400 cl-accent">{{ progress }} %</span>
+      </div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="progress"
+        color="accent">
+      </mat-progress-bar>
+    </ng-container>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="aprobarArchivo()"
+      [disabled]="form.invalid || file == undefined"
+    >
+      Subir Archivo y Aprobar
+    </button>
+
+    <button mat-button color="warn" [mat-dialog-close]="" cdkFocusInitial>
+      Cancelar
+    </button>
+  </div>
+</form>

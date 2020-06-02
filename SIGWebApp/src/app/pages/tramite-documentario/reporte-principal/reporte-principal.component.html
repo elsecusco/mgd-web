@@ -1,0 +1,12 @@
+<pdf-viewer [src]= "urlpdf"
+            [render-text]="true"
+            style="display: block;">
+</pdf-viewer>
+
+<!-- <mat-dialog-actions align="begin"> -->
+  <button mat-stroked-button color="primary" mat-dialog-close
+          (click)="descargarPdf()">Descargar
+  </button>
+    <a #link style="display: none" class="a-link-file"></a>
+  <button mat-stroked-button color="accent" mat-dialog-close>Cerrar</button>
+<!-- </mat-dialog-actions> -->

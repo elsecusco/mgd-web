@@ -1,0 +1,68 @@
+.logo{
+  text-align: center;
+  margin-bottom: 1em;
+  }
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 72px 0;
+}
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-card-content,
+mat-card-actions {
+   margin-bottom: 0px;
+  div {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+}
+
+.mat-toolbar {
+  min-height: 48px; 
+}
+
+mat-card {
+  z-index: 1;
+  padding-bottom: 0px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.margen {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+button {
+  margin-bottom: 24px !important;
+}
+button.active {
+  // cursor: not-allowed;
+  cursor: progress;
+}
+
+.progressbar {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.radius-top {
+  border-radius: 8px 8px 0px 0px;
+  margin-bottom: 2px;
+}
+
+.radius-bottom {
+  border-radius: 0px 0px 8px 8px;
+}
+
+.mat-card-actions .mat-raised-button {
+  margin: 0;
+}
