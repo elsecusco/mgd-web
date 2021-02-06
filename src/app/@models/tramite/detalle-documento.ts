@@ -1,0 +1,56 @@
+export class DetalleDocumento {
+  codigoDocumento: number;
+  codigoEstadoDocumento: number;
+  numeroDocumentoFisico: string;
+  numeroExpediente: string;
+  nombreDocumento: string;
+  contenidoDocumento: string;
+  numeroPaginas: number;
+  tieneCaducidad: number;
+  tieneVencimiento: number;
+  fechaDocumento: string;
+  fechaRecepcion: string;
+  fechaCaducidad: string;
+  fechaVencimiento: string;
+  codigoTipoRecepcionDocumento: number;
+  codigoRemitenteDocumento: number;
+  codigoTipoDocumento: number;
+  codigoEmpresa: number;
+  codigoSucursal: number;
+  codigoArea: number;
+  loginUsuarioDestino: string;
+  nombreTipoDocumento: string;
+  nombreEstadoDocumento: string;
+  nombreRemitenteDocumento: string;
+  nombreTipoRecepcion: string;
+  estadoAtendido : string;
+  mesaPartes?:string;
+  constructor() {
+    this.codigoDocumento = null;
+    this.codigoEstadoDocumento = null;
+    this.numeroDocumentoFisico = null;
+    this.numeroExpediente = null;
+    this.nombreDocumento = null;
+    this.contenidoDocumento = null;
+    this.numeroPaginas = null;
+    this.tieneCaducidad = null;
+    this.tieneVencimiento = null;
+    this.fechaDocumento = null;
+    this.fechaRecepcion = null;
+    this.fechaCaducidad = null;
+    this.fechaVencimiento = null;
+    this.codigoTipoRecepcionDocumento = null;
+    this.codigoRemitenteDocumento = null;
+    this.codigoTipoDocumento = null;
+    this.codigoEmpresa = null;
+    this.codigoSucursal = null;
+    this.codigoArea = null;
+    this.loginUsuarioDestino = null;
+    this.nombreTipoDocumento = null;
+    this.nombreEstadoDocumento = null;
+    this.nombreRemitenteDocumento = null;
+    this.nombreTipoRecepcion = null;
+    this.estadoAtendido = null;
+    this.mesaPartes=null;
+  }
+}

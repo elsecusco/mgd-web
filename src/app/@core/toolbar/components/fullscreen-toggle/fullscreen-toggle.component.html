@@ -1,0 +1,11 @@
+<!-- <button class="button" mat-button (click)="toggleFullscreen()" fxFlex="grow">
+  <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+  <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
+</button> -->
+
+<button mat-icon-button
+        (click)="toggleFullscreen()"
+        fxFlex="grow">
+  <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+  <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
+</button>

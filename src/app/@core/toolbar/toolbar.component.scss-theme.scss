@@ -1,0 +1,54 @@
+@mixin ngx-toolbar-component-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+
+
+  ngx-toolbar {
+    .mat-toolbar {
+      color: mat-color($primary, default-contrast);
+      background: mat-color($primary);
+    }
+
+    .mat-nav-list,
+    .mat-nav-list {
+      padding-top: 0;
+
+      .mat-list-item {
+        color: mat-color($primary, default-contrast);
+        background: mat-color($primary, 800);
+      }
+
+      .mat-list-item:hover {
+        color: mat-color($primary, default-contrast);
+        background: mat-color($primary, 600);
+      }
+
+      // .mat-list-item {
+      //   color: white;
+      //   background: #424242;
+      // }
+
+      // .mat-list-item:hover {
+      //   color: white;
+      //   background: #272B35;
+      // }
+    }
+  }
+
+  ngx-search-bar {
+    input.search-input {
+      color: mat-color($primary, default-contrast);
+      background: mat-color($primary, 600);
+    }
+
+    .search-dropdown {
+      color: mat-color($primary, default-contrast);
+      background: mat-color($primary, 600);
+    }
+  }
+}

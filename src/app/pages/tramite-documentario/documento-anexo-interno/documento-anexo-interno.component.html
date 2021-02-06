@@ -1,0 +1,433 @@
+<ng-container *ngIf="screenAtencion">
+  <!-- <ng-container> -->
+  <div fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+    <span class="fs-16 fw-500">Archivos Anexos Gerencia</span>
+    <button mat-icon-button
+            color="primary"
+            *ngIf="bandejaActiva == 'e'"
+            type="button"
+            (click)="adjuntar(3)"
+            matTooltip="Adjuntar/Subir Archivo">
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  </div>
+  
+  <table mat-table
+         class="wd-100 anexosGerencia"
+         [dataSource]="archivosGerencia">
+    <ng-container matColumnDef="nombreUsuario">
+          <th mat-header-cell
+              *matHeaderCellDef>Trabajador</th>
+          <td class="trabajador"
+              mat-cell
+              *matCellDef="let e"> {{e.nombreUsuario}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nombreArchivo">
+      <th mat-header-cell
+          *matHeaderCellDef>Archivo</th>
+      <td mat-cell
+          *matCellDef="let e"> {{e.nombreArchivo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="descripcionArchivo">
+      <th mat-header-cell
+          *matHeaderCellDef>Descripción Archivo</th>
+      <td mat-cell
+          *matCellDef="let e"> {{e.descripcionArchivo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="fechaArchivo">
+      <th mat-header-cell
+          *matHeaderCellDef>Fecha Archivo</th>
+      <td mat-cell
+          *matCellDef="let e"> {{e.fechaArchivo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell
+          *matHeaderCellDef>Acciones</th>
+      <td mat-cell
+          *matCellDef="let e">
+        <div>
+          <button mat-icon-button 
+                  matTooltip="Descargar"
+                  color="primary"
+                  type="button"
+                  (click)="descargar(e)">
+            <mat-icon>cloud_download</mat-icon>
+          </button>
+          <button mat-icon-button 
+                  matTooltip="Vista Previa"
+                  (click)="abrirVisor(e)"
+                  color="primary"
+                  type="button"
+                  [style.visibility]= "(e.extencion =='pdf')? 'visible' : 'hidden'">
+                  <mat-icon>image_search</mat-icon>
+          </button>
+          <button mat-icon-button 
+                  matTooltip="Eliminar"
+                  (click)="eliminar(e)"
+                  type="button"
+                  [style.visibility]="(e.eliminable)? 'visible' : 'hidden'">
+                  <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="columnasGerencia"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: columnasGerencia;"></tr>
+  </table>
+  </ng-container>
+  <ng-container *ngIf="screenAtencion && bandejaActiva == 'e'">
+  <row-container>
+      <span class="fs-16 fw-500 mg-bot-8">Atención Requerida:</span>
+      <div fxFlex="60"
+          appearance="outline"
+          class="mg-bot-8"
+          color="primary">
+          <mat-form-field fxFlex="100"
+              fxFlex.xs="auto"
+              appearance="outline"
+              class="mg-bot-8"
+              color="primary">
+              <mat-label>Atención</mat-label>
+              <input matInput
+                     readonly
+                     value="Principal destinatario">
+          </mat-form-field>
+      </div>
+      
+      <div
+         *ngIf="aprobado"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+         <mat-icon>assignment_turned_in</mat-icon> Aprobado
+      </div>
+      <div
+         *ngIf="rechazado"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+         <mat-icon>stop_screen_share</mat-icon> Rechazado
+      </div>
+      
+      <div
+         *ngIf="!(aprobado) && !(rechazado)"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+          <button mat-mini-fab
+              matTooltip="Descargar Principal"
+              type="button"
+              color="primary"
+              (click)="descargar(archivoPrincipal)">
+          <mat-icon>cloud_download</mat-icon>
+          </button>
+          <button mat-mini-fab
+                color="primary"
+                type="button"
+                style="background-color:#E86D0E"
+                (click)="derivarPrincipal()"
+                matTooltip="Derivar Documento">
+          <mat-icon>forward</mat-icon>
+        </button>
+          <button mat-mini-fab
+                color="primary"
+                type="button"
+                style="background-color:#07802d"
+                (click)="aprobar()"
+                matTooltip="Atender Documento">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+        <button mat-mini-fab 
+                matTooltip="Rechazar Archivo"
+                type="button"
+                style="background-color:#d61f1f"
+                (click)="rechazar()">
+                <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+    </row-container>  
+  </ng-container>
+   <row-container>
+    <span class="fs-16 fw-500 mg-bot-8">Documento Principal:</span>
+    <div fxFlex="60"
+        appearance="outline"
+        class="mg-bot-8 topspace"
+        color="primary">
+        <mat-form-field fxFlex="100"
+            fxFlex.xs="auto"
+            appearance="outline"
+            class="mg-bot-8"
+            color="primary">
+            <mat-label>Adjunte documento ...</mat-label>
+            <input *ngIf="tipoDocumento!=48"
+                   matInput
+                   readonly
+                   [value]="archivoPrincipal.nombreArchivo">
+            <input *ngIf="tipoDocumento==48"
+                   matInput
+                   readonly
+                   [value]="'Memo-'+doc.codigoDocumentoInterno+'.pdf'">
+        </mat-form-field>
+    </div>
+    <div
+       *ngIf="archivoPrincipal.codigoDocumentoAdjunto == null && tipoDocumento!=48"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+      <button mat-icon-button
+              color="primary"
+              type="button"
+              (click)="adjuntar(1)"
+              matTooltip="Adjuntar/Subir Archivo">
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    </div>
+    <div
+      *ngIf="archivoPrincipal.codigoDocumentoAdjunto && tipoDocumento!=48"
+       fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+      <button mat-icon-button 
+              matTooltip="Descargar"
+              type="button"
+              color="primary"
+              (click)="descargar(archivoPrincipal)">
+      <mat-icon>cloud_download</mat-icon>
+      </button>
+      <button    mat-icon-button 
+                  color="primary"
+                  matTooltip="Vista Previa"
+                  (click)="abrirVisor(archivoPrincipal)"
+                  type="button"
+                  [style.visibility]= "(archivoPrincipal.extencion =='pdf')? 'visible' : 'hidden'">
+                  <mat-icon>image_search</mat-icon>
+          </button>
+      <button mat-icon-button 
+              matTooltip="Eliminar"
+              type="button"
+              (click)="eliminar(archivoPrincipal)"
+              [style.visibility]="(doc.tipoDerivacion =='R' && archivoPrincipal.eliminable)? 'visible' : 'hidden'">
+              <mat-icon>delete_forever</mat-icon>
+      </button>
+   </div>
+
+
+       <!-- Botones para Valorización -->
+       <div
+       *ngIf="tipoDocumento==48"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+        <button mat-icon-button 
+                matTooltip="Descargar"
+                type="button"
+                color="primary"
+                (click)="descargarMemo()">
+        <mat-icon>cloud_download</mat-icon>
+        </button>
+        <button mat-mini-fab 
+                matTooltip="Ver Memo"
+                type="button"
+                style="background-color:#1e4364"
+                (click)="verMemo()"
+                [style.visibility]="(doc.tipoDerivacion =='R')? 'visible' : 'hidden'">
+                <mat-icon>print</mat-icon>
+        </button>
+        <button    mat-icon-button 
+                  color="primary"
+                  matTooltip="Vista Previa"
+                  (click)="abrirVisor(archivoPrincipal)"
+                  type="button"
+                  [style.visibility]= "(archivoPrincipal.extencion =='pdf' && doc.tipoDerivacion !='R')? 'visible' : 'hidden'">
+                  <mat-icon>image_search</mat-icon>
+          </button>
+               
+      </div>
+   <!-- Fin de botones para Valorización -->
+    
+  </row-container>
+  <div fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="8px"
+       class="mg-bot-8">
+    <span class="fs-16 fw-500">Archivos  Anexos</span>
+    <button mat-icon-button
+            *ngIf="doc.tipoDerivacion == 'R'"
+            color="primary"
+            type="button"
+            (click)="adjuntar(2)"
+            matTooltip="Adjuntar/Subir Archivo">
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  </div>
+  
+  <table mat-table
+         class="wd-100"
+         [dataSource]="archivos">
+  
+    <ng-container matColumnDef="nombreUsuario">
+          <th mat-header-cell
+              *matHeaderCellDef>Nombre</th>
+          <td mat-cell
+              *matCellDef="let e"> {{e.nombreUsuario}} </td>
+    </ng-container> 
+
+    <ng-container matColumnDef="nombreArchivo">
+      <th mat-header-cell
+          *matHeaderCellDef>Archivo</th>
+      <td mat-cell
+          *matCellDef="let e"> {{e.nombreArchivo}} </td>
+    </ng-container>  
+  
+    <ng-container matColumnDef="descripcionArchivo">
+      <th mat-header-cell
+          *matHeaderCellDef>Descripción Archivo</th>
+      <td mat-cell
+          *matCellDef="let e"> {{e.descripcionArchivo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="fechaArchivo">
+      <th mat-header-cell
+          *matHeaderCellDef>Fecha Archivo</th>
+      <td mat-cell
+          *matCellDef="let e"> {{e.fechaArchivo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell
+          *matHeaderCellDef>Acciones</th>
+      <td mat-cell
+          *matCellDef="let e">
+        <div style="display: flex;">
+          <button mat-icon-button 
+                  matTooltip="Descargar"
+                  color="primary"
+                  type="button"
+                  (click)="descargar(e)">
+            <mat-icon>cloud_download</mat-icon>
+          </button>
+
+          <button class="anexo adjunto"
+                  mat-icon-button 
+                  matTooltip="Vista Previa"
+                  color="primary"
+                  (click)="abrirVisor(e)"
+                  type="button"
+                  [style.visibility]= "(e.extencion =='pdf')? 'visible' : 'hidden'">
+                  <mat-icon>image_search</mat-icon>
+          </button>
+          
+          <button mat-icon-button 
+                  matTooltip="Reemplazar"
+                  (click)="reemplazar(e)"
+                  type="button"
+                  [style.visibility]="(screenAprobacion && editableFile)? 'visible' : 'hidden'">
+                  <mat-icon>sync</mat-icon>
+          </button>
+          
+          <button mat-icon-button 
+                  matTooltip="Eliminar"
+                  (click)="eliminar(e)"
+                  type="button"
+                  [style.visibility]="(doc.tipoDerivacion =='R' && e.eliminable && editableFile)? 'visible' : 'hidden'">
+                  <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="columnas"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: columnas;"></tr>
+  </table>
+  <ng-container *ngIf="screenAprobacion && bandejaActiva == 'e'">
+    <row-container>
+      <span class="fs-16 fw-500 mg-bot-8">Aprobación Requerida:</span>
+      <div fxFlex="60"
+          appearance="outline"
+          class="mg-bot-8"
+          color="primary">
+          <mat-form-field fxFlex="100"
+              fxFlex.xs="auto"
+              appearance="outline"
+              class="mg-bot-8"
+              color="primary">
+              <mat-label>Aprobación</mat-label>
+              <input matInput
+                     readonly
+                     [value]="doc.nombreDerivacion">
+          </mat-form-field>
+      </div>
+      <div
+         *ngIf="aprobado"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+         <mat-icon>assignment_turned_in</mat-icon> Aprobado
+      </div>
+      <div
+         *ngIf="rechazado"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+         <mat-icon>stop_screen_share</mat-icon> Rechazado
+      </div>
+     
+      <div
+         *ngIf="!(aprobado) && !(rechazado)"
+         fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px"
+         class="mg-bot-8">
+      <button mat-mini-fab
+         matTooltip="Descargar"
+         type="button"
+         color="primary"
+         (click)="descargar(archivoPrincipal)">
+     <mat-icon>cloud_download</mat-icon>
+     </button>
+     <button mat-mini-fab
+           color="primary"
+           type="button"
+           style="background-color:#07802d"
+           (click)="aprobar()"
+           matTooltip="Atender Documento">
+     <mat-icon>check_circle</mat-icon>
+   </button>
+   <button mat-mini-fab 
+           matTooltip="Rechazar Archivo"
+           type="button"
+           style="background-color:#d61f1f"
+           (click)="rechazar()">
+           <mat-icon>cancel</mat-icon>
+   </button>
+   <!-- <button mat-icon-button 
+          matTooltip="Vista Previa"
+          style="background-color:#035664"
+          (click)="visorPrincipal(archivoPrincipal)"
+          type="button">
+          <mat-icon>image_search</mat-icon>
+    </button> -->
+      </div>
+      
+    </row-container>  
+  </ng-container>
+  
+  <a #link style="display: none"
+     class="a-link-file"></a>  

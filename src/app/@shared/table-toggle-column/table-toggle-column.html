@@ -1,0 +1,20 @@
+<button mat-icon-button
+        [matMenuTriggerFor]="columnFilter">
+  <mat-icon>vertical_split</mat-icon>
+</button>
+
+<mat-menu #columnFilter="matMenu"
+          yPosition="below"
+          xPosition="before">
+  <div fxLayout="column">
+    <button class="mat-menu-item"
+            *ngFor="let columna of columnas;let i=index">
+      <mat-checkbox #checkbox
+                    checked="true"
+                    (change)="changeDisplayColumn(checkbox.checked,i)"
+                    (click)="$event.stopPropagation()">
+        {{headers[i]}}
+      </mat-checkbox>
+    </button>
+  </div>
+</mat-menu>

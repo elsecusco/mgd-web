@@ -1,0 +1,118 @@
+#table-detalle-valorizacion { 
+    width: 100% !important;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 500px;
+    height: 414px !important;
+}
+
+table#tdoc {
+    height: 414px !important;
+}
+.titulo{
+    font-weight: bold;
+    color: #1e4364;
+    text-align: center;
+ }
+.valorizacion{
+    height: 500px;
+}
+#header-cell {
+    padding: 12px 15px;
+    background-color: #009879 !important;
+    color: #ffffff  !important;
+    text-align: center  !important;
+}
+
+#stable-detalle-valorizacion tbody tr {
+    border-bottom: 1px solid #dddddd;
+   
+}
+
+#stable-detalle-valorizacion tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#stable-detalle-valorizacion tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.campoRazonSocial{
+    width: 65%;
+}
+
+.campoBuscar{
+    width: 35%;
+}
+
+.campoDescripcion{
+    width: 100%;
+}
+
+.mat-column-nombreProveedor {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+}
+
+.mat-column-numeroRuc {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+}
+
+
+.mat-column-descripcion {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 35% !important;
+    width: 35% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+}
+
+.mat-column-montoContrato {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+}
+.botonBuscar{
+    display:flex; 
+    align-items: center;
+    justify-content:center;
+    padding: 10px;
+    width:100%; 
+}
+.boton{
+    background: rgb(218, 94, 12) !important; 
+}

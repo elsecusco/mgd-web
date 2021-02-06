@@ -1,0 +1,96 @@
+mat-card {
+    padding: 6px 6px 0 6px;
+    margin-bottom: 12px;
+    }
+.btnBandeja{
+        background-image: url('../../../../assets/foco.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color:transparent !important;
+        color: black !important;
+        box-shadow: 0 4px 8px 0 rgba(250, 106, 10, 0.911) !important;
+                
+}
+
+.butons-box {
+  display: flex;
+}
+
+@media only screen and (max-width: 1300px) {
+  .butons-box {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .butons-box {
+    display: flex;
+    flex-direction:row;
+  }
+}
+
+div {
+    text-align: center;
+  }
+  .pulse-button {
+    
+    background-image: url('../../../../assets/foco.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    box-shadow:  black !important;
+
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(250, 106, 10, 0.911);
+    border-radius: 50%;
+    background-color: #e84c3d;
+    cursor: pointer;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  .pulse-inactive,
+  .pulse-button:hover {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -ms-animation: none;
+    animation: none;
+  }
+  
+  @-webkit-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+    }
+  }
+  @-moz-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+    }
+  }
+  @-ms-keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+    }
+  }
+  @keyframes pulse {
+    to {
+      box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+    }
+  }
+
+  .badge-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 5px;
+    min-width: 15px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }

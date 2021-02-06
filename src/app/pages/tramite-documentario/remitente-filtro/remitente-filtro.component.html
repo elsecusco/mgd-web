@@ -1,0 +1,35 @@
+<mat-form-field fxFlex
+                appearance="outline"
+                color="primary"
+                floatLabel="always">
+  <mat-label>Remitente</mat-label>
+  <mat-spinner [style.visibility]="show"
+               matPrefix
+               [strokeWidth]="1.8"
+               [diameter]="20"></mat-spinner>
+  <input matInput
+         autocomplete="off"
+         placeholder="Buscar remitente..."
+         [matAutocomplete]="auto"
+         [formControl]="nombreRemitente">
+
+  <mat-autocomplete #auto="matAutocomplete"
+                    [displayWith]="displayFn"
+                    (optionSelected)="selectRemitente()">
+    <mat-option *ngFor="let r of remitentes | async"
+                [value]="r">       
+      <span>{{ r.nombreRemitenteDocumento }}</span>
+    </mat-option>
+  </mat-autocomplete>
+   <!-- <button matSuffix
+          [disabled]="disabled"
+          mat-icon-button
+          color="primary"
+          type="button"
+          (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-hint align="start">
+    (mínimo 5 caracteres)
+  </mat-hint> -->
+</mat-form-field>

@@ -1,0 +1,108 @@
+<mat-card fxLayout="row"
+          fxLayoutAlign="center"
+          fxLayoutGap="16px"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="start">
+  <form [formGroup]="form"
+          (ngSubmit)="buscarValorizacion()"
+          #f="ngForm"
+          novalidate
+          class="wd-100"
+          fxLayout="column"
+          fxLayoutGap="8px">
+        <loading-sp [loading]="searching"></loading-sp>
+        <mat-progress-bar *ngIf="searching"
+                          mode="indeterminate"></mat-progress-bar>
+ <div fxFlex = "100">
+   <!-- <span class="fs-16 fw-500 mg-bot-8">Filtros de Búsqueda</span> -->
+   <span class="titulo">Filtros de Búsqueda
+   <mat-icon matSuffix>search</mat-icon>
+  </span>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <p>
+    <row-container>
+      <mat-form-field class="campoRazonSocial"
+                      appearance="outline"
+                      color="primary">
+          <mat-label>Razon Social</mat-label>
+          <input matInput
+            formControlName="porRazonSocial"
+            placeholder="Digite Razon Social...">
+          <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>      
+      <mat-form-field class="campoRuc"
+                      appearance="outline"
+                      color="primary">
+          <mat-label>Ruc</mat-label>
+          <input matInput
+            formControlName="porRuc"
+            placeholder="Digite Ruc...">
+          <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>      
+    </row-container> 
+    <row-container>
+      <mat-form-field class="campoDescripcion"
+                      appearance="outline"
+                      color="primary">
+          <mat-label>Descripción del Contrato</mat-label>
+          <input matInput 
+            formControlName="porDescripcionContrato"
+            placeholder="Digite parte de la descripcion...">
+          <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>      
+    </row-container>
+    <row-container>
+      <two-picker class="campoRuc"
+              [fechaInicio]="form.value.porFechaInicio"
+              [fechaFin]="form.value.porFechaFin"
+              (changeFecha)="changeFecha($event)">
+     </two-picker>
+   </row-container> 
+    
+    </p>
+    <div class="botonBuscar">
+      <button class="boton"
+              type="submit"
+              mat-raised-button
+              [disabled]="form.get('porDescripcionContrato').value ==='' && form.get('porRuc').value ==='' && form.get('porRazonSocial').value ===''"
+              color="primary">BUSCAR
+        <mat-icon>find_in_page</mat-icon>
+      </button>
+  </div>
+  
+  <table-container 
+                [heightSub]="10"
+                [loading]="false">
+    <table mat-table
+            matSort
+            id="table-detalle-valorizacion"
+            class="table-bordered"
+            [dataSource]="datos">
+    <ng-container [matColumnDef]="columna"
+                  *ngFor="let columna of columnas;let i=index">
+          <th mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header class="header-cell"> {{headers[i]}}
+    </th>
+    <td mat-cell
+        class="pointer"
+        *matCellDef="let element">{{element[columna]}}
+    </td>
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="columnasVisibles; sticky:true"></tr>
+    <tr mat-row
+        (click)="selectedRow(row)"
+        *matRowDef="let row; columns: columnasVisibles;"></tr>
+    </table>
+ </table-container>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]"
+               showFirstLastButtons></mat-paginator>
+ </div>
+
+ </form>
+</mat-card>
+
+

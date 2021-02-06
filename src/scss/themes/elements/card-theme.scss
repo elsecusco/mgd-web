@@ -1,0 +1,10 @@
+// estilo mat-card
+@mixin card-theme($theme) {
+  mat-card {
+    border-radius: 5px !important;
+  }
+
+  page-container div div mat-card {
+    margin-bottom: 12px;
+  }
+}

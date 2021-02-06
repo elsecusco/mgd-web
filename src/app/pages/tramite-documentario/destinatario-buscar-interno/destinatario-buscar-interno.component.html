@@ -1,0 +1,27 @@
+<div fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutAlign="space-between center">
+  <div fxLayout="row"
+       fxLayoutAlign="start center"
+       fxLayoutGap="16px">
+    <span class="fs-16 fw-500">{{matLabel}}</span>
+    <mat-radio-group fxLayout="row"
+                     fxLayout.xs="column"
+                     fxLayoutGap="4px"
+                     (change)="porNombre=$event.value"
+                     [(value)]="porNombre">
+      <mat-radio-button [value]="1">Trabajador:</mat-radio-button>
+      <mat-radio-button [value]="3">CAP:</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<div fxLayout="column">
+  <destinatario-filtro [tipoBusqueda]="tipoBusqueda"
+                       [porNombre]="porNombre"
+                       [matLabel]="matLabel"
+                       [onlyOne]="onlyOne"
+                       [blacklist]="blacklist"
+                       (returnDestinatarios)="destinatariosPara($event)"></destinatario-filtro>                                       
+  <div style="font-size: 10px">(Ingrese las 5 primeras letras del nombre o apellido)</div>
+</div>

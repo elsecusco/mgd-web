@@ -1,0 +1,105 @@
+mat-label{
+    font-weight: bold;   
+}
+mat-header-cell{
+    text-align: center;
+}
+.trabajador{
+  color: rgb(102, 103, 104);
+  font-weight: bold;
+
+}
+
+.anexosGerencia{
+  // background-color: #efeded;
+  // border-radius: 5px 5px 5px 5px;
+  // -moz-border-radius:5px 5px 5px 5px;
+  // -webkit-border-radius: 5px 5px 5px 5px;
+  background-color: #efeded;
+  border-radius: 12px 12px 12px 12px;
+  -moz-border-radius: 12px 12px 12px 12px;
+  -webkit-border-radius: 12px 12px 12px 12px;
+  border: 0px solid #727272;
+}
+
+.ng-container {
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+.mat-column-nombreUsuario {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  justify-content: center;
+  text-align: left;
+  
+}
+.mat-column-nombreArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 18% !important;
+    width: 18% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-descripcionArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-accion {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+   
+  }
+
+  .mat-column-fechaArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  .mat-cell {
+    font-size: 12px;
+  }
+  .mat-header-cell{
+    font-weight: bold;  
+    font-size: 14px; 
+    color: #7B7C7E;
+    
+  }

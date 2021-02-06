@@ -1,0 +1,82 @@
+<page-container class="column">
+  <mat-tab-group animationDuration="0ms">
+   <mat-tab class="pestana"
+    label="Buscar Documentos"> 
+    <!-- <mat-icon matSuffix>search</mat-icon> -->
+    <seguimiento-filtro></seguimiento-filtro>
+  <mat-card>
+
+<div fxLayout="column">
+<div fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px">
+  <table-toggle-column [headers]="headers"
+                       [columnas]="columnas"
+                       (changeSelect)="changeDisplayColumn($event)"></table-toggle-column>
+</div>
+<table-container [idContainer]="'tdoc'"
+                 [heightSub]="335"
+                 [loading]="pending$ | async">
+  <table mat-table
+         matSort
+         class="table-bordered"
+         [dataSource]="datos">
+    <ng-container [matColumnDef]="columna"
+                  *ngFor="let columna of columnas;let i=index">
+      <th mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header> {{headers[i]}}
+      </th>
+         <td mat-cell
+            class="pointer"
+            *matCellDef="let element">{{element[columna]}}
+
+            <button  mat-icon-button
+                    *ngIf="columna=='acciones'"
+                    matTooltip="Ver Reporte"
+                    style="margin-top:10px; margin-right: 10px;"
+                    color="primary"
+                    (click)="verReporte(element.codigoDocumentoTramite)">
+          <mat-icon *ngIf="columna=='acciones'">note_add</mat-icon>
+          </button>
+
+          <button   mat-icon-button
+                    *ngIf="columna=='acciones'"
+                    matTooltip="Ver Cargo"
+                    style="margin-top:10px; margin-right: 10px;"
+                    color="primary"
+                    (click)="openCargo(element.codigoDocumentoTramite)">
+          <mat-icon *ngIf="columna=='acciones'">verified_user</mat-icon>
+          </button>
+
+          <button   mat-icon-button
+                    *ngIf="columna=='acciones'"
+                    matTooltip="Ver Reporte"
+                    style="margin-top:10px; margin-right: 10px;"
+                    color="primary"
+                    (click)="verReporteGrafo(element)">
+          <mat-icon *ngIf="columna=='acciones'">graphic_eq</mat-icon>
+          </button>
+
+        </td>
+
+    </ng-container>
+    <tr mat-header-row
+        *matHeaderRowDef="columnasVisibles; sticky:true"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: columnasVisibles;"></tr>
+   </table>
+</table-container>
+
+<mat-paginator [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons></mat-paginator>
+
+  </div>
+</mat-card>
+Content 1 </mat-tab>
+<!-- <mat-tab label="V°B° - Valorización">  -->
+  <!-- <seguimiento-filtro></seguimiento-filtro> -->
+<!-- </mat-tab> -->
+</mat-tab-group>
+</page-container>
+

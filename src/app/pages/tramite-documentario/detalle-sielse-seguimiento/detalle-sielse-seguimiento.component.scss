@@ -1,0 +1,81 @@
+#table-detalle-sielse {
+    width: 100% !important;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 500px;
+}
+
+#header-cell {
+    padding: 12px 15px;
+    background-color: #009879 !important;
+    color: #ffffff  !important;
+    text-align: center  !important;
+}
+
+#stable-detalle-sielse tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+#stable-detalle-sielse tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#stable-detalle-sielse tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.mat-column-fecha {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 19% !important;
+    width: 19% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+}
+  .mat-column-responsable {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+}
+
+  .mat-column-descripcion {
+   
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 35% !important;
+    width: 35% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+  }
+  .mat-column-nombre {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+  }
+  .mat-cell, .mat-footer-cell {
+    font-size: 11px;
+}

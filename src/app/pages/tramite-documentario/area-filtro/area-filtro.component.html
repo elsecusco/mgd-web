@@ -1,0 +1,37 @@
+<mat-form-field class="example-chip-list"
+                appearance="outline"
+                fxFlex="100">
+  <mat-label>{{matLabel}}</mat-label>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let area of areas"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(area)">
+      {{area.nombreArea}}
+      <mat-icon matChipRemove
+                *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input #areaInput
+           [formControl]="areaCtrl"
+           [matAutocomplete]="auto"
+           [matChipInputFor]="chipList"
+           [readonly]="readonlyChips"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+
+  <mat-spinner matSuffix
+               [style.visibility]="show"
+               [strokeWidth]="1.8"
+               [diameter]="20"></mat-spinner>
+
+  <mat-autocomplete #auto="matAutocomplete"
+                    [displayWith]="displayFn"
+                    (optionSelected)="selected($event)">
+    <mat-option *ngFor="let area of allAreas | async"
+                [value]="area">
+      {{area.nombreArea}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

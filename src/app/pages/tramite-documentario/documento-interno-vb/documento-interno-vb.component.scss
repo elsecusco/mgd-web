@@ -1,0 +1,150 @@
+mat-label{
+    font-weight: bold;   
+}
+mat-header-cell{
+    text-align: center;
+  
+}
+.mat-table{
+  // background-color: #efeded;
+  // border-radius: 5px 5px 5px 5px;
+  // -moz-border-radius:5px 5px 5px 5px;
+  // -webkit-border-radius: 5px 5px 5px 5px;
+  background-color: #efeded;
+  border-radius: 12px 12px 12px 12px;
+  -moz-border-radius: 12px 12px 12px 12px;
+  -webkit-border-radius: 12px 12px 12px 12px;
+  border: 0px solid #727272;
+  //border: 0px solid #e21616ce;
+}
+.mat-column-nombreArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-descripcionArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 28% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  //Aprobadores
+  .mat-column-descripcionAtencion {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 27% !important;
+    width: 27% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+  }
+  .mat-column-accion{
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    padding-right: 0px;
+  }
+  .mat-column-tipoAprobacion{
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 16% !important;
+    width: 16% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-fechaAtencion{
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 14% !important;
+    width: 14% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-nombreTrabajador{
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 27% !important;
+    width: 27% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+    padding: 0px;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  .mat-cell {
+    font-size: 12px;
+    
+  }
+  //Encabezados de los aprobadores
+  .mat-header-cell{
+    font-weight: bold;
+    font-size: 14px;
+    //font-style: oblique;
+    text-emphasis: none;
+    color: #676663;   
+  }
+  .aprobacion{
+    margin-top: 20px !important;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .botonAprobacion{
+    margin-top: 30px !important;
+    margin-left: 8px;
+  }
+  .boxdestinatario{
+    background-color: #efeded;
+    //background-color: #ca0f0f;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius:5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 0px solid #727272;
+    
+  }
+  .topspace{
+    margin-top: 10px;
+  }
+
+  .add-icon {
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+  }

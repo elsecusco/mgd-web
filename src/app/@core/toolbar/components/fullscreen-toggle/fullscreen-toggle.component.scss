@@ -1,0 +1,9 @@
+$toolbar-button-width: 64px;
+
+
+.button {
+  border-radius: 0;
+  padding: 0;
+  min-width: $toolbar-button-width;
+  // color: $toolbar-button-icon-color;
+}

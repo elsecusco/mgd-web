@@ -1,0 +1,132 @@
+.mat-cell {
+  font-size: 11px;
+}
+div{
+  font-size: 12px;
+
+}
+span{
+  font-weight: bold;
+}
+
+.izquierda{
+  float:left
+}
+ .derecha{
+ float:right;
+ padding-right:10px;
+ }
+
+ .clearfix{
+   font-weight: bold;
+   font-size: 10px;
+ }
+
+ .izquierda>p,.derecha>p{
+  margin:0;
+  padding:0;
+  }
+// .titulo{
+//   font-family: "segoe UI";
+// }
+.mat-column-fechaDerivacion{
+  justify-content: center;
+  text-align: center;
+}
+
+.mat-column-descripcionSolicitudAtencion {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+//   .mat-header-cell{
+//     justify-content: center;
+//   }
+  .P{
+    color: #0b643a !important;
+  }
+  .C{
+    color: #185175 !important;
+  }
+  .A{
+    color: #905835 !important;
+  }
+  .F{
+    color: #e69605 !important;
+  }
+
+.mat-column-nombreUsuarioDestino {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 20% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  //justify-content: center;
+  font-weight: bold;
+}
+.mat-column-masDetalle {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 7% !important;
+  width: 6% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  justify-content: center;
+}
+ul {
+  list-style-type: none;
+  margin: 0 0.3em 0;
+  padding: 0;
+}
+
+li {
+  border-bottom: 1px solid #ccc;
+}
+
+li:last-child {
+  border: none;
+}
+
+li span {
+  text-decoration: none;
+  color: #000;
+  vertical-align: middle;
+  display: table-cell;
+  height: 40px;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+/*
+.columnIcons{
+  display: grid;
+  text-align: right;
+}
+.columnIcons li{
+  display: inline-block;
+}*/
+.circle-btn {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: none;
+  background: url('../../../../assets/logito.png') no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.circle-btn:focus {
+  border-color: transparent !important;
+  outline: none;
+}

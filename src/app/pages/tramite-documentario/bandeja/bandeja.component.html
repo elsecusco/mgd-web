@@ -1,0 +1,120 @@
+<div fxLayout="column">
+    <div fxLayout="row"
+         fxLayoutAlign="start center"
+         fxLayoutGap="8px">
+
+    <bandeja-buscar fxFlex="fill"
+                    (filter)="filter($event)"></bandeja-buscar>
+    <table-toggle-column [headers]="headers"
+                          [columnas]="columnas"
+                          (changeSelect)="changeDisplayColumn($event)"></table-toggle-column>
+    </div>
+    <table-container [idContainer]="'tdoc'"
+                      [heightSub]="335"
+                      [loading]="pending$ | async">
+      <table  mat-table
+              matSort
+              class="table-bordered"
+              [dataSource]="datos">
+        <ng-container [matColumnDef]="columna"
+                      *ngFor="let columna of columnas;let i=index">
+            <th mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header> {{headers[i]}}
+            </th>
+            <td mat-cell
+                class="pointer"
+                *matCellDef="let element">
+                <!-- BANDEJA DE SALIDA -->
+                <ul *ngIf="columna=='para' && element.bandeja=='s'">
+                  <li *ngFor="let l of element.listaPara">
+                      <span [style.color]="colores[l.tipoDerivacion]"
+                            style="font-weight: bold" 
+                            (click)="salidaClick(element,l)">
+                          {{l.usuarioDestino}}
+                        <mat-icon *ngIf="l.leido==1 && l.fechaLeido!=''"
+                                  [matTooltip]="msgs.leido +l.fechaLeido">{{icons.leido}}</mat-icon>
+                        <mat-icon *ngIf="l.atendido>0 && l.fechaAtencion!=''"
+                                  [style.color] ="colores[l.atendido]"
+                                  [matTooltip]="msgs[l.atendido] +l.fechaAtencion">{{icons[l.atendido]}}</mat-icon>
+                        <!-- <mat-icon *ngIf="l.atendido==2 && l.fechaAtencion!=''"
+                                  style="color:#e69605"
+                                  [matTooltip]="'Atención Final '+l.fechaAtencion">check_circle</mat-icon>
+                        <mat-icon *ngIf="l.atendido==3 && l.fechaAtencion!=''"
+                                  [matTooltip]="'Derivado '+l.fechaAtencion" >arrow_right_alt</mat-icon>
+                        <mat-icon *ngIf="l.leido==0 && l.atendido==1 && l.fechaLeido!='' "
+                                  [matTooltip]="'Atendido Externamente' + l.fechaAtencion">highlight_off</mat-icon>  -->
+                      </span>
+                  </li>
+                </ul>
+                <!-- fin de Bandeja de salida -->
+                <!-- BANDEJA DE ENTRADA - ATENDIDO -->
+                <ul *ngIf="columna=='fechaDerivacion' &&  element.bandeja!='s'">
+                   <li *ngFor="let l of element.listaAtendido">
+                       <span [style.color]="colores[l.estiloCelda]"
+                             style="font-weight: bold">
+                              {{l.fechaDerivacion}}
+                            <mat-icon *ngIf="element.leido==1"
+                                      [matTooltip]="msgs.leido + l.fechaLeido"
+                                      [style.color]="colores.leido">{{icons.leido}}</mat-icon>
+                            <mat-icon *ngIf="element.atendido!=0"
+                                      [matTooltip]="msgs[element.atendido]+l.fechaAtencion">
+                                      {{icons[l.estiloCelda]}}</mat-icon>
+                       </span>
+                       <!-- <span  *ngIf= "element.bandeja=='a' "
+                              [style.color]="colores[l.estiloCelda]">
+                              {{l.fechaDerivacion}}
+                              <mat-icon *ngIf="element.leido==1 && element.atendido==1 &&  element.bandeja=='a'">check_circle_outline</mat-icon>
+                              <mat-icon *ngIf="element.leido==1 && element.atendido==2 &&  element.bandeja=='a'">check_circle</mat-icon>
+                              <mat-icon *ngIf="element.leido==0 && element.bandeja=='a'"
+                                        [matTooltip]="'Atendido Externamente ' + l.fechaAtencion">highlight_off</mat-icon>
+                       </span> -->
+                    </li>
+                </ul>
+                <!-- para el campo fecha, no para el picker -->
+                <ul *ngIf="columna=='fecha' &&  element.bandeja!='s'">
+                   <li *ngFor="let l of element.listaAtendido">
+                          <span  [style.color]="colores[l.estiloCelda]"
+                                 style="font-weight: bold">
+                            {{l.fecha}}
+                          </span>
+                   </li>
+                </ul>
+                <!-- fin de Bandeja de entrada - atendido-->
+                {{element[columna]}}
+            </td>
+        </ng-container>
+      <tr mat-header-row
+          *matHeaderRowDef="columnasVisibles; sticky:true"></tr>
+      <tr mat-row
+          (click)="selectedRow(row)"
+          *matRowDef="let row; columns: columnasVisibles;let entry"
+          [ngClass]="(entry.bandeja=='s')?'salida':(
+                     (entry.para == 'En Redacción')?'nuevoDoc':'normal')">
+      </tr>
+      </table>
+    </table-container>
+<!-------------------------- LEYENDA ---------------------------------------------------->
+<mat-card fxLayout="column"
+          fxLayoutAlign="center"
+          fxLayoutGap="8px"
+          fxLayout.xs="row"
+          fxLayoutAlign.xs="start"
+          style="background: rgb(245, 245, 245);">
+<div class ="contenedor">
+  <span class="titulo">Leyenda: </span>
+    <div class="texto">Documento Leído <mat-icon>{{icons.leido}}</mat-icon></div>
+    <div class="texto">Documento Derivado <mat-icon class = "derivado">{{icons[3]}}</mat-icon></div>
+    <div class="texto" [style.color] ="colores[1]">Atención Informativa <mat-icon>{{icons[1]}}</mat-icon></div>
+    <div class="texto" [style.color] ="colores[2]">Atención Final <mat-icon>{{icons[2]}}</mat-icon></div>
+    <div class="texto" [style.color] ="colores[4]"
+                      matTooltip= "Doc. con Atención Final pero sin atender por el Usuario"
+                      style="font-size: 12px;">Atención Externa <mat-icon>{{icons[4]}}</mat-icon></div>
+</div>
+</mat-card>
+<!------------------------ FIN DE LEYENDA -------------------------------------------->
+<mat-paginator class="paginas"
+               [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons></mat-paginator>
+</div>
+

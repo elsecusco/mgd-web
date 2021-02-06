@@ -1,0 +1,24 @@
+
+<table mat-table
+      matSort
+      id="table-detalle-sielse"
+      class="table-bordered"
+      [dataSource]="datos">
+<ng-container [matColumnDef]="columna"
+              *ngFor="let columna of columnas;let i=index">
+  <th mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header class="header-cell"> {{headers[i]}}
+  </th>
+      <td mat-cell
+        class="pointer"
+        *matCellDef="let element">{{element[columna]}}
+      
+    </td>
+
+</ng-container>
+<tr mat-header-row
+    *matHeaderRowDef="columnasVisibles; sticky:true"></tr>
+<tr mat-row
+    *matRowDef="let row; columns: columnasVisibles;"></tr>
+</table>

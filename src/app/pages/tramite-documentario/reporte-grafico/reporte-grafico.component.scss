@@ -1,0 +1,42 @@
+/*.graph .panning-rect{
+  cursor: default;
+}*/
+.graph .edge{
+  cursor: pointer;
+}
+div.cuadro p{
+  font-weight: bold;
+}
+p.flecha{
+  text-align: center;
+  margin: 0;
+}
+p.flecha span{
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+ul.leyenda {
+  list-style-type: none;
+  margin: 0 0.3em 0;
+  padding: 0;
+}
+
+ul.leyenda li {
+  font-size: xx-small;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+ul.leyenda li:last-child {
+  border: none;
+}
+
+ul.leyenda li span {
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+h5{
+  margin: 4px 0;
+}
