@@ -1,7 +1,17 @@
 .card {
   min-width: 400px;
-  max-width: 600px;
+  max-width: 800px;
 }
+
+.destinatario-filtro{
+  // min-width: 120px;
+ width: 550px;
+}
+.espacio{
+  padding-left: 23px;
+}
+
+
 mat-toolbar {
   display: flex;
   flex-direction: row;

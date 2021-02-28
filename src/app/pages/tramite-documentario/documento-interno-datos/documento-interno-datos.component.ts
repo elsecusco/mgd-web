@@ -192,7 +192,6 @@ export class DocumentoInternoDatosComponent implements OnInit {
         this.doc.codigoDocumentoTramite=+codigos[1];
         this.doc.codigoDocumentoInterno=codigos[0];
         this.saving = false;
-        //llamar al meromero ya la patron
         this.save.emit(parseInt(codigos[1]));
         this.doc.codigoTipoDocumento=this.form.value.codigoTipoDocumento;
         this.doc.codigoTipoRecepcionDocumento=this.form.value.codigoTipoRecepcion;
@@ -200,7 +199,7 @@ export class DocumentoInternoDatosComponent implements OnInit {
         this.editData=false
         this.changeTipoDoc.emit(this.doc.codigoTipoDocumento);
         this.setDocument.emit({documento: this.doc, vista: 'entrada'});
-        console.log(this.doc.codigoTipoDocumento)
+        //console.log(this.doc.codigoTipoDocumento)
         if(this.doc.codigoTipoDocumento == 48)
           this.valorizacion.save(parseInt(codigos[1]))
       },

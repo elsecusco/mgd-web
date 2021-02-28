@@ -150,17 +150,18 @@ export class DocumentoDerivarComponent implements OnInit {
     this.saving = true;
     this.api.derivarDocumento(this.form.value).subscribe(
       res => {
+        console.log(res.id)
         this.saving = false;
-        if (res.length == 0) {
+        if (res.id == 0) {
           notifyOk('Derivación Realizada!');
-          //console.log(this.form.value['cargo'])
-          if(this.form.value['cargo'])
+           if(this.form.value['cargo'])
             this.openCargo()
-          else
+           else
             this.derivar.emit();
         } else {
-          const users = res.map(r => r.idItem).join(', ');
-          swalError('Error al Derivar a:', users);
+          // const users = res.map(r => r.idItem).join(', ');
+          swalError('Error Inesperado:', res.mensaje);
+          this.derivar.emit();
         }
       },
       _err => (this.saving = false)

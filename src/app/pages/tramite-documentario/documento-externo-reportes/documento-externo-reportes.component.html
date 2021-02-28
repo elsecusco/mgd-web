@@ -19,12 +19,12 @@
             fxLayout.xs="column"
             fxLayoutAlign.xs="start"> -->
   <div fxFlex = "48" >
-    <span class="fs-16 fw-500 mg-bot-8">Filtro del Documento</span>
+    <span class="fs-16 fw-500 mg-bot-16">Filtro del Documento</span>
     <div class="bloque">
       <!-- Filtro de fechas -->
       <row-container>
-        <two-picker
-            fxFlex = "100"
+        <two-picker class="espacio"
+            fxFlex = "80"
             fxLayoutGap="8px"
             fxFlex.xs="auto"
             fxLayout.xs="column"
@@ -38,8 +38,9 @@
     </row-container>
     <row-container>
       <mat-checkbox [(ngModel)]="documentoFiltro.conRemitente"></mat-checkbox>
-      <remitente-filtro
-                      fxFlex = "43" 
+      <remitente-filtro 
+                      fxLayout="column" 
+                      fxFlex = "91" 
                       fxLayoutGap="8px"
                       fxFlex.xs="auto"
                       fxLayout.xs="column"
@@ -47,9 +48,31 @@
                       [disabled]="!documentoFiltro.conRemitente"
                       (remitente)="documentoFiltro.codigoRemitente=$event.codigoRemitenteDocumento">
       </remitente-filtro>
+    </row-container>
+    <row-container>
+  <div class="espacio"
+       fxLayout="column"  
+       fxFlex = "94" 
+       fxLayoutGap="8px"
+       fxFlex.xs="auto"
+       fxLayout.xs="column"
+       fxLayoutAlign.xs="start">
+     <destinatario-filtro 
+                       [tipoBusqueda]="tipoBusqueda"
+                       [porNombre]="porNombre"
+                       [matLabel]="'Persona Interesada'"
+                       [onlyOne]="onlyOne"
+                       [blacklist]="blacklist"
+                       [all]="true"
+                       (returnDestinatarios)="destinatariosPara($event)"></destinatario-filtro> 
+                                                          
+  <!-- <div style="font-size: 10px">(Ingrese las 5 primeras letras del nombre o apellido)</div> -->
+  </div>
+</row-container>
+<row-container>
       <mat-checkbox [(ngModel)]="documentoFiltro.conNroExpediente"></mat-checkbox>
         <mat-form-field 
-            fxFlex = "43" 
+            fxFlex = "29" 
             fxLayoutGap="8px"
             fxFlex.xs="auto"
             fxLayout.xs="column"
@@ -63,11 +86,10 @@
                    [(ngModel)]="documentoFiltro.numeroExpediente"
                    type="text">
       </mat-form-field>
-    </row-container>
-    <row-container>
+       
       <mat-form-field 
         fxLayoutGap="8px"
-        fxFlex = "47"
+        fxFlex = "30"
         fxFlex.xs="auto"
         appearance="outline"
         fxLayout.xs="column"
@@ -80,7 +102,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field 
-                      fxFlex = "47"
+                      fxFlex = "30"
                       appearance="outline"
                       fxLayoutGap="8px"
                       fxFlex.xs="auto"
@@ -95,8 +117,8 @@
       </mat-form-field>
     </row-container>
     <row-container>
-      <mat-form-field 
-                      fxFlex = "47"
+      <mat-form-field class="espacio"
+                      fxFlex = "32"
                       appearance="outline"
                       fxLayoutGap="8px"
                       fxFlex.xs="auto"
@@ -116,7 +138,7 @@
                       fxFlex.xs="auto"
                       fxLayout.xs="column"
                       fxLayoutAlign.xs="start">
-        <mat-label>Doc. por vencer plazo</mat-label>
+        <mat-label>Número de días por vencer plazo</mat-label>
         <input matInput
                    placeholder="Ingrese Dias por vencer"
                    autocomplete="off"

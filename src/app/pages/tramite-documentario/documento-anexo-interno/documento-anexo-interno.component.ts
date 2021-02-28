@@ -198,7 +198,7 @@ export class DocumentoAnexoInternoComponent implements OnInit {
     });
   }
  eliminar(e: ArchivoDocumento) {
-   console.log(e)
+   //console.log(e)
      this.api
     .eliminarArchivo(e.codigoDocumento, e.codigoDocumentoAdjunto)
     .subscribe(res => {
@@ -254,7 +254,6 @@ export class DocumentoAnexoInternoComponent implements OnInit {
             //console.log(c)
             if (c)
             this.archivoPrincipal.codigoDocumentoAdjunto=c
-            else
             this.getArchivos(1)
            
           });
@@ -274,8 +273,8 @@ export class DocumentoAnexoInternoComponent implements OnInit {
      //console.log(JSON.stringify(data))
     const dialogRef = this.dialog.open(
         DocumentoInternoVisorComponent, {
-          width: '40vw',
-          height:'90vh',
+          width: '43vw',
+          height:'100vh',
           data: data
           });
     dialogRef.afterClosed().subscribe(complete => {
@@ -283,15 +282,15 @@ export class DocumentoAnexoInternoComponent implements OnInit {
             if (complete) {
               this.aprobado=true;
             }
+            this.getArchivos(1)
           });   
   }
   derivarPrincipal(){
-
     //console.log(JSON.stringify(this.doc));
     const dialogRef = this.dialog.open(
         DocumentoInternoVisorComponent, {
-          width: '40vw',
-          height:'90vh',
+          width: '43vw',
+          height:'100vh',
           data: {
             codigoDocumento: this.doc.codigoDocumentoTramite,
             codigoDocumentoAdjunto:this.archivoPrincipal.codigoDocumentoAdjunto,
@@ -304,8 +303,12 @@ export class DocumentoAnexoInternoComponent implements OnInit {
           });
           dialogRef.afterClosed().subscribe(c =>{
             //console.log(c)
-            if (c)
-            this.archivoPrincipal.codigoDocumentoAdjunto=c
+            if (c){
+              this.aprobado=true;
+              //console.log(this.aprobado)
+              this.archivoPrincipal.codigoDocumentoAdjunto=c
+
+            }
             else
             this.getArchivos(1)
             
@@ -313,7 +316,7 @@ export class DocumentoAnexoInternoComponent implements OnInit {
   }
 
   verMemo(){
-    console.log(this.archivoPrincipal);
+    //console.log(this.archivoPrincipal);
     const dialogRef = this.dialog.open(
       ReporteMemoComponent, {
         width: '54vw',
@@ -326,7 +329,7 @@ export class DocumentoAnexoInternoComponent implements OnInit {
           tipoArchivo:this.tipoArchivos[0]}
       });
     dialogRef.afterClosed().subscribe(c =>{
-      console.log(c)
+      //console.log(c)
       this.archivoPrincipal.codigoDocumentoAdjunto=c
     });
   }

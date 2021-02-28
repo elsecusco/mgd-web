@@ -5,18 +5,54 @@
           fxLayoutAlign.xs="start">
 <div fxFlex = "100">
   <!-- <span class="fs-16 fw-500 mg-bot-8">Búsqueda de Documento</span> -->
-    <p>
     <row-container>
-    <!-- <row-container> -->
-      <mat-form-field appearance="outline"
+      <two-picker
+                [fechaInicio]="documentof.fechaInicio"
+                [fechaFin]="documentof.fechaFin"
+                (changeFecha)="changeFecha($event)">
+      </two-picker>
+    </row-container>
+    <p>
+    <row-container> 
+          <!-- <mat-form-field fxLayout="column"  
+                      fxFlex = "31.5" 
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      appearance="outline"
+                      color="primary"> -->
+         <mat-form-field class="longitud"
+                      appearance="outline"
                       color="primary">
           <mat-label>Nombre del Remitente</mat-label>
           <input 
                   [(ngModel)]="documentof.nombreRemitenteDocumento"
                   matInput placeholder="Nombre del Interesado...">
           <mat-icon matSuffix>portrait</mat-icon>
-      </mat-form-field>      
-    </row-container>  
+      </mat-form-field>
+
+      <!-- <mat-form-field 
+                      class="orden"
+                      fxLayout="column"  
+                      fxFlex = "32" 
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      appearance="outline"
+                      color="primary"> -->
+            <mat-form-field class="longitud"
+                      appearance="outline"
+                      color="primary">            
+          <mat-label>Asunto del Documento</mat-label>
+          <input  [(ngModel)]="documentof.asunto"
+                  matInput placeholder="Digite parte del Asunto ó PALABRA1%PALABRA2">
+          <mat-icon matSuffix
+          matTooltip="Digite Parte del Asunto ó PALABRA1%PALABRA2">chat</mat-icon>
+      </mat-form-field>  
+        
+     </row-container>
     </p>
     <!-- Para los codigos de los Documentos -->
     <p>
@@ -40,15 +76,29 @@
                matInput placeholder="Ingrese Codigo">
       <mat-icon matSuffix>create</mat-icon>
       </mat-form-field>
+      <mat-form-field class="longitud"
+                      appearance="outline"
+                      color="primary">
+                      <!-- <mat-form-field class="orden"
+                      fxLayout="column"  
+                      fxFlex = "32" 
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      appearance="outline"
+                      color="primary"> -->
+          <mat-label>Título del Nombre del Adjunto</mat-label>
+          <input 
+                  [(ngModel)]="documentof.nombreArchivo"
+                  matInput placeholder="Digite parte del titulo ó PALABRA1%PALABRA2">
+          <mat-icon matTooltip="Digite Parte del Titulo ó PALABRA1%PALABRA2" matSuffix>comment</mat-icon>
+      </mat-form-field>
+      
+
       </row-container>
     </p>
-      <row-container>
-        <two-picker
-                [fechaInicio]="documentof.fechaInicio"
-                [fechaFin]="documentof.fechaFin"
-                (changeFecha)="changeFecha($event)">
-       </two-picker>
-     </row-container>
+      
       <button mat-raised-button color="warn"
               matTooltip="Buscar Documento por Codigo"
               style="margin-top: 10px; margin-right: 10px;"

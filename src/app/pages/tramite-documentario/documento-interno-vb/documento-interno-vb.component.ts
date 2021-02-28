@@ -129,7 +129,7 @@ export class DocumentoInternoVbComponent implements OnInit {
   addAprobacion(){
     this.para.forEach(v=>{
      // console.log(v.loginUsuario);
-      this.listas.listaAprobadores.push({loginUsuario:v.loginUsuario,
+    this.listas.listaAprobadores.push({loginUsuario:v.loginUsuario,
                               nombreUsuario: v.nombreUsuario,
                               codigoTipoAprobacion:this.tipoAprobacionAdd.codigo,
                               nombreTipoAprobacion:this.tipoAprobacionAdd.nombre});

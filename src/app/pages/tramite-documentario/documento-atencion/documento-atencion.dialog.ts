@@ -8,9 +8,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     <form [formGroup]="form" novalidate>
       <div mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
         <span>Atención Documento</span>
-        <mat-checkbox *ngIf="data!='C'" formControlName="atencionFinal"
-          ><span class="final">Es Atención Final</span></mat-checkbox
-        >
+        <mat-checkbox *ngIf="data!='C'" 
+        formControlName="atencionFinal"  
+        matTooltip="ATENCIÓN FINAL CIERRA PARA TODOS EL DOCUMENTO">
+        <span class="final">Es Atención Final</span></mat-checkbox>
       </div>
 
       <mat-divider class="mg-bot-8"></mat-divider>

@@ -71,12 +71,13 @@ export class SeguimientoDocumentoComponent implements OnInit {
     this.documentof$.subscribe(b=>{
       this.documentof ={
         nombreRemitenteDocumento:b.nombreRemitenteDocumento,
-        // anio:b.anio,
+        asunto:b.asunto,
         filtro: b.filtro,
         valor:b.valor,
         fechaInicio: b.fechaFin,
         fechaFin: b.fechaInicio,
-        check: b.check
+        check: b.check,
+        nombreArchivo: b.nombreArchivo
          };
      });
     //Línea que resume todo

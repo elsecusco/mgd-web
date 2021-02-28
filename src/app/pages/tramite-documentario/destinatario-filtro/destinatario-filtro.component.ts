@@ -90,7 +90,7 @@ export class DestinatarioFiltroComponent implements OnInit {
     this._all = all || false;
   }
   get all(): boolean {
-    return this._onlyOne;
+    return this._all;
   }
 
   @Input()

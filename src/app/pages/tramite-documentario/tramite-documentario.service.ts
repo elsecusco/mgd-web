@@ -190,7 +190,7 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
       close: false
     });
   }
-  derivarDocumento(body): Observable<ItemResultado[]> {
+  derivarDocumento(body): Observable<ItemResultado> {
     return this.http.post({
       uri: `api/derivarDocumento`,
       body,
@@ -475,7 +475,15 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
     const fi = formatDate(r.fechaInicio,"yyyyMMdd","en-US");
     const ff = formatDate(r.fechaFin,"yyyyMMdd","en-US");
     return this.http.get({
-    uri: `api/ReporteDocExternosPDF/${fi}/${ff}/${+r.conRemitente}/${r.conRemitente?r.codigoRemitente:"0"}/${+r.conNroExpediente}/${r.conNroExpediente?r.numeroExpediente:"0"}/${r.conFechaVencimiento}/${r.conPlazoAtencion}/${r.diasPorVencer}/${r.statusDoc}`,
+    uri: `api/ReporteDocExternosPDF/${fi}/${ff}/${+r.conRemitente}/
+    ${r.conRemitente?r.codigoRemitente:"0"}/
+    ${+r.conNroExpediente}/
+    ${r.conNroExpediente?r.numeroExpediente:"0"}/
+    ${r.conFechaVencimiento}/
+    ${r.conPlazoAtencion}/
+    ${r.diasPorVencer}/
+    ${r.loginUsuarioDestino}/
+    ${r.statusDoc}`,
     open: true,
     close: true,
     options: { responseType: 'blob' }

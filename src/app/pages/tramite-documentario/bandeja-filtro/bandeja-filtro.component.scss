@@ -45,9 +45,11 @@ div {
     width: 42px;
     height: 42px;
     border: none;
-    box-shadow: 0 0 0 0 rgba(250, 106, 10, 0.911);
+    //box-shadow: 0 0 0 0 rgba(250, 106, 10, 0.911);
+    box-shadow:  0 0 0 0 rgba(52, 111, 149, 0.911);
     border-radius: 50%;
-    background-color: #e84c3d;
+    //background-color: #e84c3d;
+    background-color: #1e4364;
     cursor: pointer;
     -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
     -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
@@ -91,6 +93,6 @@ div {
     padding: 5px 5px;
     min-width: 15px;
     border-radius: 50%;
-    background: red;
+    background: rgb(238, 99, 7);
     color: white;
   }

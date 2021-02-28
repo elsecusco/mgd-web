@@ -8,6 +8,7 @@ export class DocumentoExternoReporte {
     conFechaVencimiento: number;
     conPlazoAtencion:number;
     diasPorVencer: number;
+    loginUsuarioDestino : string;
     statusDoc: number;
     constructor() {
         this.conRemitente = false;
@@ -17,9 +18,10 @@ export class DocumentoExternoReporte {
         this.conFechaVencimiento=-1;
         this.conPlazoAtencion=-1;
         this.diasPorVencer=0;
+        this.loginUsuarioDestino=null;
         this.statusDoc=0;
         this.fechaInicio= new Date();
-        this.fechaInicio.setDate(new Date().getDate() - 35);
+        this.fechaInicio.setDate(new Date().getDate() - 30);
         this.fechaFin=new Date();
     }
   }

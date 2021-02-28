@@ -5,7 +5,6 @@ import { DestinatarioFiltroComponent } from '../destinatario-filtro/destinatario
 @Component({
   selector: 'destinatario-buscar-interno',
   templateUrl: './destinatario-buscar-interno.component.html',
-  //directives:[DestinatarioFiltroComponent],
   styleUrls: ['./destinatario-buscar-interno.component.scss']
 })
 export class DestinatarioBuscarInternoComponent implements OnInit {

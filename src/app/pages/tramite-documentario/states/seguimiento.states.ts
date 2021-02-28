@@ -17,9 +17,6 @@ export interface SeguimientoStateModel {
 type FiltroAction = EmitterAction<SeguimientoFiltro>;
 type Context = StateContext<SeguimientoStateModel>;
 
-//  type FiltroAction1 = EmitterAction<SeguimientoDocumento>;
-//  type Context2 = StateContext<SeguimientoStateModel>;
-
 const defaultStateSeguimiento = {
     seguimientoFiltro: new SeguimientoFiltro(),
     //seguimientoDocumento: new SeguimientoDocumento(),

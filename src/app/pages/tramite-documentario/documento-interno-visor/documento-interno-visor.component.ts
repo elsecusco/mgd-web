@@ -60,8 +60,7 @@ export class DocumentoInternoVisorComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data,
               private fb: FormBuilder,
               private api: TramiteService,
-              public dialog: MatDialog,
-              private fs: FileSave ) {
+              public dialog: MatDialog) {
               pdfDefaultOptions.renderInteractiveForms = false;
               this.buzonActual$.subscribe(b=>this.buzonActual=b)
       
@@ -78,7 +77,6 @@ export class DocumentoInternoVisorComponent implements OnInit {
   }
 
   initForm() {
-    //console.log(JSON.stringify(this.data))
     this.form = this.fb.group({
       codigoDocumento: [this.data.codigoDocumento, Validators.required],
       numeroAtencion:[this.data.numeroAtencion, Validators.required],
@@ -87,8 +85,7 @@ export class DocumentoInternoVisorComponent implements OnInit {
       proveidoDocumento: ['', Validators.required], 
       nombreArchivo: [this.data.nombreFile, Validators.required],
       codigoDocumentoAdjuntoReemplazo:[this.data.hasOwnProperty("codigoDocumentoAdjuntoReemplazo")?this.data.codigoDocumentoAdjuntoReemplazo:null],
-      //razon: [(this.data.nombreDerivacion)?'FD':'', Validators.required],
-      razon: [(this.data.nombreDerivacion)?'FD':''],
+      razon: [((this.data.nombreDerivacion) || this.data.estadoDerivacion =='FD')?'FD':'', Validators.required],
       loginUsuarioPara:[null],
       loginBuzon: [this.buzonActual.loginUsuarioBuzon]
     });
@@ -112,13 +109,10 @@ export class DocumentoInternoVisorComponent implements OnInit {
   }
   derivarArchivo(){
     this.api.derivarInternoFinal(this.form.value).subscribe(
-        res => {
-          this.isSave = false;
-          this.firmando = false;
-          notifyOk(res.mensaje);
-          this.dialogRef.close(res.idItem);
-          //  notifyOk(event.mensaje);
-          //  this.dialogRef.close(true);
+        event => {
+            notifyOk(event.mensaje);
+            const closeresult=true;
+            this.dialogRef.close(closeresult);
         },
         _err => (this.progress = 0)
       );
