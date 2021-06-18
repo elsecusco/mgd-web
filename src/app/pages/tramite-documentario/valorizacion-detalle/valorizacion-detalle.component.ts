@@ -17,17 +17,16 @@ export class ValorizacionDetalleComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   //@ViewChild(MatTable) table: MatTable<BuscarContrato>;
-  
-  
+    
   form: FormGroup;
   @ViewChild('f') f: any;
-  
   searching: boolean;
-  
   columnas: string[] = [
     'nombreProveedor',
     'numeroRuc',
     'descripcion',
+    'numeroContrato',
+    'fechaInicioFin',
     'montoContrato'    
   ];
   columnasVisibles: string[] = this.columnas.slice();
@@ -35,6 +34,8 @@ export class ValorizacionDetalleComponent implements OnInit {
     'Proveedor',
     'Ruc',
     'Descripcion',
+    'N° Contrato',
+    'Fecha Inicio Fin',
     'Monto Contrato'
   ];
   //datos: BuscarContrato[] =[];
@@ -46,8 +47,8 @@ export class ValorizacionDetalleComponent implements OnInit {
     
   }
   initForm() {
-    // 120 dias atras
-    const beforeDate = new Date(new Date().setDate(new Date().getDate() - 400));
+    // 500 dias atras
+    const beforeDate = new Date(new Date().setDate(new Date().getDate() - 500));
     this.form = this.fb.group({
       porRazonSocial:[""],
       porRuc:[""],

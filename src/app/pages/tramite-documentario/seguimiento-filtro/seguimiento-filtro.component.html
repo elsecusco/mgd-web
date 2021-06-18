@@ -4,7 +4,6 @@
           fxLayout.xs="column"
           fxLayoutAlign.xs="start">
 <div fxFlex = "100">
-  <!-- <span class="fs-16 fw-500 mg-bot-8">Búsqueda de Documento</span> -->
     <row-container>
       <two-picker
                 [fechaInicio]="documentof.fechaInicio"
@@ -12,7 +11,7 @@
                 (changeFecha)="changeFecha($event)">
       </two-picker>
     </row-container>
-    <p>
+
     <row-container> 
           <!-- <mat-form-field fxLayout="column"  
                       fxFlex = "31.5" 
@@ -53,9 +52,9 @@
       </mat-form-field>  
         
      </row-container>
-    </p>
+
     <!-- Para los codigos de los Documentos -->
-    <p>
+ 
     <row-container> 
     <mat-form-field appearance="outline"
                     color="primary">
@@ -92,13 +91,12 @@
           <input 
                   [(ngModel)]="documentof.nombreArchivo"
                   matInput placeholder="Digite parte del titulo ó PALABRA1%PALABRA2">
-          <mat-icon matTooltip="Digite Parte del Titulo ó PALABRA1%PALABRA2" matSuffix>comment</mat-icon>
+          <mat-icon matTooltip="Digite Parte del Titulo ó PALABRA1%PALABRA2" 
+                    matSuffix>comment</mat-icon>
       </mat-form-field>
       
-
       </row-container>
-    </p>
-      
+     
       <button mat-raised-button color="warn"
               matTooltip="Buscar Documento por Codigo"
               style="margin-top: 10px; margin-right: 10px;"

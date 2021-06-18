@@ -89,6 +89,10 @@ import { ReporteMemoComponent } from './reporte-memo/reporte-memo.component';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { DocumentoInternoVisorComponent } from './documento-interno-visor/documento-interno-visor.component';
+import { ReporteVBComponent } from './reporte-vb/reporte-vb.component';
+import { ReporteVBDetalleComponent } from './reporte-vb-detalle/reporte-vb-detalle.component';
+import { ReporteVBprincipalComponent } from './reporte-vbprincipal/reporte-vbprincipal.component';
+import { ReporteVbState } from './states/reporte-vb.state';
 
 //import { DocumentoInternoBuscarComponent } from './documento-interno-buscar/documento-interno-buscar.component';
 
@@ -117,7 +121,8 @@ const MODULES = [
     DocumentoState,
     DocumentoInternoState,
     PendienteState,
-    SeguimientoState]
+    SeguimientoState,
+    ReporteVbState]
   ),
   NgxsResetPluginModule.forRoot()
 ];
@@ -125,6 +130,7 @@ const MODULES = [
 //const ENTRIES = [DocumentoAdjuntarDialog, DocumentoAtencionDialog];
 const ENTRIES = [
   //DocumentoAdjuntarDialog,
+  ReporteVBprincipalComponent,
   DetalleSielseComponent,
   ValorizacionDetalleComponent,
   DetalleSielseGuardarComponent,
@@ -196,7 +202,7 @@ const PROVIDERS = [TramiteService];
 //método para llamar a todos los arreglos
 @NgModule({
 
- declarations: [...COMPONENTS, DocumentoInternoReportesComponent, DocumentoExternoReportesComponent, DetalleSielseComponent, DetalleSielseGuardarComponent, DetalleSielseSeguimientoComponent, ValorizacionContabilidadComponent, PdfViewerDialogComponent, ReporteMemoComponent, DocumentoInternoVisorComponent],
+ declarations: [...COMPONENTS, DocumentoInternoReportesComponent, DocumentoExternoReportesComponent, DetalleSielseComponent, DetalleSielseGuardarComponent, DetalleSielseSeguimientoComponent, ValorizacionContabilidadComponent, PdfViewerDialogComponent, ReporteMemoComponent, DocumentoInternoVisorComponent, ReporteVBComponent, ReporteVBDetalleComponent, ReporteVBprincipalComponent],
  imports: [...MODULES],
  bootstrap:[ReporteGraficoComponent],
  providers: [...PROVIDERS],

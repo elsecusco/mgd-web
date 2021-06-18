@@ -92,9 +92,10 @@ export class DocumentoExternoReportesComponent implements OnInit {
     this.documentoFiltro.fechaFin=fechas.fechaFin;
   }
   openPdf(){
-    //console.log(this.documentoFiltro);
+    
     this.api.getReporteExternoPdf(this.documentoFiltro).subscribe(res => {
     const fileURL = URL.createObjectURL(res);
+    console.log(res);
     window.open(fileURL, '_blank');
     });
   }

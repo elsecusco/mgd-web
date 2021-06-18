@@ -185,7 +185,7 @@ export class DocumentoAtencion implements OnInit {
       codigoDocumentoTramite:this.doc.codigoDocumentoTramite,
       fechaDocumento:this.doc.fecha,
       contenidoDocumento:this.doc.asunto,
-      nombreRemitenteDocumento:this.doc.nombreRemitenteDocumento
+      nombreRemitenteDocumento:this.doc.nombreRemitenteDocumento      
     }
     this.api.graphReport(this.doc.codigoDocumentoTramite)
       .subscribe(gr =>{

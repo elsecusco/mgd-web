@@ -30,7 +30,7 @@ export class ValorizacionContabilidadComponent implements OnInit {
   valorizacionDetalle(){
     const dialogRef = this.dialog.open( 
       ValorizacionDetalleComponent,{
-        width: '700px',
+        width: '850px',
         height: '90hv',
         data: {}
       });
@@ -68,7 +68,7 @@ export class ValorizacionContabilidadComponent implements OnInit {
           notifyOk(res.mensaje);
           this.guardado = true;
         } else {
-          swalError('Error al gusradar valorizacion:', res.mensaje);
+          swalError('Error al guardar valorizacion:', res.mensaje);
         }
       }
     );

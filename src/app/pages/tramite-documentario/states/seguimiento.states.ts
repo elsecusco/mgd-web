@@ -6,20 +6,20 @@ import { of } from 'rxjs';
 import { TramiteService } from '../tramite-documentario.service';
 import { SeguimientoDocumento } from '@models/tramite/seguimiento-documento';
 import { SeguimientoFiltro } from '@models/tramite/seguimiento-filtro';
+import { SeguimientoFiltroVb } from '@models/tramite/seguimiento-filtro-vb';
 
 
 export interface SeguimientoStateModel {
     seguimientoFiltro: SeguimientoFiltro;
-    //seguimientoDocumento: SeguimientoDocumento;
     documentos: SeguimientoDocumento[];
     loaded: boolean;
-    pending: boolean;}
+    pending: boolean;
+}
 type FiltroAction = EmitterAction<SeguimientoFiltro>;
 type Context = StateContext<SeguimientoStateModel>;
 
 const defaultStateSeguimiento = {
     seguimientoFiltro: new SeguimientoFiltro(),
-    //seguimientoDocumento: new SeguimientoDocumento(),
     documentos: [],
     loaded: false,
     pending: false
@@ -40,6 +40,7 @@ export class SeguimientoState {
     return state.seguimientoFiltro;
     }
 
+
     @Selector()
     static seguimientoDocumento(state: SeguimientoStateModel) {
     return state.seguimientoFiltro;
@@ -58,6 +59,7 @@ export class SeguimientoState {
     static loaded(state: SeguimientoStateModel) {
         return state.loaded;
     }
+
     @Receiver({ cancelUncompleted: true })
     public static loadDocuments(ctx: Context, action: FiltroAction) {
         const seguimientoFiltro = action.payload;
@@ -74,4 +76,5 @@ export class SeguimientoState {
         })
         );
     }
+
 }

@@ -5,6 +5,7 @@ export class ResultadoContrato  {
     numeroContrato: string;
     descripcion : string;
     montoContrato:string;
+    fechaInicioFin:string;
     constructor() {
         this.nombreProveedor = null;
         this.numeroRuc = null;
@@ -12,6 +13,7 @@ export class ResultadoContrato  {
         this.numeroContrato = null; 
         this.descripcion = null;
         this.montoContrato = null;
+        this.fechaInicioFin = null;
         
 
    }

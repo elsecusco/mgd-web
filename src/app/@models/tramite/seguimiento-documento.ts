@@ -7,7 +7,6 @@ export class SeguimientoDocumento  {
     numeroPaginas?:number;
     nombreTipoDocumento?:string;
     nombreUsuario?:string;
-    //acciones:string;
 
    constructor() {
        this.codigoDocumentoTramite = null;
@@ -18,7 +17,7 @@ export class SeguimientoDocumento  {
        this.numeroPaginas = null;
        this.nombreTipoDocumento = null;
        this.nombreUsuario = null;
-       //this.acciones ="<mat-icon>note_add</mat-icon>";
+
 
    }
 }

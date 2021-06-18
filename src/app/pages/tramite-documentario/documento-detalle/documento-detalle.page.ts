@@ -13,6 +13,7 @@ import { notifyOk } from '@core/swal';
 import { BandejaFiltro } from '@models/tramite/bandeja-filtro';
 import { BandejaState } from '../states/bandeja.state';
 import { BuzonesUsuario } from '@models/tramite/buzones-usuario';
+import { ArchivoDocumento } from '@models/tramite/archivo.documento';
 
 @Component({
   selector: 'documento-detalle-page',
@@ -129,7 +130,7 @@ export class DocumentoDetallePage implements OnInit {
     this.api.recuperarDerivacion(body).subscribe(res => {
       if (res.id == 0) notifyOk(res.mensaje);
         this.navigate();
-    });
+   });
   }
   cancelarAtencionDocumento(){
     const body = [this.doc.codigoDocumentoTramite, this.doc.numeroAtencion];

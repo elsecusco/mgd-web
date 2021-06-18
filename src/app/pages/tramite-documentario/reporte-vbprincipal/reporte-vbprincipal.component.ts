@@ -5,20 +5,20 @@ import { Archivo } from '@core/archivo';
 import { FileSave } from '@core/file-save.service';
 
 @Component({
-  selector: 'reporte-principal',
-  templateUrl: './reporte-principal.component.html',
-  styleUrls: ['./reporte-principal.component.scss']
+  selector: 'reporte-vbprincipal',
+  templateUrl: './reporte-vbprincipal.component.html',
+  styleUrls: ['./reporte-vbprincipal.component.scss']
 })
-export class ReportePrincipalComponent implements OnInit {
-
+export class ReporteVBprincipalComponent implements OnInit {
+ 
   @ViewChild('link') public link: ElementRef;
   //codigo: number = 2019006785;
-//  urlpdf: string = "http://localhost:9000/api/reporteprincipal"  
+  //urlpdf: string = "http://localhost:9000/api/reporteprincipal"
   loadedPDF:Boolean = false;
   pdf!: Blob;
   constructor(private api: TramiteService,
               private fs: FileSave,
-              public dialogRef: MatDialogRef<ReportePrincipalComponent>, 
+              public dialogRef: MatDialogRef<ReporteVBprincipalComponent>, 
               @Inject(MAT_DIALOG_DATA) public data: number) { }  
   
   ngOnInit() {
@@ -26,14 +26,14 @@ export class ReportePrincipalComponent implements OnInit {
   } 
   
   getUrl(){
-    this.api.getReporteSeguimiento(this.data).subscribe(res => {
+    this.api.getReporteSeguimientoVB(this.data).subscribe(res => {
       this.pdf = res;
       this.loadedPDF = true;
     });
   }
 
   descargarPdf(){
-    this.api.getReporteSeguimiento(this.data)
+    this.api.getReporteSeguimientoVB(this.data)
     .subscribe(blob => this.setFile(blob));
   }
   

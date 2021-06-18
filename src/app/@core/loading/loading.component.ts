@@ -10,7 +10,9 @@ import { MatDialogRef } from '@angular/material';
   template: `
               <mat-spinner strokeWidth="5"></mat-spinner>
               <div class="cl-primary letra-spinner">CARGANDO</div>
+              
   `,
+  // aqui se muetra el componente cargando
   styles: [
     `
   .letra-spinner {

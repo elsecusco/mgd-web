@@ -40,8 +40,10 @@ export class LoadingService {
    */
   close() {
     try {
+      //console.log('Aquí')
       this.dialogRef.close();
-    } catch (error) {}
+    } 
+    catch (error) {}
   }
 
   /**

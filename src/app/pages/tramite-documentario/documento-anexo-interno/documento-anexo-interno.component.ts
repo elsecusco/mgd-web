@@ -230,18 +230,7 @@ export class DocumentoAnexoInternoComponent implements OnInit {
     }
   } 
   abrirVisor(archivoPrincipal:ArchivoDocumento){
-      // const data={
-      //   codigoDocumento: archivoPrincipal.codigoDocumento,
-      //   codigoDocumentoAdjunto:archivoPrincipal.codigoDocumentoAdjunto
-      // }
-      // this.dialog.open(
-      //   PdfViewerDialogComponent, {
-      //     width: '50vw',
-      //     height:'100vh',
-      //     data: data
-      //   }
-      // );  
-      const dialogRef = this.dialog.open(
+        const dialogRef = this.dialog.open(
         PdfViewerDialogComponent, {
           width: '40vw',
           height:'90vh',

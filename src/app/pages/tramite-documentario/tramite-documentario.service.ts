@@ -34,6 +34,7 @@ import { DocumentoExternoReporte } from '@models/tramite/documento-externo-repor
 import { DetalleSielse } from '@models/tramite/detalle-sielse';
 import { Sielse } from '@models/tramite/sielse';
 import { BuscarContrato } from '@models/tramite/buscar-contrato';
+import { SeguimientoFiltroVb } from '@models/tramite/seguimiento-filtro-vb';
 
 // import { BandejaSalida } from '@models/tramite/bandeja-salida';
 @Injectable()
@@ -53,6 +54,7 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
   }
   //************************Bandeja buscar */
   buscarBandeja(loginUsuarioBuzon: string, s: BuscarBandeja): Observable<Bandejas> {
+    //console.log(JSON.stringify(s))
     return this.http.get({
       uri: `api/buscarDocumento/${loginUsuarioBuzon.trim()}/${s.tipoBusqueda}/${s.valorBusqueda.trim()}`,
       open: false,
@@ -60,7 +62,7 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
     });
   }
   buscarBandejaInterna(loginUsuarioBuzon: string, s: BuscarBandeja): Observable<BandejasInternas> {
-    return this.http.get({
+      return this.http.get({
       uri: `api/buscarDocumentoInterno/${loginUsuarioBuzon.trim()}/${s.tipoBusqueda}/${s.valorBusqueda.trim()}`,
       open: false,
       close: false
@@ -387,14 +389,25 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
       close: false
     });
   }
-
   descargarArchivo(
     codigoDocumento,
     itemId
   ): Observable<Blob> | Observable<any> {
     return this.http.get({
       uri: `api/DescargarArchivo/${codigoDocumento}/${itemId}`,
-      open: true,
+      open:  true,
+      close: true,
+      options: { responseType: 'blob' }
+    });
+  }
+  //Aquí el componente se cambia por FALSE , para evitar que se habrá el componete 
+  descargarArchivoZip(
+    codigoDocumento,
+    itemId
+  ): Observable<Blob> | Observable<any> {
+    return this.http.get({
+      uri: `api/DescargarArchivo/${codigoDocumento}/${itemId}`,
+      open: false,
       close: true,
       options: { responseType: 'blob' }
     });
@@ -474,6 +487,7 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
   getReporteExternoPdf(r: DocumentoExternoReporte): Observable<Blob> | Observable<any> {
     const fi = formatDate(r.fechaInicio,"yyyyMMdd","en-US");
     const ff = formatDate(r.fechaFin,"yyyyMMdd","en-US");
+    //console.log(JSON.stringify(r))
     return this.http.get({
     uri: `api/ReporteDocExternosPDF/${fi}/${ff}/${+r.conRemitente}/
     ${r.conRemitente?r.codigoRemitente:"0"}/
@@ -576,6 +590,26 @@ getBandeja(loginUsuarioBuzon:string,b: BandejaFiltro): Observable<BandejaRespues
         uri: `api/listarDocumentosInteresado`,
         open: false,
         close: false
+    });
+  }
+  getBuscarVb(body:SeguimientoFiltroVb): Observable<SeguimientoDocumento[]> {
+    let copia:SeguimientoFiltroVb={...body}
+    copia.fechaInicioTexto = formatDate(copia.fechaInicio, "yyyyMMdd","en-US");
+    copia.fechaFinTexto = formatDate(copia.fechaFin, "yyyyMMdd","en-US");
+        //console.log(JSON.stringify(body))
+        return this.http.post({
+        body:copia,
+        uri: `api/listarDocumentoVb`,
+        open: false,
+        close: false
+    });
+  }
+  getReporteSeguimientoVB(codigo: number): Observable<Blob> | Observable<any> {
+    return this.http.get({
+    uri: `api/reporteVB/${codigo}`,
+    open: true,
+    close: true,
+    options: { responseType: 'blob' }
     });
   }
   getReporteSeguimiento(codigo: number): Observable<Blob> | Observable<any> {

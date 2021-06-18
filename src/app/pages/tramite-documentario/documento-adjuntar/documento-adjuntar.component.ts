@@ -14,7 +14,9 @@ import { DetalleAdjuntarComponent } from '../detalle-adjuntar/detalle-adjuntar.c
 import { MatRadioChange } from '@angular/material';
 import { BuzonesUsuario } from '@models/tramite/buzones-usuario';
 import { PdfViewerDialogComponent } from '../pdf-viewer-dialog/pdf-viewer-dialog.component';
-import { DocumentoInternoVisorComponent } from '../documento-interno-visor/documento-interno-visor.component';
+import * as JSZip from 'jszip';
+import * as FileSaver from 'file-saver';  
+import { LoadingService } from '@core/loading/loading.service';
 
 @Component({
   selector: 'documento-adjuntar',
@@ -62,7 +64,8 @@ export class DocumentoAdjuntarComponent implements OnInit {
   constructor(
     private api: TramiteService,
     public dialog: MatDialog,
-    private fs: FileSave
+    private fs: FileSave,
+    private loading: LoadingService
   ) {}
 
   ngOnInit() {
@@ -105,32 +108,78 @@ export class DocumentoAdjuntarComponent implements OnInit {
       this.api
         .descargarArchivo(e.codigoDocumento, e.codigoDocumentoAdjunto)
         .subscribe(blob => this.setFile(e, blob));
-        
+      
   }
+  descargarTodos(){
+    this.loading.open();
+    this.createZip(this.archivos.anexosIniciales.concat(this.archivos.anexosRespuesta),this.codigoDocumento.toString());
+  }
+
+  createZip(archivos: ArchivoDocumento[], zipName: string) {  
+    // tslint:disable-next-line:prefer-for-of  
+    let fc=0;
+    let f=[];
+    let names =[];
+    archivos.forEach(e => {
+      this.api
+      //.descargarArchivo(e.codigoDocumento, e.codigoDocumentoAdjunto)
+      .descargarArchivoZip(e.codigoDocumento, e.codigoDocumentoAdjunto)
+      .subscribe(blob =>{
+        f.push(blob);
+        names.push(e.nombreArchivo);
+        fc++;
+        if(fc==archivos.length)
+          this.saveAll(f,names,zipName);
+      });
+    });
+  }
+  saveAll(files:Blob[], names:string[], zipName: string){
+    const zip = new JSZip();  
+    const name = zipName + '.zip';
+    for (let counter = 0; counter < files.length; counter++) { 
+      const fileData: any = files[counter];  
+      const b: any = new Blob([fileData], { type: '' + fileData.type + '' });
+      zip.file(names[counter], b);  
+    }  
+    zip.generateAsync({ type: 'blob' }).then((content) => {  
+      if (content) {  
+        this.setFileAll(zipName,content);
+        this.loading.close();
+        //FileSaver.saveAs(content, name);  
+      }  
+    });  
+  }
+
+  setFileAll(nombre:string, blob) {
+    const archivo: Archivo = {
+    nombre: nombre,
+    archivo: blob,
+    extension: ".zip",
+    element: this.link
+    };
+    this.fs.save(archivo);
+
+  }
+  //Descargar Todos
   // async descargarVarios(files: any) {
   //   for (let file of files) {
   //     await this.descargar(file);
   //   }
   //   //files.forEach(file => this.descargar(file))
   // }
+
  eliminar(tipo:string,e: ArchivoDocumento) {
      this.api
     .eliminarArchivo(e.codigoDocumento, e.codigoDocumentoAdjunto)
     .subscribe(res => {
-    if (res.id == 0) notifyOk(res.mensaje);
+    //console.log(JSON.stringify(res))
+    if (res[0].Resultado == 0) 
+    { 
+      notifyOk(res.Mensaje);
+      this.getArchivos()
+    }
     });
-      //eliminar columna del html
-      let archivos=(tipo=="iniciales")?this.archivos.anexosIniciales:this.archivos.anexosRespuesta;
-          archivos = archivos.filter((value,key)=>{
-        return value.codigoDocumentoAdjunto != e.codigoDocumentoAdjunto;
-      });
-      if(tipo=="iniciales")
-        this.tableIniciales.dataSource=archivos;
-      else
-      if(tipo=="respuesta")
-        this.tableRespuesta.dataSource=archivos;
-      //console.log(archivos.length)
-  } 
+ } 
   
   abrirVisor(e:ArchivoDocumento){
       //console.log(archivoPrincipal);
@@ -158,7 +207,8 @@ export class DocumentoAdjuntarComponent implements OnInit {
     element: this.link
     };
     this.fs.save(archivo);
-    }
+  }
+
   endsWith(str, suffix) {
       return str.indexOf(suffix, str.length - suffix.length) !== -1;
   } 

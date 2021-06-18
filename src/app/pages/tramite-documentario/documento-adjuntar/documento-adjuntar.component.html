@@ -49,11 +49,17 @@
     <td mat-cell
         *matCellDef="let e">
       <div>
+        <!-- <button mat-icon-button 
+                matTooltip="Descargar"
+                color="primary"
+                (click)="descargarTodos()">
+               (click)="descargarVarios([e, e])">// Prueba para descargar todos
+          <mat-icon>cloud_download</mat-icon>
+        </button> -->
         <button mat-icon-button 
                 matTooltip="Descargar"
                 color="primary"
                 (click)="descargar(e)">
-                <!-- (click)="descargarVarios([e, e])"> -->
           <mat-icon>cloud_download</mat-icon>
         </button>
         <!-- <button mat-icon-button 
@@ -184,8 +190,7 @@
             </mat-radio-group> -->
         </div>
       </td>
-    </ng-container>
-
+    </ng-container>  
   <tr mat-header-row
       *matHeaderRowDef="columnas"></tr>
   <tr mat-row
@@ -193,4 +198,22 @@
 </table>
 <a #link style="display: none"
    class="a-link-file"></a>
-   
+
+<!-- Descargar Todos -->
+<!-- <ng-container matColumnDef="accion">
+    <th mat-header-cell
+        *matHeaderCellDef>Acciones</th>
+    <td mat-cell
+        *matCellDef="let e"> -->
+  <div class="descarga">
+      <mat-hint >Descargar todo .Zip</mat-hint>
+      <button mat-icon-button 
+                  matTooltip="Descargar"
+                  color="primary"
+                  (click)="descargarTodos()">
+              <mat-icon>cloud_download</mat-icon>
+      </button>
+  </div>
+ <!-- </td> -->
+<!-- </ng-container> -->
+<!-- </td> -->

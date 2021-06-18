@@ -54,7 +54,7 @@ export class HttpService {
     return http.pipe(
       finalize(() => {
         if (options.close) this.loading.close();
-      }),
+        }),
       catchError(e => {
         this.loading.close();
         return throwError(e);

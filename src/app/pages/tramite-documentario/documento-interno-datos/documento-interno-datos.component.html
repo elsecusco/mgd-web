@@ -51,6 +51,40 @@
                 readonly
                 type="text">
     </mat-form-field>
+    <!-- <mat-form-field fxFlex="25"
+                        fxFlex.xs="auto"
+                        appearance="outline"
+                        class="mg-bot-8"
+                        color="primary">
+        <mat-label>Recepción</mat-label>
+        <mat-select *ngIf="editData"
+                formControlName="codigoTipoRecepcion">
+                <mat-option *ngFor="let t of tipos.tiposRecepcion"
+                            [value]="t.codigo">                           
+                    {{t.nombre}}
+                </mat-option>
+        </mat-select>
+        <input  *ngIf="!editData"
+                matInput
+                [value]="tipoRecepcion"
+                autocomplete="off"
+                readonly
+                type="text">
+    </mat-form-field> -->
+    <mat-form-field *ngIf="editData"
+                    fxFlex="25"
+                    fxFlex.xs="auto"
+                    appearance="outline"
+                    class="mg-bot-8"
+                    color="primary">
+        <mat-label>Tipo Correlativo</mat-label>
+          <mat-select formControlName="codigoTipoCorrelativo">
+            <mat-option *ngFor="let t of correlativos"
+                    [value]="t.codigo">                           
+                       {{t.nombre}}
+            </mat-option>
+          </mat-select> 
+    </mat-form-field>
     <mat-form-field fxFlex="25"
                         fxFlex.xs="auto"
                         appearance="outline"
@@ -71,7 +105,7 @@
                 readonly
                 type="text">
     </mat-form-field>
-    <mat-form-field fxFlex="30"
+    <!-- <mat-form-field fxFlex="30"
                         appearance="outline"
                         class="mg-bot-8"
                         color="primary">
@@ -84,7 +118,7 @@
                                [for]="dp1"></mat-datepicker-toggle>
         <mat-datepicker #dp1
                         [disabled]="!editData"></mat-datepicker>
-    </mat-form-field>
+    </mat-form-field> -->
     </row-container>
     <row-container>
         <mat-form-field fxFlex="25"
@@ -136,7 +170,7 @@
                                 [disabled]="!chkVencimiento.checked || !editData"></mat-datepicker>
             </mat-form-field>
         </div>
-        <mat-form-field *ngIf="editData"
+        <!-- <mat-form-field *ngIf="editData"
                         fxFlex="25"
                         fxFlex.xs="auto"
                         appearance="outline"
@@ -149,7 +183,22 @@
                     {{t.nombre}}
                 </mat-option>
             </mat-select> 
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <mat-form-field fxFlex="30"
+                        appearance="outline"
+                        class="mg-bot-8"
+                        color="primary">
+            <mat-label>Fecha Documento</mat-label>
+                        <input matInput
+                                formControlName="fechaDocumento"
+                                readonly
+                                [matDatepicker]="dp1">
+        <mat-datepicker-toggle matSuffix
+                               [for]="dp1"></mat-datepicker-toggle>
+        <mat-datepicker #dp1
+                        [disabled]="!editData"></mat-datepicker>
+    </mat-form-field>
     </row-container>
     <!-- Si eligen la opción de Valorización de Contabilidad -->
     <!-- {{form.value.codigoTipoDocumento }} para comprobar -->

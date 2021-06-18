@@ -41,6 +41,13 @@ table#tdoc {
 .campoRazonSocial{
     width: 65%;
 }
+.campoRuc{
+    width: 35%;
+}
+
+.campoFecha{
+    width: 70%;
+}
 
 .campoBuscar{
     width: 35%;
@@ -53,8 +60,8 @@ table#tdoc {
 .mat-column-nombreProveedor {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 25% !important;
-    width: 25% !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -67,8 +74,8 @@ table#tdoc {
 .mat-column-numeroRuc {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 20% !important;
-    width: 20% !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -82,8 +89,8 @@ table#tdoc {
 .mat-column-descripcion {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 35% !important;
-    width: 35% !important;
+    flex: 0 0 30% !important;
+    width: 30% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -96,8 +103,8 @@ table#tdoc {
 .mat-column-montoContrato {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 20% !important;
-    width: 20% !important;
+    flex: 0 0 13% !important;
+    width: 13% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -106,6 +113,35 @@ table#tdoc {
     text-align: center;
     font-size: 11px;
 }
+
+.mat-column-numeroContrato {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+}
+
+.mat-column-fechaInicioFin {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 13% !important;
+    width: 13% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+}
+
 .botonBuscar{
     display:flex; 
     align-items: center;

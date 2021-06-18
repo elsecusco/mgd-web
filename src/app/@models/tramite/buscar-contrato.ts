@@ -9,6 +9,7 @@ export class BuscarContrato {
     fechaFinTexto: string; 
     descripcion: string;
     montoContrato:string;
+    fechaInicioFin?:string;
     listValorizaciones?: ValorizacionDetalle[];
     numeroContrato?: string;
     fondoGarantia?: string;
@@ -21,6 +22,7 @@ export class BuscarContrato {
         this.numeroRuc = null;
         this.descripcion = null;
         this.montoContrato = null;
+        this.fechaInicioFin = null;
         this.listValorizaciones = [];
         this.numeroContrato = null; 
         this.fondoGarantia = null;
