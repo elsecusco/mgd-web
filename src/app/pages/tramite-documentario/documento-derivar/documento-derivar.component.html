@@ -72,10 +72,12 @@
                   color="primary">
     <mat-label>Proveido</mat-label>
     <textarea matInput
+              autosize
               formControlName= "descripcionSolicitudAtencion"
+              maxlength="500"
               rows="2"></textarea>
   </mat-form-field>
-
+  <label class="nopadding clrlbl"> Maximo caracteres: {{form.value.descripcionSolicitudAtencion.length}}/500</label>
   <!-- <section class="check">
     <mat-checkbox class="example-margin" formControlName= "cargo">Imprimir Cargo de Mesa de Partes!</mat-checkbox>
   </section> -->

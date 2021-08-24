@@ -225,13 +225,28 @@
     <mat-form-field appearance="outline"
                     color="primary">
         <mat-label>Asunto</mat-label>
-        <textarea style="text-transform:uppercase"
-                  matInput
+        <textarea matInput
+                  autosize
                   formControlName="contenidoDocumento"
-                  rows="2" (keyup)="autoGrowTextZone($event)"></textarea>
+                  maxlength="500"
+                  rows="2" ></textarea>
     </mat-form-field>
+    <label class="nopadding clrlbl"> Maximo caracteres: {{form.value.contenidoDocumento.length}}/500</label>
+
+    <!-- <mat-form-field appearance="outline"
+                        color="primary">
+        <mat-label>Proveido</mat-label>
+        <textarea matInput
+                  autosize
+                  formControlName= "descripcionSolicitudAtencion"
+                  maxlength="500"
+                  rows="2"></textarea>
+        </mat-form-field>
+    <label class="nopadding clrlbl"> Maximo caracteres: {{form.value.descripcionSolicitudAtencion.length}}/500</label> -->
 
 
+
+   
     <div *ngIf="form.get('codigoDocumento').enabled"
          fxLayout="row"
          fxLayoutAlign="end center">

@@ -4,11 +4,11 @@
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 500px;
-    height: 414px !important;
+    max-height: 414px !important;
 }
 
 table#tdoc {
-    height: 414px !important;
+    max-height: 414px !important;
 }
 .titulo{
     font-weight: bold;
@@ -29,6 +29,7 @@ table#tdoc {
     border-bottom: 1px solid #dddddd;
    
 }
+
 
 #stable-detalle-valorizacion tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;

@@ -86,13 +86,13 @@ import { ValorizacionContabilidadComponent } from './valorizacion-contabilidad/v
 import { ValorizacionDetalleComponent } from './valorizacion-detalle/valorizacion-detalle.component';
 import { PdfViewerDialogComponent } from './pdf-viewer-dialog/pdf-viewer-dialog.component';
 import { ReporteMemoComponent } from './reporte-memo/reporte-memo.component';
-
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { DocumentoInternoVisorComponent } from './documento-interno-visor/documento-interno-visor.component';
 import { ReporteVBComponent } from './reporte-vb/reporte-vb.component';
 import { ReporteVBDetalleComponent } from './reporte-vb-detalle/reporte-vb-detalle.component';
 import { ReporteVBprincipalComponent } from './reporte-vbprincipal/reporte-vbprincipal.component';
 import { ReporteVbState } from './states/reporte-vb.state';
+import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 //import { DocumentoInternoBuscarComponent } from './documento-interno-buscar/documento-interno-buscar.component';
 
@@ -107,6 +107,7 @@ const MODULES = [
   NgxChartsModule,
   MatSliderModule,
   MatTabsModule,
+  TextareaAutosizeModule,
   MatSlideToggleModule,
   // Agreagado para el nuevo date y hours
   OwlDateTimeModule,
