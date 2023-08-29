@@ -1,0 +1,14 @@
+<page-container class="row-center">
+  <mat-card class="max-wd-950 wd-full">
+    <mat-card-title>
+      <mat-toolbar color="primary" fxLayoutGap="16px">
+        <span>Registro de Documento Mesa de Partes Virtual</span>
+      </mat-toolbar>
+      </mat-card-title>
+      <mat-card-content fxLayout="column"
+                      fxLayoutGap="16px">
+      <mesa-datos (save)="codigoDocumento=$event"></mesa-datos>
+      <mat-divider> </mat-divider>
+    </mat-card-content>
+  </mat-card>
+</page-container>

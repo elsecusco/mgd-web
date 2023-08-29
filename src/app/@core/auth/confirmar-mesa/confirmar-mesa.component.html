@@ -1,0 +1,70 @@
+<form [formGroup]="form" novalidate
+[style.display]="!isVerificado">
+  <h1 mat-dialog-title>Confirmacion Envio</h1>
+  <mat-divider class="mg-bot-8"></mat-divider>
+  <span>Un mensaje con el codigo de verificacion fue envido al correo electronico y al celular registrado</span>
+  <ul>
+    <li>Correo: {{data.persona.emailContacto}}</li>
+    <li>Celular: {{data.persona.telefonoContacto}}</li>
+    <li>Archivo Principal:{{data.principal.titulo}}</li>
+  </ul>
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Codigo de verificacion</mat-label>
+      <input
+        matInput
+        placeholder="Ingrese Codigo..."
+        formControlName="codigoVerificacion"
+        autocomplete="off"/>
+    </mat-form-field>
+  </div>  
+  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="verificarCodigo()"
+      [disabled]="form.invalid"
+    >
+    Enviar
+    </button>
+    <button mat-button color="warn" [mat-dialog-close]="" cdkFocusInitial>
+      Cancelar
+    </button>
+    <span>{{verficacionMensaje}}</span>
+  </div>
+</form>
+<ng-container *ngIf="isVerificado">
+  <div *ngIf="!confirmacionFinal">
+  <h1 mat-dialog-title>Registrando Documento</h1>
+  <mat-divider class="mg-bot-8"></mat-divider>
+  <span>{{verficacionMensaje}}</span>
+    <ul>
+      <li>Correo: {{data.persona.emailContacto}}</li>
+      <li>Celular: {{data.persona.telefonoContacto}}</li>
+      <li>Archivo Principal:{{data.principal.titulo}}</li>
+    </ul>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <span class="fw-400 cl-accent">{{ progress }} %</span>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progress"
+      color="accent">
+    </mat-progress-bar>
+    </div>
+  </div>
+  <div *ngIf="confirmacionFinal">
+    <h1 mat-dialog-title>Documento registrado</h1>
+    <mat-divider class="mg-bot-8"></mat-divider>
+    <span>Guarde en un lugar seguro los siguientes datos para consultar el estado de su tramite</span>
+      <ul>
+        <li>Codigo Documento: {{data.doc.codigoDocumentoTramite}}</li>
+        <li>Codigo de verificacion: {{data.doc.codigoVerificacion}}</li>
+      </ul>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="close()"
+    >Aceptar
+    </button>
+  </div>
+</ng-container>

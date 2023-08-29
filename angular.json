@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MGD-WEBAPP": {
+    "appSIG": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mgd-webapp",
+            "outputPath": "dist/appSIG",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -27,28 +27,50 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/server.js",
+              "src/web.config",
+              "src/manifest.json",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/bleeding-edge",
+                "output": "/bleeding-edge/"
+              }
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": ["node_modules/jquery/dist/jquery.min.js"]
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 }
               ],
-              "outputHashing": "all"
+              "serviceWorker": true
             },
             "development": {
               "buildOptimizer": false,
@@ -65,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "MGD-WEBAPP:build:production"
+              "browserTarget": "appSIG:build:production"
             },
             "development": {
-              "browserTarget": "MGD-WEBAPP:build:development"
+              "browserTarget": "appSIG:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MGD-WEBAPP:build"
+            "browserTarget": "appSIG:build"
           }
         },
         "test": {
@@ -100,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b002b27e-066f-4a8b-a086-40877a69ef6d"
   }
 }

@@ -1,0 +1,99 @@
+<row-container>
+  <span class="fs-16 fw-500 mg-bot-8">Documento Principal:</span>
+  <div fxFlex="60"
+      appearance="outline"
+      class="mg-bot-8"
+      color="primary">
+      <mat-form-field fxFlex="100"
+          fxFlex.xs="auto"
+          appearance="outline"
+          class="mg-bot-8"
+          color="primary">
+          <mat-label>Adjunte documento ...</mat-label>
+          <input matInput
+                 readonly
+                 [value]="archivoPrincipal.nombreArchivo">
+      </mat-form-field>
+  </div>
+  <div
+     *ngIf="archivoPrincipal.nombreArchivo == ''"
+     fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+    <button mat-icon-button
+            color="primary"
+            type="button"
+            (click)="adjuntar(1)"
+            matTooltip="Adjuntar/Subir Archivo">
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  </div>
+  <div
+    *ngIf="archivoPrincipal.nombreArchivo"
+     fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+    <button mat-icon-button 
+            matTooltip="Eliminar"
+            type="button"
+            (click)="eliminar(-1)"
+    >
+            <mat-icon>delete_forever</mat-icon>
+    </button>
+  </div>
+</row-container>
+
+<div fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="mg-bot-8">
+  <span class="fs-16 fw-500">Archivos Anexos</span>
+  <button mat-icon-button
+          color="primary"
+          type="button"
+          (click)="adjuntar(2)"
+          matTooltip="Adjuntar/Subir Archivo">
+    <mat-icon>cloud_upload</mat-icon>
+  </button>
+</div>
+
+<table mat-table
+       class="wd-100"
+       [dataSource]="anexos">
+
+  <ng-container matColumnDef="nombreArchivo">
+    <th mat-header-cell
+        *matHeaderCellDef>Archivo</th>
+    <td mat-cell
+        *matCellDef="let e"> {{e.nombreArchivo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcionArchivo">
+    <th mat-header-cell
+        *matHeaderCellDef>Descripción Archivo</th>
+    <td mat-cell
+        *matCellDef="let e"> {{e.descripcionArchivo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="accion">
+    <th mat-header-cell
+        *matHeaderCellDef>Acciones</th>
+    <td mat-cell
+        *matCellDef="let e; let i = index">
+      <div>
+        <button mat-icon-button 
+                matTooltip="Eliminar"
+                (click)="eliminar(i)"
+                type="button">
+                <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row
+      *matHeaderRowDef="columnas"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: columnas;"></tr>
+</table>

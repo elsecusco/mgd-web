@@ -1,0 +1,27 @@
+<div class="div-card">
+    <mat-toolbar color="primary"
+                 class="radius-top mat-elevation-z2">
+       <p class="fw-300">Aviso Importante</p>
+    </mat-toolbar>
+    <mat-card class="radius-bottom">
+        <ul>
+            <li>Tener un correo electrónico activo.</li>
+            <li>Número de celular - trámite</li>
+        </ul>
+
+        <mat-card-actions class="margen btn-login">
+            <button color="primary"
+                        mat-raised-button
+                        type="button"
+                        (click)="send()">
+                    <span>Nuevo Doc</span>
+            </button>
+            <button color="primary"
+                        mat-raised-button
+                        type="button"
+                        (click)="send()">
+                    <span>Seguimiento Doc</span>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

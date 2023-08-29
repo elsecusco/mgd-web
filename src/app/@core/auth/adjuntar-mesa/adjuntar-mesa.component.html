@@ -1,0 +1,39 @@
+<form [formGroup]="form" novalidate>
+  <div class="backdropFirma" *ngIf="firmando"></div>
+  <h1 mat-dialog-title>Adjuntar {{tipo}}</h1>
+  <mat-divider class="mg-bot-8"></mat-divider>
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
+    <upload-file (file)="changeFile($event)"></upload-file>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Título del Documento</mat-label>
+      <input
+        matInput
+        placeholder="Ingrese Título..."
+        formControlName="titulo"/>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Descripción Documento</mat-label>
+      <textarea
+        matInput
+        placeholder="Ingrese Descripción..."
+        formControlName="descripcionArchivo"
+        rows="2">
+      </textarea>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="subirArchivo()"
+      [disabled]="form.invalid || file == undefined"
+    >
+    Subir Archivo
+    </button>
+    <button mat-button color="warn" [mat-dialog-close]="" cdkFocusInitial>
+      Cancelar
+    </button>
+  </div>
+</form>
