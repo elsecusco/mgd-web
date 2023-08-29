@@ -1,0 +1,99 @@
+@import 'styles-app-loading';
+
+@import 'styles-reset';
+@import 'colors';
+@import '~@angular/material/theming';
+
+
+@include mat-core();
+
+// temas
+@import './themes/default-theme';
+@import './themes/light-theme';
+@import './themes/black-theme';
+@import './themes/blue-theme';
+
+
+//estilo elementos
+@import './themes/elements/button-theme';
+@import './themes/elements/button-toggle-theme';
+@import './themes/elements/form-field-theme';
+@import './themes/elements/dialog-theme';
+@import './themes/elements/card-theme';
+@import './themes/elements/table-theme';
+
+//mixins components
+@import 'styles-reset.scss-theme';
+@import '../app/@core/loading/loading.component-theme';
+
+@import '../app/@core/toolbar/toolbar.component.scss-theme.scss';
+@import '../app/@core/side-nav/sidenav.component.scss-theme.scss';
+@import '../app/@core/breadcrumbs/breadcrumbs.component-theme.scss';
+
+// @import '../app/@shared/nav-bar/nav-bar-theme';
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+
+//clases tema
+@import 'class-theme';
+
+@mixin snackbar-cargando-app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .cargando-app {
+    .mat-simple-snackbar {
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    color: mat-color($accent);
+  }
+}
+
+@mixin custom-components-theme($theme) {
+  @include app-styles-reset-theme($theme);
+  @include ngx-toolbar-component-theme($theme);
+  @include ngx-sidenav-component-theme($theme);
+  @include ngx-breadcrumbs-component-theme($theme);
+  // @include menu-item-theme($theme);
+  @include loading-component-theme($theme);
+  @include snackbar-cargando-app-theme($theme);
+
+  //estilo elements app
+  @include button-theme($theme);
+  @include button-toggle-theme($theme);
+  @include form-field-theme($theme);
+  @include dialog-theme($theme);
+  @include card-theme($theme);
+  @include table-theme($theme);
+
+  //clases
+  @include class-theme($theme);
+}
+
+.default-theme {
+  @include angular-material-theme($app-default-theme);
+  @include custom-components-theme($app-default-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($app-light-theme);
+  @include custom-components-theme($app-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($app-black-theme);
+  @include custom-components-theme($app-black-theme);
+}
+
+.blue-theme {
+  @include angular-material-theme($app-blue-theme);
+  @include custom-components-theme($app-blue-theme);
+}
+
+.custom-size-btn .mat-button-wrapper{
+  padding: 0 !important;
+}

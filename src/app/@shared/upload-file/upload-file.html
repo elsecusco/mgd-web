@@ -1,0 +1,20 @@
+<div fxLayout="row"
+     fxLayoutAlign="start center"
+     fxLayoutGap="8px"
+     class="wd-100">
+
+  <button mat-stroked-button
+          (ngxf-select)="uploadFile($event)"
+          color="primary"
+          type="button">
+    Selecionar Archivo <mat-icon>attachment</mat-icon>
+  </button>
+
+  <input matInput
+         fxFlex
+         readonly
+         autocomplete="off"
+         placeholder="Ningún Archivo Seleccionado..."
+         value="{{fileName}}"
+         class="fw-400 cl-accent">
+</div>

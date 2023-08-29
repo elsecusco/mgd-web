@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExternPageComponent implements OnInit {
   showForm = false;
-  titulo: string;
-  subtitulo:string;
-  footer: string;
+  titulo: string = '';
+  subtitulo:string = '';
+  footer: string = '';
   constructor() { }
 
   ngOnInit() {

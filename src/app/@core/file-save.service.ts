@@ -1,5 +1,5 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { Archivo } from '@core/archivo';
+import { Archivo } from '../@core/archivo';
 //import { type } from 'os';
 
 @Injectable()

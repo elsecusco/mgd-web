@@ -1,0 +1,29 @@
+<mat-sidenav-container class="dashboard-container">
+  <mat-sidenav class="sidenav" [opened]="sidenavOpen" align="start" role="navigation"
+               [mode]="sidenavMode" ngxIconSidenav #sidenav>
+
+    <!-- <ngx-sidenav *ngIf="(url$|async) !='/'"></ngx-sidenav> -->
+    <ngx-sidenav></ngx-sidenav>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content-container" fxLayout="column">
+
+    <ngx-toolbar [sidenav]="sidenav"></ngx-toolbar>    
+    <ng-scrollbar class="mat-app-background">
+        <mat-card class="m-crumb bg-primary">
+            <ngx-breadcrumbs [crumbs]="crumbs$ | async"></ngx-breadcrumbs>  
+        </mat-card>    
+      <!-- <div class="route-container" [@routeAnimation]="depth$ | async"> -->
+      <div class="route-container">
+        <!--<ngx-breadcrumbs title="Dashboard" [crumbs]="crumbs$ | async"></ngx-breadcrumbs>-->
+        <!-- <router-outlet></router-outlet> -->
+        <ng-content></ng-content>
+      </div>
+    </ng-scrollbar>
+    <scroll-to-top>
+      <!-- add id="top" -->
+    </scroll-to-top>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

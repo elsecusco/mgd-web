@@ -1,0 +1,30 @@
+* {
+  a:hover,
+  a:active,
+  a:focus {
+    text-decoration: none;
+  }
+
+  &:active,
+  :focus {
+    outline: none !important;
+  }
+}
+
+label {
+  margin: 0;
+}
+
+html,
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100% !important;
+}
+
+code {
+  white-space: nowrap;
+  border-radius: 10px;
+  padding: 0 8px 1px 8px;
+}

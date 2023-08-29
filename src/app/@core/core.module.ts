@@ -25,16 +25,16 @@ import { AuthState } from './auth/state/auth.state';
 
 import { AuthModule } from './auth/auth.module';
 import { LoadingModule } from './loading/loading.module';
-import { ResponseHttpInterceptor } from '@core/responseHttp.interceptor';
+import { ResponseHttpInterceptor } from '../@core/responseHttp.interceptor';
 
-import { environment as env } from 'environments/environment';
+import { environment as env } from '../../environments/environment';
 
-import { JWTModule } from '@core/jwt.module';
-import { HttpService } from '@core/http.service';
-import { IconService } from '@core/icon.service';
-import { FileSave } from '@core/file-save.service';
-import { _window, WINDOW } from '@core/window';
-import { ThemePickerModule } from '@core/theme-picker/theme-picker.module';
+import { JWTModule } from '../@core/jwt.module';
+import { HttpService } from '../@core/http.service';
+import { IconService } from '../@core/icon.service';
+import { FileSave } from '../@core/file-save.service';
+import { _window, WINDOW } from '../@core/window';
+import { ThemePickerModule } from '../@core/theme-picker/theme-picker.module';
 import { MenuState } from './navigator/state/menu.state';
 import { NavigatorModule } from './navigator/navigator.module';
 import { PageTitleService } from './page-title.service';

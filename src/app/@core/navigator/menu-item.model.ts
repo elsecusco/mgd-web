@@ -1,4 +1,4 @@
-import { TreeNode } from '@core/tree';
+import { TreeNode } from '../../@core/tree';
 
 export enum MenuItemType {
   Link = 'link',

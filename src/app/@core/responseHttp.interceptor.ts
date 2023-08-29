@@ -13,7 +13,7 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { swalError, notifyOk, notifyInfo, swalInfo } from '@core/swal';
+import { swalError, notifyOk, notifyInfo, swalInfo } from '../@core/swal';
 import { Logout } from './auth/state/auth.action';
 
 @Injectable()
