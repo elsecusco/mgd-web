@@ -45,7 +45,7 @@ const PROVIDERS = [AuthService, AuthGuard, RoleGuard];
   imports: [...MODULES],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
-  entryComponents: [...ENTRIES]
+  // entryComponents: [...ENTRIES] --- deprecated
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {

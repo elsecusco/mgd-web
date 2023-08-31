@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollToTopComponent } from './scroll-to-top.component';
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatTooltipModule
-} from '@angular/material';
+// --- upgraded version
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 @NgModule({

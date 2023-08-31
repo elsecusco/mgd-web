@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { scrollFabAnimation } from '@core/animations/scroll-fab.animation';
-import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll';
+import { scrollFabAnimation } from '../../@core/animations/scroll-fab.animation';
+import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 import {
   distinctUntilChanged,
   map,
@@ -10,8 +10,8 @@ import {
   throttleTime
 } from 'rxjs/operators';
 import { BehaviorSubject, fromEvent } from 'rxjs';
-import { WINDOW } from '@core/window';
-import { untilDestroy } from '@core/untilDestroy';
+import { WINDOW } from '../../@core/window';
+import { untilDestroy } from '../../@core/untilDestroy';
 
 enum ShowStatus {
   show = 'show',
@@ -28,7 +28,7 @@ export class ScrollToTopComponent implements AfterViewInit, OnDestroy {
   private _stateSubject = new BehaviorSubject<string>(ShowStatus.hide);
   state$ = this._stateSubject.asObservable();
 
-  pageScrollInstance: PageScrollInstance;
+  pageScrollInstance!: PageScrollInstance;
 
   constructor(
     private pageScrollService: PageScrollService,

@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
-import { PackageMesa, DocumentoMesa } from '@models/documento-mesa';
+import { PackageMesa, DocumentoMesa } from '../../../@models/documento-mesa';
 import { UploadStatus } from 'ngxf-uploader';
-import { notifyOk } from '@core/swal';
+import { notifyOk } from '../../../@core/swal';
 
 @Component({
     selector: 'confirmar-mesa',
@@ -15,16 +15,16 @@ import { notifyOk } from '@core/swal';
 export class ConfirmarMesaComponent implements OnInit {
   form: FormGroup;
   progress = 0;
-  verficacionMensaje = "";  
+  verficacionMensaje = "";
   isSave = false;
   isVerificado=false;
   confirmacionFinal=false;
-  
+
   constructor(
     private fb: FormBuilder,
     private api: AuthService,
     public dialogRef: MatDialogRef<ConfirmarMesaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:PackageMesa                   
+    @Inject(MAT_DIALOG_DATA) public data:PackageMesa
   ) {}
 
   ngOnInit() {
@@ -48,12 +48,12 @@ export class ConfirmarMesaComponent implements OnInit {
     );
   }
   subirArchivo() {
-    
+
     this.data.doc.filePrincipal=DocumentoMesa.adjuntoToString(this.data.principal);
-    this.data.doc.listAnexos=this.data.listAnexos.map(v=>DocumentoMesa.adjuntoToString(v)).join("##");
+    this.data.doc.listAnexos=this.data.listAnexos.map((v:any)=>DocumentoMesa.adjuntoToString(v)).join("##");
     let files:File[]=[];
     files.push(this.data.principal.file);
-    this.data.listAnexos.map(v=>files.push(v.file));
+    this.data.listAnexos.map((v:any)=>files.push(v.file));
     this.api.subirArchivos(this.data.doc, files).subscribe(
       event => {
         this.progress = event.percent;

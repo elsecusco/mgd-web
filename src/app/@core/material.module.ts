@@ -6,6 +6,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 // CDK
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
+// --- upgraded import versions ---
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -34,52 +35,21 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips'
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import {
-  // MatInputModule,
-  // MatCardModule,
-  // MatButtonModule,
-  // MatSidenavModule,
-  // MatListModule,
-  // MatIconModule,
-  // MatToolbarModule,
-  // MatProgressSpinnerModule,
-  // MatProgressBarModule,
-  // MatDatepickerModule,
-  // MatDialogModule,
-  // MatFormFieldModule,
-  // MatNativeDateModule,
-  // MatTooltipModule,
-  // MatTableModule,
-  // MatRadioModule,
-  // MatPaginatorModule,
-  // MatTabsModule,
-  // MatSnackBarModule,
-  // MatExpansionModule,
-  // MatSelectModule,
-  // MatSortModule,
 
-  // MatCheckboxModule,
-  // MatAutocompleteModule,
-  // MatChipsModule,
-  // MAT_CHIPS_DEFAULT_OPTIONS,
-  // MatButtonToggleModule
-} from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 const MODULES = [
   FlexLayoutModule,
   NgScrollbarModule,
-
   OverlayModule,
   CdkAccordionModule,
-
+  MatToolbarModule,
   MatCardModule,
   MatButtonModule,
   MatSidenavModule,
   MatListModule,
   MatIconModule,
-  MatToolbarModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatButtonModule,
@@ -89,13 +59,11 @@ const MODULES = [
   MatRadioModule,
   MatPaginatorModule,
   MatTabsModule,
-
   MatInputModule,
   MatFormFieldModule,
   MatDatepickerModule,
   MatDialogModule,
   MatNativeDateModule,
-
   MatSnackBarModule,
   MatExpansionModule,
   MatSelectModule,
@@ -103,7 +71,7 @@ const MODULES = [
   MatCheckboxModule,
   MatAutocompleteModule,
   MatChipsModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
 ];
 
 @NgModule({

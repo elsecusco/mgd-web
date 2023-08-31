@@ -1,4 +1,4 @@
-import { environment as env } from 'environments/environment';
+import { environment as env } from '../../environments/environment';
 import { Subscription } from 'rxjs';
 
 export function setUrl(uri: string) {

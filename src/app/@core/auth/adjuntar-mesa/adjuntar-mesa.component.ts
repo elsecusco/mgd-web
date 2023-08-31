@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FileAdjunto } from '@models/documento-mesa';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FileAdjunto } from '../../../@models/documento-mesa';
 /* import { UploadStatus } from 'ngxf-uploader';
 import { notifyOk, swalError } from '@core/swal';
  */
@@ -15,14 +15,14 @@ export class AdjuntarMesaComponent implements OnInit {
   form: FormGroup;
   file: File;
   progress = 0;
-  tipo = "";  
+  tipo = "";
   isSave = false;
 
   firmando=false;//eliminaar despues
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AdjuntarMesaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data                       
+    @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class AdjuntarMesaComponent implements OnInit {
     this.form = this.fb.group({
       codigoTipoDocumentoTramiteAdjunto:[this.data.tipoArchivo.val],
       titulo: ['', Validators.required],
-      descripcionArchivo: [''], 
+      descripcionArchivo: [''],
       nombreArchivo: ['', Validators.required]
     });
   }

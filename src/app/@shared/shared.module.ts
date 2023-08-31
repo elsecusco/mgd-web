@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@core/material.module';
-import { ToolbarModule } from '@core/toolbar/toolbar.module';
-import { SidenavModule } from '@core/side-nav/sidenav.module';
-import { ScrollToTopModule } from '@core/scroll-to-top/scroll-to-top.module';
+import { MaterialModule } from '../@core/material.module';
+import { ToolbarModule } from '../@core/toolbar/toolbar.module';
+import { SidenavModule } from '../@core/side-nav/sidenav.module';
+import { ScrollToTopModule } from '../@core/scroll-to-top/scroll-to-top.module';
 import { NgxfUploaderModule } from 'ngxf-uploader';
 
 import {
@@ -22,7 +22,7 @@ import { ChipsAutocompleteComponent } from './chips-autocomplete/chips-autocompl
 import { UploadComponent } from './upload/upload.component';
 import { UploadFile } from './upload-file/upload-file';
 import { TableToggleColumn } from './table-toggle-column/table-toggle-column';
-import { BreadcrumbsModule } from '@core/breadcrumbs/breadcrumbs.module';
+import { BreadcrumbsModule } from '../@core/breadcrumbs/breadcrumbs.module';
 import { SafePipe } from './safe.pipe';
 import { Firma } from './firma/firma';
 

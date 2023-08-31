@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-import {MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService, TiposMesa } from '../auth.service';
-import { DocumentoMesa, Persona, FileAdjunto } from '@models/documento-mesa';
+import { DocumentoMesa, Persona, FileAdjunto } from '../../../@models/documento-mesa';
 import { ConfirmarMesaComponent } from '../confirmar-mesa/confirmar-mesa.component';
 import { formatDate } from '@angular/common';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+// import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'mesa-datos',
@@ -20,9 +20,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./mesa-datos.component.scss']
 })
 export class MesaDatosComponent implements OnInit {
- 
+
  // codigoDocumento = 0;
-  form: FormGroup;
+  form!: FormGroup;
   editPerson = false;
   editDocument = false;
 
@@ -31,20 +31,20 @@ export class MesaDatosComponent implements OnInit {
   listAnexos: Array<FileAdjunto> = [];
 
   tipos: TiposMesa={tiposDocumento:[],tiposProceso:[],tiposDocIdentidad:[]};
-  
-  saving: boolean;
+
+  saving!: boolean;
   @Output() save = new EventEmitter<number | string>();
 
   doc: DocumentoMesa = new DocumentoMesa();
   persona:Persona = new Persona();
-  
+
   constructor(private fb: FormBuilder
     ,private api: AuthService
     ,public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.api.getTipos().subscribe(tipos => 
+    this.api.getTipos().subscribe(tipos =>
       {
         this.tipos = tipos;
         this.doc.codigoTipoDocumento = this.tipos.tiposDocumento[0].codigo;
@@ -81,9 +81,9 @@ export class MesaDatosComponent implements OnInit {
   }
 
   search(){
-    const id=this.form.get("tipoDocumentoPersona").value;
-    const number=this.form.get("numeroDocumentoPersona").value;
-    this.saving = true;   
+    const id=this.form.get("tipoDocumentoPersona")?.value;
+    const number=this.form.get("numeroDocumentoPersona")?.value;
+    this.saving = true;
     this.api.getRemitente(id,number).subscribe(p=>{
       if(p.length>0){
         this.persona=p[0];
@@ -103,16 +103,16 @@ export class MesaDatosComponent implements OnInit {
     if(p.file!= null)
       this.form.patchValue({ filePrincipal: p});
     else
-      this.form.patchValue({ filePrincipal: null});    
+      this.form.patchValue({ filePrincipal: null});
   }
   formPullPerson(){
     this.persona={
       codigoRemitenteDocumento:this.persona.codigoRemitenteDocumento,
-      codigoTipoDocumento:this.form.get("tipoDocumentoPersona").value,
-      emailContacto:this.form.get("correoPersona").value,
-      nombreRemitenteDocumento:this.form.get("nombrePersona").value,
-      numeroDocumentoIdentidad:this.form.get("numeroDocumentoPersona").value,
-      telefonoContacto:this.form.get("celularPersona").value
+      codigoTipoDocumento:this.form.get("tipoDocumentoPersona")?.value,
+      emailContacto:this.form.get("correoPersona")?.value,
+      nombreRemitenteDocumento:this.form.get("nombrePersona")?.value,
+      numeroDocumentoIdentidad:this.form.get("numeroDocumentoPersona")?.value,
+      telefonoContacto:this.form.get("celularPersona")?.value
     }
   }
   formPullDocumento(){
@@ -133,7 +133,7 @@ export class MesaDatosComponent implements OnInit {
       res => {
         this.persona.codigoRemitenteDocumento=res.codigoRemitenteDocumento;
         this.saving = false;
-        this.showConfirmacion();  
+        this.showConfirmacion();
       }
     );
   }
@@ -142,7 +142,7 @@ export class MesaDatosComponent implements OnInit {
       width: '600px',
       data: { doc:this.doc,
               persona:this.persona,
-              principal:this.form.get("filePrincipal").value,
+              principal:this.form.get("filePrincipal")?.value,
               listAnexos:this.listAnexos}
     });
     dialogRef.afterClosed().subscribe(ok => {

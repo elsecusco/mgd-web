@@ -5,8 +5,8 @@ import {
   HostBinding
 } from '@angular/core';
 import { Input } from '@angular/core';
-import { MenuService } from '@core/navigator/menu.service';
-import { MenuItem } from '@core/navigator/menu-item.model';
+import { MenuService } from '../../../../@core/navigator/menu.service';
+import { MenuItem } from '../../../../@core/navigator/menu-item.model';
 
 @Component({
   selector: 'ngx-sidenav-item',
@@ -16,7 +16,8 @@ import { MenuItem } from '@core/navigator/menu-item.model';
 })
 export class SidenavItemComponent implements OnInit {
   @Input()
-  item: MenuItem;
+  item = {} as MenuItem;
+  // item: MenuItem
 
   @HostBinding('class.open')
   get isOpen() {
