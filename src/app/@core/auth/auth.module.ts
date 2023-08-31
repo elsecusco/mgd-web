@@ -6,7 +6,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard, RoleGuard } from './auth.guard';
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from '../../@shared/shared.module';
 import { MaterialModule } from '../material.module';
 import{ExternPageComponent} from './extern-page/extern-page.component';
 import { from } from 'rxjs';

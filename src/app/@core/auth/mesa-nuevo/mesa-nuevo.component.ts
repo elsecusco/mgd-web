@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { DocumentoMesaState } from '../state/documento-mesa.state';
-import { DocumentoMesa } from '@models/documento-mesa';
+import { DocumentoMesa } from '../../../@models/documento-mesa';
 
 @Component({
   selector: 'mesa-nuevo',
@@ -21,8 +21,8 @@ export class MesaNuevoComponent implements OnInit {
 
   doc: DocumentoMesa = new DocumentoMesa();
   @Select(DocumentoMesaState.documento)
-  public doc$: Observable<DocumentoMesa>;
-  
+  public doc$: Observable<DocumentoMesa> | undefined;
+
   constructor(private router: Router, private route: ActivatedRoute) {
     this.doc$.subscribe(d => {
                 this.doc = d;

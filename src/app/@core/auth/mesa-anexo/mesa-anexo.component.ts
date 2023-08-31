@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatTable } from '@angular/material';
 
-import { ArchivoDocumento } from '@models/tramite/archivo.documento';
-import { FileSave } from '@core/file-save.service';
-import { Archivo } from '@core/archivo';
+import { ArchivoDocumento } from '../../../@models/tramite/archivo.documento';
+import { FileSave } from '../../../@core/file-save.service';
+import { Archivo } from '../../../@core/archivo';
 import { Observable } from 'rxjs';
 import { AdjuntarMesaComponent } from '../adjuntar-mesa/adjuntar-mesa.component';
-import { FileAdjunto } from '@models/documento-mesa';
+import { FileAdjunto } from '../../../@models/documento-mesa';
 
 @Component({
   selector: 'mesa-anexo',
@@ -23,19 +23,19 @@ export class MesaAnexoComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
   //columnas = ['nombreArchivo','ubicacionArchivo', 'fechaArchivo', 'accion'];
   columnas = ['nombreArchivo','descripcionArchivo', 'accion'];
-  
+
   @Output() listAnexos= new EventEmitter<Array<FileAdjunto>>();
   anexos: Array<FileAdjunto> = [];
-  
+
   @Output() principal= new EventEmitter<FileAdjunto>();
   archivoPrincipal: FileAdjunto = {
     descripcionArchivo:"",
     nombreArchivo:"",
-    file:null,
+    file:null ,
     codigoTipoDocumentoTramiteAdjunto:1,
     titulo:""
   };
-    
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class MesaAnexoComponent implements OnInit {
         }
     });
   }
-  
+
   // actualizarTipoAdjunto(e:ArchivoDocumento){
   //   console.log(JSON.stringify(e))
   //   this.api.actualizarAdjunto(e.codigoDocumento,e.codigoDocumentoAdjunto,e.codigoTipoDocumentoTramiteAdjunto)
@@ -66,8 +66,8 @@ export class MesaAnexoComponent implements OnInit {
   //     if (res.id == 0) notifyOk(res.mensaje);
   //     });  //console.log(JSON.stringify(e))
   // }
-  
-  eliminar(index){
+
+  eliminar(index: any){
     if(index ==-1){
       this.archivoPrincipal = {
         descripcionArchivo:"",

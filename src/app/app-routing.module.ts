@@ -8,7 +8,8 @@ import { ExternPageComponent } from './@core/auth/extern-page/extern-page.compon
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './pages/pages.module#PagesModule',
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+    // loadChildren: './pages/pages.module#PagesModule', old version
     canActivate: [AuthGuard]
   },
   { path: 'login', component: LoginPage },
