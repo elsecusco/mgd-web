@@ -9,12 +9,12 @@ import {
 import { Router, NavigationEnd } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-import { untilDestroy } from '@core/untilDestroy';
-import { WINDOW } from '@core/window';
-import { MenuService } from '@core/navigator/menu.service';
-import { MenuItem } from '@core/navigator/menu-item.model';
+import { untilDestroy } from '../../@core/untilDestroy';
+import { WINDOW } from '../../@core/window';
+import { MenuService } from '../../@core/navigator/menu.service';
+import { MenuItem } from '../../@core/navigator/menu-item.model';
 
 // import { sidenavAnimation } from '@ngx-starter-kit/animations';
 
@@ -28,7 +28,7 @@ import { MenuItem } from '@core/navigator/menu-item.model';
 export class SidenavComponent implements OnInit, OnDestroy {
   private _destroyed$ = new Subject<void>();
 
-  items: MenuItem[];
+  items: MenuItem[] | undefined;
 
   constructor(
     private router: Router,
@@ -41,7 +41,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuService.items$
       .pipe(untilDestroy(this))
-      .subscribe((items: MenuItem[]) => {
+      .subscribe((items: MenuItem[] | undefined) => {
         this.items = items;
       });
 

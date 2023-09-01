@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { MatSidenav } from '@angular/material';
-import { AuthState } from '@core/auth/state/auth.state';
-import { Usuario } from '@core/auth/usuario';
+import { MatSidenav } from '@angular/material/sidenav';
+import { AuthState } from '../../@core/auth/state/auth.state';
+import { Usuario } from '../../@core/auth/usuario';
 
 @Component({
   selector: 'ngx-toolbar',
@@ -13,13 +13,13 @@ import { Usuario } from '@core/auth/usuario';
 })
 export class ToolbarComponent implements OnInit {
   @Select(AuthState.usuario)
-  usuario$: Observable<Usuario>;
+  usuario$: Observable<Usuario> | undefined; // --- - | undefined
 
-  @Select(state => state.router.state.url)
-  url$: Observable<string>;
+  @Select((state: any) => state.router.state.url)
+  url$: Observable<string> | undefined; // --- - | undefined
 
   @Input()
-  sidenav: MatSidenav;
+  sidenav: MatSidenav | undefined; // --- - | undefined
   isFullscreen = false;
 
   constructor() {}

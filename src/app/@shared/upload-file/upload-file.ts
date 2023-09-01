@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FileError } from 'ngxf-uploader';
-import { swalError } from '@core/swal';
-import { tipoArchivo } from '@core/file-save.service';
+import { swalError } from '../../@core/swal';
+import { tipoArchivo } from '../../@core/file-save.service';
 
 @Component({
   selector: 'upload-file',
@@ -29,7 +29,7 @@ export class UploadFile {
   isValidType(type:string):boolean{
     //console.log(type);
     for(let key in tipoArchivo)
-      if(tipoArchivo[key]==type)
+      if(tipoArchivo[tipoArchivo.indexOf(key)]==type)
         return true;
     return false;
   }

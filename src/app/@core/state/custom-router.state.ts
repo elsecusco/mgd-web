@@ -31,15 +31,17 @@ export interface RouterStateData {
   data: any;
 }
 
-const flatMap = (f, arr: any[]) => arr.reduce((x, y) => [...x, ...f(y)], []);
+const flatMap = (f: any, arr: any[]) =>
+  arr.reduce((x, y) => [...x, ...f(y)], []);
 
 // Map the router snapshot to { url, params, queryParams, titleSet }
 export class CustomRouterStateSerializer
-  implements RouterStateSerializer<RouterStateData> {
+  implements RouterStateSerializer<RouterStateData>
+{
   serialize(routerState: RouterStateSnapshot): RouterStateData {
     const {
       url,
-      root: { queryParams }
+      root: { queryParams },
     } = routerState;
     let { root: route } = routerState;
 
@@ -50,7 +52,7 @@ export class CustomRouterStateSerializer
       if (route.data['title']) {
         breadcrumbs.set(
           route.data['title'],
-          flatMap(segment => segment.url, route.pathFromRoot).join('/')
+          flatMap((segment: any) => segment.url, route.pathFromRoot).join('/')
           // route.pathFromRoot.flatMap(segment => segment.url).join('/')
         );
       }

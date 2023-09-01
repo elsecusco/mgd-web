@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { WINDOW } from '@core/window';
+import { WINDOW } from '../@core/window';
 
 @Component({
   selector: 'table-container',
@@ -22,9 +22,9 @@ import { WINDOW } from '@core/window';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableContainer implements AfterViewInit {
-  @Input() idContainer: string;
-  @Input() heightSub: number;
-  @Input() loading: boolean;
+  @Input() idContainer: string = '';
+  @Input() heightSub: number = 0;
+  @Input() loading: boolean = true;//--- :boolean
 
   constructor(
     private r2: Renderer2,

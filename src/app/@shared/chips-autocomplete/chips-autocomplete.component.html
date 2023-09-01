@@ -1,28 +1,29 @@
 <mat-form-field class="chip-list"
                 appearance="outline">
   <mat-label>{{matLabel}}</mat-label>
-  <mat-chip-list #chipList>
-    <mat-chip *ngFor="let object of objects"
+  <mat-chip-listbox #chipList>
+    <mat-chip-option *ngFor="let object of objects"
               [selectable]="selectable"
               [removable]="removable"
               (removed)="remove(object)">
       {{object[nameObject]}}
       <mat-icon matChipRemove
                 *ngIf="removable">cancel</mat-icon>
-    </mat-chip>
+    </mat-chip-option>
     <input #objectInput
            [formControl]="objectControl"
            [matAutocomplete]="auto"
-           [matChipInputFor]="chipList"
+           >
+           <!-- [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            [matChipInputAddOnBlur]="addOnBlur"
-           (matChipInputTokenEnd)="add($event)">
-  </mat-chip-list>
+           (matChipInputTokenEnd)="add($event)" -->
+  </mat-chip-listbox>
   <mat-autocomplete #auto="matAutocomplete"
                     (optionSelected)="selected($event)">
     <mat-option *ngFor="let object of filteredObjects | async"
                 [value]="object">
-      {{object[nameObject]}}
+      {{object[object.indexOf(nameObject)]}}//--- object[nameObject]
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
