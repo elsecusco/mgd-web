@@ -8,22 +8,22 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { WINDOW } from '@core/window';
+import { WINDOW } from '../../@core/window';
 
-import { FirmaModel } from '@models/firma.model';
+import { FirmaModel } from '../../@models/firma.model';
 
 @Component({
   selector: 'firma',
   templateUrl: './firma.html'
 })
 export class Firma implements OnInit {
-  @Input() f: FirmaModel;
+  @Input() f!: FirmaModel;
   @Output() resultado = new EventEmitter<any>();
 
-  @ViewChild('form') form: ElementRef<HTMLFormElement>;
+  @ViewChild('form') form!: ElementRef<HTMLFormElement>;
   constructor(@Inject(WINDOW) private window: Window) {}
 
-  listener;
+  listener:any;
 
   ngOnInit() {
     this.listener = this.result.bind(this);
@@ -33,7 +33,7 @@ export class Firma implements OnInit {
     this.window.removeEventListener('message', this.listener, false);
   }
 
-  result(e) {
+  result(e: any) {
     ///console.log(JSON.stringify(this.f))
     this.resultado.emit(JSON.parse(e.data));
   }

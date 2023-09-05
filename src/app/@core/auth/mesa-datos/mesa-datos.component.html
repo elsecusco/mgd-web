@@ -19,7 +19,7 @@
         <mat-label>Tipo de Documento</mat-label>
         <mat-select formControlName="tipoDocumentoPersona">
             <mat-option *ngFor="let t of tipos.tiposDocIdentidad"
-                [value]="t.codigo">                           
+                [value]="t.codigo">
                 {{t.nombre}}
             </mat-option>
         </mat-select>
@@ -38,7 +38,7 @@
             color="primary"
             type="button"
             matTooltip="Buscar Usuario"
-            [disabled]="numeroDocumentoPersona.errors"
+            [disabled]="numeroDocumentoPersona?.errors"
             (click)="search()">
       <mat-icon>search</mat-icon>
     </button>
@@ -91,7 +91,7 @@
         <mat-label>Tipo del Documento</mat-label>
         <mat-select formControlName="codigoTipoDocumento">
             <mat-option *ngFor="let t of tipos.tiposDocumento"
-                            [value]="t.codigo">                           
+                            [value]="t.codigo">
                     {{t.nombre}}
             </mat-option>
         </mat-select>
@@ -159,7 +159,7 @@
             <mat-label>Proceso</mat-label>
             <mat-select formControlName="codigoProceso">
                 <mat-option *ngFor="let t of tipos.tiposProceso"
-                            [value]="t.codigo">                           
+                            [value]="t.codigo">
                     {{t.nombre}}
                 </mat-option>
             </mat-select>
@@ -177,7 +177,7 @@
     <mat-divider> </mat-divider>
     <mesa-anexo
         (listAnexos)="listAnexos=$event"
-        (principal)="setPrincipal($event)"        
+        (principal)="setPrincipal($event)"
     ></mesa-anexo>
     <div fxLayout="row"
          fxLayoutAlign="end center">

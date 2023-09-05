@@ -29,7 +29,7 @@ export class MesaAnexoComponent implements OnInit {
   aprobado = false;
   rechazado = false;
 
-  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatTable) table!: MatTable<any>;
   //columnas = ['nombreArchivo','ubicacionArchivo', 'fechaArchivo', 'accion'];
   columnas = ['nombreArchivo', 'descripcionArchivo', 'accion'];
 

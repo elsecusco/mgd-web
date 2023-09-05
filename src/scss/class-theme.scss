@@ -1,9 +1,13 @@
+@use '@angular/material' as mat;
+@use "sass:map";
+@include mat.core();
+
 @mixin class-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
 
   .default-theme,
   .blue-theme {
@@ -27,22 +31,22 @@
   .cl-primary,
   .text-primary,
   h2 {
-    color: mat-color($primary);
+    color: mat.get-color-from-palette($primary);
   }
 
   .bg-primary {
-    color: mat-color($primary, default-contrast);
-    background-color: mat-color($primary);
+    color: mat.get-color-from-palette($primary, default-contrast);
+    background-color: mat.get-color-from-palette($primary);
   }
 
   .cl-accent,
   .text-accent {
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 
   .cl-warn,
   .text-warn {
-    color: mat-color($warn);
+    color: mat.get-color-from-palette($warn);
   }
 }
 

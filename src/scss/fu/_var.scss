@@ -1,4 +1,6 @@
-@import '~@angular/material/theming';
+@use "sass:map";
+@use '@angular/material' as mat;
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
@@ -9,18 +11,18 @@ $theme-primary-hue: 700;
 $theme-accent-hue: 500;
 $theme-warn-hue: 500;
 
-$theme-primary: mat-palette($mat-blue-grey, $theme-primary-hue, 500, 900);
-$theme-accent: mat-palette($mat-blue, $theme-accent-hue);
-$theme-warn: mat-palette($mat-red, $theme-warn-hue);
+$theme-primary: mat.define-palette(mat.$blue-grey-palette, $theme-primary-hue, 500, 900);
+$theme-accent: mat.define-palette(mat.$blue-palette, $theme-accent-hue);
+$theme-warn: mat.define-palette(mat.$red-palette, $theme-warn-hue);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+$theme: mat.define-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
-@include angular-material-theme($theme);
+@include mat.all-component-themes($theme);
 
 /**
  USAGE:
@@ -29,9 +31,9 @@ $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   }
 */
 
-$color-primary: map-get($theme, primary);
-$color-accent: map-get($theme, accent);
-$color-warn: map-get($theme, warn);
+$color-primary: map.get($theme, primary);
+$color-accent: map.get($theme, accent);
+$color-warn: map.get($theme, warn);
 
 /**
  USAGE:
@@ -40,22 +42,22 @@ $color-warn: map-get($theme, warn);
   }
 */
 
-$config: mat-typography-config(
+$config: mat.define-typography-config(
   $font-family: 'Roboto, "Helvetica Neue", sans-serif',
-  $display-4: mat-typography-level(112px, 112px, 300),
-  $display-3: mat-typography-level(56px, 56px, 400),
-  $display-2: mat-typography-level(45px, 48px, 400),
-  $display-1: mat-typography-level(28px, 34px, 400),
-  $headline: mat-typography-level(24px, 32px, 400),
-  $title: mat-typography-level(20px, 32px, 500),
-  $subheading-2: mat-typography-level(18px, 28px, 400),
-  $subheading-1: mat-typography-level(16px, 24px, 400),
-  $body-2: mat-typography-level(14px, 24px, 500),
-  $body-1: mat-typography-level(14px, 22px, 400),
-  $caption: mat-typography-level(13px, 22px, 400),
-  $button: mat-typography-level(14px, 14px, 500),
-  // Line-height must be unit-less fraction of the font-size.
-  $input: mat-typography-level(16px, 1.125, 400)
+  $headline-1: mat.define-typography-level(112px, 112px, 300),
+  $headline-2: mat.define-typography-level(56px, 56px, 400),
+  $headline-3: mat.define-typography-level(45px, 48px, 400),
+  $headline-4: mat.define-typography-level(28px, 34px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400),
+  $headline-6: mat.define-typography-level(20px, 32px, 500),
+  // $subheading-2: mat.define-typography-level(18px, 28px, 400),
+  // $subheading-1: mat.define-typography-level(16px, 24px, 400),
+  $body-2: mat.define-typography-level(14px, 24px, 500),
+  $body-1: mat.define-typography-level(14px, 22px, 400),
+  $caption: mat.define-typography-level(13px, 22px, 400),
+  // $button: mat.define-typography-level(14px, 14px, 500),
+  // // // Line-height must be unit-less fraction of the font-size.
+  // $input: mat.define-typography-level(16px, 1.125, 400)
 );
 
 /**
@@ -65,33 +67,33 @@ $config: mat-typography-config(
   }
 */
 
-$theme-foreground-map: map-get($theme, foreground);
-$theme-background-map: map-get($theme, background);
-$theme-primary-map: map-get($theme, primary);
-$theme-accent-map: map-get($theme, accent);
-$theme-warn-map: map-get($theme, warn);
+$theme-foreground-map: map.get($theme, foreground);
+$theme-background-map: map.get($theme, background);
+$theme-primary-map: map.get($theme, primary);
+$theme-accent-map: map.get($theme, accent);
+$theme-warn-map: map.get($theme, warn);
 
-$theme-text: mat-color($theme-foreground-map, text);
-$theme-hint-text: mat-color($theme-foreground-map, hint-text);
-$theme-secondary-text: mat-color($theme-foreground-map, secondary-text);
-$theme-divider: mat-color($theme-foreground-map, divider);
-$theme-icon: mat-color($theme-foreground-map, icon);
+$theme-text: mat.get-color-from-palette($theme-foreground-map, text);
+$theme-hint-text: mat.get-color-from-palette($theme-foreground-map, hint-text);
+$theme-secondary-text: mat.get-color-from-palette($theme-foreground-map, secondary-text);
+$theme-divider: mat.get-color-from-palette($theme-foreground-map, divider);
+$theme-icon: mat.get-color-from-palette($theme-foreground-map, icon);
 
 $theme-background: #f0f0f0;
 //$theme-background: mat-color($theme-background-map, background);
-$theme-background-light: mat-color($theme-background-map, background);
-$theme-app-bar: mat-color($theme-background-map, app-bar);
-$theme-background-hover: mat-color($theme-background-map, hover);
+$theme-background-light: mat.get-color-from-palette($theme-background-map, background);
+$theme-app-bar: mat.get-color-from-palette($theme-background-map, app-bar);
+$theme-background-hover: mat.get-color-from-palette($theme-background-map, hover);
 
-$theme-card: mat-color($theme-background-map, card);
+$theme-card: mat.get-color-from-palette($theme-background-map, card);
 
-$theme-color-primary: mat-color($color-primary);
-$theme-color-accent: mat-color($color-accent);
-$theme-color-warn: mat-color($color-warn);
+$theme-color-primary: mat.get-color-from-palette($color-primary);
+$theme-color-accent: mat.get-color-from-palette($color-accent);
+$theme-color-warn: mat.get-color-from-palette($color-warn);
 
-$theme-color-primary-contrast: mat-contrast($color-primary, $theme-primary-hue);
-$theme-color-accent-contrast: mat-contrast($color-accent, $theme-accent-hue);
-$theme-color-warn-contrast: mat-contrast($color-warn, $theme-warn-hue);
+$theme-color-primary-contrast: mat.get-color-from-palette($color-primary, $theme-primary-hue);
+$theme-color-accent-contrast: mat.get-color-from-palette($color-accent, $theme-accent-hue);
+$theme-color-warn-contrast: mat.get-color-from-palette($color-warn, $theme-warn-hue);
 
 /**
   General

@@ -6,12 +6,12 @@ import {
 } from '@angular/core';
 
 import { Store } from '@ngxs/store';
-import { Logout } from '@core/auth/state/auth.action';
-import { Usuario } from '@core/auth/usuario';
+import { Logout } from '../../../../@core/auth/state/auth.action';
+import { Usuario } from '../../../../@core/auth/usuario';
 import { StateResetAll } from 'ngxs-reset-plugin';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { PendienteState } from 'app/pages/tramite-documentario/states/pendientes.state';
-import { PopupPendientes } from '@models/tramite/popup-pendientes';
+import { PopupPendientes } from '../../../../@models/tramite/popup-pendientes';
 
 @Component({
   selector: 'ngx-user-menu',
@@ -20,12 +20,12 @@ import { PopupPendientes } from '@models/tramite/popup-pendientes';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMenuComponent implements OnInit {
-  isOpen: boolean;
+  isOpen!: boolean;
   @Input()
-  currentUser: Usuario = null;
+  currentUser = {} as Usuario;
   @Emitter(PendienteState.clearCount)
-  private clearCount: Emittable<PopupPendientes>;
-  
+  private clearCount!: Emittable<PopupPendientes>;
+
   constructor(private store: Store) {}
 
   ngOnInit() {
@@ -99,5 +99,5 @@ export class UserMenuComponent implements OnInit {
 //     this.store.dispatch(new Logout());
 //     this.store.dispatch(new StateResetAll() );
 //   }
-  
+
 // }

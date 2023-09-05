@@ -17,10 +17,10 @@ export class LoginPage implements OnInit {
   footer: string = '';
 
   @Select((state: any) => state.auth.pending)
-  pending$: Observable<boolean> | undefined ;
+  pending$!: Observable<boolean>;
 
   @Select((state: any) => state.auth.errorMessage)
-  error$: Observable<string> | undefined;
+  error$!: Observable<string>;
 
   constructor(private store: Store) {
     // pdfDefaultOptions.renderInteractiveForms = false; upgrade version

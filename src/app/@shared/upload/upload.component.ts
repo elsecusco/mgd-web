@@ -5,8 +5,8 @@ import {
   UploadEvent,
   UploadStatus
 } from 'ngxf-uploader';
-import { swalError, notifyOk } from '@core/swal';
-import { setUrl } from '@core/functions';
+import { swalError, notifyOk } from '../../@core/swal';
+import { setUrl } from '../../@core/functions';
 
 @Component({
   selector: 'upload',
@@ -17,7 +17,7 @@ export class UploadComponent {
   progress = 0;
   fileName = '';
 
-  private _options: UploadOptions;
+  private _options!: UploadOptions;
   @Input()
   set options(options: UploadOptions) {
     this._options = options;
@@ -26,7 +26,7 @@ export class UploadComponent {
     return this._options;
   }
 
-  @Input() disabled: boolean;
+  @Input() disabled!: boolean;
 
   @Output() complete = new EventEmitter();
 

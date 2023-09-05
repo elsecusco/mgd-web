@@ -1,13 +1,13 @@
 <div class="div-card">
     <!-- Para quitar el logo principal del sistema del logeo-->
     <!--<div class="logo">
-            <img src="assets/logo1.png" /> 
+            <img src="assets/logo1.png" />
     </div>-->
     <mat-toolbar color="primary"
                  class="radius-top mat-elevation-z2">
        <p class="fw-300">Iniciar Sesión</p>
          <img src="assets/logo36.png"
-             class="margin-image"> 
+             class="margin-image">
 
     </mat-toolbar>
     <mat-card class="radius-bottom">
@@ -21,10 +21,10 @@
                            type="text"
                            floatPlaceholder="true"
                            formControlName="username">
-                    <mat-placeholder>
+                    <mat-form-field>
                         <mat-icon>account_box</mat-icon>
                         <i> Usuario</i>
-                    </mat-placeholder>
+                    </mat-form-field>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
@@ -33,10 +33,11 @@
                            floatPlaceholder="true"
                            formControlName="password"
                            [type]="hide ? 'password' : 'text'">
-                    <mat-placeholder>
+                    <mat-form-field>
+                      <!-- <mat-placeholder></mat-placeholder> -->
                         <mat-icon>lock</mat-icon>
                         <i> Contraseña</i>
-                    </mat-placeholder>
+                    </mat-form-field>
                     <mat-icon matSuffix
                               class="pointer"
                               color="primary"

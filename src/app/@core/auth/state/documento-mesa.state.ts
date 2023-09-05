@@ -2,7 +2,7 @@ import { State, StateContext, Selector } from '@ngxs/store';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { DocumentoMesa } from '@models/documento-mesa';
+import { DocumentoMesa } from '../../../@models/documento-mesa';
 
 export interface DocumentoMesaStateModel {
   documento: DocumentoMesa;
@@ -30,7 +30,7 @@ export class DocumentoMesaState {
   static documento(state: DocumentoMesaStateModel) {
     return state.documento;
   }
-  /* 
+  /*
   @Selector()
   static vista(state: DocumentoMesaStateModel) {
     return state.vista;

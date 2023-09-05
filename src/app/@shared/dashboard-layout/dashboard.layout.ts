@@ -7,7 +7,7 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 
 import { map } from 'rxjs/operators';
 
-import { untilDestroy } from '@core/untilDestroy';
+import { untilDestroy } from '../../@core/untilDestroy';
 
 @Component({
   selector: 'ngx-dashboard-layout',
@@ -18,12 +18,12 @@ import { untilDestroy } from '@core/untilDestroy';
   // encapsulation: ViewEncapsulation.None
 })
 export class DashboardLayout implements OnInit, OnDestroy {
-  @ViewChild('sidenav') sidenav;
+  @ViewChild('sidenav') sidenav: any; //--- any
 
   sidenavOpen = true;
   sidenavMode = 'side';
   isMobile = false;
-  crumbs$;
+  crumbs$:any; //--add :any
   // depth$;
 
   constructor(
@@ -46,10 +46,10 @@ export class DashboardLayout implements OnInit, OnDestroy {
     //   .select<any>(RouterState.state)
     //   .pipe(map(state => state.data.depth));
 
-    this.mediaObserver.media$
+    this.mediaObserver.asObservable()
       .pipe(untilDestroy(this))
-      .subscribe((change: MediaChange) => {
-        const isMobile = change.mqAlias === 'xs' || change.mqAlias === 'sm';
+      .subscribe((change: MediaChange[]) => {
+        const isMobile = change[0].mqAlias === 'xs' || change[0].mqAlias === 'sm';
 
         this.isMobile = isMobile;
         this.sidenavMode = isMobile ? 'over' : 'side';
@@ -70,7 +70,7 @@ export class DashboardLayout implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
-  getRouteDepth(outlet) {
+  getRouteDepth(outlet: any) {
     return outlet.activatedRouteData['depth'] || 1;
     // return outlet.isActivated ? outlet.activatedRoute : ''
   }

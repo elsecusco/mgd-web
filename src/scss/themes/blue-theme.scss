@@ -1,8 +1,8 @@
-$app-blue-primary: mat-palette($mat-indigo, 800, 300, 900);
-$app-blue-accent: mat-palette($mat-light-blue);
-$app-blue-warn: mat-palette($mat-pink, 600);
+$app-blue-primary: mat.define-palette(mat.$indigo-palette, 800, 300, 900);
+$app-blue-accent: mat.define-palette(mat.$light-blue-palette);
+$app-blue-warn: mat.define-palette(mat.$pink-palette, 600);
 
-$app-blue-theme: mat-light-theme(
+$app-blue-theme: mat.define-light-theme(
   $app-blue-primary,
   $app-blue-accent,
   $app-blue-warn

@@ -6,16 +6,16 @@ import { catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { Authenticate, AuthResponse, Usuario } from './usuario';
-import { setUrl } from '@core/functions';
-import { Pair } from '@models/pair';
-import { HttpService } from '@core/http.service';
-import { Persona } from '@models/documento-mesa';
-import { Resultado } from '@models/resultado';
+import { setUrl } from '../../@core/functions';
+import { Pair } from '../../@models/pair';
+import { HttpService } from '../../@core/http.service';
+import { Persona } from '../../@models/documento-mesa';
+import { Resultado } from '../../@models/resultado';
 import { NgxfUploaderService, UploadEvent } from 'ngxf-uploader';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
               private httpService: HttpService,
               private Upload: NgxfUploaderService) {}
 
@@ -77,7 +77,7 @@ export class AuthService {
       close: false
     });
   }
-  verificarCodigo(body):Observable<Resultado>{
+  verificarCodigo(body:any):Observable<Resultado>{
     return this.httpService.post({
       uri: `api/ValidarCodigoRemitente`,
       body,
@@ -85,7 +85,7 @@ export class AuthService {
       close: false
     });
   }
-  subirArchivos(form, files: File[]): Observable<UploadEvent> {
+  subirArchivos(form:any, files: File[]): Observable<UploadEvent> {
     return this.Upload.upload({
       url: setUrl('api/GuardarDocumentoMV'),
       fields: form,

@@ -6,7 +6,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { toAAmmdd } from '@core/functions';
+import { toAAmmdd } from '../../@core/functions';
 import { TwoPicker } from './two-picker';
 
 @Component({

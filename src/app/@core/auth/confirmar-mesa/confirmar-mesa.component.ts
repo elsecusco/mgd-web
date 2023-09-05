@@ -13,7 +13,7 @@ import { notifyOk } from '../../../@core/swal';
 })
 
 export class ConfirmarMesaComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup| undefined;
   progress = 0;
   verficacionMensaje = "";
   isSave = false;
@@ -35,13 +35,13 @@ export class ConfirmarMesaComponent implements OnInit {
   }
 
   verificarCodigo(){
-    this.api.verificarCodigo(this.form.value).subscribe(
+    this.api.verificarCodigo(this.form?.value).subscribe(
       r=>{
         this.verficacionMensaje=r.mensaje;
         this.isVerificado=(r.id == 1);
         if(r.id == 1){
           this.verficacionMensaje+= ": Registrando documentos espere por favor... no cierre esta ventana";
-          this.data.doc.codigoVerificacion=this.form.value.codigoVerificacion;
+          this.data.doc.codigoVerificacion=this.form?.value.codigoVerificacion;
           this.subirArchivo();
         }
       }
@@ -51,7 +51,7 @@ export class ConfirmarMesaComponent implements OnInit {
 
     this.data.doc.filePrincipal=DocumentoMesa.adjuntoToString(this.data.principal);
     this.data.doc.listAnexos=this.data.listAnexos.map((v:any)=>DocumentoMesa.adjuntoToString(v)).join("##");
-    let files:File[]=[];
+    let files:File[] = [];
     files.push(this.data.principal.file);
     this.data.listAnexos.map((v:any)=>files.push(v.file));
     this.api.subirArchivos(this.data.doc, files).subscribe(

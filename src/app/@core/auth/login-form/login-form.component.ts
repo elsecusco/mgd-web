@@ -29,7 +29,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   @Input()
-  errorMessage: string | null;
+  errorMessage: string | null = '';
 
   @Output()
   submitted = new EventEmitter<Authenticate>();
@@ -48,8 +48,8 @@ export class LoginFormComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.submitted.emit(this.loginForm.value);
-    } else if (this.loginForm.get('username').valid) {
-      if (!this.loginForm.get('password').valid) {
+    } else if (this.loginForm.get('username')?.valid) {
+      if (!this.loginForm.get('password')?.valid) {
         this.errorMessage = 'Ingrese contraseña';
       }
     } else {

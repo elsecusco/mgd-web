@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-@media screen and ($mat-small) {
+@media screen and ((min-width: 600px) and (max-width: 959.98px)) {
   button.user-button {
     min-width: 72px;
   }
@@ -15,7 +15,7 @@
 /**
  * deep TODO
  */
-:host /deep/ {
+:host-context {
   @media screen and (min-width: 960px) {
     .mat-drawer-backdrop {
       z-index: 50 !important;
@@ -29,7 +29,7 @@
   height: calc(100% - #{$mat-toolbar-height-desktop});
   position: relative;
 
-  @media ($mat-xsmall) {
+  @media (max-width: 599.98px) {
     height: calc(100% - #{$mat-toolbar-height-mobile-portrait});
   }
 }

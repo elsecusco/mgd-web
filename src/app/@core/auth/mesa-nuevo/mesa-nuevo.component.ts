@@ -15,7 +15,7 @@ export class MesaNuevoComponent implements OnInit {
   codigoDocumento = 0; //Probar codigo de documento q existe
 
   @Emitter(DocumentoMesaState.setDocument)
-  private setDocument: Emittable<{
+  private setDocument!: Emittable<{
     documento: DocumentoMesa;
   }>;
 

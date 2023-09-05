@@ -7,7 +7,7 @@ import * as screenfull from 'screenfull';
   styleUrls: ['./fullscreen-toggle.component.scss'],
 })
 export class FullscreenToggleComponent implements OnInit {
-  isFullscreen: boolean;
+  isFullscreen!: boolean;
 
   constructor() {}
 

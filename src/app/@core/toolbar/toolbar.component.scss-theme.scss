@@ -1,17 +1,21 @@
+@use '@angular/material' as mat;
+@use "sass:map";
+@include mat.core();
+
 @mixin ngx-toolbar-component-theme($theme) {
 
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
 
 
 
   ngx-toolbar {
     .mat-toolbar {
-      color: mat-color($primary, default-contrast);
-      background: mat-color($primary);
+      color: mat.get-color-from-palette($primary, default-contrast);
+      background: mat.get-color-from-palette($primary);
     }
 
     .mat-nav-list,
@@ -19,13 +23,13 @@
       padding-top: 0;
 
       .mat-list-item {
-        color: mat-color($primary, default-contrast);
-        background: mat-color($primary, 800);
+        color: mat.get-color-from-palette($primary, default-contrast);
+        background: mat.get-color-from-palette($primary, 800);
       }
 
       .mat-list-item:hover {
-        color: mat-color($primary, default-contrast);
-        background: mat-color($primary, 600);
+        color: mat.get-color-from-palette($primary, default-contrast);
+        background: mat.get-color-from-palette($primary, 600);
       }
 
       // .mat-list-item {
@@ -42,13 +46,13 @@
 
   ngx-search-bar {
     input.search-input {
-      color: mat-color($primary, default-contrast);
-      background: mat-color($primary, 600);
+      color: mat.get-color-from-palette($primary, default-contrast);
+      background: mat.get-color-from-palette($primary, 600);
     }
 
     .search-dropdown {
-      color: mat-color($primary, default-contrast);
-      background: mat-color($primary, 600);
+      color: mat.get-color-from-palette($primary, default-contrast);
+      background: mat.get-color-from-palette($primary, 600);
     }
   }
 }

@@ -1,11 +1,13 @@
-@import 'styles-app-loading';
+@use '@angular/material' as mat;
+@use "sass:map";
 
+@include mat.core();
+
+@import 'styles-app-loading';
 @import 'styles-reset';
 @import 'colors';
-@import '~@angular/material/theming';
 
 
-@include mat-core();
 
 // temas
 @import './themes/default-theme';
@@ -32,16 +34,16 @@
 
 // @import '../app/@shared/nav-bar/nav-bar-theme';
 
-@import "~ng-pick-datetime/assets/style/picker.min.css";
+// @import "ng-pick-datetime/assets/style/picker.min.css";
 
 
 //clases tema
 @import 'class-theme';
 
 @mixin snackbar-cargando-app-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
 
   .cargando-app {
     .mat-simple-snackbar {
@@ -49,7 +51,7 @@
       font-weight: bold;
     }
 
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 }
 
@@ -75,23 +77,27 @@
 }
 
 .default-theme {
-  @include angular-material-theme($app-default-theme);
-  @include custom-components-theme($app-default-theme);
+  @include mat.all-component-themes($app-default-theme);
+  // @include angular-material-theme($app-default-theme);
+  // @include custom-components-theme($app-default-theme);
 }
 
 .light-theme {
-  @include angular-material-theme($app-light-theme);
-  @include custom-components-theme($app-light-theme);
+  @include mat.all-component-themes($app-light-theme);
+  // @include angular-material-theme($app-light-theme);
+  // @include custom-components-theme($app-light-theme);
 }
 
 .black-theme {
-  @include angular-material-theme($app-black-theme);
-  @include custom-components-theme($app-black-theme);
+  @include mat.all-component-themes($app-black-theme);
+  // @include angular-material-theme($app-black-theme);
+  // @include custom-components-theme($app-black-theme);
 }
 
 .blue-theme {
-  @include angular-material-theme($app-blue-theme);
-  @include custom-components-theme($app-blue-theme);
+  @include mat.all-component-themes($app-blue-theme);
+  // @include angular-material-theme($app-blue-theme);
+  // @include custom-components-theme($app-blue-theme);
 }
 
 .custom-size-btn .mat-button-wrapper{
