@@ -27,6 +27,7 @@
     "@angular/router": "^16.2.0",
     "@angular/service-worker": "^16.2.2",
     "@auth0/angular-jwt": "^5.1.2",
+    "@danielmoncada/angular-datetime-picker": "^16.0.1",
     "@ngxs-labs/emitter": "^5.0.0",
     "@ngxs/devtools-plugin": "^3.8.1",
     "@ngxs/form-plugin": "^3.8.1",

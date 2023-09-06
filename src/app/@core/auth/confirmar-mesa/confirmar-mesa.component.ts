@@ -13,7 +13,7 @@ import { notifyOk } from '../../../@core/swal';
 })
 
 export class ConfirmarMesaComponent implements OnInit {
-  form: FormGroup| undefined;
+  form!: FormGroup;
   progress = 0;
   verficacionMensaje = "";
   isSave = false;
@@ -52,7 +52,7 @@ export class ConfirmarMesaComponent implements OnInit {
     this.data.doc.filePrincipal=DocumentoMesa.adjuntoToString(this.data.principal);
     this.data.doc.listAnexos=this.data.listAnexos.map((v:any)=>DocumentoMesa.adjuntoToString(v)).join("##");
     let files:File[] = [];
-    files.push(this.data.principal.file);
+    files.push(this.data.principal.file as File);
     this.data.listAnexos.map((v:any)=>files.push(v.file));
     this.api.subirArchivos(this.data.doc, files).subscribe(
       event => {

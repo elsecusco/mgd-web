@@ -29,7 +29,7 @@ export class UploadFile {
   isValidType(type:string):boolean{
     //console.log(type);
     for(let key in tipoArchivo)
-      if(tipoArchivo[tipoArchivo.indexOf(key)]==type)
+      if(tipoArchivo[key as keyof typeof tipoArchivo]===type)
         return true;
     return false;
   }

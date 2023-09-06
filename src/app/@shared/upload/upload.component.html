@@ -6,7 +6,7 @@
   <button fxFlex="145px"
           mat-stroked-button
           [disabled]="disabled"
-          (ngxf-select)="uploadFile($event)"
+          (ngxf-select)="uploadFile($any($event))"
           color="primary">
     Subir Archivo
     <mat-icon>attachment</mat-icon>

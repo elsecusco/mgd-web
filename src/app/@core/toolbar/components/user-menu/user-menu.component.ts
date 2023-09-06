@@ -10,7 +10,7 @@ import { Logout } from '../../../../@core/auth/state/auth.action';
 import { Usuario } from '../../../../@core/auth/usuario';
 import { StateResetAll } from 'ngxs-reset-plugin';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
-import { PendienteState } from 'app/pages/tramite-documentario/states/pendientes.state';
+import { PendienteState } from '../../../../pages/tramite-documentario/states/pendientes.state';
 import { PopupPendientes } from '../../../../@models/tramite/popup-pendientes';
 
 @Component({
@@ -49,7 +49,7 @@ export class UserMenuComponent implements OnInit {
     this.store.dispatch(
       new StateResetAll()
     );
-    this.clearCount.emit();
+    this.clearCount.emit({} as PopupPendientes);
     this.store.dispatch(new Logout());
   }
 }

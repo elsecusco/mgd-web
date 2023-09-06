@@ -48,7 +48,7 @@ const PROVIDERS = [AuthService, AuthGuard, RoleGuard];
   // entryComponents: [...ENTRIES] --- deprecated
 })
 export class AuthModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<any> {
     return {
       ngModule: AuthModule,
       providers: [...PROVIDERS]

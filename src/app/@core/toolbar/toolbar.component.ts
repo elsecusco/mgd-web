@@ -13,13 +13,13 @@ import { Usuario } from '../../@core/auth/usuario';
 })
 export class ToolbarComponent implements OnInit {
   @Select(AuthState.usuario)
-  usuario$: Observable<Usuario> | undefined; // --- - | undefined
+  usuario$!: Observable<Usuario>; // --- - | undefined
 
   @Select((state: any) => state.router.state.url)
-  url$: Observable<string> | undefined; // --- - | undefined
+  url$!: Observable<string> // --- - | undefined
 
   @Input()
-  sidenav: MatSidenav | undefined; // --- - | undefined
+  sidenav!: MatSidenav; // --- - | undefined
   isFullscreen = false;
 
   constructor() {}

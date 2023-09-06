@@ -6,11 +6,11 @@ export class BuzonesUsuario {
   mesaPartes: string;
   cargo: string;
   constructor() {
-    this.loginUsuarioBuzon = null;
-    this.nombreUsuarioBuzon = null;
-  //  this.nombreUsuario = null;
+    this.loginUsuarioBuzon = '';
+    this.nombreUsuarioBuzon = '';
+    //  this.nombreUsuario = null;
     this.permiso = 0;
-    this.mesaPartes =  null;
-    this.cargo = null;
+    this.mesaPartes = '';
+    this.cargo = '';
   }
 }

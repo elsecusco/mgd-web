@@ -11,8 +11,8 @@ import { notifyOk, swalError } from '@core/swal';
   styleUrls: ['./adjuntar-mesa.component.scss'],
 })
 export class AdjuntarMesaComponent implements OnInit {
-  form: FormGroup | undefined; //--- - | undefined
-  file: File | undefined; //--- - | undefined
+  form!: FormGroup; //--- - | undefined
+  file!: File; //--- - | undefined
   progress = 0;
   tipo = '';
   isSave = false;

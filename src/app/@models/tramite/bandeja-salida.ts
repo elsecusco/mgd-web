@@ -9,31 +9,31 @@ export class BandejaSalida {
     de: string;
     listaPara: ListaPara[];
     asunto: string;
-    leido: number;  
-    atendido: number; 
+    leido: number;
+    atendido: number;
     fechaDerivacion: string;
     fecha: string;
     bandeja: number;
     tipoBuzon: number;
 
     constructor() {
-        this.usuarioBuzon = null;
-        this.codigoDocumentoTramite = null;
-        this.recibido = null;
-        this.emitido = null;
-        this.nombreRemitenteDocumento = null;
-        this.numeroDocumento = null;
-        this.numeroExpediente = null;
-        this.de = null;
-        this.listaPara = null;
-        this.asunto = null;
-        this.leido = null;
-        this.atendido = null;
-        this.fechaDerivacion = null;
-        this.fecha = null;
-        this.bandeja = null;
-        this.tipoBuzon = null;
-           
+        this.usuarioBuzon = '';
+        this.codigoDocumentoTramite = 0;
+        this.recibido = 0;
+        this.emitido = 0;
+        this.nombreRemitenteDocumento = '';
+        this.numeroDocumento = '';
+        this.numeroExpediente = '';
+        this.de = '';
+        this.listaPara = [];
+        this.asunto = '';
+        this.leido = 0;
+        this.atendido = 0;
+        this.fechaDerivacion = '';
+        this.fecha = '';
+        this.bandeja = 0;
+        this.tipoBuzon = 0;
+
     }
   }
   interface ListaPara{
@@ -41,4 +41,3 @@ export class BandejaSalida {
       tipoDerovacion: string;
       usuarioDestino: string;
   }
-  

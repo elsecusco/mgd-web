@@ -93,7 +93,7 @@ export class Tree<T extends TreeNode<T>> implements Iterable<T> {
       if (!this.root) {
         this.root = node;
       } else {
-        return 'Root node is already assigned';
+        // return 'Root node is already assigned';
       }
     }
   }

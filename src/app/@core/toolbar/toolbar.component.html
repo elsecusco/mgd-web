@@ -26,7 +26,7 @@
 
     <ngx-fullscreen-toggle class="button" fxLayout="column" fxHide fxShow.gt-sm></ngx-fullscreen-toggle>
     <theme-picker class="button-center" fxShow fxHide.lt-md></theme-picker>
-    <ngx-user-menu class="button" [currentUser]="usuario$ | async"></ngx-user-menu>
+    <ngx-user-menu class="button" [currentUser]="$any(usuario$ | async)"></ngx-user-menu>
 
 
 

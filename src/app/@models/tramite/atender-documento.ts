@@ -4,12 +4,12 @@ export class AtenderDocumento {
   //tipo:string;
   descripcionAtencion: string;
   atencionFinal: false;
-  
+
   constructor() {
-    this.codigoDocumento = null;
-    this.numeroAtencion = null;
+    this.codigoDocumento = 0;
+    this.numeroAtencion = 0;
     //this.tipo = null;
-    this.descripcionAtencion = null;
+    this.descripcionAtencion = '';
     this.atencionFinal = false;
   }
 }

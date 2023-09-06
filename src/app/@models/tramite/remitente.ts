@@ -5,9 +5,13 @@ export interface IRemitente {
   emailContacto?: string;
   codigoTipoRemitenteDocumento?: number;
 }
-export class TipoRemitente{
-  CodigoTipoRemitenteDocumento:number;
-  NombreTipoRemitenteDocumento:string;
+export class TipoRemitente {
+  CodigoTipoRemitenteDocumento: number;
+  NombreTipoRemitenteDocumento: string;
+  constructor() {
+    this.CodigoTipoRemitenteDocumento = 0;
+    this.NombreTipoRemitenteDocumento = '';
+  }
 }
 export class Remitente implements IRemitente {
   codigoRemitenteDocumento: number;
@@ -17,11 +21,10 @@ export class Remitente implements IRemitente {
   codigoTipoRemitenteDocumento: number;
 
   constructor() {
-    this.codigoRemitenteDocumento = null;
-    this.nombreRemitenteDocumento = null;
-    this.telefonoContacto = null;
-    this.emailContacto = null;
-    this.codigoTipoRemitenteDocumento = null;
+    this.codigoRemitenteDocumento = 0;
+    this.nombreRemitenteDocumento = '';
+    this.telefonoContacto = '';
+    this.emailContacto = '';
+    this.codigoTipoRemitenteDocumento = 0;
   }
 }
-

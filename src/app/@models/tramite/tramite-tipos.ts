@@ -1,4 +1,4 @@
-import { Pair } from '@models/pair';
+import { Pair } from '../../@models/pair';
 
 export class TramiteTipos {
   tiposPrioridad: Pair[];
@@ -8,16 +8,16 @@ export class TramiteTipos {
   tiposAprobaciones?: Pair[];
   tiposDocumentoInterno?: Pair[];
   tiposGerencias?: Pair[];
-  tiposCorrelativos:{ [id: string] : Pair[]; };
+  tiposCorrelativos: { [id: string]: Pair[] };
   tiposAnaliticoIntegracion?: Pair[];
   tiposSucursal?: Pair[];
   tiposTiposOT?: Pair[];
   tiposClaseOTMantenimiento?: Pair[];
-  tiposOTMantenimiento?: { [id: string] : Pair[]; };
-  tiposTecnicoSupervisor?: { [id: string] : Pair[]; };
-  tiposFirmaMotivo?:Pair[];
+  tiposOTMantenimiento?: { [id: string]: Pair[] };
+  tiposTecnicoSupervisor?: { [id: string]: Pair[] };
+  tiposFirmaMotivo?: Pair[];
   areas: Area[];
-  
+
   constructor() {
     this.tiposPrioridad = [];
     this.tiposRecepcion = [];
@@ -28,11 +28,11 @@ export class TramiteTipos {
     this.tiposGerencias = [];
     this.tiposCorrelativos = {};
     this.tiposAnaliticoIntegracion = [];
-    this.tiposSucursal=[];
+    this.tiposSucursal = [];
     this.tiposTiposOT = [];
-    this.tiposClaseOTMantenimiento=[];
-    this.tiposOTMantenimiento={};
-    this.tiposTecnicoSupervisor={};
+    this.tiposClaseOTMantenimiento = [];
+    this.tiposOTMantenimiento = {};
+    this.tiposTecnicoSupervisor = {};
     this.tiposFirmaMotivo = [];
     this.areas = [];
   }

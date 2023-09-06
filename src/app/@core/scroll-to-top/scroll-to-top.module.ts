@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
     MatIconModule,
     MatTooltipModule,
     CommonModule,
-    NgxPageScrollModule
+    NgxPageScrollCoreModule
   ],
   exports: [ScrollToTopComponent],
   declarations: [ScrollToTopComponent]
