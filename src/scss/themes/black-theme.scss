@@ -2,9 +2,12 @@ $app-black-primary: mat.define-palette(mat.$grey-palette, 700, 300, 900);
 $app-black-accent: mat.define-palette(mat.$blue-grey-palette, 400);
 $app-black-warn: mat.define-palette(mat.$red-palette, 500);
 
-
 $app-black-theme: mat.define-light-theme(
-  $app-black-primary,
-  $app-black-accent,
-  $app-black-warn
+  (
+    color: (
+      primary: $app-default-primary,
+      accent: $app-default-accent,
+      warn: $app-default-warn,
+    ),
+  )
 );

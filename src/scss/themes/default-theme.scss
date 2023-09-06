@@ -1,38 +1,38 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @include mat.core();
 // Cree un tema principal
 
 $yess-pallete: (
-50: #e4f0f4,
-100: #bddae5,
-200: #97c3d5,
-300: #75abc4,
-400: #5e9bba,
-500: #4a8cb1,
-600: #3f7fa5,
-700: #346f95,
-800: #2b5f83,
-900: #1e4364,
-A100: #cfd8dc,
-A200: #b0bec5,
-A400: #78909c,
-A700: #455a64,
-contrast: (
-50: mat.$private-dark-primary-text,
-100: mat.$private-dark-primary-text,
-200: mat.$private-dark-primary-text,
-300: mat.$private-dark-primary-text,
-400: white,
-500: white,
-600: white,
-700: white,
-800: white,
-900: white,
-A100: mat.$private-dark-primary-text,
-A200: mat.$private-dark-primary-text,
-A400: white,
-A700: white,
-)
+  50: #e4f0f4,
+  100: #bddae5,
+  200: #97c3d5,
+  300: #75abc4,
+  400: #5e9bba,
+  500: #4a8cb1,
+  600: #3f7fa5,
+  700: #346f95,
+  800: #2b5f83,
+  900: #1e4364,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: mat.$private-dark-primary-text,
+    100: mat.$private-dark-primary-text,
+    200: mat.$private-dark-primary-text,
+    300: mat.$private-dark-primary-text,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: mat.$private-dark-primary-text,
+    A200: mat.$private-dark-primary-text,
+    A400: white,
+    A700: white,
+  ),
 );
 $app-default-primary: mat.define-palette($yess-pallete, 900);
 //$app-default-primary: mat-palette($yess-pallete,900, 300, 700);
@@ -42,7 +42,11 @@ $app-default-accent: mat.define-palette(mat.$orange-palette, 800);
 $app-default-warn: mat.define-palette(mat.$red-palette, 500);
 
 $app-default-theme: mat.define-light-theme(
-  $app-default-primary,
-  $app-default-accent,
-  $app-default-warn
+  (
+    color: (
+      primary: $app-default-primary,
+      accent: $app-default-accent,
+      warn: $app-default-warn,
+    ),
+  )
 );

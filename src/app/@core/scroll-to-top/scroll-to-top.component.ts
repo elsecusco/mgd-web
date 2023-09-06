@@ -1,4 +1,10 @@
-import { AfterViewInit, EventEmitter, Component, Inject, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  EventEmitter,
+  Component,
+  Inject,
+  OnDestroy,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { scrollFabAnimation } from '../../@core/animations/scroll-fab.animation';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
@@ -9,9 +15,9 @@ import {
   tap,
   throttleTime,
 } from 'rxjs/operators';
-import { BehaviorSubject, fromEvent } from 'rxjs';
+import { BehaviorSubject, Subscription, fromEvent } from 'rxjs';
 import { WINDOW } from '../../@core/window';
-import { untilDestroy } from '../../@core/untilDestroy';
+// import { untilDestroy } from '../../@core/untilDestroy';
 
 enum ShowStatus {
   show = 'show',
@@ -32,6 +38,7 @@ export class ScrollToTopComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private pageScrollService: PageScrollService,
+    private subscription: Subscription,
     @Inject(DOCUMENT) private document: any,
     @Inject(WINDOW) private window: Window
   ) {}
@@ -41,10 +48,10 @@ export class ScrollToTopComponent implements AfterViewInit, OnDestroy {
     //   this.document,
     //   '#top'
     // );
-    this.goToTOP()
+    this.goToTOP();
     const scroll$ = fromEvent(this.window, 'scroll').pipe(
       throttleTime(10),
-      map(() => this.window.pageYOffset),
+      map(() => this.window.scrollY),
       map((y) => {
         if (y > 100) {
           return ShowStatus.show;
@@ -55,12 +62,14 @@ export class ScrollToTopComponent implements AfterViewInit, OnDestroy {
       distinctUntilChanged(),
       share(),
       tap((state) => this._stateSubject.next(state)),
-      untilDestroy(this)
+      // untilDestroy(this)
     );
-    scroll$.subscribe();
+    this.subscription = scroll$.subscribe();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   public goToTOP(): void {
     // You may use any valid css selector as scroll target (e.g. ids, class selectors, tags, combinations of those, ...)
@@ -77,7 +86,7 @@ export class ScrollToTopComponent implements AfterViewInit, OnDestroy {
   }
 
   scrollToTop() {
-    this.goToTOP()
+    this.goToTOP();
     // //use if PageScrollService not installed.
     // (function smoothscroll() {
     //   const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;

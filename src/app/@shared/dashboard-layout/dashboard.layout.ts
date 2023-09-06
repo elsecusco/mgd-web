@@ -6,13 +6,13 @@ import { RouterState } from '@ngxs/router-plugin';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 
 import { map } from 'rxjs/operators';
-
-import { untilDestroy } from '../../@core/untilDestroy';
+import { Subscription } from 'rxjs';
+// import { untilDestroy } from '../../@core/untilDestroy';
 
 @Component({
   selector: 'ngx-dashboard-layout',
   templateUrl: './dashboard.layout.html',
-  styleUrls: ['./dashboard.layout.scss']
+  styleUrls: ['./dashboard.layout.scss'],
   // animations: [routeAnimation],
   // animations: [hierarchicalRouteAnimation],
   // encapsulation: ViewEncapsulation.None
@@ -23,21 +23,23 @@ export class DashboardLayout implements OnInit, OnDestroy {
   sidenavOpen = true;
   sidenavMode = 'side';
   isMobile = false;
-  crumbs$:any; //--add :any
+  crumbs$: any; //--add :any
   // depth$;
 
   constructor(
     private router: Router,
     private store: Store,
-    private mediaObserver: MediaObserver
+    private mediaObserver: MediaObserver,
+    private mediaSubscription: Subscription,
+    private subscribtion: Subscription
   ) {}
 
   ngOnInit() {
     this.crumbs$ = this.store.select<any>(RouterState.state).pipe(
-      map(state =>
+      map((state) =>
         Array.from(state.breadcrumbs, ([key, value]) => ({
           name: key,
-          link: '/' + value
+          link: '/' + value,
         }))
       )
     );
@@ -46,17 +48,19 @@ export class DashboardLayout implements OnInit, OnDestroy {
     //   .select<any>(RouterState.state)
     //   .pipe(map(state => state.data.depth));
 
-    this.mediaObserver.asObservable()
-      .pipe(untilDestroy(this))
+    this.mediaSubscription = this.mediaObserver
+      .asObservable()
+      .pipe()
       .subscribe((change: MediaChange[]) => {
-        const isMobile = change[0].mqAlias === 'xs' || change[0].mqAlias === 'sm';
+        const isMobile =
+          change[0].mqAlias === 'xs' || change[0].mqAlias === 'sm';
 
         this.isMobile = isMobile;
         this.sidenavMode = isMobile ? 'over' : 'side';
         this.sidenavOpen = !isMobile;
       });
 
-    this.router.events.pipe(untilDestroy(this)).subscribe(event => {
+    this.subscribtion = this.router.events.pipe().subscribe((event) => {
       if (event instanceof NavigationEnd && this.isMobile) {
         this.sidenav.close();
       }
@@ -69,7 +73,10 @@ export class DashboardLayout implements OnInit, OnDestroy {
     // Disable WebSocket in mock mode
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.mediaSubscription.unsubscribe();
+    this.subscribtion.unsubscribe();
+  }
   getRouteDepth(outlet: any) {
     return outlet.activatedRouteData['depth'] || 1;
     // return outlet.isActivated ? outlet.activatedRoute : ''

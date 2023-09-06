@@ -3,7 +3,11 @@ $app-blue-accent: mat.define-palette(mat.$light-blue-palette);
 $app-blue-warn: mat.define-palette(mat.$pink-palette, 600);
 
 $app-blue-theme: mat.define-light-theme(
-  $app-blue-primary,
-  $app-blue-accent,
-  $app-blue-warn
+  (
+    color: (
+      primary: $app-default-primary,
+      accent: $app-default-accent,
+      warn: $app-default-warn,
+    ),
+  )
 );

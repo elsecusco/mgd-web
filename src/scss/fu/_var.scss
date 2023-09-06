@@ -1,5 +1,5 @@
 @use "sass:map";
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -11,12 +11,25 @@ $theme-primary-hue: 700;
 $theme-accent-hue: 500;
 $theme-warn-hue: 500;
 
-$theme-primary: mat.define-palette(mat.$blue-grey-palette, $theme-primary-hue, 500, 900);
+$theme-primary: mat.define-palette(
+  mat.$blue-grey-palette,
+  $theme-primary-hue,
+  500,
+  900
+);
 $theme-accent: mat.define-palette(mat.$blue-palette, $theme-accent-hue);
 $theme-warn: mat.define-palette(mat.$red-palette, $theme-warn-hue);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$theme: mat.define-light-theme($theme-primary, $theme-accent, $theme-warn);
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $theme-primary,
+      accent: $theme-accent,
+      warn: $theme-warn,
+    ),
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -57,7 +70,7 @@ $config: mat.define-typography-config(
   $caption: mat.define-typography-level(13px, 22px, 400),
   // $button: mat.define-typography-level(14px, 14px, 500),
   // // // Line-height must be unit-less fraction of the font-size.
-  // $input: mat.define-typography-level(16px, 1.125, 400)
+  // $input: mat.define-typography-level(16px, 1.125, 400),,,
 );
 
 /**
@@ -75,15 +88,24 @@ $theme-warn-map: map.get($theme, warn);
 
 $theme-text: mat.get-color-from-palette($theme-foreground-map, text);
 $theme-hint-text: mat.get-color-from-palette($theme-foreground-map, hint-text);
-$theme-secondary-text: mat.get-color-from-palette($theme-foreground-map, secondary-text);
+$theme-secondary-text: mat.get-color-from-palette(
+  $theme-foreground-map,
+  secondary-text
+);
 $theme-divider: mat.get-color-from-palette($theme-foreground-map, divider);
 $theme-icon: mat.get-color-from-palette($theme-foreground-map, icon);
 
 $theme-background: #f0f0f0;
 //$theme-background: mat-color($theme-background-map, background);
-$theme-background-light: mat.get-color-from-palette($theme-background-map, background);
+$theme-background-light: mat.get-color-from-palette(
+  $theme-background-map,
+  background
+);
 $theme-app-bar: mat.get-color-from-palette($theme-background-map, app-bar);
-$theme-background-hover: mat.get-color-from-palette($theme-background-map, hover);
+$theme-background-hover: mat.get-color-from-palette(
+  $theme-background-map,
+  hover
+);
 
 $theme-card: mat.get-color-from-palette($theme-background-map, card);
 
@@ -91,9 +113,18 @@ $theme-color-primary: mat.get-color-from-palette($color-primary);
 $theme-color-accent: mat.get-color-from-palette($color-accent);
 $theme-color-warn: mat.get-color-from-palette($color-warn);
 
-$theme-color-primary-contrast: mat.get-color-from-palette($color-primary, $theme-primary-hue);
-$theme-color-accent-contrast: mat.get-color-from-palette($color-accent, $theme-accent-hue);
-$theme-color-warn-contrast: mat.get-color-from-palette($color-warn, $theme-warn-hue);
+$theme-color-primary-contrast: mat.get-color-from-palette(
+  $color-primary,
+  $theme-primary-hue
+);
+$theme-color-accent-contrast: mat.get-color-from-palette(
+  $color-accent,
+  $theme-accent-hue
+);
+$theme-color-warn-contrast: mat.get-color-from-palette(
+  $color-warn,
+  $theme-warn-hue
+);
 
 /**
   General
@@ -115,7 +146,7 @@ $card-elevation: $elevation;
   Toolbar
  */
 $toolbar-background: white;
-$toolbar-height: 48px;//64px;
+$toolbar-height: 48px; //64px;
 $toolbar-z-index: 500;
 
 $toolbar-button-width: 64px;
@@ -180,27 +211,31 @@ $sidenav-item-icon-font-size: 22px;
 $sidenav-item-height: 48px;
 $sidenav-item-padding-left: 24px;
 $sidenav-item-padding-right: 24px;
-$sidenav-item-padding-left-level2: $sidenav-item-padding-left + $sidenav-item-icon-font-size;
+$sidenav-item-padding-left-level2: $sidenav-item-padding-left +
+  $sidenav-item-icon-font-size;
 $sidenav-item-padding-left-level3: $sidenav-item-padding-left-level2 + 8px;
 $sidenav-item-padding-left-level4: $sidenav-item-padding-left-level3 + 8px;
 $sidenav-item-padding-left-level5: $sidenav-item-padding-left-level4 + 8px;
 $sidenav-item-padding-left-level6: $sidenav-item-padding-left-level5 + 8px;
 
 $sidenav-width: 270px; // If you change this, you also need to adjust the animations in sidenav.component.ts
-$sidenav-collapsed-width: ($sidenav-item-padding-left + $sidenav-item-padding-right + $sidenav-item-icon-font-size); // If you change this, you also need to adjust the animations in sidenav.component.ts
+$sidenav-collapsed-width: (
+  $sidenav-item-padding-left + $sidenav-item-padding-right +
+    $sidenav-item-icon-font-size
+); // If you change this, you also need to adjust the animations in sidenav.component.ts
 $sidenav-z-index: 1000;
 
 /**
   Mixins
  */
-$media-xs: 'screen and (max-width: 599px)';
+$media-xs: "screen and (max-width: 599px)";
 @mixin media-xs {
   @media #{$media-xs} {
     @content;
   }
 }
 
-$media-sm: 'screen and (min-width: 599px) and (max-width: 959px)';
+$media-sm: "screen and (min-width: 599px) and (max-width: 959px)";
 @mixin media-sm {
   @media #{$media-sm} {
     @content;

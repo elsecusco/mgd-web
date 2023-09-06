@@ -3,7 +3,11 @@ $app-light-accent: mat.define-palette(mat.$brown-palette, 200);
 $app-light-warn: mat.define-palette(mat.$deep-orange-palette, 200);
 
 $app-light-theme: mat.define-light-theme(
-  $app-light-primary,
-  $app-light-accent,
-  $app-light-warn
+  (
+    color: (
+      primary: $app-default-primary,
+      accent: $app-default-accent,
+      warn: $app-default-warn,
+    ),
+  )
 );

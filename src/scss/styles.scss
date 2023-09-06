@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+
 @use "sass:map";
 
 @include mat.core();
@@ -65,15 +66,15 @@
   @include snackbar-cargando-app-theme($theme);
 
   //estilo elements app
-  @include button-theme($theme);
-  @include button-toggle-theme($theme);
-  @include form-field-theme($theme);
-  @include dialog-theme($theme);
-  @include card-theme($theme);
-  @include table-theme($theme);
+  @include mat.button-theme($theme);
+  @include mat.button-toggle-theme($theme);
+  @include mat.form-field-theme($theme);
+  @include mat.dialog-theme($theme);
+  @include mat.card-theme($theme);
+  @include mat.table-theme($theme);
 
   //clases
-  @include class-theme($theme);
+  @include mat.class-theme($theme);
 }
 
 .default-theme {
@@ -82,23 +83,23 @@
   // @include custom-components-theme($app-default-theme);
 }
 
-.light-theme {
-  @include mat.all-component-themes($app-light-theme);
-  // @include angular-material-theme($app-light-theme);
-  // @include custom-components-theme($app-light-theme);
-}
+// .light-theme {
+//   @include mat.all-component-themes($app-light-theme);
+//   // @include angular-material-theme($app-light-theme);
+//   // @include custom-components-theme($app-light-theme);
+// }
 
-.black-theme {
-  @include mat.all-component-themes($app-black-theme);
-  // @include angular-material-theme($app-black-theme);
-  // @include custom-components-theme($app-black-theme);
-}
+// .black-theme {
+//   @include mat.all-component-themes($app-black-theme);
+//   // @include angular-material-theme($app-black-theme);
+//   // @include custom-components-theme($app-black-theme);
+// }
 
-.blue-theme {
-  @include mat.all-component-themes($app-blue-theme);
-  // @include angular-material-theme($app-blue-theme);
-  // @include custom-components-theme($app-blue-theme);
-}
+// .blue-theme {
+//   @include mat.all-component-themes($app-blue-theme);
+//   // @include angular-material-theme($app-blue-theme);
+//   // @include custom-components-theme($app-blue-theme);
+// }
 
 .custom-size-btn .mat-button-wrapper{
   padding: 0 !important;
