@@ -10,7 +10,7 @@
       <mat-icon matChipRemove
                 *ngIf="removable">cancel</mat-icon>
     </mat-chip-option>
-    <input #objectInput
+    <input matInput #objectInput
            [formControl]="objectControl"
            [matAutocomplete]="auto"
            >

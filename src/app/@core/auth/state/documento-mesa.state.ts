@@ -3,6 +3,7 @@ import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { DocumentoMesa } from '../../../@models/documento-mesa';
+import { Injectable } from '@angular/core';
 
 export interface DocumentoMesaStateModel {
   documento: DocumentoMesa;
@@ -23,6 +24,7 @@ const defaultStateDocumento = {
   name: 'documentoMesa',
   defaults: defaultStateDocumento
 })
+@Injectable()
 export class DocumentoMesaState {
   constructor() {}
 

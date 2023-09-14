@@ -1,0 +1,36 @@
+<mat-card fxLayout="column"
+                  fxLayoutAlign="center"
+                  fxLayoutGap 
+                  fxLayout.xs="row"
+                  fxLayoutAlign.xs="start">
+            <div class="cuadro">
+                <span class = "titulo" matSuffix> Detalle - Atención </span>
+                <mat-icon matSuffix>assignment_turned_in</mat-icon> 
+                <mat-divider class="mg-bot-8" 
+                              style="height:2px"></mat-divider>
+                <ul>
+                 <li class = "contenido">{{data.detalle.usuarioDestino}}</li>
+               </ul>
+                <mat-divider class="mg-bot-8"
+                              style="height:2px"></mat-divider>
+                
+                <p class = "subtitulo">Fecha:</p>
+                <p class = "contenido">{{data.detalle.fechaAtencion}}</p>
+                <p class = "subtitulo">Descripción - Atención:</p>
+                <p class = "contenido">{{data.detalle.descripcionAtencion}}</p>
+
+                <mat-divider class="mg-bot-8" 
+                              style="height:2px"></mat-divider>
+       
+                <mat-label 
+                    class = "lectura"
+                    mat-dialog-title
+                    *ngIf="data.detalle.tipoAtendido== 'A'; else elseBlock">Atención Informativa y de Lectura</mat-label>
+                     <ng-template class = "atendido" #elseBlock>
+                        <span class = "atendido">
+                          Atencion Final
+                        </span>
+                </ng-template>
+               
+
+

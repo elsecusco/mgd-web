@@ -1,0 +1,130 @@
+<form [formGroup]="form" novalidate>
+  <div class="backdropFirma" *ngIf="firmando"></div>
+  <firma
+    *ngIf="isSave"
+    #firma
+    [f]="fields"
+    style="position:absolute;z-index:2000"
+    (resultado)="resultadoFirma($event)"></firma>
+  <h1 mat-dialog-title>{{titulo}}</h1>
+  <mat-divider class="mg-bot-8"></mat-divider>
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
+    <ng-container *ngIf="data.doc.tipoDerivacion!='D'">
+    <upload-file (file)="changeFile($event)"></upload-file>
+    <div class="mensaje_documento"
+         *ngIf="errorMaxlength"> 
+         <mat-icon>report</mat-icon>
+         No es posible cargar el archivo, máximo 110 caracteres en el título
+    </div>
+    </ng-container>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Tipo de Aprobación</mat-label>
+      <input
+        matInput
+        readonly
+        placeholder="Aprobación"
+        formControlName="aprobacion"/>
+    </mat-form-field>
+    <ng-container *ngIf="data.tipo=='Derivar';else desBlock">
+      <destinatario-buscar-interno
+                 (para)="para($event)"
+                 [matLabel]="'Destinatario'"
+                 [onlyOne]="true"></destinatario-buscar-interno>
+      <mat-form-field appearance="outline" color="primary">
+      <mat-label>Proveido Documento</mat-label>
+      <textarea
+        matInput
+        placeholder="Ingrese Proveido..."
+        formControlName="proveidoDocumento"
+        rows="2">
+      </textarea>
+    </mat-form-field>
+    </ng-container>
+    <ng-template #desBlock>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Descripción Documento</mat-label>
+      <textarea
+        matInput
+        placeholder="Ingrese Descripción..."
+        formControlName="descripcionAprobacion"
+        rows="2">
+      </textarea>
+    </mat-form-field>
+  </ng-template>
+    <!-- PARA FIRMAR , DESBLOQUEADO -->
+    <mat-form-field
+                    appearance="outline"
+                    color="primary"
+                    floatLabel="always">
+      <mat-label>Razón Firma Documento (Solo si va a firmar el documento)</mat-label>
+      <mat-select formControlName="razon">
+        <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
+                    [value]="t.nombre">                    
+          {{t.nombre}}
+        </mat-option>
+      </mat-select>
+       </mat-form-field>
+    <!-- FIN E FIRMAR  -->
+
+    <ng-container *ngIf="file">
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <span class="fw-400 cl-accent">{{ progress }} %</span>
+      </div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="progress"
+        color="accent">
+      </mat-progress-bar>
+    </ng-container>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px">
+    <button
+      *ngIf="aprovar"
+      mat-raised-button
+      color="primary"
+      (click)="aprovarDePrincipal()"
+      [disabled]="form.invalid"
+    >
+      Aprobar Archivo
+    </button>
+    <button
+      *ngIf="derivar"
+      mat-raised-button
+      color="primary"
+      (click)="derivarDePrincipal()"
+      [disabled]="form.invalid || !cellDerivar"
+    >
+      Derivar Archivo
+    </button>
+    <button
+      *ngIf="derivarSubir"
+      mat-raised-button
+      color="primary"
+      (click)="derivarArchivo()"
+      [disabled]="form.invalid || file == undefined || !cellDerivar"
+    >
+      Subir Archivo y Derivar
+    </button>
+      <button
+      *ngIf="aprovarSubir"
+      mat-raised-button
+      color="primary"
+      (click)="aprobarArchivo()"
+      [disabled]="form.invalid || file == undefined">
+      Subir Archivo y Aprobar
+      </button>
+
+      <button
+              mat-raised-button
+              color="primary"
+              (click)="guardarArchivo()"
+              [disabled]="form.invalid || file == undefined">
+      Firmar y Subir Archivo
+    </button>
+
+    <button mat-button color="warn" [mat-dialog-close]="" cdkFocusInitial>
+      Cancelar
+    </button>
+  </div>
+</form>

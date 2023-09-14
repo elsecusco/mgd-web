@@ -1,0 +1,24 @@
+<mat-progress-bar *ngIf="_pending" color="primary" mode="indeterminate"></mat-progress-bar>
+<div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="start center"
+     fxLayoutAlign.lt-md="">
+  <ng-container *ngFor="let item of items">
+     <a fxFlex="25" fxFlex.lt-md="100" routerLink="/{{item.link}}">
+         <!--No se linea modificada para poder colocar un color solo a los bloques, solo rect quita color 
+          Se aplica siempre a pesar del cambio del tema, parche--->
+      <mat-card class="bg-primary rect">
+      <!----------------------------------------------------------->
+        <!--Linea modificada para poder colocar iconos de tipo PNG, se aumento <img --->
+        <!-- <mat-icon>{{item.icon}}</mat-icon> -->
+        <img src="assets/{{item.icon}}.png" >
+        <!----------------------------------------------------------->
+        <!-- <mat-icon svgIcon="{{item.icono}}"></mat-icon> -->
+          <p>{{item.name}}</p>
+      </mat-card>
+      <!-- <div class="rect bg-primary">
+        <mat-icon>{{item.Icono}}</mat-icon>
+        <p>{{item.nombreItem}}</p>
+      </div> -->
+    </a>
+  </ng-container> 
+
+</div>

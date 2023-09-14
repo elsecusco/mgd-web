@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -11,6 +11,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
+@Injectable()
 export class LoginPage implements OnInit {
   titulo: string = '';
   subtitulo: string = '';

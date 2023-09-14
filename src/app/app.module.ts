@@ -8,6 +8,7 @@ import { CoreModule } from '../app/@core/core.module';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +17,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     BrowserModule,
     AppRoutingModule,
     NgxExtendedPdfViewerModule, // for pdf
-    CoreModule
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

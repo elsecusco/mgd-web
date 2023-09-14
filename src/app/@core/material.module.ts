@@ -9,6 +9,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 // --- upgraded import versions ---
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -19,7 +20,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
@@ -33,13 +33,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
-import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips'
+import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 const MODULES = [
+  MatFormFieldModule,
+  MatInputModule,
   FlexLayoutModule,
   NgScrollbarModule,
   OverlayModule,
@@ -59,8 +61,6 @@ const MODULES = [
   MatRadioModule,
   MatPaginatorModule,
   MatTabsModule,
-  MatInputModule,
-  MatFormFieldModule,
   MatDatepickerModule,
   MatDialogModule,
   MatNativeDateModule,
@@ -81,9 +81,9 @@ const MODULES = [
     {
       provide: MAT_CHIPS_DEFAULT_OPTIONS,
       useValue: {
-        separatorKeyCodes: [ENTER, COMMA]
-      }
-    }
-  ]
+        separatorKeyCodes: [ENTER, COMMA],
+      },
+    },
+  ],
 })
 export class MaterialModule {}

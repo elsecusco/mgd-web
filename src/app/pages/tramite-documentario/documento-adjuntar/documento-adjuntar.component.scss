@@ -1,0 +1,104 @@
+mat-label{
+    font-weight: bold;   
+}
+mat-header-cell{
+    text-align: center;
+}
+.mat-column-nombreUsuario {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 18% !important;
+  width: 18% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  justify-content: center;
+  text-align: left;
+}
+.mat-column-nombreArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-descripcionArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-fechaArchivo {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 11% !important;
+    width: 11% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+  }
+  .mat-column-acciones {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 23% !important;
+    width: 23% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: center;
+  }
+  .mat-column-codigoTipoDocumentoTramiteAdjunto {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 18% !important;
+    width: 18% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    justify-content: center;
+    text-align: left;
+    font-weight: bold !important;
+
+  }
+  .mat-radio-button ~ .mat-radio-button {
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+  .mat-cell {
+    font-size: 12px;
+  }
+  .mat-header-cell{
+    font-weight: bold;   
+  }
+
+  .mat-hint{
+    font-weight: bold;
+    font-style: oblique;
+    color: #07426f;
+  }
+  .titulos_adjuntos{
+    font-weight: bold;
+
+  }
+  .descarga{
+     margin-top:7px;
+     height: 25px;
+  }

@@ -1,0 +1,106 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="derivarDoc()"
+  #f="ngForm"
+  novalidate
+  class="wd-100"
+  fxLayout="column"
+  fxLayoutGap="8px"
+>
+  <loading-sp [loading]="saving"></loading-sp>
+  <span class="fs-16 fw-500 mg-bot-8">Derivar Documento</span>
+
+  <row-container>
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      appearance="outline"
+      color="primary"
+    >
+      <mat-label>Prioridad</mat-label>
+      <mat-select formControlName="codigoPrioridadAtencion">
+        <mat-option *ngFor="let t of tipos.tiposPrioridad" [value]="t.codigo">
+          {{ t.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      appearance="outline"
+      color="primary"
+    >
+      <mat-label>Tipo Atención</mat-label>
+      <mat-select formControlName="codigoTipoAtencionRequeridaDocumento">
+        <mat-option *ngFor="let t of tipos.tiposAtencion" [value]="t.codigo">
+          {{ t.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div fxFlex="33" fxFlex.xs="auto" fxLayout="row" fxLayoutAlign="end center">
+      <mat-checkbox
+        #chkPlazoAtencion
+        formControlName="conPlazoAtencion"
+      ></mat-checkbox>
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Plazo Atención</mat-label>
+        <input
+          matInput
+          readonly
+          (blur)="onBlur('fechaPlazoAtencion')"
+          formControlName="fechaPlazoAtencion"
+          [matDatepicker]="dpPlazoAtencion"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="dpPlazoAtencion"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+          #dpPlazoAtencion
+          [disabled]="!chkPlazoAtencion.checked"
+        ></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </row-container>
+
+  <destinatario-buscar
+    [loginUsuario]="buzonActual.loginUsuarioBuzon"
+    (para)="para($event)"
+    (conCopia)="conCopia($event)"
+  ></destinatario-buscar>
+
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Proveido</mat-label>
+    <textarea
+      matInput
+      autosize
+      formControlName="descripcionSolicitudAtencion"
+      maxlength="500"
+      rows="2"
+    ></textarea>
+  </mat-form-field>
+  <label class="nopadding clrlbl">
+    Maximo caracteres:
+    {{ form.value.descripcionSolicitudAtencion.length }}/500</label
+  >
+  <!-- <section class="check">
+    <mat-checkbox class="example-margin" formControlName= "cargo">Imprimir Cargo de Mesa de Partes!</mat-checkbox>
+  </section> -->
+
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button
+      fxFlex="20"
+      fxFlex.xs="100"
+      type="submit"
+      mat-raised-button
+      [disabled]="
+        form.get('loginUsuarioPara')!.value.length == 0 || sizeAdjuntos == 0
+      "
+      color="primary"
+    >
+      DERIVAR DOCUMENTO <mat-icon>contact_mail</mat-icon>
+    </button>
+  </div>
+</form>

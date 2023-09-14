@@ -1,0 +1,44 @@
+.matTooltip{
+  font-size: 40px !important;
+  padding: 10px
+}
+
+h2,h3{
+  border-bottom: 3px solid;
+  margin-right: 10px;
+ }
+
+ .example-tooltip-red {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: #444;
+      font-family: 'Comfortaa', cursive;
+      text-align: center;
+      font-size: 26px !important;
+ }
+// .Titulo{
+//   font-size: 1.2vw;
+//   font-size: 1.4rem;
+// }
+  
+  .img {
+    width: 100%;
+    margin-bottom: 18%;
+    margin: auto;
+  }
+  .container {
+    min-height: 20%;
+    margin: 0 20px;
+    width: 90%;
+  }
+  mat-card {
+    text-align: justify;
+    margin: 10px;
+    height: 150px;
+    width: 452px;
+  }
+  mat-card-content{
+    border-left: inset 3px;
+    padding-left:6px ;
+  }

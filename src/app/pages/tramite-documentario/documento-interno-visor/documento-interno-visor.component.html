@@ -1,0 +1,124 @@
+<div>
+  <mat-card class="max-wd-950 wd-full">
+    <mat-card-title>
+      <mat-toolbar color="primary" fxLayoutGap="12px">
+        <span class="titulo">Documento Memo Valorización</span>
+      </mat-toolbar>
+    </mat-card-title>
+
+<form [formGroup]="form" novalidate>
+    <div class="backdropFirma" *ngIf="firmando"></div>
+    <firma
+      *ngIf="isSave"
+      #firma
+      [f]="fields"
+      style="position:absolute;z-index:2000"
+      (resultado)="resultadoFirma($event)"></firma>
+
+    <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
+      <destinatario-buscar-interno
+                *ngIf="data.tipo=='Derivar'"
+                (para)="para($event)"
+                [matLabel]="'Destinatario'"
+                [onlyOne]="true">
+      </destinatario-buscar-interno>
+    <row-container>
+      <mat-form-field
+        fxFlex="60"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary">
+        <mat-label>Proveido Documento</mat-label>
+        <textarea
+          matInput
+          placeholder="Ingrese Proveido..."
+          formControlName="proveidoDocumento"
+          rows="2">
+        </textarea>
+      </mat-form-field>
+      <mat-form-field
+        *ngIf="data.nombreDerivacion; else razon"
+        fxFlex="40"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary">
+        <mat-label>Razón Firma</mat-label>
+        <input matInput
+              readonly
+              [value]="data.nombreDerivacion">
+      </mat-form-field>
+      <ng-template #razon>
+      <mat-form-field
+        *ngIf="data.estadoDerivacion !='FD'"
+        fxFlex="40"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary">
+        <mat-label>Razón Firma</mat-label>
+        <mat-select formControlName="razon">
+          <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
+                      [value]="t.nombre">
+            {{t.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-template>
+    </row-container>
+      <ng-container *ngIf="file">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <span class="fw-400 cl-accent">{{ progress }} %</span>
+        </div>
+        <mat-progress-bar
+          mode="determinate"
+          [value]="progress"
+          color="accent">
+        </mat-progress-bar>
+    </ng-container>
+    </div>
+    <div
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxLayoutGap="8px"
+        class="mg-bot-8">
+      <button
+      *ngIf="data.estadoDerivacion != 'FD'"
+        mat-raised-button
+        color="primary"
+        (click)="guardarArchivo()"
+        [disabled]="form.invalid">
+        Firmar Archivo
+      </button>
+      <button
+      *ngIf="data.estadoDerivacion == 'FD' && data.tipo =='Derivar'"
+        mat-raised-button
+        color="primary"
+        (click)="derivarArchivo()"
+        [disabled]="form.invalid">
+        Derivar Archivo
+      </button>
+      <button
+      *ngIf="data.estadoDerivacion == 'FD' && data.tipo =='Atender'"
+        mat-raised-button
+        color="primary"
+        (click)="aprobarArchivo()"
+        [disabled]="form.invalid">
+        Atencion Final
+      </button>
+      <button
+        mat-button
+        color="warn"
+        [mat-dialog-close]="" cdkFocusInitial>
+        Cerrar
+      </button>
+    </div>
+    <hr style="border-top: 2px solid #1a405a;" />
+  </form>
+<ngx-extended-pdf-viewer
+                          *ngIf="loadedPDF"
+                          [src]="pdfSrc"
+                          [height]="'90vh'"
+                          [useBrowserLocale]="false"
+                          [showUnverifiedSignatures]="true">
+</ngx-extended-pdf-viewer>
+  </mat-card>
+</div>

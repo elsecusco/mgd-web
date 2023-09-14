@@ -1,0 +1,154 @@
+<mat-card fxLayout="row"
+          fxLayoutAlign="center"
+          fxLayoutGap="16px"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="start">
+<div fxFlex = "100">
+    <row-container>
+      <two-picker
+                [fechaInicio]="documentof.fechaInicio"
+                [fechaFin]="documentof.fechaFin"
+                (changeFecha)="changeFecha($event)">
+      </two-picker>
+    </row-container>
+       <!-- Para los codigos de los Documentos -->
+        <row-container>
+        <mat-form-field appearance="outline"
+                        color="primary">
+            <mat-label>Seleccionar Codigo</mat-label>
+             <mat-icon matSuffix>description</mat-icon>
+             <mat-select placeholder="codigos"
+                         [(ngModel)]="documentof.filtro">
+                <!-- <mat-option>None</mat-option> -->
+                <mat-option [value] ="0">Cód. Interno V°B°</mat-option>
+                <mat-option [value] ="1">N° Documento</mat-option>
+                <mat-option [value] ="2">N° Expediente</mat-option>
+             </mat-select>
+        </mat-form-field>
+        <!--Asignando el valor de acuerdo al codigo seleccionado-->
+          <mat-form-field appearance="outline">
+                <mat-label>Digite valor</mat-label>
+                <input [(ngModel)]="documentof.valor"
+                        matInput placeholder="Ingrese Codigo">
+                <mat-icon matSuffix>create</mat-icon>
+          </mat-form-field>
+          </row-container>
+        <!--Segmento titulo Asunto - Razón Social y Ruc -->
+        <row-container>
+        <!-- Asunto -->
+        <mat-form-field
+                      class="orden"
+                      fxLayout="column"
+                      fxFlex = "32"
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      appearance="outline"
+                      color="primary">
+                <mat-label>Asunto del Documento</mat-label>
+                <input  [(ngModel)]="documentof.asunto"
+                        matInput placeholder="Digite parte del Asunto ó PALABRA1%PALABRA2">
+                <mat-icon matSuffix
+                          matTooltip="Digite Parte del Asunto ó PALABRA1%PALABRA2">chat</mat-icon>
+        </mat-form-field>
+
+        <!-- Razón Social -->
+        <mat-form-field
+                      class="espacio"
+                      fxLayout="column"
+                      fxFlex = "32"
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      appearance="outline"
+                      color="primary">
+                <mat-label>Razón Social</mat-label>
+                <input  [(ngModel)]="documentof.razonSocial"
+                        matInput placeholder="Digite parte del Asunto ó PALABRA1%PALABRA2">
+                <mat-icon matSuffix
+                          matTooltip="Digite Parte del Asunto ó PALABRA1%PALABRA2">chat</mat-icon>
+        </mat-form-field>
+
+        <!-- Ruc -->
+        <mat-form-field
+                      class="orden"
+                      fxLayout="column"
+                      fxFlex = "15"
+                      fxLayoutGap="1px"
+                      fxFlex.xs= "auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      appearance="outline"
+                      color="primary">
+                <mat-label>Ruc</mat-label>
+                <input  [(ngModel)]="documentof.ruc"
+                        matInput placeholder="Digite parte del Asunto ó PALABRA1%PALABRA2">
+                <mat-icon matSuffix
+                          matTooltip="Digite Parte del Asunto ó PALABRA1%PALABRA2">chat</mat-icon>
+        </mat-form-field>
+        </row-container>
+         <!-- Bloque de Adjunto,Serie - Numero y HES -->
+        <row-container>
+                <!-- Adjunto -->
+                <mat-form-field class="orden"
+                                fxLayout="column"
+                                fxFlex = "32"
+                                fxLayoutGap="8px"
+                                fxFlex.xs="auto"
+                                fxLayout.xs="column"
+                                fxLayoutAlign.xs="start"
+                                appearance="outline"
+                                color="primary">
+              <mat-label>Título del Nombre del Adjunto</mat-label>
+              <input [(ngModel)]="documentof.nombreArchivo"
+                     matInput placeholder="Digite parte del titulo ó PALABRA1%PALABRA2">
+              <mat-icon matTooltip="Digite Parte del Titulo ó PALABRA1%PALABRA2"
+                        matSuffix>comment</mat-icon>
+          </mat-form-field>
+          <!-- Serie Numero -->
+          <mat-form-field class="espacio"
+                          fxLayout="column"
+                          fxFlex = "16"
+                          fxLayoutGap="1px"
+                          fxFlex.xs= "auto"
+                          fxLayout.xs="column"
+                          fxLayoutAlign.xs="start"
+                          appearance="outline"
+                          color="primary">
+                <mat-label>Serie - Número</mat-label>
+                <input
+                        [(ngModel)]="documentof.serieNumero"
+                        matInput placeholder="Nombre del Interesado...">
+                <mat-icon matSuffix>portrait</mat-icon>
+        </mat-form-field>
+        <!-- HES -->
+        <mat-form-field fxLayout="column"
+                        fxFlex = "15.5"
+                        fxLayoutGap="1px"
+                        fxFlex.xs= "auto"
+                        fxLayout.xs="column"
+                        fxLayoutAlign.xs="start"
+                        appearance="outline"
+                        color="primary">
+                <mat-label>HES</mat-label>
+                <input
+                        [(ngModel)]="documentof.hes"
+                        matInput placeholder="Nombre del Interesado...">
+                <mat-icon matSuffix>portrait</mat-icon>
+        </mat-form-field>
+        </row-container>
+
+
+      <button class="boton"
+              mat-raised-button color="warn"
+              matTooltip="Buscar Documento por Codigo"
+              style="margin-top: 10px; margin-right: 10px;"
+              (click)="buscarDoc()">
+              <mat-icon>find_in_page</mat-icon>
+      </button>
+
+ </div>
+</mat-card>
+<reporte-vb-detalle></reporte-vb-detalle>

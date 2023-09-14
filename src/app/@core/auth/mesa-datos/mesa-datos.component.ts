@@ -33,7 +33,7 @@ export class MesaDatosComponent implements OnInit {
   tipos: TiposMesa={tiposDocumento:[],tiposProceso:[],tiposDocIdentidad:[]};
 
   saving!: boolean;
-  @Output() save = new EventEmitter<number | string>();
+  @Output() save = new EventEmitter<string>();
 
   doc: DocumentoMesa = new DocumentoMesa();
   persona:Persona = new Persona();
@@ -149,7 +149,7 @@ export class MesaDatosComponent implements OnInit {
     if(ok){
       this.doc=new DocumentoMesa();
       this.persona=new Persona();
-      this.save.emit(this.doc.codigoDocumentoTramite);
+      this.save.emit(this.doc.codigoDocumentoTramite.toString());
       window.location.reload();
     }
     });

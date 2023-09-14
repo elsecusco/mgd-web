@@ -1,6 +1,6 @@
 export class ItemResultado {
   id: number;
-  idItem: number | string;
+  idItem: number;
   mensaje: string;
   constructor() {
     this.id = 1;

@@ -1,0 +1,9 @@
+.orden{
+    padding-left: 3px;
+}
+.longitud{
+     width: 458px;
+    //  display: box; 
+     grid-template-columns: 1fr 1fr; 
+     gap: 5px 
+}

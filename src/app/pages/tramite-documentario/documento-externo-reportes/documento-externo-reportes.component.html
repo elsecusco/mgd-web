@@ -1,0 +1,172 @@
+<page-container class="row-center">
+  <mat-card class="card wd-full">
+    <mat-card-title>
+      <mat-toolbar color="primary"
+                   fxLayoutGap="16px">
+        <a mat-flat-button
+           color="primary"
+           routerLink="../">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        <span>Reporte Documentos Externos</span>
+      </mat-toolbar>
+    </mat-card-title>
+    <mat-card-content fxLayout="column"
+                      fxLayoutGap="16px">
+<!-- <mat-card fxLayout="row"
+            fxLayoutAlign="center"
+            fxLayoutGap="16px"
+            fxLayout.xs="column"
+            fxLayoutAlign.xs="start"> -->
+  <div fxFlex = "48" >
+    <span class="fs-16 fw-500 mg-bot-16">Filtro del Documento</span>
+    <div class="bloque">
+      <!-- Filtro de fechas -->
+      <row-container>
+        <two-picker class="espacio"
+            fxFlex = "80"
+            fxLayoutGap="8px"
+            fxFlex.xs="auto"
+            fxLayout.xs="column"
+            fxLayoutAlign.xs="start"
+            [fechaInicio]="documentoFiltro.fechaInicio"
+            [fechaFin]="documentoFiltro.fechaFin"
+            (changeFecha)="changeFecha($event)">
+        </two-picker>
+        <!-- <mat-slide-toggle [(ngModel)]="documentoFiltro.conFechaVencimiento">Con Fecha Vencimiento</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="documentoFiltro.conPlazoAtencion">Con Plazo de Atención</mat-slide-toggle> -->
+    </row-container>
+    <row-container>
+      <mat-checkbox [(ngModel)]="documentoFiltro.conRemitente"></mat-checkbox>
+      <remitente-filtro 
+                      fxLayout="column" 
+                      fxFlex = "91" 
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start"
+                      [disabled]="!documentoFiltro.conRemitente"
+                      (remitente)="documentoFiltro.codigoRemitente=$event.codigoRemitenteDocumento">
+      </remitente-filtro>
+    </row-container>
+    <row-container>
+  <div class="espacio"
+       fxLayout="column"  
+       fxFlex = "94" 
+       fxLayoutGap="8px"
+       fxFlex.xs="auto"
+       fxLayout.xs="column"
+       fxLayoutAlign.xs="start">
+     <destinatario-filtro 
+                       [tipoBusqueda]="tipoBusqueda"
+                       [porNombre]="porNombre"
+                       [matLabel]="'Persona Interesada'"
+                       [onlyOne]="onlyOne"
+                       [blacklist]="blacklist"
+                       [all]="true"
+                       (returnDestinatarios)="destinatariosPara($event)"></destinatario-filtro> 
+                                                          
+  <!-- <div style="font-size: 10px">(Ingrese las 5 primeras letras del nombre o apellido)</div> -->
+  </div>
+</row-container>
+<row-container>
+      <mat-checkbox [(ngModel)]="documentoFiltro.conNroExpediente"></mat-checkbox>
+        <mat-form-field 
+            fxFlex = "29" 
+            fxLayoutGap="8px"
+            fxFlex.xs="auto"
+            fxLayout.xs="column"
+            fxLayoutAlign.xs="start"
+            appearance="outline">
+            <mat-label>Nro Expediente</mat-label>
+            <input matInput
+                   placeholder="Ingrese Nro Expediente"
+                   autocomplete="off"
+                   [disabled]='!documentoFiltro.conNroExpediente'
+                   [(ngModel)]="documentoFiltro.numeroExpediente"
+                   type="text">
+      </mat-form-field>
+       
+      <mat-form-field 
+        fxLayoutGap="8px"
+        fxFlex = "30"
+        fxFlex.xs="auto"
+        appearance="outline"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="start">
+        <mat-label>Con Fecha Vencimiento</mat-label>
+        <mat-select [(value)]="documentoFiltro.conFechaVencimiento">
+          <mat-option value="-1">Todos</mat-option>
+          <mat-option value="0">Sin Vencimiento</mat-option>
+          <mat-option value="1">Con Vencimiento</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field 
+                      fxFlex = "30"
+                      appearance="outline"
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start">
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="documentoFiltro.statusDoc">
+          <mat-option value="2">Atención Final</mat-option>
+          <mat-option value="0">En trámite</mat-option>
+          <mat-option value="1">Todos</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </row-container>
+    <row-container>
+      <mat-form-field class="espacio"
+                      fxFlex = "32"
+                      appearance="outline"
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start">
+      <mat-label>Con Plazo de Atención</mat-label>
+      <mat-select [(value)]="documentoFiltro.conPlazoAtencion">
+        <mat-option value="-1">Todos</mat-option>
+        <mat-option value="0">Sin Plazo</mat-option>
+        <mat-option value="1">Con Plazo</mat-option>
+      </mat-select>
+      </mat-form-field>
+      <mat-form-field
+                      fxFlex = "30"
+                      appearance="outline"
+                      fxLayoutGap="8px"
+                      fxFlex.xs="auto"
+                      fxLayout.xs="column"
+                      fxLayoutAlign.xs="start">
+        <mat-label>Número de días por vencer plazo</mat-label>
+        <input matInput
+                   placeholder="Ingrese Dias por vencer"
+                   autocomplete="off"
+                   [disabled]="documentoFiltro.conPlazoAtencion!=1"
+                   (keypress)="numericOnly($event)"
+                   [(ngModel)]="documentoFiltro.diasPorVencer"
+                   type="text">
+      </mat-form-field>
+      <button mat-mini-fab
+                matTooltip="Descargar"
+                style="margin-top: 10px; margin-right: 10px;"
+                (click)="descargarPdf()">
+            <mat-icon>cloud_download</mat-icon>
+        </button>
+        <!-- Abrir pdf -->
+        <button mat-mini-fab
+              matTooltip="Abrir Pdf"
+              style="margin-top: 10px; margin-right: 10px;"
+              (click)="openPdf()">
+            <mat-icon>picture_as_pdf</mat-icon>
+        </button>
+      <a #link style="display: none" class="a-link-file"></a>
+    </row-container>
+    </div>
+  </div>
+</mat-card-content>
+
+
+</mat-card>
+
+</page-container>

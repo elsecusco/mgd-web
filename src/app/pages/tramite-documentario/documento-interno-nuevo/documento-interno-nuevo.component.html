@@ -1,0 +1,29 @@
+<page-container class="row-center">
+  <mat-card class="max-wd-950 wd-full">
+    <mat-card-title>
+      <mat-toolbar color="primary" fxLayoutGap="16px">
+        <a mat-flat-button
+           color="primary"
+           routerLink="../documento-interno">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        <span>Registro de Documento Interno</span>
+      </mat-toolbar>
+    </mat-card-title>
+    <mat-card-content fxLayout="column"
+                      fxLayoutGap="16px">
+      <documento-interno-datos
+        (save)="codigoDocumento=$event"
+        (changeTipoDoc)="tipoDocumento=$event"
+        (changeValorizaciones)="numeroValorizaciones=$event"></documento-interno-datos>
+      <mat-divider> </mat-divider>
+      <ng-container *ngIf="codigoDocumento!=0">
+        <documento-interno-derivar [codigoDocumento]="codigoDocumento"
+                                   [tipoDocumento]="tipoDocumento"
+                                   [numeroValorizaciones]="numeroValorizaciones"
+                           (derivar)="derivar()"></documento-interno-derivar>
+      </ng-container>
+    </mat-card-content>
+
+  </mat-card>
+</page-container>

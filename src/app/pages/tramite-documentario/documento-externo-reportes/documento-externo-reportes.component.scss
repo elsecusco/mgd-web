@@ -1,0 +1,28 @@
+.card {
+  min-width: 400px;
+  max-width: 800px;
+}
+
+.destinatario-filtro{
+  // min-width: 120px;
+ width: 550px;
+}
+.espacio{
+  padding-left: 23px;
+}
+
+
+mat-toolbar {
+  display: flex;
+  flex-direction: row;
+  
+  height: 48px;
+  padding-left: 0;
+
+  border-radius: 5px;
+
+  span:last-child {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}

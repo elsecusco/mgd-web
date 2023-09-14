@@ -1,0 +1,89 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="derivarDoc()"
+  #f="ngForm"
+  novalidate
+  class="wd-100"
+  fxLayout="column"
+  fxLayoutGap="8px"
+>
+  <loading-sp [loading]="saving"></loading-sp>
+  <div
+    class="boxdestinatario"
+    fxFlex="100"
+    fxFlex.xs="auto"
+    appearance="outline"
+  >
+    <ng-container *ngIf="doc.tipoDerivacion === 'R'; else verDestinatario">
+      <destinatario-buscar-interno
+        #boxDest
+        (para)="para($event)"
+        [onlyOne]="true"
+        [matLabel]="'Destinatario'"
+      >
+      </destinatario-buscar-interno>
+    </ng-container>
+    <ng-template #verDestinatario>
+      <span class="fs-16 fw-500">Destinatario:</span>
+      <mat-form-field
+        fxFlex="100"
+        fxFlex.xs="auto"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary"
+      >
+        <mat-label class="destinatario">Destinatario</mat-label>
+        <input
+          matInput
+          readonly
+          [value]="doc.destinantario + ' - ' + doc.correo"
+        />
+      </mat-form-field>
+    </ng-template>
+  </div>
+  <documento-anexo-interno
+    (sizeAdjuntos)="sizeAdjuntos = $event"
+    [tipoDocumento]="tipoDocumento"
+    [codigoDocumento]="codigoDocumento"
+  >
+  </documento-anexo-interno>
+
+  <documento-interno-vb
+    (listAprobaciones)="listAprobaciones($event)"
+    [tipoDocumento]="tipoDocumento"
+    [codigoDocumento]="tipoDocumento"
+  ></documento-interno-vb>
+
+  <div
+    *ngIf="tipoDocumento != 48 && doc.tipoDerivacion === 'R'"
+    fxLayout="row"
+    fxLayoutAlign="end center"
+  >
+    <button
+      fxFlex="20"
+      fxFlex.xs="100"
+      type="submit"
+      mat-raised-button
+      [disabled]="
+        form.get('loginUsuarioPara')!.value.length == 0 || sizeAdjuntos == 0
+      "
+      color="primary"
+    >
+      DERIVAR DOCUMENTO <mat-icon>contact_mail</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="tipoDocumento == 48" fxLayout="row" fxLayoutAlign="end center">
+    <button
+      fxFlex="20"
+      fxFlex.xs="100"
+      type="submit"
+      mat-raised-button
+      [disabled]="form.get('loginUsuarioPara')!.value.length == 0"
+      color="primary"
+    >
+      DERIVAR DOCUMENTO <mat-icon>contact_mail</mat-icon>
+    </button>
+  </div>
+</form>
+
+<!-- [disabled]="form.get('loginUsuarioPara').value.length==0 || sizeAdjuntos==0" -->

@@ -1,0 +1,26 @@
+.mat-dialog-title {
+    margin: 0;
+  }
+  mat-divider {
+    margin-bottom: 16px !important;
+  }
+  .backdropFirma {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background: #ffffffe8;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+    margin-bottom: 10px;
+    
+  }
+  .mat-radio-group{
+    font-size:11px;
+  }
+
+  

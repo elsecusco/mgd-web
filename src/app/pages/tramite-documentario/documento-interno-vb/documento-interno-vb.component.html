@@ -1,0 +1,162 @@
+<div
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="8px"
+  class="mg-bot-8"
+>
+  <span class="fs-16 fw-500">Aprobaciones</span>
+</div>
+<ng-container *ngIf="doc.tipoDerivacion === 'R'">
+  <row-container>
+    <div
+      class="boxdestinatario"
+      fxFlex="100"
+      fxFlex.xs="auto"
+      appearance="outline"
+    >
+      <div
+        fxFlex="73"
+        fxFlex.xs="auto"
+        appearance="outline"
+        class="mg-bot-8"
+        color="primary"
+      >
+        <destinatario-buscar-interno
+          (para)="paraDest($event)"
+          [matLabel]="'Trabajador'"
+          [blacklist]="blacklist"
+        >
+        </destinatario-buscar-interno>
+      </div>
+      <mat-form-field
+        fxFlex="22"
+        fxFlex.xs="auto"
+        appearance="outline"
+        class="mg-bot-8 aprobacion"
+        color="primary"
+      >
+        <mat-label>Tipo Aprobacion</mat-label>
+        <mat-select [(value)]="tipoAprobacionAdd">
+          <mat-option *ngFor="let t of tipos.tiposAprobaciones" [value]="t">
+            {{ t.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        mat-fab
+        class="aprobacion custom-size-btn"
+        color="primary"
+        type="button"
+        (click)="addAprobacion()"
+        matTooltip="Agregar aprobación"
+      >
+        <mat-icon class="add-icon">add</mat-icon>
+      </button>
+    </div>
+  </row-container>
+</ng-container>
+<table mat-table class="wd-100" [dataSource]="listas.listaAprobadores">
+  <ng-container matColumnDef="nombreTrabajador">
+    <th mat-header-cell *matHeaderCellDef>Trabajador</th>
+    <td mat-cell *matCellDef="let e">{{ e.nombreUsuario }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipoAprobacion">
+    <th mat-header-cell *matHeaderCellDef>Tipo Aprobación</th>
+    <td mat-cell *matCellDef="let e">{{ e.nombreTipoAprobacion }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaAtencion">
+    <th mat-header-cell *matHeaderCellDef>Fecha Aprobacion</th>
+    <td mat-cell *matCellDef="let e">{{ e.fechaAtencion }}</td>
+  </ng-container>
+  <ng-container matColumnDef="descripcionAtencion">
+    <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+    <td mat-cell *matCellDef="let e">{{ e.descripcionAtencion }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="accion">
+    <th mat-header-cell *matHeaderCellDef>{{ tituloAccion }}</th>
+    <td mat-cell *matCellDef="let e; let i = index">
+      <div *ngIf="doc.tipoDerivacion == 'R'; else verEstado">
+        <button
+          mat-icon-button
+          matTooltip="Subir"
+          type="button"
+          color="primary"
+          (click)="up(i)"
+        >
+          <mat-icon>arrow_drop_up</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Bajar"
+          type="button"
+          (click)="down(i)"
+        >
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Eliminar"
+          type="button"
+          (click)="eliminar(i)"
+        >
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+      <ng-template #verEstado>
+        <mat-icon
+          [style.color]="getColors(e.estado)"
+          [matTooltip]="getToolstip(e.estado)"
+        >
+          {{ getIcons(e.estado) }}</mat-icon
+        >
+      </ng-template>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+</table>
+
+<ng-container *ngIf="listas.listaDerivados.length">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="8px"
+    class="mg-bot-8"
+  >
+    <span class="fs-16 fw-500">Derivados para su Gestion</span>
+  </div>
+  <table mat-table class="wd-100" [dataSource]="listas.listaDerivados">
+    <ng-container matColumnDef="nombreTrabajador">
+      <th mat-header-cell *matHeaderCellDef>Trabajador</th>
+      <td mat-cell *matCellDef="let e">{{ e.nombreUsuario }}</td>
+    </ng-container>
+    <ng-container matColumnDef="tipoAprobacion">
+      <th mat-header-cell *matHeaderCellDef>Tipo Aprobación</th>
+      <td mat-cell *matCellDef="let e">{{ e.nombreTipoAprobacion }}</td>
+    </ng-container>
+    <ng-container matColumnDef="fechaAtencion">
+      <th mat-header-cell *matHeaderCellDef>Fecha Aprobacion</th>
+      <td mat-cell *matCellDef="let e">{{ e.fechaAtencion }}</td>
+    </ng-container>
+    <ng-container matColumnDef="descripcionAtencion">
+      <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+      <td mat-cell *matCellDef="let e">{{ e.descripcionAtencion }}</td>
+    </ng-container>
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef>{{ tituloAccion }}</th>
+      <td mat-cell *matCellDef="let e; let i = index">
+        <mat-icon
+          [style.color]="getColors(e.estado)"
+          [matTooltip]="getToolstip(e.estado)"
+        >
+          {{ getIcons(e.estado) }}</mat-icon
+        >
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+</ng-container>

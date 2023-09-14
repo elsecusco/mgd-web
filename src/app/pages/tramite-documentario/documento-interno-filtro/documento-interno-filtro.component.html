@@ -1,0 +1,84 @@
+<mat-card fxLayout="row"
+          fxLayoutAlign="space-between"
+          fxLayoutGap="16px"
+          fxLayout.xs="column"
+          fxLayoutAlign.xs="start">
+ 
+     <!--Filtro de Usuario de Bandeja-->
+     <mat-form-field fxFlex="22"
+                        fxFlex.xs="auto"
+                        class="mg-bot-8"
+                        appearance="outline"
+                        color="primary">
+            <mat-label>Buzones de Usuario</mat-label>
+            <mat-select placeholder="Buzon"
+                        [(value)]="buzonActual"
+                        (selectionChange)="changeBuzon()">
+                <mat-option *ngFor="let t of listaBuzones"
+                            [value]="t">
+                    {{t.nombreUsuarioBuzon}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+  <!--Bandejas del usuario-->
+  <mat-form-field fxFlex="22"
+                  appearance="outline"
+                  color="primary">
+    <mat-label>Bandeja</mat-label>
+    <mat-select placeholder="Bandeja"
+                [(value)]="bandejaf.bandeja"
+                (selectionChange)="actualizar()">
+      <!-- <mat-option value="1"> Mesa de Partes</mat-option> -->
+      <mat-option value="e"> Doc. Entrada V°B°</mat-option>
+      <mat-option value="a"> Doc. Aprobados ó Rechazados</mat-option>
+      <mat-option value="s"> Doc. Emitidos </mat-option>
+      <!-- <mat-option [value]="0"> Todas las bandejas del Usuario</mat-option> -->
+    </mat-select>
+  </mat-form-field>
+
+
+    <two-picker class="wd-100"
+                fxFlex
+                fxFlex="46"
+                fxFlex.xs="auto"
+                appearance="outline"
+                [fechaInicio]="bandejaf.fechaInicio"
+                [fechaFin]="bandejaf.fechaFin"
+                (changeFecha)="changeFecha($event)"></two-picker>
+
+                <!-- [disabled]="buzonActual.permiso<3" -->
+    <div class="butons-box">
+    <button mat-mini-fab
+            matTooltip="Actualizar"
+            (click)="actualizar()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button mat-mini-fab
+            matTooltip="Nuevo Documento"
+           (click)="documentoNuevoInterno()">
+      <mat-icon>description</mat-icon>
+    </button>
+  <!-- </div> -->
+    <!-- <button mat-mini-fab class="btnBandeja" -->
+     <!-- <button class="pulse-button"
+        *ngIf="externos"
+        matTooltip="Bandeja de externos"
+        (click)="openExternos()">{{externos}}
+    </button>-->
+    <button 
+        [ngClass]="{'pulse-inactive': externos === '0', 'pulse-button': true}"
+        *ngIf="externos"
+        matTooltip="Bandeja de externos"
+        (click)="openExternos()">
+        <span class="badge-btn">{{externos}}</span>
+    </button>
+    </div>
+</mat-card>
+
+
+<!-- Orden de Restriccion -->
+<!-- 0- sin permiso 
+     1- lectura
+     2- derivar y atender
+     3- derivar y atender y crear nuevo documento -->

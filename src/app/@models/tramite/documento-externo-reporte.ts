@@ -2,7 +2,7 @@ export class DocumentoExternoReporte {
   fechaInicio: Date;
   fechaFin: Date;
   conRemitente: boolean;
-  codigoRemitente: string;
+  codigoRemitente: number;
   conNroExpediente: boolean;
   numeroExpediente: string;
   conFechaVencimiento: number;
@@ -12,7 +12,7 @@ export class DocumentoExternoReporte {
   statusDoc: number;
   constructor() {
     this.conRemitente = false;
-    this.codigoRemitente = '';
+    this.codigoRemitente = 0;
     this.conNroExpediente = false;
     this.numeroExpediente = '';
     this.conFechaVencimiento = -1;

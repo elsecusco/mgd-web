@@ -9,6 +9,7 @@ import {
 import { MenuItem } from '../menu-item.model';
 import { MenuService } from '../menu.service';
 import { Tree } from '../../../@core/tree';
+import { Injectable } from '@angular/core';
 
 export class NextCurrentlyOpened {
   static readonly type = '[Menu] Next Currently Opened';
@@ -44,6 +45,7 @@ export interface MenuStateModel {
     iconMode: false
   }
 })
+@Injectable()
 export class MenuState implements NgxsOnInit {
   constructor(private menuService: MenuService) {}
 

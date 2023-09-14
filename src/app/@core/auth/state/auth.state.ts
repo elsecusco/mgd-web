@@ -12,6 +12,8 @@ import { AuthService } from '../auth.service';
 import { map, catchError } from 'rxjs/operators';
 import { Usuario, AuthResponse } from '../usuario';
 
+import { Injectable } from '@angular/core';
+
 export interface AuthStateModel {
   loggedIn: boolean;
   pending: boolean;
@@ -28,6 +30,7 @@ export interface AuthStateModel {
     errorMessage: null
   }
 })
+@Injectable()
 export class AuthState {
   @Selector()
   static loggedIn(state: AuthStateModel) {

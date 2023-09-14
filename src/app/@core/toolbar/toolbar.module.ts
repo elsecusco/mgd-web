@@ -9,6 +9,7 @@ import { SidenavToggleComponent } from './components/sidenav-toggle/sidenav-togg
 import { FullscreenToggleComponent } from './components/fullscreen-toggle/fullscreen-toggle.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
@@ -24,6 +25,7 @@ import { ThemePickerModule } from '../../@core/theme-picker/theme-picker.module'
 const MATERIAL_MODULES = [
   MatIconModule,
   MatInputModule,
+  MatFormFieldModule,
   MatMenuModule,
   MatListModule,
   MatDividerModule,
