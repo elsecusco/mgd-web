@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from '@angular/common/http';
 
 import { Store } from '@ngxs/store';
@@ -23,15 +23,21 @@ export class ResponseHttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('token');
+    if (token) {
+      request = request.clone({
+        headers: request.headers.set('Authorization', 'Bearer ' + token),
+      });
+    }
     return next.handle(request).pipe(
-      tap(
-        (event: HttpEvent<any>) => {
+      tap({
+        next: (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) this.eventAction(event);
         },
-        error => {
+        error: (error) => {
           if (error instanceof HttpErrorResponse) this.errorAction(error);
-        }
-      )
+        },
+      })
     );
   }
 

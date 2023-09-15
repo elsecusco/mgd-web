@@ -15,18 +15,22 @@ import { NgxfUploaderService, UploadEvent } from 'ngxf-uploader';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient,
-              private httpService: HttpService,
-              private Upload: NgxfUploaderService) {}
+  constructor(
+    private http: HttpClient,
+    private httpService: HttpService,
+    private Upload: NgxfUploaderService
+  ) {}
 
   login(auth: Authenticate): Observable<AuthResponse> {
     return this.auth('api/login', auth);
   }
   private auth(url: string, user: Authenticate): Observable<AuthResponse> {
     const URL = setUrl(url);
-    return this.http
-      .post<AuthResponse>(URL, user)
-      .pipe(catchError(e => throwError(e)));
+    return this.http.post<AuthResponse>(URL, user).pipe(
+      catchError((e) => {
+        return throwError(() => e);
+      })
+    );
   }
 
   isAuthenticated(data: AuthResponse): IsAuthenticated {
@@ -42,7 +46,7 @@ export class AuthService {
       } catch (error) {
         isExpired = true;
       }
-      if (isExpired) localStorage.removeItem('token');
+      // if (isExpired) localStorage.removeItem('token');
     }
     return { isAuth: !isExpired, message: data.mensaje };
   }
@@ -56,49 +60,49 @@ export class AuthService {
     }
     return u;
   }
-  getTipos():Observable<TiposMesa>{
+  getTipos(): Observable<TiposMesa> {
     return this.httpService.get({
       uri: `api/TramiteTiposMesaVirtual`,
       open: false,
-      close: false
+      close: false,
     });
   }
-  getRemitente(idTipoDoc:number,numeroDoc:number):Observable<Persona[]>{
+  getRemitente(idTipoDoc: number, numeroDoc: number): Observable<Persona[]> {
     return this.httpService.get({
       uri: `api/BusquedaRemitenteDocumento/${idTipoDoc}/${numeroDoc}`,
       open: false,
-      close: false
+      close: false,
     });
   }
-  pedirCodigo(persona:Persona):Observable<any>{
+  pedirCodigo(persona: Persona): Observable<any> {
     return this.httpService.post({
       uri: `api/RemitenteGuardarPedirCodigo`,
       body: persona,
       open: false,
-      close: false
+      close: false,
     });
   }
-  verificarCodigo(body:any):Observable<Resultado>{
+  verificarCodigo(body: any): Observable<Resultado> {
     return this.httpService.post({
       uri: `api/ValidarCodigoRemitente`,
       body,
       open: false,
-      close: false
+      close: false,
     });
   }
-  subirArchivos(form:any, files: File[]): Observable<UploadEvent> {
+  subirArchivos(form: any, files: File[]): Observable<UploadEvent> {
     return this.Upload.upload({
       url: setUrl('api/GuardarDocumentoMV'),
       fields: form,
       files: files,
-      process: true
+      process: true,
     });
   }
 }
-export interface TiposMesa{
-  tiposDocumento: Pair[],
-  tiposProceso:Pair[],
-  tiposDocIdentidad:Pair[]
+export interface TiposMesa {
+  tiposDocumento: Pair[];
+  tiposProceso: Pair[];
+  tiposDocIdentidad: Pair[];
 }
 
 export interface IsAuthenticated {
