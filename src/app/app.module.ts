@@ -8,6 +8,7 @@ import { CoreModule } from '../app/@core/core.module';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     AppRoutingModule,
     NgxExtendedPdfViewerModule, // for pdf
     CoreModule,
+
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

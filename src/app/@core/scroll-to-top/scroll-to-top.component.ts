@@ -35,10 +35,10 @@ export class ScrollToTopComponent implements AfterViewInit, OnDestroy {
   state$ = this._stateSubject.asObservable();
 
   pageScrollInstance!: PageScrollInstance;
+  private subscription!: Subscription
 
   constructor(
     private pageScrollService: PageScrollService,
-    private subscription: Subscription,
     @Inject(DOCUMENT) private document: any,
     @Inject(WINDOW) private window: Window
   ) {}

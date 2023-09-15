@@ -11,8 +11,8 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip-option>
     <input
-      #destinatarioInput
       matInput
+      #destinatarioInput
       [formControl]="destinatarioCtrl"
       [matAutocomplete]="auto"
       [readonly]="readonlyChips"

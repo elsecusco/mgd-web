@@ -28,7 +28,7 @@
           formControlName="descripcionArchivo"
           rows="2">
         </textarea>
-      </mat-form-field> 
+      </mat-form-field>
       <mat-form-field
         fxFlex="40"
         appearance="outline"
@@ -37,7 +37,7 @@
         <mat-label>Razón Firma</mat-label>
         <mat-select formControlName="razon">
           <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
-                      [value]="t.nombre">                    
+                      [value]="t.nombre">
             {{t.nombre}}
           </mat-option>
         </mat-select>
@@ -66,7 +66,7 @@
         [disabled]="form.invalid">
         Firmar Archivo
       </button>
-      <button 
+      <button
         mat-button
         color="warn"
         [mat-dialog-close]="" cdkFocusInitial>
@@ -79,7 +79,7 @@
               [render-text]="true"
               style="display: block;">
   </pdf-viewer> -->
-  
+
 <ngx-extended-pdf-viewer
   *ngIf="loadedPDF"
   [src]="pdf"

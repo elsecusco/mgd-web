@@ -229,8 +229,10 @@ const COMPONENTS = [
 const PROVIDERS = [TramiteService];
 @NgModule({
   declarations: [...COMPONENTS],
-  providers: [...PROVIDERS],
   imports: [...MODULES],
+  bootstrap:[ReporteGraficoComponent],
+  providers: [...PROVIDERS],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // entryComponents: [...ENTRIES] /// --- deprecated
 })
 export class TramiteDocumentarioModule {}

@@ -10,6 +10,18 @@ import { Store } from '@ngxs/store';
 import { Usuario } from '../../@core/auth/usuario';
 import { Authenticated, Logout } from './state/auth.action';
 
+
+// canActivate = (route: ActivatedRouteSnapshot) => {
+//   const authService = inject(AuthService);
+//   const auth = authService.checkLogin();
+//   if (auth.isAuth) {
+//     this.store.dispatch(new Authenticated(auth.usuario));
+//     return true;
+//   }
+
+//   this.store.dispatch(new Logout());
+//   return false;
+// };
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private store: Store) {}
@@ -30,12 +42,12 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(): { isAuth: boolean; usuario: Usuario } {
-    const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem('token')!;
 
     const helper = new JwtHelperService();
     const isExpired = helper.isTokenExpired(token);
 
-    if (isExpired) return { isAuth: false, usuario: null as any };
+    if (isExpired) return { isAuth: false, usuario: {} as Usuario };
 
     const usuario = helper.decodeToken(token).usuario;
     return { isAuth: true, usuario };

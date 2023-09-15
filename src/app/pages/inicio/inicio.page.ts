@@ -24,6 +24,7 @@ export class InicioPage implements OnInit {
     this.service.getItems(701).subscribe(items => {
       this.items = items.children;
       this.menu.publishMenuChange([items]);
+      console.log("menu--->",this.menu.items![0].children)
     });
   }
 }

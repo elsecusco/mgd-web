@@ -25,13 +25,13 @@ export class DashboardLayout implements OnInit, OnDestroy {
   isMobile = false;
   crumbs$: any; //--add :any
   // depth$;
+  private subscription!: Subscription
+  private mediaSubscription!: Subscription
 
   constructor(
     private router: Router,
     private store: Store,
     private mediaObserver: MediaObserver,
-    private mediaSubscription: Subscription,
-    private subscribtion: Subscription
   ) {}
 
   ngOnInit() {
@@ -60,7 +60,7 @@ export class DashboardLayout implements OnInit, OnDestroy {
         this.sidenavOpen = !isMobile;
       });
 
-    this.subscribtion = this.router.events.pipe().subscribe((event) => {
+    this.subscription = this.router.events.pipe().subscribe((event) => {
       if (event instanceof NavigationEnd && this.isMobile) {
         this.sidenav.close();
       }
@@ -75,7 +75,7 @@ export class DashboardLayout implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.mediaSubscription.unsubscribe();
-    this.subscribtion.unsubscribe();
+    this.subscription.unsubscribe();
   }
   getRouteDepth(outlet: any) {
     return outlet.activatedRouteData['depth'] || 1;

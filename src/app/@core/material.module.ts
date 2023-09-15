@@ -40,10 +40,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 const MODULES = [
+  NgScrollbarModule,
   MatFormFieldModule,
   MatInputModule,
   FlexLayoutModule,
-  NgScrollbarModule,
   OverlayModule,
   CdkAccordionModule,
   MatToolbarModule,
@@ -71,7 +71,7 @@ const MODULES = [
   MatCheckboxModule,
   MatAutocompleteModule,
   MatChipsModule,
-  MatButtonToggleModule,
+  MatButtonToggleModule
 ];
 
 @NgModule({

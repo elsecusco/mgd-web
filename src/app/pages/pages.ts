@@ -43,6 +43,7 @@ export class Pages {
       .subscribe((event: NavigationEnd) => {
         const data = this.store.selectSnapshot<any>(RouterState.state);
         this.pageTitle.setTitle(data.breadcrumbs);
+        console.log("data--> ",data)
       });
   }
 }

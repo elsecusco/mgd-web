@@ -29,13 +29,13 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private _destroyed$ = new Subject<void>();
 
   items: MenuItem[] | undefined;
+  private subscription!: Subscription
 
   constructor(
     private router: Router,
     private menuService: MenuService,
     private snackBar: MatSnackBar,
     private cd: ChangeDetectorRef,
-    private subscription: Subscription,
     @Inject(WINDOW) private window: Window
   ) {}
 

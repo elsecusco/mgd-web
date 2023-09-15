@@ -165,7 +165,7 @@ import { InicioPage, InicioComponent } from './inicio';
 import { MenuItemService } from './menu-item.service';
 import { SharedModule } from '../@shared/shared.module';
 
-const COMPONENTS = [Pages, InicioPage, InicioComponent];
+
 
 const MODULES = [
   CommonModule,
@@ -174,10 +174,11 @@ const MODULES = [
   SharedModule,
   // NavigatorModule.forRoot([])
 ];
+const COMPONENTS = [Pages, InicioPage, InicioComponent];
 const PROVIDERS = [MenuItemService];
 @NgModule({
-  declarations: [...COMPONENTS],
   imports: [...MODULES],
-  providers: [...PROVIDERS]
+  declarations: [...COMPONENTS],
+  providers: [...PROVIDERS],
 })
 export class PagesModule {}
