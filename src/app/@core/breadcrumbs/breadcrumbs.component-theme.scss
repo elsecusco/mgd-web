@@ -1,8 +1,11 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @use "sass:map";
 
+$swift-ease-out-duration: 400ms !default;
+$swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
+
 @mixin ngx-breadcrumbs-component-theme($theme) {
-  $config: mat.define-typography-level();
+  $config: mat.define-typography-config();
 
   $spacing: 24px;
   // $theme-foreground-map: map-get($theme, foreground);
@@ -13,11 +16,10 @@
   $theme-secondary-text: mat.get-color-from-palette($primary, default-contrast);
   $theme-text: mat.get-color-from-palette($primary, default-contrast);
 
-
-
   ngx-breadcrumbs {
     .title {
-      @include mat.define-typography-level($config, title);
+      // @include mat.define-typography-level($font-size: 20px, $font-weight: 400, $font-family: Rubik);
+      // @include mat.typography-level($config, title);
       font-weight: 400;
     }
 
@@ -28,7 +30,7 @@
       transition: color $swift-ease-out-duration $swift-ease-out-timing-function;
       text-transform: capitalize;
 
-      @include mat.define-typography-level($config, caption);
+      // @include mat.typography-level($config, caption);
 
       &:hover {
         color: $theme-text;
@@ -44,8 +46,8 @@
       font-size: 18px;
       height: 18px;
       width: 18px;
-      margin-left: $spacing/4;
-      margin-right: $spacing/4;
+      margin-left: calc($spacing/4);
+      margin-right: calc($spacing/4);
     }
 
     .crumb.current,

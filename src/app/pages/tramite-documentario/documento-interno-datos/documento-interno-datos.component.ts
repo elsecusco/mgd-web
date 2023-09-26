@@ -161,7 +161,7 @@ export class DocumentoInternoDatosComponent implements OnInit {
       });
   }
 
-  changeChk(nameChk:any, nameControl:any) {
+  changeChk(nameChk: any, nameControl: any) {
     this.form.get(nameChk)!.valueChanges.subscribe((checked) => {
       if (checked) {
         this.form.get(nameControl)!.setValidators(Validators.required);
@@ -183,9 +183,8 @@ export class DocumentoInternoDatosComponent implements OnInit {
   saveDoc() {
     //console.log(JSON.stringify(this.form.value))
     //this.form.patchValue({ loginBuzonCrea: this.buzonActual.loginUsuarioBuzon });
-    this.saving = true;
-    this.api.guardarDocumentoInterno(this.form.value).subscribe(
-      (res) => {
+    const observer = {
+      next: (res: any) => {
         notifyOk(res.mensaje);
         //console.log(res.idItem);
         //this.form.disable();
@@ -210,9 +209,14 @@ export class DocumentoInternoDatosComponent implements OnInit {
         if (this.doc.codigoTipoDocumento == 48)
           this.valorizacion.save(parseInt(codigos[1]));
       },
-      (_err) => {
+      error: (_err: any) => {
         this.saving = false;
-      }
-    );
+      },
+      complete: () => {
+        console.log('Completed');
+      },
+    };
+    this.saving = true;
+    this.api.guardarDocumentoInterno(this.form.value).subscribe(observer);
   }
 }

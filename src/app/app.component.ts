@@ -5,12 +5,12 @@ import { ThemeService } from './@core/theme-picker/theme.service';
 import {
   ThemeStorage,
   SiteTheme,
-  Themes
+  Themes,
 } from './@core/theme-picker/theme-storage.service';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>'
+  template: '<router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
   constructor(
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.installDefaultTheme();
-    this.themeService.recibir().subscribe(theme => this.setTheme(theme));
+    this.themeService.recibir().subscribe((theme) => this.setTheme(theme));
   }
 
   private installDefaultTheme() {
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     classList.add(`${theme.name}-theme`);
     this.overlay.getContainerElement().classList.remove(...toRemove);
     this.overlay.getContainerElement().classList.add(`${theme.name}-theme`);
+    console.log('theme', theme);
 
     this.themeStorage.storeTheme(theme);
   }

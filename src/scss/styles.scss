@@ -1,45 +1,41 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 @use "sass:map";
 
 @include mat.core();
 
-@import 'styles-app-loading';
-@import 'styles-reset';
-@import 'colors';
-
-
+@import "styles-app-loading";
+@import "styles-reset";
+@import "colors";
 
 // temas
-@import './themes/default-theme';
-@import './themes/light-theme';
-@import './themes/black-theme';
-@import './themes/blue-theme';
-
+@import "./themes/default-theme";
+@import "./themes/light-theme";
+@import "./themes/black-theme";
+@import "./themes/blue-theme";
 
 //estilo elementos
-@import './themes/elements/button-theme';
-@import './themes/elements/button-toggle-theme';
-@import './themes/elements/form-field-theme';
-@import './themes/elements/dialog-theme';
-@import './themes/elements/card-theme';
-@import './themes/elements/table-theme';
+@import "./themes/elements/button-theme";
+@import "./themes/elements/button-toggle-theme";
+@import "./themes/elements/form-field-theme";
+@import "./themes/elements/dialog-theme";
+@import "./themes/elements/card-theme";
+@import "./themes/elements/table-theme";
 
 //mixins components
-@import 'styles-reset.scss-theme';
-@import '../app/@core/loading/loading.component-theme';
+@import "styles-reset.scss-theme";
+@import "../app/@core/loading/loading.component-theme";
 
-@import '../app/@core/toolbar/toolbar.component.scss-theme.scss';
-@import '../app/@core/side-nav/sidenav.component.scss-theme.scss';
-@import '../app/@core/breadcrumbs/breadcrumbs.component-theme.scss';
+@import "../app/@core/toolbar/toolbar.component.scss-theme.scss";
+@import "../app/@core/side-nav/sidenav.component.scss-theme.scss";
+@import "../app/@core/breadcrumbs/breadcrumbs.component-theme.scss";
 
 // @import '../app/@shared/nav-bar/nav-bar-theme';
-@import '@danielmoncada/angular-datetime-picker/assets/style/picker.min.css';
+@import "@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
 // @import "ng-pick-datetime/assets/style/picker.min.css";
 
-
 //clases tema
-@import 'class-theme';
+@import "class-theme";
 
 @mixin snackbar-cargando-app-theme($theme) {
   $primary: map.get($theme, primary);
@@ -61,46 +57,47 @@
   @include ngx-toolbar-component-theme($theme);
   @include ngx-sidenav-component-theme($theme);
   @include ngx-breadcrumbs-component-theme($theme);
-  // @include menu-item-theme($theme);
+  // // @include menu-item-theme($theme);
   @include loading-component-theme($theme);
   @include snackbar-cargando-app-theme($theme);
 
   //estilo elements app
-  @include mat.button-theme($theme);
-  @include mat.button-toggle-theme($theme);
-  @include mat.form-field-theme($theme);
-  @include mat.dialog-theme($theme);
-  @include mat.card-theme($theme);
-  @include mat.table-theme($theme);
+  @include button-theme($theme);
+  @include button-toggle-theme($theme);
+  @include form-field-theme($theme);
+  @include dialog-theme($theme);
+  @include card-theme($theme);
+  @include table-theme($theme);
 
   //clases
-  @include mat.class-theme($theme);
+  @include class-theme($theme);
 }
 
 .default-theme {
   @include mat.all-component-themes($app-default-theme);
   // @include angular-material-theme($app-default-theme);
-  // @include custom-components-theme($app-default-theme);
+  @include custom-components-theme($app-default-theme);
 }
 
-// .light-theme {
-//   @include mat.all-component-themes($app-light-theme);
-//   // @include angular-material-theme($app-light-theme);
-//   // @include custom-components-theme($app-light-theme);
-// }
+.light-theme {
 
-// .black-theme {
-//   @include mat.all-component-themes($app-black-theme);
-//   // @include angular-material-theme($app-black-theme);
-//   // @include custom-components-theme($app-black-theme);
-// }
+  @include mat.all-component-colors($app-light-theme);
+  // @include angular-material-theme($app-light-theme);
+  @include custom-components-theme($app-light-theme);
+}
 
-// .blue-theme {
-//   @include mat.all-component-themes($app-blue-theme);
-//   // @include angular-material-theme($app-blue-theme);
-//   // @include custom-components-theme($app-blue-theme);
-// }
+.black-theme {
+  @include mat.all-component-colors($app-black-theme);
+  // @include angular-material-theme($app-black-theme);
+  @include custom-components-theme($app-black-theme);
+}
 
-.custom-size-btn .mat-button-wrapper{
+.blue-theme {
+  @include mat.all-component-colors($app-blue-theme);
+  // @include angular-material-theme($app-blue-theme);
+  @include custom-components-theme($app-blue-theme);
+}
+
+.custom-size-btn .mat-button-wrapper {
   padding: 0 !important;
 }
