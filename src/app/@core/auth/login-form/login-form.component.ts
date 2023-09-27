@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Authenticate } from '../usuario';
 
 @Component({
@@ -16,6 +16,16 @@ import { Authenticate } from '../usuario';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
+  signin: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.email, Validators.required ]),
+    password: new FormControl('', [Validators.required, Validators.min(3) ])
+  });
+
+  get emailInput() { return this.signin.get('email'); }
+  get passwordInput() { return this.signin.get('password'); }
+
+
+
   _pending = false;
 
   @Input()

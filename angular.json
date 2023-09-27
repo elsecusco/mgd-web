@@ -48,12 +48,18 @@
               }
             ],
             "styles": [
-              "src/scss/styles.scss",
-              "node_modules/sweetalert2/src/sweetalert2.scss",
-              "node_modules/material-design-icons-iconfont/dist/material-design-icons.css"
+              {
+                "input": "src/scss/styles.scss"
+              },
+              {
+                "input": "node_modules/sweetalert2/src/sweetalert2.scss"
+              },
+              {
+                "input": "node_modules/material-design-icons-iconfont/dist/material-design-icons.css"
+              }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules"]
+              "includePaths": ["node_modules", "src", "src/scss/styles"]
             },
             "scripts": ["node_modules/jquery/dist/jquery.min.js"]
           },

@@ -13,6 +13,7 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 })
 @Injectable()
 export class LoginPage implements OnInit {
+
   titulo: string = '';
   subtitulo: string = '';
   footer: string = '';

@@ -1,18 +1,18 @@
-<mat-toolbar color="primary"
-             class="mat-elevation-z10">
-             <div class=titulo>
-               <h1>{{ titulo }}</h1>
-               <h2>{{ subtitulo }}</h2>
-             </div>
+<mat-toolbar color="primary" class="mat-elevation-z10">
+  <div class="titulo">
+    <h1>{{ titulo }}</h1>
+    <h2>{{ subtitulo }}</h2>
+  </div>
   <!-- <p class="fw-400">{{ titulo }}</p> -->
- </mat-toolbar>
+</mat-toolbar>
 
-<login-form (submitted)="onSubmit($event)"
-            [pending]="!!(pending$ | async)"
-            [errorMessage]="error$ | async">
+<login-form
+  (submitted)="onSubmit($event)"
+  [pending]="!!(pending$ | async)"
+  [errorMessage]="error$ | async"
+>
 </login-form>
 
-<mat-toolbar color="primary"
-             class="footer">
+<mat-toolbar color="primary" class="footer">
   <p class="fs-12 fw-300">{{ footer }}</p>
 </mat-toolbar>
