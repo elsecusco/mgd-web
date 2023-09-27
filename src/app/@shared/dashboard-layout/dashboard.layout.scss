@@ -1,5 +1,4 @@
-@import '../../../scss/constants';
-
+@import "../../../scss/constants";
 
 .dashboard-container,
 .route-container {
@@ -41,4 +40,14 @@
 .m-crumb {
   margin: 12px 24px 0 24px !important;
   padding: 10px;
+}
+
+::ng-deep {
+  ng-scrollbar {
+    // max-height: 400px !important;
+  }
+
+  .ng-scroll-content {
+    display: block !important;
+  }
 }

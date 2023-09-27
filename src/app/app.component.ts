@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
     classList.add(`${theme.name}-theme`);
     this.overlay.getContainerElement().classList.remove(...toRemove);
     this.overlay.getContainerElement().classList.add(`${theme.name}-theme`);
-    console.log('theme', theme);
 
     this.themeStorage.storeTheme(theme);
   }

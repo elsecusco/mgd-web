@@ -35,7 +35,7 @@ div {
   }
 
   .pulse-button {
-    
+
     background-image: url('../../../../assets/foco.png');
     background-repeat: no-repeat;
     background-size: contain;
@@ -62,7 +62,7 @@ div {
     -ms-animation: none;
     animation: none;
   }
-  
+
   @-webkit-keyframes pulse {
     to {
       box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
