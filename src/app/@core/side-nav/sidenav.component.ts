@@ -29,7 +29,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   private _destroyed$ = new Subject<void>();
 
   items: MenuItem[] | undefined;
-  private subscription!: Subscription
+  private subscription!: Subscription;
 
   constructor(
     private router: Router,
@@ -42,10 +42,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.menuService.items$
       .pipe()
-      .subscribe((items: MenuItem[] | undefined) => {
+      .subscribe((items: any ) => {
         this.items = items;
       });
-
+    console.log('items--->', this.items);
     // this.router.events.pipe(untilDestroy(this))
     //   .subscribe(event => {
     //   if (event instanceof NavigationEnd) {

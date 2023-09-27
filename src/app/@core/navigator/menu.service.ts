@@ -26,8 +26,8 @@ export class MenuService {
 
   items$ = this._items.asObservable();
 
-  get items(): MenuItem[] | undefined { // --- add | undefined
-    return this._items.getValue();
+  get items(): MenuItem[]  { // --- add | undefined
+    return this._items.getValue() as any;
   }
 
   set items(items: MenuItem[]) {
