@@ -256,7 +256,7 @@ export class DocumentoAtencion implements OnInit {
         if (s.length > 0) this.detalleSielse = s[0];
         else this.detalleSielse = {} as Sielse;
         // console.log(JSON.stringify(this.detalleSielse))
-        if (this.detalleSielse) this.verSielse();
+        if (this.detalleSielse.codigoMGD != undefined) this.verSielse();
         else this.verSIELSEcombo = true;
       });
   }
