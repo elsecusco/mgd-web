@@ -22,6 +22,8 @@ import { BandejaState } from '../states/bandeja.state';
   styleUrls: ['./detalle-adjuntar.component.scss'],
 })
 export class DetalleAdjuntarComponent implements OnInit {
+  title!: any;
+
   form!: FormGroup;
   file!: File;
   progress = 0;
@@ -84,9 +86,11 @@ export class DetalleAdjuntarComponent implements OnInit {
   get titulo() {
     return this.form.get('titulo');
   }
+
   changeFile(file: File) {
     this.file = file;
     this.form.patchValue({ titulo: file.name, nombreArchivo: file.name });
+    this.title = this.form.get('titulo');
   }
 
   subirArchivo() {

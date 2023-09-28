@@ -21,9 +21,11 @@
       />
     </mat-form-field>
     <!-- cambio titulo.error.maxlenght -->
-    <div class="mensaje_documento" *ngIf="titulo!.errors!['maxlength']">
-      <mat-icon>report</mat-icon>
-      No es posible cargar el archivo, máximo 110 caracteres en el título
+    <div *ngIf="titulo?.value">
+      <div class="mensaje_documento" *ngIf="titulo?.errors">
+        <mat-icon>report</mat-icon>
+        No es posible cargar el archivo, máximo 110 caracteres en el título
+      </div>
     </div>
     <!-- Dentro del pop up -->
     <mat-radio-group formControlName="codigoTipoDocumentoTramiteAdjunto">
