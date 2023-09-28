@@ -52,7 +52,7 @@ import {
 } from '@danielmoncada/angular-datetime-picker';
 import { PopupPendientesComponent } from './popup-pendientes/popup-pendientes.component';
 import { RemitenteUpdateAddComponent } from './remitente-update-add/remitente-update-add.component';
-// import { PendienteState } from './states/pendientes.state';
+import { PendienteState } from './states/pendientes.state';
 
 // //----para reseteo de estados
 import { BandejaConfiguracionComponent } from './bandeja-configuracion/bandeja-configuracion.component';
@@ -95,11 +95,11 @@ import { ReporteVBprincipalComponent } from './reporte-vbprincipal/reporte-vbpri
 // import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewerDialogComponent } from './pdf-viewer-dialog/pdf-viewer-dialog.component';
-// import { MatSliderModule } from '@angular/material/slider';
-// import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-// import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
+import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
 
 import { TramiteDocumentarioRoutingModule } from './tramite-documentario-routing.module';
 
@@ -115,9 +115,9 @@ const MODULES = [
   NgxGraphModule,
   NgxChartsModule,
   // NgxChartsModule,
-  // MatSliderModule,
+  MatSliderModule,
   // TextareaAutosizeModule,
-  // MatSlideToggleModule,
+  MatSlideToggleModule,
   // Agreagado para el nuevo date y hours
   OwlDateTimeModule,
   OwlNativeDateTimeModule,
@@ -130,11 +130,11 @@ const MODULES = [
     TramiteTiposState,
     DocumentoState,
     DocumentoInternoState,
-    // PendienteState,
+    PendienteState,
     SeguimientoState,
     ReporteVbState,
   ]),
-  // NgxsResetPluginModule.forRoot()
+  NgxsResetPluginModule.forRoot()
 ];
 
 //const ENTRIES = [DocumentoAdjuntarDialog, DocumentoAtencionDialog];
@@ -230,7 +230,7 @@ const PROVIDERS = [TramiteService];
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [...MODULES],
-  bootstrap:[ReporteGraficoComponent],
+  bootstrap: [ReporteGraficoComponent],
   providers: [...PROVIDERS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // entryComponents: [...ENTRIES] /// --- deprecated

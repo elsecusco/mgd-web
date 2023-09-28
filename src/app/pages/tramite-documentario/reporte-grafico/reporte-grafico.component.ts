@@ -2,8 +2,7 @@ import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Flecha } from '../../../@models/tramite/grafo-reporte';
 import { PlacementTypes, StyleTypes } from '@swimlane/ngx-charts';
-// import { Node } from '@swimlane/ngx-graph';
-//import { ViewEncapsulation } from '@angular/compiler/src/core';
+import { Node } from '@swimlane/ngx-graph';
 
 @Component({
   selector: 'reporte-grafico',

@@ -30,7 +30,7 @@ export class SidenavItemComponent implements OnInit {
   constructor(private menuService: MenuService) {}
 
   ngOnInit() {
-    console.log("this.item-->",this.item)
+    // console.log("this.item-->",this.item)
   }
 
   toggleDropdown(): void {

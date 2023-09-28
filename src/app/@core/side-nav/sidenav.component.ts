@@ -45,7 +45,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
       .subscribe((items: any ) => {
         this.items = items;
       });
-    console.log('items--->', this.items);
+    // console.log('items--->', this.items);
     // this.router.events.pipe(untilDestroy(this))
     //   .subscribe(event => {
     //   if (event instanceof NavigationEnd) {

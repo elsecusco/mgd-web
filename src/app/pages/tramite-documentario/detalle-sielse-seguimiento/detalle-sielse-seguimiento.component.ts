@@ -13,7 +13,7 @@ export class DetalleSielseSeguimientoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   //@ViewChild(MatSort) sort: MatSort;
 
-  private _codigoSielse: string = '';
+  private _codigoSielse!: string;
   @Input()
   set codigoSielse(codigoSielse: string) {
     this._codigoSielse = codigoSielse;
@@ -28,8 +28,10 @@ export class DetalleSielseSeguimientoComponent implements OnInit {
   constructor(private api: TramiteService) {}
 
   ngOnInit() {
-    this.api.detalleSielseSeguimiento(this.codigoSielse).subscribe((res) => {
-      this.datos = res;
-    });
+    if (this.codigoSielse != undefined) {
+      this.api.detalleSielseSeguimiento(this.codigoSielse).subscribe((res) => {
+        this.datos = res;
+      });
+    }
   }
 }
