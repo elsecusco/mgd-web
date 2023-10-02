@@ -1,5 +1,4 @@
-@import '../../../../../scss/var';
-
+@import "../../../../../scss/var";
 
 :host {
   display: block;
@@ -19,13 +18,12 @@ mat-nav-list a.sidenav-anchor {
   .sidenav-item-name {
     margin-left: $margin-left__sidenav-list__item-name;
     font-size: 14px;
-
   }
   mat-icon {
-    width: $width-height__sidenav-list__icon;
-    height: $width-height__sidenav-list__icon;
+    width: $width-height__sidenav-list__icon + 10;
+    height: $width-height__sidenav-list__icon + 10;
     font-size: 30px; //18
-    line-height: 18px;
+    line-height: 20px;
     //color: red; // ubicar el icono a variar
   }
 }
@@ -33,9 +31,9 @@ mat-nav-list a.sidenav-anchor {
 .sidenav-list {
   transition: height 0.4s cubic-bezier(0.35, 0, 0.25, 1);
 
-  >ngx-sidenav-item {
+  > ngx-sidenav-item {
     &.open {
-      >.sidenav-anchor {
+      > .sidenav-anchor {
         .sidenav-item-dropdown-indicator {
           transform: rotate(180deg);
         }
@@ -44,6 +42,37 @@ mat-nav-list a.sidenav-anchor {
 
     .sidenav-item-dropdown-indicator {
       transition: transform 0.25s;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .estilos {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .icono {
+      padding: 5px;
+      display: flex;
+      align-items: center;
+    }
+    .iconodos {
+      padding: 0px;
+      display: flex;
+      align-items: center;
+    }
+    .nombre {
+      padding-left: 10px;
+    }
+    .nombredos {
+      padding-left: 15px;
+    }
+    span {
+      color: $color-primary;
+      white-space: initial;
     }
 
     .badge {

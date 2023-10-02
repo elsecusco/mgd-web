@@ -11,13 +11,18 @@
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
   >
-    <mat-icon>{{ item.icon }}</mat-icon>
-    &nbsp;&nbsp;
-    <span>{{ item.name }}</span>
-    <span fxFlex> <!-- fill space --></span>
-    <span *ngIf="item.badge" [style.background-color]="item.badge.color">{{
-      item.badge
-    }}</span>
+    <div class="estilos">
+      <div class="icono">
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </div>
+      <div class="nombre">
+        <span>{{ item.name }}</span>
+      </div>
+      <span fxFlex> <!-- fill space --></span>
+      <span *ngIf="item.badge" [style.background-color]="item.badge.color">{{
+        item.badge
+      }}</span>
+    </div>
   </a>
   <ng-template #elseBlock>
     <a
@@ -26,13 +31,16 @@
       matRipple
       (click)="toggleDropdown()"
     >
-      <mat-icon> {{ item.icon }} </mat-icon>
-      &nbsp;
-      <span>{{ item.name }}</span>
+      <div class="estilos">
+        <mat-icon> {{ item.icon }} </mat-icon>
+        <div class="nombredos">
+          <span>{{ item.name }}</span>
+        </div>
 
-      <!--<span class="badge fade-in-on-icon-sidenav" *ngIf="item.badge" -->
-      <!--[style.background-color]="item.badge.color" style="margin-right: 12px;">{{ item.badge.value }}</span>-->
-      <mat-icon>expand_more</mat-icon>
+        <!--<span class="badge fade-in-on-icon-sidenav" *ngIf="item.badge" -->
+        <!--[style.background-color]="item.badge.color" style="margin-right: 12px;">{{ item.badge.value }}</span>-->
+        <mat-icon>expand_more</mat-icon>
+      </div>
     </a>
   </ng-template>
 

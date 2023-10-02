@@ -144,7 +144,7 @@
     color="primary"
   >
     <mat-label>Recibido el</mat-label>
-    <input matInput readonly value="{{doc.fechaRecepcion}}" />
+    <input matInput readonly value="{{doc.fechaRecepcion | date:'dd/MM/yy HH:mm':'GMT':'en-GB'}}" />
   </mat-form-field>
 
   <mat-form-field

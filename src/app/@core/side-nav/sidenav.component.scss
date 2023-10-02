@@ -1,4 +1,10 @@
-@import '../../../scss/var';
+@import "../../../scss/var";
+
+ngx-sidenav mat-toolbar.mat-toolbar.sidenav-toolbar {
+  span {
+    color: white !important;
+  }
+}
 
 mat-toolbar.mat-toolbar.sidenav-toolbar {
   // background: $background-color__sidenav-toolbar;
@@ -58,9 +64,8 @@ mat-sidenav {
 }
 
 @media screen and (min-width: 960px) {
-
-  .sidenav+.cdk-visually-hidden+.mat-drawer-content,
-  .sidenav+.mat-drawer-content {
+  .sidenav + .cdk-visually-hidden + .mat-drawer-content,
+  .sidenav + .mat-drawer-content {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     transition-property: transform, max-width, margin-left, margin-right !important;
     margin-left: 0 !important;
@@ -70,51 +75,53 @@ mat-sidenav {
     box-shadow: inset 7px 0 9px -7px rgba(0, 0, 0, 0.4);
   }
 
-  .sidenav+.cdk-visually-hidden+.mat-drawer-content,
-  .sidenav+.mat-drawer-content {
+  .sidenav + .cdk-visually-hidden + .mat-drawer-content,
+  .sidenav + .mat-drawer-content {
     max-width: calc(100% - #{$width__sidenav});
     transform: translate3d($width__sidenav, 0, 0) !important;
   }
 
-  .sidenav.icon-sidenav.collapsed+.cdk-visually-hidden+.mat-drawer-content,
-  .sidenav.icon-sidenav.collapsed+.mat-drawer-content {
+  .sidenav.icon-sidenav.collapsed + .cdk-visually-hidden + .mat-drawer-content,
+  .sidenav.icon-sidenav.collapsed + .mat-drawer-content {
     max-width: calc(100% - #{$max-width__icon-sidenav});
     transform: translate3d($max-width__icon-sidenav, 0, 0) !important;
   }
 
-  .sidenav.icon-sidenav+.cdk-visually-hidden+.mat-drawer-content,
-  .sidenav.icon-sidenav+.mat-drawer-content {
+  .sidenav.icon-sidenav + .cdk-visually-hidden + .mat-drawer-content,
+  .sidenav.icon-sidenav + .mat-drawer-content {
     max-width: calc(100% - #{$max-width__icon-sidenav});
   }
 
   .sidenav {
     &.collapsed {
-
       //max-width: $max-width__icon-sidenav; // Padding width + icon width
       //min-width: $max-width__icon-sidenav;
       .fade-in-on-icon-sidenav {
         //noinspection CssInvalidPropertyValue
-        animation: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadeout;
+        animation: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1
+          fadeout;
       }
     }
 
     &:not(.collapsed) {
       .fade-in-on-icon-sidenav {
         //noinspection CssInvalidPropertyValue
-        animation: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1 fadein;
+        animation: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1
+          fadein;
       }
     }
   }
 }
-//ngx-sidenav-item {  
+//ngx-sidenav-item {
 //  background-color: #97c3d5 !important;
 //}
-// Da color y sombra a los items del menu 
-mat-nav-list.sidenav-list-nested ngx-sidenav-item{
+// Da color y sombra a los items del menu
+mat-nav-list.sidenav-list-nested ngx-sidenav-item {
   background-color: #75abc4 !important;
-  color: white; text-shadow: black 0.1em 0.1em 0.2em
+  color: white;
+  text-shadow: black 0.1em 0.1em 0.2em;
   //background: mat-color($primary, 500); y borde -webkit-text-stroke: 2px white;
 }
-.sidenav-anchor sidenav-item-name{
-  color:black !important; 
+.sidenav-anchor sidenav-item-name {
+  color: black !important;
 }
