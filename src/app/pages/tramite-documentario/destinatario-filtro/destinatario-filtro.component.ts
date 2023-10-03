@@ -183,6 +183,7 @@ export class DestinatarioFiltroComponent implements OnInit {
       (d) =>
         d.nombreUsuario.toUpperCase() == destAux.nombreUsuario.toUpperCase()
     );
+
     if (dest === null || dest === undefined) {
       this.destinatarios.push(<Destinatario>event.option.value);
       this.destinatarioInput.nativeElement.value = '';

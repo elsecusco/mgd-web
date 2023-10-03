@@ -4,10 +4,13 @@
     <mat-chip-option
       *ngFor="let destinatario of destinatarios"
       [selectable]="selectable"
+      selected
       [removable]="removable"
       (removed)="remove(destinatario)"
     >
-      {{ destinatario.nombreUsuario }}
+      <p class="nombre">
+        {{ destinatario.nombreUsuario }}
+      </p>
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip-option>
     <input
