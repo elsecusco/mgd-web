@@ -3,19 +3,21 @@
   max-width: 800px;
 }
 
-.destinatario-filtro{
+.destinatario-filtro {
   // min-width: 120px;
- width: 550px;
+  width: 550px;
 }
-.espacio{
+.espacio {
   padding-left: 23px;
 }
 
-
+.bloque {
+  padding: 15px;
+}
 mat-toolbar {
   display: flex;
   flex-direction: row;
-  
+
   height: 48px;
   padding-left: 0;
 

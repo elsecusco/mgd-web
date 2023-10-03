@@ -20,16 +20,26 @@
     <div class="content">
       <mat-nav-list>
         <mat-list-item>
-          <a matLine>Perfil</a>
-          <button mat-icon-button>
-            <mat-icon>account_circle</mat-icon>
-          </button>
+          <div class="mat-list">
+            <div class="nombre-menu">
+              <a matLine>Perfil</a>
+            </div>
+            <div>
+              <button mat-icon-button>
+                <mat-icon>account_circle</mat-icon>
+              </button>
+            </div>
+          </div>
         </mat-list-item>
         <mat-list-item>
-          <a matLine>Configuración</a>
-          <button mat-icon-button>
-            <mat-icon>settings</mat-icon>
-          </button>
+          <div class="mat-list">
+            <div class="nombre-menu">
+              <a matLine>Configuración</a>
+            </div>
+            <button mat-icon-button>
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
         </mat-list-item>
         <!-- <mat-list-item>
           <a matLine>Ayuda</a>
@@ -41,10 +51,14 @@
         <mat-divider></mat-divider>
 
         <mat-list-item (click)="logout()">
-          <a matLine>Cerrar Sesión</a>
-          <button mat-icon-button>
-            <mat-icon>exit_to_app</mat-icon>
-          </button>
+          <div class="mat-list">
+            <div class="nombre-menu">
+              <a matLine>Cerrar Sesión</a>
+            </div>
+            <button mat-icon-button>
+              <mat-icon>exit_to_app</mat-icon>
+            </button>
+          </div>
         </mat-list-item>
       </mat-nav-list>
     </div>

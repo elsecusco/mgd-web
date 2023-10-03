@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
     this.setTheme(newTheme);
   }
   private setTheme(theme: SiteTheme) {
+
+
     const body = document.getElementsByTagName('body')[0];
     const classList = body.classList;
     const toRemove = Array.from(classList).filter((item: string) =>

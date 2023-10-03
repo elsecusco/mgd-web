@@ -1,4 +1,5 @@
 @use "@angular/material" as mat;
+mat.$theme-ignore-duplication-warnings: true;
 
 @use "sass:map";
 
@@ -75,14 +76,11 @@
 
 .default-theme {
   @include mat.all-component-themes($app-default-theme);
-  // @include angular-material-theme($app-default-theme);
   @include custom-components-theme($app-default-theme);
 }
 
 .light-theme {
-
   @include mat.all-component-colors($app-light-theme);
-  // @include angular-material-theme($app-light-theme);
   @include custom-components-theme($app-light-theme);
 }
 
@@ -100,4 +98,9 @@
 
 .custom-size-btn .mat-button-wrapper {
   padding: 0 !important;
+}
+
+mat-card {
+  padding: 15px;
+  margin: 5px;
 }

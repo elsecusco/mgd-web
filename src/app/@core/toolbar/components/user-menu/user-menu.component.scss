@@ -1,7 +1,6 @@
-@use '@angular/material' as mat;
-@import '../../../../../scss/var';
-@import '../../../../../scss/constants';
-
+@use "@angular/material" as mat;
+@import "../../../../../scss/var";
+@import "../../../../../scss/constants";
 
 .user-container {
   height: 100%;
@@ -39,18 +38,23 @@
   }
 
   .dropdown {
-    background: white;
+    // display: flex;
+    // justify-content: space-between;
+
+    background: #2b5f83;
     position: absolute;
     top: $mat-toolbar-height-desktop;
     right: 0;
     width: 100%;
-    min-width: 160px;
+    min-width: 200px;
     z-index: -1;
     transform: translateY(-110%);
     visibility: hidden;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+      visibility 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-    @media (max-width: 599.98px) {//--- $mat-xsmall
+    @media (max-width: 599.98px) {
+      //--- $mat-xsmall
       top: $mat-toolbar-height-mobile-portrait;
     }
 
@@ -58,5 +62,18 @@
       transform: translateY(0);
       visibility: visible;
     }
+  }
+
+  .mat-list {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+  }
+  .nombre-menu {
+    a {
+      color: white !important;
+    }
+    display: flex;
+    align-items: center;
   }
 }
