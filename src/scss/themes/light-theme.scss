@@ -5,9 +5,9 @@ $app-light-warn: mat.define-palette(mat.$deep-orange-palette, 200);
 $app-light-theme: mat.define-light-theme(
   (
     color: (
-      primary: $app-default-primary,
-      accent: $app-default-accent,
-      warn: $app-default-warn,
+      primary: $app-light-primary,
+      accent: $app-light-accent,
+      warn: $app-light-warn,
     ),
   )
 );

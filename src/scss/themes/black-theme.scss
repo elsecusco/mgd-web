@@ -5,9 +5,9 @@ $app-black-warn: mat.define-palette(mat.$red-palette, 500);
 $app-black-theme: mat.define-dark-theme(
   (
     color: (
-      primary: $app-default-primary,
-      accent: $app-default-accent,
-      warn: $app-default-warn,
+      primary: $app-black-primary,
+      accent: $app-black-accent,
+      warn: $app-black-warn,
     ),
   )
 );
