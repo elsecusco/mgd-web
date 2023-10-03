@@ -120,3 +120,7 @@ mat-nav-list.sidenav-list-nested ngx-sidenav-item {
 .sidenav-anchor sidenav-item-name {
   color: black !important;
 }
+
+ngx-sidenav .sidenav-toplevel .sidenav-anchor {
+  height: 50px;
+}
