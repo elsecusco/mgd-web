@@ -24,6 +24,8 @@ mat-nav-list a.sidenav-anchor {
     height: $width-height__sidenav-list__icon + 10;
     font-size: 30px; //18
     line-height: 20px;
+    padding-right: 10px;
+    padding-top: 5px;
     //color: red; // ubicar el icono a variar
   }
 }
@@ -55,7 +57,6 @@ mat-nav-list a.sidenav-anchor {
       justify-content: space-between;
     }
     .icono {
-      padding: 5px;
       display: flex;
       align-items: center;
     }
@@ -65,10 +66,12 @@ mat-nav-list a.sidenav-anchor {
       align-items: center;
     }
     .nombre {
+      font-size: 15px;
       padding-left: 10px;
     }
     .nombredos {
-      padding-left: 15px;
+      font-size: 15px;
+      padding-left: 20px;
     }
     span {
       color: $color-primary;

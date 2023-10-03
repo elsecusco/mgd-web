@@ -38,18 +38,22 @@ mat-sidenav {
 }
 
 @keyframes fadein {
+  0% {
+    opacity: 0;
+  }
 
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeout {
   0% {
-    color: green;
     opacity: 1;
   }
 
   100% {
-    color: white;
-    // opacity: 0;
+    opacity: 0;
   }
 }
 
@@ -67,19 +71,19 @@ mat-sidenav {
 
   .sidenav + .cdk-visually-hidden + .mat-drawer-content,
   .sidenav + .mat-drawer-content {
-    max-width: calc(100% - #{$width__sidenav});
-    transform: translate3d($width__sidenav, 0, 0) !important;
+    max-width: calc(100% - #{$width__sidenav - 5});
+    transform: translate3d($width__sidenav - 5, 0, 0) !important;
   }
 
   .sidenav.icon-sidenav.collapsed + .cdk-visually-hidden + .mat-drawer-content,
   .sidenav.icon-sidenav.collapsed + .mat-drawer-content {
-    max-width: calc(100% - #{$max-width__icon-sidenav});
-    transform: translate3d($max-width__icon-sidenav, 0, 0) !important;
+    max-width: calc(100% - #{$max-width__icon-sidenav - 5});
+    transform: translate3d($max-width__icon-sidenav - 5, 0, 0) !important;
   }
 
   .sidenav.icon-sidenav + .cdk-visually-hidden + .mat-drawer-content,
   .sidenav.icon-sidenav + .mat-drawer-content {
-    max-width: calc(100% - #{$max-width__icon-sidenav});
+    max-width: calc(100% - #{$max-width__icon-sidenav - 5});
   }
 
   .sidenav {
