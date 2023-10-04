@@ -50,3 +50,7 @@ $app-default-theme: mat.define-light-theme(
     ),
   )
 );
+
+.mat-mdc-text-field-wrapper {
+  flex: none !important;
+}

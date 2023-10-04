@@ -11,3 +11,18 @@ $app-blue-theme: mat.define-light-theme(
     ),
   )
 );
+
+.mat-mdc-text-field-wrapper {
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex: none !important;
+}
+
+.mat-mdc-form-field-flex {
+  display: flex !important;
+  align-items: center !important;
+}
+.sidenav-list > ngx-sidenav-item .estilos {
+  height: 43px !important;
+}
