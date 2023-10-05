@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @use "sass:map";
 @include mat.core();
 
@@ -11,22 +11,18 @@
 
   .default-theme,
   .blue-theme {
-
     .cl,
     .text {
       color: $gray-light;
     }
-
   }
 
   .black-theme {
-
     .cl,
     .text {
       color: $gray-black;
     }
   }
-
 
   .cl-primary,
   .text-primary,
@@ -136,9 +132,11 @@
   width: 100%;
 }
 
-
 .max-wd-950 {
   max-width: 950px;
+}
+.max-wd-1300 {
+  max-width: 1300px;
 }
 
 /**********************PADDING************************/
@@ -184,7 +182,6 @@
 .overflow-auto {
   overflow: auto;
 }
-
 
 // .loading-spinner {
 //   // margin-top: 30px;
