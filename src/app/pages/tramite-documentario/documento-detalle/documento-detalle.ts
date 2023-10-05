@@ -17,12 +17,13 @@ export class DocumentoDetalle implements OnInit {
   ngOnInit() {
     this.doc = new DetalleDocumento();
     this.detalleDocumento();
+    console.log('documento-detalle')
   }
 
   detalleDocumento() {
     this.api.detalleDocumento(this.codigoDocumento).subscribe((docs) => {
       this.doc = docs[0];
-      //console.log(JSON.stringify(this.doc))
+      console.log(JSON.stringify(this.doc))
     });
   }
 }

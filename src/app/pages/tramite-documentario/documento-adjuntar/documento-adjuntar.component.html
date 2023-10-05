@@ -44,7 +44,7 @@
   <ng-container matColumnDef="accion">
     <th mat-header-cell *matHeaderCellDef>Acciones</th>
     <td mat-cell *matCellDef="let e">
-      <div>
+      <div [style]="{'display':'flex','justify-content':'space-between'}">
         <!-- <button mat-icon-button
                 matTooltip="Descargar"
                 color="primary"
@@ -54,7 +54,7 @@
         </button> -->
         <button
           mat-icon-button
-          matTooltip="Descargar"
+          matTooltip="Descargares"
           color="primary"
           (click)="descargar(e)"
         >
@@ -137,7 +137,7 @@
   <ng-container matColumnDef="accion">
     <th mat-header-cell *matHeaderCellDef>Acciones</th>
     <td mat-cell *matCellDef="let e">
-      <div>
+      <div  [style]="{'display':'flex','justify-content':'space-between'}">
         <button
           mat-icon-button
           matTooltip="Descargar"
