@@ -53,10 +53,10 @@
                    <li *ngFor="let l of element.listaAtendido">
                        <span [style.color]="getColores(l.estiloCelda)"
                              style="font-weight: bold">
-                              {{l.fechaDerivacion}}
+                              {{l.fechaDerivacion + l.estiloCelda}}
                             <mat-icon *ngIf="element.leido==1"
                                       [matTooltip]="msgs.leido + l.fechaLeido"
-                                      [style.color]="colores.leido">{{icons.leido}}</mat-icon>
+                                      [style.color]="color">{{icons.leido}}</mat-icon>
                             <mat-icon *ngIf="element.atendido!=0"
                                       [matTooltip]="getMsgs(element.atendido)+l.fechaAtencion">
                                       {{getIcons(l.estiloCelda)}}</mat-icon>

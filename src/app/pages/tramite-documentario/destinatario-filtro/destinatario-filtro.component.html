@@ -1,7 +1,7 @@
 <mat-form-field class="example-chip-list" appearance="outline" fxFlex="100">
   <mat-label>{{ matLabel }}</mat-label>
-  <mat-chip-listbox #chipList>
-    <mat-chip-option
+  <mat-chip-grid #chipGrid>
+    <mat-chip-row
       *ngFor="let destinatario of destinatarios"
       [selectable]="selectable"
       selected
@@ -12,19 +12,23 @@
         {{ destinatario.nombreUsuario }}
       </p>
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-    </mat-chip-option>
+    </mat-chip-row>
     <input
       matInput
       #destinatarioInput
       [formControl]="destinatarioCtrl"
       [matAutocomplete]="auto"
       [readonly]="readonlyChips"
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
     />
     <!-- [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            [matChipInputAddOnBlur]="addOnBlur"
            (matChipInputTokenEnd)="add($event)"> -->
-  </mat-chip-listbox>
+  </mat-chip-grid>
 
   <mat-spinner
     matSuffix

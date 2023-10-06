@@ -22,6 +22,7 @@ import { Emitter, Emittable } from '@ngxs-labs/emitter';
 })
 export class BandejaComponent implements OnInit {
   //#region variables tabla
+  color = '#666666';
   datos!: MatTableDataSource<BandejaDocumento>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
