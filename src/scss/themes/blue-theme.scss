@@ -13,7 +13,7 @@ $app-blue-theme: mat.define-light-theme(
 );
 
 .mat-mdc-text-field-wrapper {
-  height: 50px !important;
+  // height: 50px !important;
   display: flex !important;
   align-items: center !important;
   flex: none !important;
@@ -25,4 +25,7 @@ $app-blue-theme: mat.define-light-theme(
 }
 .sidenav-list > ngx-sidenav-item .estilos {
   height: 43px !important;
+}
+.mat-mdc-text-field-wrapper{
+  // height: 50px !important;
 }

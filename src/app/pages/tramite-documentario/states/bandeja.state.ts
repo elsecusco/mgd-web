@@ -88,6 +88,11 @@ export class BandejaState {
   }
 
   @Selector()
+  static bandeja(state: BandejaStateModel) {
+    return state;
+  }
+
+  @Selector()
   static currentUserBuzon(state: BandejaStateModel) {
     return state.listaBuzones[0];
   }

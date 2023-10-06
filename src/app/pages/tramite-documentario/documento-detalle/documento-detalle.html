@@ -3,6 +3,7 @@
 </div>
 <row-container>
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="18"
     fxFlex.xs="auto"
     class="mg-bot-8"
@@ -14,6 +15,7 @@
   </mat-form-field>
 
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="16"
     fxFlex.xs="auto"
     class="mg-bot-8"
@@ -26,6 +28,7 @@
 
   <!-- Aumentando Mesa Partes -->
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="18"
     fxFlex.xs="auto"
     class="mg-bot-8"
@@ -38,6 +41,7 @@
   <!-- Fin de Mesa Partes -->
 
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="18"
     fxFlex.xs="auto"
     appearance="outline"
@@ -60,6 +64,7 @@
   </mat-form-field> -->
 
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="16"
     fxFlex.xs="auto"
     appearance="outline"
@@ -81,6 +86,7 @@
   </mat-form-field>
 
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="calc(11% - 21px)"
     fxFlex.xs="auto"
     appearance="outline"
@@ -129,6 +135,7 @@
 
 <row-container>
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="25"
     fxFlex.xs="auto"
     appearance="outline"
@@ -139,6 +146,7 @@
     <input matInput readonly value="{{doc.fechaDocumento}}" />
   </mat-form-field>
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="25"
     fxFlex.xs="auto"
     appearance="outline"
@@ -146,14 +154,11 @@
     color="primary"
   >
     <mat-label>Recibido el</mat-label>
-    <input
-      matInput
-      readonly
-      value="{{doc.fechaRecepcion}}"
-    />
+    <input matInput readonly value="{{doc.fechaRecepcion}}" />
   </mat-form-field>
 
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="25"
     fxFlex.xs="auto"
     appearance="outline"
@@ -169,6 +174,7 @@
     />
   </mat-form-field>
   <mat-form-field
+    [style.fontSize]="12"
     fxFlex="25"
     fxFlex.xs="auto"
     appearance="outline"
@@ -185,12 +191,17 @@
   </mat-form-field>
 </row-container>
 
-<mat-form-field appearance="outline" class="mg-bot-8 wd-full" color="primary">
+<mat-form-field
+  [style.fontSize]="12"
+  appearance="outline"
+  class="mg-bot-8 wd-full"
+  color="primary"
+>
   <mat-label>Asunto</mat-label>
   <textarea
     matInput
     autosize
-    rows="2"
+    [rows]="2"
     readonly
     value="{{doc.contenidoDocumento}}"
   ></textarea>

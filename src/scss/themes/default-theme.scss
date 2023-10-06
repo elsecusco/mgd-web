@@ -53,4 +53,14 @@ $app-default-theme: mat.define-light-theme(
 
 .mat-mdc-text-field-wrapper {
   flex: none !important;
+  height: 50px !important;
 }
+
+// .mat-mdc-text-field-wrapper {
+//   // height: 50px !important;
+//   display: flex !important;
+//   align-items: center !important;
+//   flex: none !important;
+// }
+
+

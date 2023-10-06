@@ -69,6 +69,8 @@ export class DocumentoAdjuntarComponent implements OnInit {
     return this._numeroAtencion;
   }
 
+  @Output() aux = new EventEmitter<BuzonesUsuario>();
+
   @ViewChild('link') public link!: ElementRef;
   columnas = [
     'nombreUsuario',

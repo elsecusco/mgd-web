@@ -1,6 +1,18 @@
 .mat-cell {
   font-size: 11px;
 }
+
+mat-header-cell {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.mat-mdc-table .mat-mdc-header-cell {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
 div {
   font-size: 12px;
 }
@@ -130,4 +142,3 @@ li span {
   border-color: transparent !important;
   outline: none;
 }
-
