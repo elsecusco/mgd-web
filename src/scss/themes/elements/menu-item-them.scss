@@ -1,0 +1,27 @@
+// estilo mat-card
+@use "sass:map";
+@use "../../var.scss" as *;
+
+@mixin menu-item-theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+
+  .mat-list {
+    color: white;
+    color: var(--font-color-main);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nombre-menu {
+    a {
+      color: white !important;
+      color: var(--font-color-main);
+    }
+    display: flex;
+    align-items: center;
+  }
+  mat-nav-list {
+    background-color: var(--bg-color);
+  }
+}

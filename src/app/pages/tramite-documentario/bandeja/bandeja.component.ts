@@ -88,7 +88,28 @@ export class BandejaComponent implements OnInit {
 
   ngOnInit() {
     this.setTable();
-    this.docs$.subscribe((datos) => this.setTable(datos));
+
+    const observer = {
+      next: (event: any) => {
+        this.setTable(event);
+        console.log('data', event);
+      },
+      error: (_err: any) => {
+        console.log('error', _err);
+      },
+      complete: () => {
+        console.log('complete');
+      },
+    };
+
+    this.docs$.subscribe(
+      //   (datos) => {
+      //   this.setTable(datos);
+      //   console.log("datos tabla",datos)
+      // }
+      observer
+    );
+
     this.paginator._intl.itemsPerPageLabel = 'Items por Página';
   }
   //#region METODOS TABLA
@@ -96,6 +117,7 @@ export class BandejaComponent implements OnInit {
     this.datos = new MatTableDataSource<BandejaDocumento>(data);
     this.datos.sort = this.sort;
     this.datos.paginator = this.paginator;
+    // console.log('datos tabla', this.datos);
   }
   filter(value: string) {
     this.datos.filter = value.trim().toLowerCase();

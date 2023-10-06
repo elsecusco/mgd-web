@@ -1,6 +1,7 @@
 <mat-form-field fxFlex
                 appearance="outline"
                 color="primary"
+                class="mat-sm"
                 floatLabel="always">
   <mat-label>Remitente</mat-label>
   <mat-spinner [style.visibility]="show"
@@ -17,7 +18,7 @@
                     [displayWith]="displayFn"
                     (optionSelected)="selectRemitente()">
     <mat-option *ngFor="let r of remitentes | async"
-                [value]="r">       
+                [value]="r">
       <span>{{ r.nombreRemitenteDocumento }}</span>
     </mat-option>
   </mat-autocomplete>
