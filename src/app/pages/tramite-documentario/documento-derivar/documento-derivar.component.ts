@@ -150,7 +150,7 @@ export class DocumentoDerivarComponent implements OnInit {
     this.saving = true;
     const observer = {
       next: (res: any) => {
-        console.log("res-->",res);
+        // console.log("res-->",res);
         this.saving = false;
         if (res.id == 0) {
           notifyOk('Derivación Realizada!');

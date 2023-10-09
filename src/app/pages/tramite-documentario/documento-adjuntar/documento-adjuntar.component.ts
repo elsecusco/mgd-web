@@ -21,7 +21,7 @@ import { notifyOk } from '../../../@core/swal';
 import { Observable } from 'rxjs';
 import { BandejaFiltro } from '../../../@models/tramite/bandeja-filtro';
 import { BandejaState } from '../states/bandeja.state';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { DetalleAdjuntarComponent } from '../detalle-adjuntar/detalle-adjuntar.component';
 import { MatRadioChange } from '@angular/material/radio';
 import { BuzonesUsuario } from '../../../@models/tramite/buzones-usuario';
@@ -29,6 +29,8 @@ import { PdfViewerDialogComponent } from '../pdf-viewer-dialog/pdf-viewer-dialog
 import * as JSZip from 'jszip';
 // import * as FileSaver from 'file-saver';
 import { LoadingService } from '../../../@core/loading/loading.service';
+import { AuthStateModel } from 'src/app/@core/auth/state/auth.state';
+import { Usuario } from 'src/app/@core/auth/usuario';
 
 @Component({
   selector: 'documento-adjuntar',
@@ -52,6 +54,9 @@ export class DocumentoAdjuntarComponent implements OnInit {
   buzonActual!: BuzonesUsuario;
   @Select(BandejaState.buzonActual)
   public buzonActual$!: Observable<BuzonesUsuario>;
+
+  aux$!: Observable<AuthStateModel>;
+  usuario: Usuario | null = {} as Usuario;
 
   @Input()
   set codigoDocumento(codigoDocumento: number) {
@@ -86,13 +91,20 @@ export class DocumentoAdjuntarComponent implements OnInit {
     private api: TramiteService,
     public dialog: MatDialog,
     private fs: FileSave,
-    private loading: LoadingService
-  ) {}
+    private loading: LoadingService,
+    private store: Store
+  ) {
+    this.aux$ = this.store.select((state) => state.usuario);
+  }
 
   ngOnInit() {
-    this.bandejaf$.subscribe((b) => (this.bandejaf = b));
-    this.buzonActual$.subscribe((u) => (this.buzonActual = u));
+    this.bandejaf$.subscribe(b => this.bandejaf =b);
+    this.buzonActual$.subscribe(u=>this.buzonActual=u);
     this.getArchivos();
+
+    this.aux$.subscribe((r) => {
+      if (r) this.usuario = r.usuario;
+    });
   }
 
   adjuntar() {
@@ -125,7 +137,8 @@ export class DocumentoAdjuntarComponent implements OnInit {
     this.api
       .archivosDocumento(
         this.codigoDocumento,
-        this.buzonActual.loginUsuarioBuzon
+        // this.buzonActual.loginUsuarioBuzon
+        this.usuario?.loginUsuario
       )
       .subscribe((res) => {
         this.archivos = res;

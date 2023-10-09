@@ -4,8 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
-import { Select } from '@ngxs/store';
-import { BandejaState } from '../states/bandeja.state';
+import { Select, Store } from '@ngxs/store';
+import { BandejaState, BandejaStateModel } from '../states/bandeja.state';
 
 import {
   BandejaDocumento,
@@ -22,7 +22,9 @@ import { Emitter, Emittable } from '@ngxs-labs/emitter';
 })
 export class BandejaComponent implements OnInit {
   //#region variables tabla
-  color = '#666666';
+  filtrado: BandejaDocumento[] = [];
+  buscarDocs$!: Observable<BandejaStateModel>;
+  color: string = '#666';
   datos!: MatTableDataSource<BandejaDocumento>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -85,32 +87,24 @@ export class BandejaComponent implements OnInit {
   }>;
   //#endregion ngxs state bandeja
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private store: Store
+  ) {
+    this.buscarDocs$ = this.store.select((state) => state.bandeja.bandejas);
+  }
 
   ngOnInit() {
     this.setTable();
-
-    const observer = {
-      next: (event: any) => {
-        this.setTable(event);
-        console.log('data', event);
-      },
-      error: (_err: any) => {
-        console.log('error', _err);
-      },
-      complete: () => {
-        console.log('complete');
-      },
-    };
-
-    this.docs$.subscribe(
-      //   (datos) => {
-      //   this.setTable(datos);
-      //   console.log("datos tabla",datos)
-      // }
-      observer
-    );
-
+    this.docs$.subscribe((datos) => {
+      if (datos === undefined) {
+        this.filtro(datos);
+        this.setTable(this.filtrado);
+      } else {
+        this.setTable(datos);
+      }
+    });
     this.paginator._intl.itemsPerPageLabel = 'Items por Página';
   }
   //#region METODOS TABLA
@@ -174,56 +168,42 @@ export class BandejaComponent implements OnInit {
   }
   //#endregion METODOS TABLA
   getColores(x: any) {
-    switch (x) {
-      case 'P':
-        return this.colores.P;
-      case 'C':
-        return this.colores.C;
-      case 'leido':
-        return this.colores.leido;
-      case 1:
-        return this.colores[1];
-      case 2:
-        return this.colores[2];
-      case 3:
-        return this.colores[3];
-      case 4:
-        return this.colores[4];
-      default:
-        return;
-    }
+    let t = '';
+    if (x == 'P') t = this.colores.P;
+    if (x == 'C') t = this.colores.C;
+    if (x == 'leido') t = this.colores.leido;
+    if (x == 1) t = this.colores[1];
+    if (x == 2) t = this.colores[2];
+    if (x == 3) t = this.colores[3];
+    if (x == 4) t = this.colores[4];
+    return t;
   }
 
   getIcons(x: any) {
-    switch (x) {
-      case 'leido':
-        return this.icons.leido;
-      case 1:
-        return this.icons[1];
-      case 2:
-        return this.icons[2];
-      case 3:
-        return this.icons[3];
-      case 4:
-        return this.icons[4];
-      default:
-        return;
-    }
+    let t = '';
+    if (x == 'leido') t = this.icons.leido;
+    if (x == 1) t = this.icons[1];
+    if (x == 2) t = this.icons[2];
+    if (x == 3) t = this.icons[3];
+    if (x == 4) t = this.icons[4];
+    return t;
   }
   getMsgs(x: any) {
-    switch (x) {
-      case 'leido':
-        return this.msgs.leido;
-      case 1:
-        return this.msgs[1];
-      case 2:
-        return this.msgs[2];
-      case 3:
-        return this.msgs[3];
-      case 4:
-        return this.msgs[4];
-      default:
-        return;
+    let t = '';
+    if (x == 'leido') t = this.msgs.leido;
+    if (x == 1) t = this.msgs[1];
+    if (x == 2) t = this.msgs[2];
+    if (x == 3) t = this.msgs[3];
+    if (x == 4) t = this.msgs[4];
+    return t;
+  }
+  filtro(d: any) {
+    if (d === undefined) {
+      this.buscarDocs$.subscribe((x: any) => {
+        if (x.a.length > 0) this.filtrado = x.a;
+        if (x.e.length > 0) this.filtrado = x.e;
+        if (x.s.length > 0) this.filtrado = x.s;
+      });
     }
   }
 }

@@ -36,6 +36,5 @@ export class LoginPage implements OnInit {
 
   onSubmit($event: Authenticate) {
     this.store.dispatch(new Login($event));
-    console.log('store.login.onSubmit')
   }
 }

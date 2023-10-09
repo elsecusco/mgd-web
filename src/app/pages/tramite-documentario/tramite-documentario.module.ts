@@ -102,6 +102,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
 
 import { TramiteDocumentarioRoutingModule } from './tramite-documentario-routing.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 //arreglos auxiliares
 const MODULES = [
@@ -231,7 +232,9 @@ const PROVIDERS = [TramiteService];
   declarations: [...COMPONENTS],
   imports: [...MODULES],
   bootstrap: [ReporteGraficoComponent],
-  providers: [...PROVIDERS],
+  providers: [...PROVIDERS,
+    // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' }}
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // entryComponents: [...ENTRIES] /// --- deprecated
 })

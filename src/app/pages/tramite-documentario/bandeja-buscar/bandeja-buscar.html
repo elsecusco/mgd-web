@@ -1,80 +1,95 @@
 <row-container [formGroup]="form">
-  <mat-form-field *ngIf="group.value=='filtrar'"
-                  fxFlex
-                  appearance="outline"
-                  class="mat-sm"
-                  color="primary">
-    <input matInput
-           type="text"
-           autocomplete="off"
-           formControlName="filtro"
-           placeholder="Para buscar un documento digite un valor...">
+  <mat-form-field
+    *ngIf="group.value=='filtrar'"
+    fxFlex
+    appearance="outline"
+    class="mat-sm centrar"
+    color="primary"
+  >
+    <input
+      matInput
+      class="centrar"
+      type="text"
+      autocomplete="off"
+      formControlName="filtro"
+      placeholder="Para buscar un documento digite un valor..."
+    />
   </mat-form-field>
 
-  <mat-form-field *ngIf="group.value=='buscar'"
-                  fxFlex="25"
-                  appearance="outline">
+  <mat-form-field
+    class="mat-sm centrar"
+    *ngIf="group.value=='buscar'"
+    fxFlex="25"
+    appearance="outline"
+  >
     <mat-label>Buscar Por:</mat-label>
-    <mat-select formControlName="tipoBusqueda"
-                placeholder="Seleccione...">
-      <mat-option *ngFor="let t of tipos"
-                  [value]="t.id">
+    <mat-select formControlName="tipoBusqueda" placeholder="Seleccione...">
+      <mat-option *ngFor="let t of tipos" [value]="t.id">
         {{t.value}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field *ngIf="group.value=='buscar'"
-                  fxFlex
-                  appearance="outline"
-                  color="primary">
+  <mat-form-field
+    class="mat-sm centrar"
+    *ngIf="group.value=='buscar'"
+    fxFlex
+    appearance="outline"
+    color="primary"
+  >
     <mat-label>Valor de Búsqueda</mat-label>
-    <input matInput
-           formControlName="valorBusqueda"
-           autocomplete="off"
-           placeholder="Ingrese Valor de Búsqueda...">
-     <mat-hint>mínimo 4 letras</mat-hint>
+    <input
+      matInput
+      class="centrar"
+      formControlName="valorBusqueda"
+      autocomplete="off"
+      placeholder="Ingrese Valor de Búsqueda..."
+    />
+    <mat-hint>mínimo 4 letras</mat-hint>
   </mat-form-field>
 
-  <button *ngIf="group.value=='buscar'"
-          [disabled]="form.get('tipoBusqueda')?.value==null || form.get('valorBusqueda')?.value.length<2"
-          (click)="search()"
-          mat-mini-fab>
+  <button
+    *ngIf="group.value=='buscar'"
+    [disabled]="form.get('tipoBusqueda')?.value==null || form.get('valorBusqueda')?.value.length<2"
+    (click)="search()"
+    mat-mini-fab
+  >
     <mat-icon>search</mat-icon>
   </button>
   <mat-button-toggle-group
-      *ngIf="group.value=='buscar'"
-      (change)="selectBandeja($event)"
-      ><!-- [value]="botonesActiva" -->
-      <mat-button-toggle
-        value="e"
-        [disabled]="!count.e"
-        [matTooltip]="'Entrada('+count.e+')'">
-        E<span class="bandeja">{{count.e}}</span>
-      </mat-button-toggle>
-      <mat-button-toggle
-        value="a"
-        [disabled]="!count.a"
-        [matTooltip]="'Atendidos('+count.a+')'">
-        A<span class="bandeja">{{count.a}}</span>
-      </mat-button-toggle>
-      <mat-button-toggle
-        value="s"
-        [disabled]="!count.s"
-        [matTooltip]="'Derivados('++count.s+')'">
-        D<span class="bandeja">{{count.s}}</span>
-      </mat-button-toggle>
+    *ngIf="group.value=='buscar'"
+    (change)="selectBandeja($event)"
+    ><!-- [value]="botonesActiva" -->
+    <mat-button-toggle
+      value="e"
+      [disabled]="!count.e"
+      [matTooltip]="'Entrada('+count.e+')'"
+    >
+      E<span class="bandeja">{{count.e}}</span>
+    </mat-button-toggle>
+    <mat-button-toggle
+      value="a"
+      [disabled]="!count.a"
+      [matTooltip]="'Atendidos('+count.a+')'"
+    >
+      A<span class="bandeja">{{count.a}}</span>
+    </mat-button-toggle>
+    <mat-button-toggle
+      value="s"
+      [disabled]="!count.s"
+      [matTooltip]="'Derivados('++count.s+')'"
+    >
+      D<span class="bandeja">{{count.s}}</span>
+    </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <mat-button-toggle-group appearance="legacy"
-                           #group="matButtonToggleGroup"
-                           [value]="'filtrar'"
-                           (change)="toggle()">
-    <mat-button-toggle value="filtrar">
-      Filtrar
-    </mat-button-toggle>
-    <mat-button-toggle value="buscar">
-      Buscar
-    </mat-button-toggle>
+  <mat-button-toggle-group
+    appearance="legacy"
+    #group="matButtonToggleGroup"
+    [value]="'filtrar'"
+    (change)="toggle()"
+  >
+    <mat-button-toggle value="filtrar"> Filtrar </mat-button-toggle>
+    <mat-button-toggle value="buscar"> Buscar </mat-button-toggle>
   </mat-button-toggle-group>
 </row-container>

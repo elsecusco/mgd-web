@@ -177,7 +177,6 @@ export class BandejaState {
       bandejaBuscar,
       pending: true,
     });
-    console.log('state', loginUsuarioBuzon, bandejaBuscar);
     return this.api.buscarBandeja(loginUsuarioBuzon, bandejaBuscar).pipe(
       tap((b) => {
         console.log('respuesta', b);
