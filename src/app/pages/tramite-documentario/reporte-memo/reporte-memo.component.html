@@ -1,96 +1,103 @@
- <mat-card class="max-wd-950 wd-full">
-    <mat-card-title>
-      <mat-toolbar color="primary" fxLayoutGap="12px">
-        <span class="titulo">Documento Memo Valorización</span>
-      </mat-toolbar>
-    </mat-card-title>
+<mat-card class="max-wd-950 wd-full">
+  <mat-card-title>
+    <mat-toolbar color="primary" fxLayoutGap="12px">
+      <span class="titulo">Documento Memo Valorización</span>
+    </mat-toolbar>
+  </mat-card-title>
 
-<form [formGroup]="form" novalidate>
+  <form [formGroup]="form" novalidate>
     <div class="backdropFirma" *ngIf="firmando"></div>
     <firma
       *ngIf="isSave"
       #firma
       [f]="fields"
-      style="position:absolute;z-index:2000"
-      (resultado)="resultadoFirma($event)"></firma>
+      style="position: absolute; z-index: 2000"
+      (resultado)="resultadoFirma($event)"
+    ></firma>
 
     <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
-    <row-container>
-      <mat-form-field
-        fxFlex="60"
-        appearance="outline"
-        class="mat-sm"
-        color="primary">
-        <mat-label>Descripción Documento</mat-label>
-        <textarea
-          matInput
-          placeholder="Ingrese Descripción..."
-          formControlName="descripcionArchivo"
-          rows="2">
-        </textarea>
-      </mat-form-field>
-      <mat-form-field
-        fxFlex="40"
-        appearance="outline"
-        class="mat-sm"
-        color="primary">
-        <mat-label>Razón Firma</mat-label>
-        <mat-select formControlName="razon">
-          <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
-                      [value]="t.nombre">
-            {{t.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </row-container>
+      <row-container>
+        <mat-form-field
+          fxFlex="60"
+          appearance="outline"
+          class="mat-tx"
+          color="primary"
+        >
+          <mat-label>Descripción Documento</mat-label>
+          <textarea
+            matInput
+            placeholder="Ingrese Descripción..."
+            formControlName="descripcionArchivo"
+            rows="3"
+          >
+          </textarea>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="40"
+          appearance="outline"
+          class="mat-sm"
+          color="primary"
+        >
+          <mat-label>Razón Firma</mat-label>
+          <mat-select formControlName="razon">
+            <mat-option
+              *ngFor="let t of tipos.tiposFirmaMotivo"
+              [value]="t.nombre"
+            >
+              {{ t.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </row-container>
       <ng-container *ngIf="file">
         <div fxLayout="row" fxLayoutAlign="end center">
           <span class="fw-400 cl-accent">{{ progress }} %</span>
         </div>
-        <mat-progress-bar
-          mode="determinate"
-          [value]="progress"
-          color="accent">
+        <mat-progress-bar mode="determinate" [value]="progress" color="accent">
         </mat-progress-bar>
-    </ng-container>
+      </ng-container>
     </div>
     <div
-        fxLayout="row"
-        fxLayoutAlign="start center"
-        fxLayoutGap="8px"
-        class="mg-bot-8">
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="8px"
+      class="mg-bot-8"
+    >
       <button
         mat-raised-button
         color="primary"
         (click)="guardarArchivo()"
-        [disabled]="form.invalid">
+        [disabled]="form.invalid"
+      >
         Firmar Archivo
       </button>
-      <button
-        mat-button
-        color="warn"
-        [mat-dialog-close]="" cdkFocusInitial>
+      <button mat-button color="warn" [mat-dialog-close]="" cdkFocusInitial>
         Cerrar
       </button>
     </div>
-    <hr style="border-top: 2px solid #1a405a;" />
+    <hr style="border-top: 2px solid #1a405a" />
   </form>
   <!--<pdf-viewer [src]= "pdf"
               [render-text]="true"
               style="display: block;">
   </pdf-viewer> -->
 
-<ngx-extended-pdf-viewer
-  *ngIf="loadedPDF"
-  [src]="pdf"
-  [height]="'90vh'"
-  [useBrowserLocale]="false"
-  [showUnverifiedSignatures]="true"
->
-</ngx-extended-pdf-viewer>
-  <button mat-stroked-button color="primary" mat-dialog-close
-          (click)="descargarPdf()">Descargar
+  <ngx-extended-pdf-viewer
+    *ngIf="loadedPDF"
+    [src]="pdf"
+    [height]="'90vh'"
+    [useBrowserLocale]="false"
+    [showUnverifiedSignatures]="true"
+  >
+  </ngx-extended-pdf-viewer>
+  <button
+    mat-stroked-button
+    color="primary"
+    mat-dialog-close
+    (click)="descargarPdf()"
+  >
+    Descargar
   </button>
-    <a #link style="display: none" class="a-link-file"></a>
+  <a #link style="display: none" class="a-link-file"></a>
   <button mat-stroked-button color="accent" mat-dialog-close>Cerrar</button>
-
+</mat-card>

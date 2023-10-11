@@ -241,14 +241,19 @@
     (changeValorizaciones)="numeroValorizaciones = $event"
   >
   </valorizacion-contabilidad>
-  <mat-form-field class="mat-tx" appearance="outline" color="primary">
+  <mat-form-field
+    class="mat-tx"
+    appearance="outline"
+    color="primary"
+    class="mat-tx"
+  >
     <mat-label>Asunto</mat-label>
     <textarea
       matInput
       style="text-transform: uppercase"
       [readonly]="!editData"
       formControlName="contenidoDocumento"
-      rows="2"
+      rows="3"
     ></textarea>
   </mat-form-field>
   <div *ngIf="editData" fxLayout="row" fxLayoutAlign="end center">

@@ -1,192 +1,240 @@
-<form [formGroup]="form"
-      (ngSubmit)="pedirCodigo()"
-      #f="ngForm"
-      novalidate
-      class="wd-100"
-      fxLayout="column"
-      fxLayoutGap="8px">
-    <loading-sp [loading]="saving"></loading-sp>
-    <mat-progress-bar *ngIf="loading"
-                      mode="indeterminate">
-    </mat-progress-bar>
-    <span class="fs-16 fw-500 mg-bot-8">Datos de la persona que envia el documento</span>
-    <row-container>
-    <mat-form-field fxFlex="22"
-                    fxFlex.xs="auto"
-                    class="mg-bot-8"
-                    appearance="outline"
-                    color="primary">
-        <mat-label>Tipo de Documento</mat-label>
-        <mat-select formControlName="tipoDocumentoPersona">
-            <mat-option *ngFor="let t of tipos.tiposDocIdentidad"
-                [value]="t.codigo">
-                {{t.nombre}}
-            </mat-option>
-        </mat-select>
+<form
+  [formGroup]="form"
+  (ngSubmit)="pedirCodigo()"
+  #f="ngForm"
+  novalidate
+  class="wd-100"
+  fxLayout="column"
+  fxLayoutGap="8px"
+>
+  <loading-sp [loading]="saving"></loading-sp>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"> </mat-progress-bar>
+  <span class="fs-16 fw-500 mg-bot-8"
+    >Datos de la persona que envia el documento</span
+  >
+  <row-container>
+    <mat-form-field
+      fxFlex="22"
+      fxFlex.xs="auto"
+      class="mg-bot-8"
+      appearance="outline"
+      color="primary"
+    >
+      <mat-label>Tipo de Documento</mat-label>
+      <mat-select formControlName="tipoDocumentoPersona">
+        <mat-option
+          *ngFor="let t of tipos.tiposDocIdentidad"
+          [value]="t.codigo"
+        >
+          {{ t.nombre }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex="22"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-            <mat-label>Numero Documento</mat-label>
-                        <input matInput type="text"
-                            formControlName="numeroDocumentoPersona"
-                            placeholder="Ingrese Nro Documento"
-                            autocomplete="off">
+    <mat-form-field
+      fxFlex="22"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Numero Documento</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="numeroDocumentoPersona"
+        placeholder="Ingrese Nro Documento"
+        autocomplete="off"
+      />
     </mat-form-field>
-    <button mat-mini-fab
-            color="primary"
-            type="button"
-            matTooltip="Buscar Usuario"
-            [disabled]="numeroDocumentoPersona?.errors"
-            (click)="search()">
+    <button
+      mat-mini-fab
+      color="primary"
+      type="button"
+      matTooltip="Buscar Usuario"
+      [disabled]="numeroDocumentoPersona?.errors"
+      (click)="search()"
+    >
       <mat-icon>search</mat-icon>
     </button>
-    <mat-form-field fxFlex="25"
-                        appearance="outline"
-                        class="mg-bot-8"
-                        color="primary">
-            <mat-label>Correo Electronico</mat-label>
-                        <input matInput type="text"
-                            formControlName="correoPersona"
-                            placeholder="Ingrese Correo Electronico"
-                            [readonly]= "!editPerson"
-                            autocomplete="off">
+    <mat-form-field
+      fxFlex="25"
+      appearance="outline"
+      class="mg-bot-8"
+      color="primary"
+    >
+      <mat-label>Correo Electronico</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="correoPersona"
+        placeholder="Ingrese Correo Electronico"
+        [readonly]="!editPerson"
+        autocomplete="off"
+      />
     </mat-form-field>
-    <mat-form-field fxFlex="25"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-            <mat-label>Celular</mat-label>
-                        <input matInput type="text"
-                            formControlName="celularPersona"
-                            placeholder="Ingrese su Celular"
-                            [readonly]= "!editPerson"
-                            autocomplete="off">
+    <mat-form-field
+      fxFlex="25"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Celular</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="celularPersona"
+        placeholder="Ingrese su Celular"
+        [readonly]="!editPerson"
+        autocomplete="off"
+      />
     </mat-form-field>
-    </row-container>
-    <row-container>
-        <mat-form-field fxFlex="100"
-                        fxFlex.xs="auto"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-            <mat-label>Nombre o razon social</mat-label>
-            <input matInput type="text"
-                formControlName="nombrePersona"
-                placeholder="Ingrese su nombre"
-                [readonly]= "!editPerson"
-                autocomplete="off">
-        </mat-form-field>
-    </row-container>
-    <mat-divider> </mat-divider>
+  </row-container>
+  <row-container>
+    <mat-form-field
+      fxFlex="100"
+      fxFlex.xs="auto"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Nombre o razon social</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="nombrePersona"
+        placeholder="Ingrese su nombre"
+        [readonly]="!editPerson"
+        autocomplete="off"
+      />
+    </mat-form-field>
+  </row-container>
+  <mat-divider> </mat-divider>
 
-    <span class="fs-16 fw-500 mg-bot-8">Datos del Documento</span>
-    <row-container>
-    <mat-form-field fxFlex="33"
-                    fxFlex.xs="auto"
-                    class="mat-sm"
-                    appearance="outline"
-                    color="primary">
-        <mat-label>Tipo del Documento</mat-label>
-        <mat-select formControlName="codigoTipoDocumento">
-            <mat-option *ngFor="let t of tipos.tiposDocumento"
-                            [value]="t.codigo">
-                    {{t.nombre}}
-            </mat-option>
-        </mat-select>
+  <span class="fs-16 fw-500 mg-bot-8">Datos del Documento</span>
+  <row-container>
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      class="mat-sm"
+      appearance="outline"
+      color="primary"
+    >
+      <mat-label>Tipo del Documento</mat-label>
+      <mat-select formControlName="codigoTipoDocumento">
+        <mat-option *ngFor="let t of tipos.tiposDocumento" [value]="t.codigo">
+          {{ t.nombre }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex="33"
-            fxFlex.xs="auto"
-            class="mat-sm"
-            appearance="outline"
-            color="primary">
-        <mat-label>Numero de Documento</mat-label>
-        <input matInput
-                   formControlName="numeroDocumento"
-                   placeholder="Numero de Documento"
-                   autocomplete="off"
-                   [readonly]= "!editDocument"
-                   type="text">
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      class="mat-sm"
+      appearance="outline"
+      color="primary"
+    >
+      <mat-label>Numero de Documento</mat-label>
+      <input
+        matInput
+        formControlName="numeroDocumento"
+        placeholder="Numero de Documento"
+        autocomplete="off"
+        [readonly]="!editDocument"
+        type="text"
+      />
     </mat-form-field>
-    <mat-form-field fxFlex="33"
-                        fxFlex.xs="auto"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-                        <mat-label>Fecha Documento</mat-label>
-                        <input matInput
-                                formControlName="fechaDocumento"
-                                readonly
-                                [matDatepicker]="dp1">
-        <mat-datepicker-toggle matSuffix
-                               [for]="dp1"></mat-datepicker-toggle>
-        <mat-datepicker #dp1 ></mat-datepicker>
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Fecha Documento</mat-label>
+      <input
+        matInput
+        formControlName="fechaDocumento"
+        readonly
+        [matDatepicker]="dp1"
+      />
+      <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+      <mat-datepicker #dp1></mat-datepicker>
     </mat-form-field>
-    </row-container>
-    <row-container>
-        <mat-form-field fxFlex="33"
-                        fxFlex.xs="auto"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-            <mat-label>Nro de Paginas</mat-label>
-            <input matInput
-                   formControlName="numeroPaginas"
-                   placeholder="Ingrese Nro de Paginas"
-                   autocomplete="off"
-                   type="text"
-                   [readonly]= "!editDocument">
-        </mat-form-field>
-        <mat-form-field fxFlex="33"
-                        fxFlex.xs="auto"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-            <mat-label>Nro Expediente</mat-label>
-            <input matInput
-                   formControlName="numeroExpediente"
-                   placeholder="Ingrese Nro Expediente"
-                   autocomplete="off"
-                   type="text"
-                   [readonly]= "!editDocument">
-        </mat-form-field>
-        <mat-form-field fxFlex="33"
-                        fxFlex.xs="auto"
-                        appearance="outline"
-                        class="mat-sm"
-                        color="primary">
-            <mat-label>Proceso</mat-label>
-            <mat-select formControlName="codigoProceso">
-                <mat-option *ngFor="let t of tipos.tiposProceso"
-                            [value]="t.codigo">
-                    {{t.nombre}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </row-container>
+  </row-container>
+  <row-container>
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Nro de Paginas</mat-label>
+      <input
+        matInput
+        formControlName="numeroPaginas"
+        placeholder="Ingrese Nro de Paginas"
+        autocomplete="off"
+        type="text"
+        [readonly]="!editDocument"
+      />
+    </mat-form-field>
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Nro Expediente</mat-label>
+      <input
+        matInput
+        formControlName="numeroExpediente"
+        placeholder="Ingrese Nro Expediente"
+        autocomplete="off"
+        type="text"
+        [readonly]="!editDocument"
+      />
+    </mat-form-field>
+    <mat-form-field
+      fxFlex="33"
+      fxFlex.xs="auto"
+      appearance="outline"
+      class="mat-sm"
+      color="primary"
+    >
+      <mat-label>Proceso</mat-label>
+      <mat-select formControlName="codigoProceso">
+        <mat-option *ngFor="let t of tipos.tiposProceso" [value]="t.codigo">
+          {{ t.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </row-container>
 
-    <mat-form-field appearance="outline"
-                    color="primary">
-        <mat-label>Asunto</mat-label>
-        <textarea matInput
-                  formControlName="asunto"
-                  rows="2"
-                  [readonly]= "!editDocument"></textarea>
-    </mat-form-field>
-    <mat-divider> </mat-divider>
-    <mesa-anexo
-        (listAnexos)="listAnexos=$event"
-        (principal)="setPrincipal($event)"
-    ></mesa-anexo>
-    <div fxLayout="row"
-         fxLayoutAlign="end center">
-        <button fxFlex="20"
-                fxFlex.xs=""
-                type="submit"
-                mat-raised-button
-                [disabled]="!form.valid"
-                color="primary">GUARDAR DOCUMENTO <mat-icon>save</mat-icon>
-        </button>
-    </div>
+  <mat-form-field appearance="outline" class="mat-tx" color="primary">
+    <mat-label>Asunto</mat-label>
+    <textarea
+      matInput
+      formControlName="asunto"
+      rows="3"
+      [readonly]="!editDocument"
+    ></textarea>
+  </mat-form-field>
+  <mat-divider> </mat-divider>
+  <mesa-anexo
+    (listAnexos)="listAnexos = $event"
+    (principal)="setPrincipal($event)"
+  ></mesa-anexo>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button
+      fxFlex="20"
+      fxFlex.xs=""
+      type="submit"
+      mat-raised-button
+      [disabled]="!form.valid"
+      color="primary"
+    >
+      GUARDAR DOCUMENTO <mat-icon>save</mat-icon>
+    </button>
+  </div>
 </form>

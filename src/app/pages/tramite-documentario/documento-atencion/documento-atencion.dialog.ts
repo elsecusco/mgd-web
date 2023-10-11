@@ -24,13 +24,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
         <mat-divider class="mg-bot-8"></mat-divider>
         <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
-          <mat-form-field appearance="outline" color="primary">
+          <mat-form-field appearance="outline" color="primary" class="mat-tx">
             <mat-label>Descripción de la Atención</mat-label>
             <textarea
               matInput
               placeholder="Ingrese Descripción..."
               formControlName="descripcionAtencion"
-              rows="2"
+              rows="3"
             >
             </textarea>
           </mat-form-field>
