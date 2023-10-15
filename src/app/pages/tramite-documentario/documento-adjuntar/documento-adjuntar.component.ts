@@ -29,7 +29,7 @@ import { PdfViewerDialogComponent } from '../pdf-viewer-dialog/pdf-viewer-dialog
 import * as JSZip from 'jszip';
 // import * as FileSaver from 'file-saver';
 import { LoadingService } from '../../../@core/loading/loading.service';
-import { AuthStateModel } from 'src/app/@core/auth/state/auth.state';
+import { AuthState, AuthStateModel } from 'src/app/@core/auth/state/auth.state';
 import { Usuario } from 'src/app/@core/auth/usuario';
 
 @Component({
@@ -46,6 +46,10 @@ export class DocumentoAdjuntarComponent implements OnInit {
   @ViewChild('respuesta') tableRespuesta!: MatTable<any>;
 
   MaxFechaRecepcion!: Observable<ArchivoDocumento>;
+
+  usuarioS!: Usuario;
+  @Select(AuthState.usuario)
+  public usuarioS$!: Observable<Usuario>;
 
   bandejaf!: BandejaFiltro;
   @Select(BandejaState.bandejaFiltro)
@@ -95,21 +99,18 @@ export class DocumentoAdjuntarComponent implements OnInit {
     private loading: LoadingService,
     private store: Store
   ) {
-    this.aux$ = this.store.select((state) => state.usuario);
-    this.auxBandeja$ = this.store.select((state) => state.bandejaFiltro);
   }
 
   ngOnInit() {
+    this.usuarioS$.subscribe((b) => {
+      this.usuarioS = b;
+    });
     this.bandejaf$.subscribe((b) => (this.bandejaf = b));
     this.buzonActual$.subscribe((u) => (this.buzonActual = u));
-    this.getArchivos();
     this.bandejaf$.subscribe((r: any) => {
       if (r) this.bandejaf = r;
-      console.log('bandejafiltro', r);
     });
-    this.aux$.subscribe((r) => {
-      if (r) this.usuario = r.usuario;
-    });
+    this.getArchivos();
   }
 
   adjuntar() {
@@ -139,11 +140,15 @@ export class DocumentoAdjuntarComponent implements OnInit {
       });
   }
   getArchivos() {
+    console.log(
+      'usuario',
+      this.buzonActual.loginUsuarioBuzon + '---' + this.usuario?.loginUsuario
+    );
     this.api
       .archivosDocumento(
         this.codigoDocumento,
         // this.buzonActual.loginUsuarioBuzon
-        this.usuario?.loginUsuario
+        this.usuarioS.loginUsuario
       )
       .subscribe((res) => {
         this.archivos = res;

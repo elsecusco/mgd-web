@@ -81,7 +81,7 @@
           matTooltip="Eliminar"
           (click)="eliminar('respuesta', e)"
           [style.visibility]="
-            bandejaf.bandeja == 'e' && e.eliminable == 0 ? 'visible' : 'hidden'
+            bandejaf.bandeja == 'e' && e.eliminable ? 'visible' : 'hidden'
           "
         >
           <mat-icon>delete_forever</mat-icon>
@@ -163,7 +163,7 @@
           matTooltip="Eliminar"
           (click)="eliminar('iniciales', e)"
           [style.visibility]="
-            bandejaf.bandeja == 'e' && e.eliminable == 0 ? 'visible' : 'hidden'
+            bandejaf.bandeja == 'e' && e.eliminable ? 'visible' : 'hidden'
           "
         >
           <mat-icon>delete_forever</mat-icon>
