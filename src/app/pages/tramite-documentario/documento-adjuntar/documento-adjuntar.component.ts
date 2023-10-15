@@ -20,7 +20,7 @@ import { Archivo } from '../../../@core/archivo';
 import { notifyOk } from '../../../@core/swal';
 import { Observable } from 'rxjs';
 import { BandejaFiltro } from '../../../@models/tramite/bandeja-filtro';
-import { BandejaState } from '../states/bandeja.state';
+import { BandejaState, BandejaStateModel } from '../states/bandeja.state';
 import { Select, Store } from '@ngxs/store';
 import { DetalleAdjuntarComponent } from '../detalle-adjuntar/detalle-adjuntar.component';
 import { MatRadioChange } from '@angular/material/radio';
@@ -56,6 +56,7 @@ export class DocumentoAdjuntarComponent implements OnInit {
   public buzonActual$!: Observable<BuzonesUsuario>;
 
   aux$!: Observable<AuthStateModel>;
+  auxBandeja$!: Observable<BandejaStateModel>;
   usuario: Usuario | null = {} as Usuario;
 
   @Input()
@@ -95,13 +96,17 @@ export class DocumentoAdjuntarComponent implements OnInit {
     private store: Store
   ) {
     this.aux$ = this.store.select((state) => state.usuario);
+    this.auxBandeja$ = this.store.select((state) => state.bandejaFiltro);
   }
 
   ngOnInit() {
-    this.bandejaf$.subscribe(b => this.bandejaf =b);
-    this.buzonActual$.subscribe(u=>this.buzonActual=u);
+    this.bandejaf$.subscribe((b) => (this.bandejaf = b));
+    this.buzonActual$.subscribe((u) => (this.buzonActual = u));
     this.getArchivos();
-
+    this.bandejaf$.subscribe((r: any) => {
+      if (r) this.bandejaf = r;
+      console.log('bandejafiltro', r);
+    });
     this.aux$.subscribe((r) => {
       if (r) this.usuario = r.usuario;
     });
