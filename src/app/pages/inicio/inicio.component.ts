@@ -4,7 +4,7 @@ import {
   Input,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { Menu } from '@models/menu';
+// import { Menu } from '@models/menu';
 
 @Component({
   selector: 'inicio',
@@ -22,5 +22,6 @@ export class InicioComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

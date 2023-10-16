@@ -1,8 +1,9 @@
 import { State, StateContext, Selector } from '@ngxs/store';
+import { Injector, Injectable } from '@angular/core';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { DocumentoInterno } from '@models/tramite/documento-interno';
+import { DocumentoInterno } from '../../../@models/tramite/documento-interno';
 
 export interface DocumentoInternoStateModel {
   documento: DocumentoInterno;
@@ -23,6 +24,7 @@ const defaultStateDocumento = {
   name: 'documentoInterno',
   defaults: defaultStateDocumento
 })
+@Injectable()
 export class DocumentoInternoState {
   constructor() {}
 

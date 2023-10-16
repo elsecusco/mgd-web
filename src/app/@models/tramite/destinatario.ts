@@ -7,11 +7,11 @@ export class Destinatario {
   nombreArea: string;
 
   constructor() {
-    this.loginUsuario = null;
-    this.nombreUsuario = null;
-    this.codigoEmpresa = null;
-    this.codigoSucursal = null;
-    this.codigoArea = null;
-    this.nombreArea = null;
+    this.loginUsuario = '';
+    this.nombreUsuario = '';
+    this.codigoEmpresa = 0;
+    this.codigoSucursal = 0;
+    this.codigoArea = 0;
+    this.nombreArea = '';
   }
 }

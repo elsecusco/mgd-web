@@ -16,12 +16,17 @@ mat-icon {
   height: 64px;
 }
 
+img {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+}
 .rect {
   // color: white;
   text-align: center;
   padding: 20px; //20
   margin: 20px;
-  height: 130px; 
+  height: 130px;
 }
 
 .rect:hover {
@@ -30,4 +35,5 @@ mat-icon {
 //Se aplica siempre sin importar el tema, se mantiene el color indicado
 mat-card{
   background-color: #75abc4 !important;
+  align-items: center;
 }

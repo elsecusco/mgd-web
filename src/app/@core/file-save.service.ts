@@ -1,5 +1,5 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { Archivo } from '@core/archivo';
+import { Archivo } from '../@core/archivo';
 //import { type } from 'os';
 
 @Injectable()
@@ -33,22 +33,24 @@ export class FileSave {
         return tipoArchivo.ZIP;
       case '.pdf':
         return tipoArchivo.PDF;
-	  case '.rar':
+      case '.rar':
         return tipoArchivo.RAR;
-	  case '.docx':
+      case '.docx':
         return tipoArchivo.DOCX;
-    case '.doc':
+      case '.doc':
         return tipoArchivo.DOC;
+      default:
+        throw new Error('error');
     }
   }
 }
 export const tipoArchivo = {
   EXCEL: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  EXCEL_A : 'application/vnd.ms-excel',
+  EXCEL_A: 'application/vnd.ms-excel',
   TXT: 'application/text',
   ZIP: 'application/x-zip-compressed',
   PDF: 'application/pdf',
   RAR: 'application/rar',
   DOCX: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  DOC: 'application/msword'
+  DOC: 'application/msword',
 };

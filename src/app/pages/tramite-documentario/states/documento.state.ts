@@ -1,8 +1,9 @@
+import { Injectable } from '@angular/core';
 import { State, StateContext, Selector } from '@ngxs/store';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
 
-import { BandejaDocumento } from '@models/tramite/bandeja-documento';
+import { BandejaDocumento } from '../../../@models/tramite/bandeja-documento';
 import { of } from 'rxjs';
 
 export interface DocumentoStateModel {
@@ -17,13 +18,14 @@ type Context = StateContext<DocumentoStateModel>;
 
 const defaultStateDocumento = {
   documento: new BandejaDocumento(),
-  vista: ''
+  vista: '',
 };
 
 @State<DocumentoStateModel>({
   name: 'documento',
-  defaults: defaultStateDocumento
+  defaults: defaultStateDocumento,
 })
+@Injectable()
 export class DocumentoState {
   constructor() {}
 

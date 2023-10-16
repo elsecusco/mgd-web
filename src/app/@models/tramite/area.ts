@@ -3,9 +3,8 @@ export class Area {
     nombreArea: string;
     sigla: string;
     constructor() {
-      this.codigoArea = null;
-      this.nombreArea = null;
-      this.sigla = null;
+      this.codigoArea = 0;
+      this.nombreArea = '';
+      this.sigla = '';
     }
   }
-  

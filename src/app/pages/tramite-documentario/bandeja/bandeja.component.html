@@ -11,7 +11,7 @@
     </div>
     <table-container [idContainer]="'tdoc'"
                       [heightSub]="335"
-                      [loading]="pending$ | async">
+                      [loading]="!!(pending$ | async)">
       <table  mat-table
               matSort
               class="table-bordered"
@@ -28,15 +28,15 @@
                 <!-- BANDEJA DE SALIDA -->
                 <ul *ngIf="columna=='para' && element.bandeja=='s'">
                   <li *ngFor="let l of element.listaPara">
-                      <span [style.color]="colores[l.tipoDerivacion]"
-                            style="font-weight: bold" 
+                      <span [style.color]="getColores(l.tipoDerivacion)"
+                            style="font-weight: bold"
                             (click)="salidaClick(element,l)">
                           {{l.usuarioDestino}}
                         <mat-icon *ngIf="l.leido==1 && l.fechaLeido!=''"
                                   [matTooltip]="msgs.leido +l.fechaLeido">{{icons.leido}}</mat-icon>
                         <mat-icon *ngIf="l.atendido>0 && l.fechaAtencion!=''"
-                                  [style.color] ="colores[l.atendido]"
-                                  [matTooltip]="msgs[l.atendido] +l.fechaAtencion">{{icons[l.atendido]}}</mat-icon>
+                                  [style.color] ="getColores(l.atendido)"
+                                  [matTooltip]="getMsgs(l.atendido) +l.fechaAtencion">{{getIcons(l.atendido)}}</mat-icon>
                         <!-- <mat-icon *ngIf="l.atendido==2 && l.fechaAtencion!=''"
                                   style="color:#e69605"
                                   [matTooltip]="'Atención Final '+l.fechaAtencion">check_circle</mat-icon>
@@ -51,15 +51,15 @@
                 <!-- BANDEJA DE ENTRADA - ATENDIDO -->
                 <ul *ngIf="columna=='fechaDerivacion' &&  element.bandeja!='s'">
                    <li *ngFor="let l of element.listaAtendido">
-                       <span [style.color]="colores[l.estiloCelda]"
+                       <span [style.color]="getColores(l.estiloCelda)"
                              style="font-weight: bold">
                               {{l.fechaDerivacion}}
                             <mat-icon *ngIf="element.leido==1"
                                       [matTooltip]="msgs.leido + l.fechaLeido"
-                                      [style.color]="colores.leido">{{icons.leido}}</mat-icon>
+                                      [style.color]="color">{{icons.leido}}</mat-icon>
                             <mat-icon *ngIf="element.atendido!=0"
-                                      [matTooltip]="msgs[element.atendido]+l.fechaAtencion">
-                                      {{icons[l.estiloCelda]}}</mat-icon>
+                                      [matTooltip]="getMsgs(element.atendido)+l.fechaAtencion">
+                                      {{getIcons(l.estiloCelda)}}</mat-icon>
                        </span>
                        <!-- <span  *ngIf= "element.bandeja=='a' "
                               [style.color]="colores[l.estiloCelda]">
@@ -74,7 +74,7 @@
                 <!-- para el campo fecha, no para el picker -->
                 <ul *ngIf="columna=='fecha' &&  element.bandeja!='s'">
                    <li *ngFor="let l of element.listaAtendido">
-                          <span  [style.color]="colores[l.estiloCelda]"
+                          <span  [style.color]="getColores(l.estiloCelda)"
                                  style="font-weight: bold">
                             {{l.fecha}}
                           </span>

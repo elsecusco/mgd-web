@@ -1,148 +1,224 @@
 <div class="container">
   <h2>Mesa de Partes</h2>
   <div class="flex-container" fxLayout="row">
-    <mat-card fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutGap="0.3%"
-              fxLayoutAlign="center">
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
       <div fxFlex="25%">
-        <img mat-card-image class="img" src="assets/registrar_ex.png">
+        <img mat-card-image class="img" src="assets/registrar_ex.png" />
       </div>
       <mat-card-content fxFlex="75%">
         <h3>Registrar Nuevo Documento</h3>
         <p>
-          Permite registrar un nuevo documento externo que ingresa a la institución. 
+          Permite registrar un nuevo documento externo que ingresa a la
+          institución.
         </p>
-        <button mat-raised-button (click)="documentoNuevo()" color="primary">Acceder</button>
+        <button mat-raised-button (click)="documentoNuevo()" color="primary">
+          Acceder
+        </button>
       </mat-card-content>
     </mat-card>
-    <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.3%" fxLayoutAlign="center">
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
       <div fxFlex="25%">
-          <img mat-card-image class="img" src="assets/mesa_partes.png">
-        </div>
-        <mat-card-content fxFlex="75%">
-          <h3>Documentos Mesa de Partes</h3>
-          <p>
-            Permite recepcionar los documentos para su respectivo trámite. 
-          </p>
-          <button mat-raised-button (click)="bandeja(2)" color="primary">Acceder</button>
-        </mat-card-content>
-    </mat-card> 
-    <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.3%" fxLayoutAlign="center">
+        <img mat-card-image class="img" src="assets/mesa_partes.png" />
+      </div>
+      <mat-card-content fxFlex="75%">
+        <h3>Documentos Mesa de Partes</h3>
+        <p>Permite recepcionar los documentos para su respectivo trámite.</p>
+        <button mat-raised-button (click)="bandeja(2)" color="primary">
+          Acceder
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
       <div fxFlex="25%">
-        <img mat-card-image class="img" src="assets/reporte_cargo.png">
+        <img mat-card-image class="img" src="assets/reporte_cargo.png" />
       </div>
       <mat-card-content fxFlex="75%">
         <h3>Reporte Cargo</h3>
         <p>
-          Permite obtener la lista de los documentos registrados para la firma de su cargo.
+          Permite obtener la lista de los documentos registrados para la firma
+          de su cargo.
         </p>
-        <button mat-raised-button (click)="reporte()" color="primary">Acceder</button>
+        <button mat-raised-button (click)="reporte()" color="primary">
+          Acceder
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
   <h2>Mis Documentos por Tramitar</h2>
   <div class="flex-container" fxLayout="row">
-    <mat-card fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutGap="0.3%"
-              fxLayoutAlign="center">
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
       <div fxFlex="25%">
-        <img mat-card-image class="img" src="assets/tramitar_ex.png">
+        <img mat-card-image class="img" src="assets/tramitar_ex.png" />
       </div>
       <mat-card-content fxFlex="75%">
         <h3>Tramitar Documentos</h3>
         <p>
-          Permite tramitar los documentos externos que fueron ingresados por mesa de partes. 
+          Permite tramitar los documentos externos que fueron ingresados por
+          mesa de partes.
         </p>
-        <button mat-raised-button (click)="bandeja(2)" color="primary">Acceder</button>
+        <button mat-raised-button (click)="bandeja(2)" color="primary">
+          Acceder
+        </button>
       </mat-card-content>
     </mat-card>
-    <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.3%" fxLayoutAlign="center">
-        <div fxFlex="25%">
-          <img mat-card-image class="img" src="assets/registrar_in.png">
-        </div>
-        <mat-card-content fxFlex="75%">
-          <h3>Generar Documento para V°B°</h3>
-          <p matTooltip="PREVIA CAPACITACIÓN">
-            Permite registrar un nuevo documento interno para su respectiva aprobación. 
-          </p>
-          <button matTooltip="PREVIA CAPACITACIÓN"
-                  matTooltipClass="example-tooltip-red"
-                  mat-raised-button (click)="documentoNuevoInterno()" 
-                  color="primary"
-                  >Acceder</button>
-        </mat-card-content>
-    </mat-card> 
-    <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.3%" fxLayoutAlign="center">
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
       <div fxFlex="25%">
-        <img mat-card-image class="img" src="assets/tramitar_in.png">
+        <img mat-card-image class="img" src="assets/registrar_in.png" />
+      </div>
+      <mat-card-content fxFlex="75%">
+        <h3>Generar Documento para V°B°</h3>
+        <p matTooltip="PREVIA CAPACITACIÓN">
+          Permite registrar un nuevo documento interno para su respectiva
+          aprobación.
+        </p>
+        <button
+          matTooltip="PREVIA CAPACITACIÓN"
+          matTooltipClass="example-tooltip-red"
+          mat-raised-button
+          (click)="documentoNuevoInterno()"
+          color="primary"
+        >
+          Acceder
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
+      <div fxFlex="25%">
+        <img mat-card-image class="img" src="assets/tramitar_in.png" />
       </div>
       <mat-card-content fxFlex="75%">
         <h3>Revisar Documentos para V°B°</h3>
         <p matTooltip="PREVIA CAPACITACIÓN">
-          Permite tramitar un documento interno para su respectivo aprobación o rechazo. 
-         </p>      <!--[disabled]="true"  -->
-        <button mat-raised-button (click)="documentoInterno()" color="primary" matTooltip="PREVIA CAPACITACIÓN">Acceder</button>
+          Permite tramitar un documento interno para su respectivo aprobación o
+          rechazo.
+        </p>
+        <!--[disabled]="true"  -->
+        <button
+          mat-raised-button
+          (click)="documentoInterno()"
+          color="primary"
+          matTooltip="PREVIA CAPACITACIÓN"
+        >
+          Acceder
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
   <h2>Opciones de Ayuda</h2>
-    <!-- <h2> Buscar Documento </h2> -->
-    <div class="flex-container" fxLayout="row">
-      <mat-card fxLayout="row"
-                fxLayout.xs="column"
-                fxLayoutWrap
-                fxLayoutGap="0.3%"
-                fxLayoutAlign="center">
-        <div fxFlex="25%">
-          <img mat-card-image class="img" src="assets/buscar_doc.png">
-        </div>
-        <mat-card-content fxFlex="75%">
-          <h3>Buscar Documento</h3>
-          <p>
-            Permite visualizar todos los documentos que fueron registrados en la institución. 
-          </p>
-          <button mat-raised-button (click)="seguimientoDocumento()" color="primary">Acceder</button>
-        </mat-card-content>
-      </mat-card>
-    <!-- <h2>Reportes Doc Externos</h2> -->
-      <mat-card fxLayout="row"
-                fxLayout.xs="column"
-                fxLayoutWrap
-                fxLayoutGap="0.3%"
-                fxLayoutAlign="center">
-        <div fxFlex="25%">
-          <img mat-card-image class="img" src="assets/reporte_externo.png">
-        </div>
-        <mat-card-content fxFlex="75%">
-          <h3>Reporte Doc. externos</h3>
-          <p>
-            Permite visualizar el estado de los documentos externos en su trámite.  
-          </p>
-          <button mat-raised-button (click)="documentoExternoReportes()" color="primary">Acceder</button>
-        </mat-card-content>
-      </mat-card>
-  <!-- <h2>Reportes Doc Internos</h2> -->
-      <mat-card fxLayout="row"
-              fxLayout.xs="column"
-              fxLayoutWrap
-              fxLayoutGap="0.3%"
-              fxLayoutAlign="center">
+  <!-- <h2> Buscar Documento </h2> -->
+  <div class="flex-container" fxLayout="row">
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
       <div fxFlex="25%">
-        <img mat-card-image class="img" src="assets/reportes_doc.png">
+        <img mat-card-image class="img" src="assets/buscar_doc.png" />
+      </div>
+      <mat-card-content fxFlex="75%">
+        <h3>Buscar Documento</h3>
+        <p>
+          Permite visualizar todos los documentos que fueron registrados en la
+          institución.
+        </p>
+        <button
+          mat-raised-button
+          (click)="seguimientoDocumento()"
+          color="primary"
+        >
+          Acceder
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <!-- <h2>Reportes Doc Externos</h2> -->
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
+      <div fxFlex="25%">
+        <img mat-card-image class="img" src="assets/reporte_externo.png" />
+      </div>
+      <mat-card-content fxFlex="75%">
+        <h3>Reporte Doc. externos</h3>
+        <p>
+          Permite visualizar el estado de los documentos externos en su trámite.
+        </p>
+        <button
+          mat-raised-button
+          (click)="documentoExternoReportes()"
+          color="primary"
+        >
+          Acceder
+        </button>
+      </mat-card-content>
+    </mat-card>
+    <!-- <h2>Reportes Doc Internos</h2> -->
+    <mat-card
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.3%"
+      fxLayoutAlign="center"
+    >
+      <div fxFlex="25%">
+        <img mat-card-image class="img" src="assets/reportes_doc.png" />
       </div>
       <mat-card-content fxFlex="75%">
         <h3>Reporte Doc. Internos</h3>
         <p>
-          Permite visualizar el estado de los documentos internos en su trámite. 
+          Permite visualizar el estado de los documentos internos en su trámite.
         </p>
-        <button mat-raised-button (click)="documentoInternoReportes()" color="primary">Acceder</button>
+        <button
+          mat-raised-button
+          (click)="documentoInternoReportes()"
+          color="primary"
+        >
+          Acceder
+        </button>
       </mat-card-content>
     </mat-card>
-    
+
     <!-- <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.3%" fxLayoutAlign="center">
         <div fxFlex="25%">
           <img mat-card-image class="img" src="assets/registrar_ex.png">
@@ -150,11 +226,11 @@
         <mat-card-content fxFlex="75%">
           <h3>Registrar Doc. Nuevo Externo</h3>
           <p>
-            Permite registrar un nuevo documento externo que ingresa a la organización. 
+            Permite registrar un nuevo documento externo que ingresa a la organización.
           </p>
           <button mat-raised-button (click)="documentoInterno()" color="primary">Acceder</button>
         </mat-card-content>
-    </mat-card> 
+    </mat-card>
     <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.3%" fxLayoutAlign="center">
       <div fxFlex="25%">
         <img mat-card-image class="img" src="assets/registrar_ex.png">
@@ -162,11 +238,12 @@
       <mat-card-content fxFlex="75%">
         <h3>Registrar Doc. Nuevo Externo</h3>
         <p>
-          Permite registrar un nuevo documento externo que ingresa a la organización. 
+          Permite registrar un nuevo documento externo que ingresa a la organización.
         </p>
         <button mat-raised-button (click)="documentoInterno()" color="primary">Acceder</button>
       </mat-card-content>
     </mat-card> -->
     <!-- </div> -->
-  <!-- </div> -->
+    <!-- </div> -->
+  </div>
 </div>

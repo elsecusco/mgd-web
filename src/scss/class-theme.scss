@@ -1,48 +1,48 @@
+@use "@angular/material" as mat;
+@use "sass:map";
+@include mat.core();
+
 @mixin class-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
 
   .default-theme,
   .blue-theme {
-
     .cl,
     .text {
       color: $gray-light;
     }
-
   }
 
   .black-theme {
-
     .cl,
     .text {
       color: $gray-black;
     }
   }
 
-
   .cl-primary,
   .text-primary,
   h2 {
-    color: mat-color($primary);
+    color: mat.get-color-from-palette($primary);
   }
 
   .bg-primary {
-    color: mat-color($primary, default-contrast);
-    background-color: mat-color($primary);
+    color: mat.get-color-from-palette($primary, default-contrast);
+    background-color: mat.get-color-from-palette($primary);
   }
 
   .cl-accent,
   .text-accent {
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 
   .cl-warn,
   .text-warn {
-    color: mat-color($warn);
+    color: mat.get-color-from-palette($warn);
   }
 }
 
@@ -132,9 +132,11 @@
   width: 100%;
 }
 
-
 .max-wd-950 {
   max-width: 950px;
+}
+.max-wd-1300 {
+  max-width: 1300px;
 }
 
 /**********************PADDING************************/
@@ -180,7 +182,6 @@
 .overflow-auto {
   overflow: auto;
 }
-
 
 // .loading-spinner {
 //   // margin-top: 30px;

@@ -1,54 +1,53 @@
-<mat-card fxLayout="column"
-                  fxLayoutAlign="center"
-                  fxLayoutGap 
-                  fxLayout.xs="row"
-                  fxLayoutAlign.xs="start">
-            <div class="cuadro">
-                <span class = "titulo circle-btn" matSuffix> Detalle - Sielse </span>
-                <!-- <mat-icon matSuffix>assignment_turned_in</mat-icon>  -->
-                <mat-divider class="mg-bot-8" 
-                              style="height:2px"></mat-divider>
-                <!-- <ul>
+<mat-card
+  fxLayout="column"
+  fxLayoutAlign="center"
+  fxLayoutGap
+  fxLayout.xs="row"
+  fxLayoutAlign.xs="start"
+>
+  <div class="cuadro">
+    <span class="titulo circle-btn" matSuffix> Detalle - Sielse </span>
+    <!-- <mat-icon matSuffix>assignment_turned_in</mat-icon>  -->
+    <mat-divider class="mg-bot-8" style="height: 2px"></mat-divider>
+    <!-- <ul>
                  <li class = "contenido">{{data.detalle.usuarioDestino}}</li>
                </ul> -->
-                <mat-divider class="mg-bot-8"
-                              style="height:2px"></mat-divider>
+    <mat-divider class="mg-bot-8" style="height: 2px"></mat-divider>
 
-                <div style="display: flex; justify-content: space-between;">              
-                  <div>
-                    <p class = "subtitulo">Codigo MGD:</p>
-                    <p class = "contenido">{{data.codigoMGD}}</p>
-                  </div>
-                  <div style="margin-left: 8px;">
-                    <p class = "subtitulo">Codigo Sielse:</p>
-                    <p class = "contenido">{{data.codigoSielse}}</p>
-                  </div>
-                  <div style="margin-left: 8px;">
-                    <p class = "subtitulo">Tipo Analitico:</p>
-                    <p class = "contenido">{{data.tipoAnalitico}}</p>
-                  </div>
-                </div>
-                
-                <div>
-                  <p class = "subtitulo">Descripción Atención Sielse:</p>
-                  <p class = "contenido">{{data.descripcionAtencionSielse}}</p>
-                </div>
+    <div style="display: flex; justify-content: space-between">
+      <div>
+        <p class="subtitulo">Codigo MGD:</p>
+        <p class="contenido">{{ data.codigoMGD }}</p>
+      </div>
+      <div style="margin-left: 8px">
+        <p class="subtitulo">Codigo Sielse:</p>
+        <p class="contenido">{{ data.codigoSielse }}</p>
+      </div>
+      <div style="margin-left: 8px">
+        <p class="subtitulo">Tipo Analitico:</p>
+        <p class="contenido">{{ data.tipoAnalitico }}</p>
+      </div>
+    </div>
 
-                <mat-divider class="mg-bot-8" 
-                              style="height:2px"></mat-divider>
-      <detalle-sielse-seguimiento *ngIf="data.codigoSielse!='En Proceso'"
-        [codigoSielse]="data.codigoSielse"
-        >
-</detalle-sielse-seguimiento>
-                <!-- <mat-label 
+    <div>
+      <p class="subtitulo">Descripción Atención Sielse:</p>
+      <p class="contenido">{{ data.descripcionAtencionSielse }}</p>
+    </div>
+
+    <mat-divider class="mg-bot-8" style="height: 2px"></mat-divider>
+    <detalle-sielse-seguimiento
+      *ngIf="data.codigoSielse != 'En Proceso'"
+      [codigoSielse]="data.codigoSielse"
+    >
+    </detalle-sielse-seguimiento>
+    <!-- <mat-label 
                     class = "lectura"
                     mat-dialog-title
                     *ngIf="data.detalle.tipoAtendido== 'A'; else elseBlock">Atención Informativa y de Lectura</mat-label> -->
-                     <!-- <ng-template class = "atendido" #elseBlock>
+    <!-- <ng-template class = "atendido" #elseBlock>
                         <span class = "atendido">
                           Atencion Final
                         </span>
                 </ng-template> -->
-               
-
-
+  </div></mat-card
+>

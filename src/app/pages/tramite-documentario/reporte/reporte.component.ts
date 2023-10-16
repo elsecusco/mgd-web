@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { ReporteDocumento } from '@models/tramite/reporte-documento';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { ReporteDocumento } from '../../../@models/tramite/reporte-documento';
 import { Select } from '@ngxs/store';
 import { ReporteState } from '../states/reporte.state';
 import { Observable } from 'rxjs';
@@ -12,9 +14,9 @@ import { Observable } from 'rxjs';
 })
 export class ReporteComponent implements OnInit {
   //#region variables tabla
-  datos: MatTableDataSource<ReporteDocumento>
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  datos!: MatTableDataSource<ReporteDocumento>
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   columnas: string[] = [
     'CodigoDocumentoTramite',
@@ -44,9 +46,9 @@ export class ReporteComponent implements OnInit {
     //#endregion variables tabla
     //#region ngxs - state bandeja
     @Select(ReporteState.pending)
-    public pending$:Observable<boolean>;
+    public pending$!:Observable<boolean>;
     @Select(ReporteState.documentos)
-    public docs$: Observable<ReporteDocumento[]>;
+    public docs$!: Observable<ReporteDocumento[]>;
 
   constructor() { }
 

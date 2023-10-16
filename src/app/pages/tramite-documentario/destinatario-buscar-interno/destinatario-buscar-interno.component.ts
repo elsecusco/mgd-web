@@ -1,23 +1,29 @@
-import { Destinatario } from '@models/tramite/destinatario';
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Destinatario } from '../../../@models/tramite/destinatario';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { DestinatarioFiltroComponent } from '../destinatario-filtro/destinatario-filtro.component';
 
 @Component({
   selector: 'destinatario-buscar-interno',
   templateUrl: './destinatario-buscar-interno.component.html',
-  styleUrls: ['./destinatario-buscar-interno.component.scss']
+  styleUrls: ['./destinatario-buscar-interno.component.scss'],
 })
 export class DestinatarioBuscarInternoComponent implements OnInit {
-
-  @ViewChild(DestinatarioFiltroComponent) filtro:DestinatarioFiltroComponent;
+  @ViewChild(DestinatarioFiltroComponent) filtro!: DestinatarioFiltroComponent;
   tipoBusqueda = 2;
   porNombre = 1;
   @Output() para = new EventEmitter<Destinatario[]>();
-  
-  private _matLabel: string;
-  private _onlyOne: boolean=false;
+
+  private _matLabel: string = '';
+  private _onlyOne: boolean = false;
   private _blacklist: string = '';
-  
+
   @Input()
   set matLabel(matLabel: string) {
     this._matLabel = matLabel || '';
@@ -25,7 +31,7 @@ export class DestinatarioBuscarInternoComponent implements OnInit {
   get matLabel(): string {
     return this._matLabel;
   }
-  
+
   @Input()
   set onlyOne(onlyOne: boolean) {
     this._onlyOne = onlyOne || false;
@@ -47,10 +53,10 @@ export class DestinatarioBuscarInternoComponent implements OnInit {
   destinatariosPara(destinatarios: Destinatario[]) {
     this.para.emit(destinatarios);
   }
-  clearAll(){
+  clearAll() {
     this.filtro.removeAll();
   }
-  setDefault(destinatarioDefault:Destinatario){
-    this.filtro.setDefault(destinatarioDefault)
+  setDefault(destinatarioDefault: Destinatario) {
+    this.filtro.setDefault(destinatarioDefault);
   }
 }

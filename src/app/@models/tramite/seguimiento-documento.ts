@@ -1,23 +1,21 @@
-export class SeguimientoDocumento  {
-    codigoDocumentoTramite: number;
-    nombreRemitenteDocumento: string;
-    fechaDocumento?: string;//Date;
-    contenidoDocumento: string;
-    numeroExpediente?:string;
-    numeroPaginas?:number;
-    nombreTipoDocumento?:string;
-    nombreUsuario?:string;
+export class SeguimientoDocumento {
+  codigoDocumentoTramite: number;
+  nombreRemitenteDocumento: string;
+  fechaDocumento?: string; //Date;
+  contenidoDocumento: string;
+  numeroExpediente?: string;
+  numeroPaginas?: number;
+  nombreTipoDocumento?: string;
+  nombreUsuario?: string;
 
-   constructor() {
-       this.codigoDocumentoTramite = null;
-       this.nombreRemitenteDocumento = null;
-       this.fechaDocumento = null;
-       this.contenidoDocumento = null;
-       this.numeroExpediente = null;
-       this.numeroPaginas = null;
-       this.nombreTipoDocumento = null;
-       this.nombreUsuario = null;
-
-
-   }
+  constructor() {
+    this.codigoDocumentoTramite = 0;
+    this.nombreRemitenteDocumento = '';
+    this.fechaDocumento = '';
+    this.contenidoDocumento = '';
+    this.numeroExpediente = '';
+    this.numeroPaginas = 0;
+    this.nombreTipoDocumento = '';
+    this.nombreUsuario = '';
+  }
 }

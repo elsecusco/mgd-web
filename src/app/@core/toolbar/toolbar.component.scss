@@ -1,8 +1,9 @@
-@import '~@angular/material/theming';
+@use "@angular/material" as mat;
 
-$config: mat-typography-config();
+// $config: mat-typography-config();
+$config: mat.define-typography-config();
 
-@import '../../../scss/fu/var';
+@import "../../../scss/fu/var";
 
 :host {
   z-index: $toolbar-z-index;
@@ -13,7 +14,7 @@ $config: mat-typography-config();
   // background: $toolbar-background;
   padding-right: 0;
   height: $toolbar-height;
-  padding-left: $spacing/1.5;
+  padding-left: calc($spacing/1.5);
   max-width: 100%;
 
   // @include mat-elevation($toolbar-elevation);
@@ -21,7 +22,6 @@ $config: mat-typography-config();
   .button {
     border-left: 1px solid rgba(0, 0, 0, 0.08);
     display: flex;
-
   }
 
   .button-center {
@@ -32,6 +32,6 @@ $config: mat-typography-config();
   }
 
   @include media-xs {
-    padding-left: $spacing/3;
+    padding-left: calc($spacing/3);
   }
 }

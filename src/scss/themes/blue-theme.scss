@@ -1,9 +1,31 @@
-$app-blue-primary: mat-palette($mat-indigo, 800, 300, 900);
-$app-blue-accent: mat-palette($mat-light-blue);
-$app-blue-warn: mat-palette($mat-pink, 600);
+$app-blue-primary: mat.define-palette(mat.$indigo-palette, 800, 300, 900);
+$app-blue-accent: mat.define-palette(mat.$light-blue-palette);
+$app-blue-warn: mat.define-palette(mat.$pink-palette, 600);
 
-$app-blue-theme: mat-light-theme(
-  $app-blue-primary,
-  $app-blue-accent,
-  $app-blue-warn
+$app-blue-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-blue-primary,
+      accent: $app-blue-accent,
+      warn: $app-blue-warn,
+    ),
+  )
 );
+
+.mat-mdc-text-field-wrapper {
+  // height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex: none !important;
+}
+
+.mat-mdc-form-field-flex {
+  display: flex !important;
+  align-items: center !important;
+}
+.sidenav-list > ngx-sidenav-item .estilos {
+  height: 43px !important;
+}
+.mat-mdc-text-field-wrapper{
+  // height: 50px !important;
+}

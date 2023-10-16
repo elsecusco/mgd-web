@@ -6,30 +6,28 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  MatAutocompleteSelectedEvent,
-  MatChipInputEvent,
-  MatAutocomplete
-} from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 import { Observable, of } from 'rxjs';
 import {
   startWith,
   debounceTime,
   distinctUntilChanged,
   switchMap,
-  finalize
+  finalize,
 } from 'rxjs/operators';
 
-import { Area } from '@models/tramite/area';
+import { Area } from '../../../@models/tramite/area';
 import { TramiteService } from '../tramite-documentario.service';
 
 @Component({
   selector: 'area-filtro',
   templateUrl: './area-filtro.component.html',
-  styleUrls: ['./area-filtro.component.scss']
+  styleUrls: ['./area-filtro.component.scss'],
 })
 export class AreaFiltroComponent implements OnInit {
   show = 'hidden';
@@ -38,13 +36,13 @@ export class AreaFiltroComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonlyChips=false;
+  readonlyChips = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   areaCtrl = new FormControl();
-  allAreas: Observable<Area[]>;
+  allAreas!: Observable<Area[]>;
   areas: Array<Area> = [];
 
-  private _matLabel: string;
+  private _matLabel: string = '';
 
   @Input()
   set matLabel(matLabel: string) {
@@ -56,24 +54,22 @@ export class AreaFiltroComponent implements OnInit {
 
   @Output() returnAreas = new EventEmitter<Area[]>();
 
-  @ViewChild('areaInput') areaInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('areaInput') areaInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
   constructor(private api: TramiteService) {}
 
-  displayFn = (d?: Area) => (d ? d.nombreArea : undefined);
+  displayFn = (d?: Area) => (d ? d.nombreArea : '');
 
   ngOnInit() {
     this.allAreas = this.areaCtrl.valueChanges.pipe(
       startWith(''),
       debounceTime(200),
       distinctUntilChanged(),
-      switchMap(nombre => this.buscarArea(nombre))
+      switchMap((nombre) => this.buscarArea(nombre))
     );
   }
-  buscarArea(value): Observable<Area[]> {
+  buscarArea(value: any): Observable<Area[]> {
     if (typeof value == 'object' || value.length < 5) return of([]);
 
     this.show = 'visible';
@@ -100,7 +96,6 @@ export class AreaFiltroComponent implements OnInit {
     //   this.areaCtrl.setValue(null);
     // }
   }
-  
 
   remove(area: Area): void {
     const index = this.areas.indexOf(area);
@@ -109,17 +104,17 @@ export class AreaFiltroComponent implements OnInit {
       this.areas.splice(index, 1);
     }
     this.returnAreas.emit(this.areas);
-    this.readonlyChips = (this.areas.length>0);
+    this.readonlyChips = this.areas.length > 0;
   }
-  removeAll():void{
-    this.areas=[];
+  removeAll(): void {
+    this.areas = [];
     this.returnAreas.emit(this.areas);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     const destAux = <Area>event.option.value;
     const dest = this.areas.find(
-      d => d.nombreArea.toUpperCase() == destAux.nombreArea.toUpperCase()
+      (d) => d.nombreArea.toUpperCase() == destAux.nombreArea.toUpperCase()
     );
     if (dest === null || dest === undefined) {
       this.areas.push(<Area>event.option.value);
@@ -129,7 +124,7 @@ export class AreaFiltroComponent implements OnInit {
       this.areaInput.nativeElement.value = '';
       this.areaCtrl.setValue(null);
     }
-    this.readonlyChips = (this.areas.length>0);
+    this.readonlyChips = this.areas.length > 0;
     this.returnAreas.emit(this.areas);
   }
 

@@ -4,7 +4,7 @@
      class="wd-100">
 
   <button mat-stroked-button
-          (ngxf-select)="uploadFile($event)"
+          (ngxf-select)="uploadFile($any($event))"
           color="primary"
           type="button">
     Selecionar Archivo <mat-icon>attachment</mat-icon>

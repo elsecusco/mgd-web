@@ -1,14 +1,25 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, ViewChild, Input, Output, EventEmitter} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete} from '@angular/material';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocomplete,
+} from '@angular/material/autocomplete';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'chips-autocomplete',
   templateUrl: './chips-autocomplete.component.html',
-  styleUrls: ['./chips-autocomplete.component.scss']
+  styleUrls: ['./chips-autocomplete.component.scss'],
 })
 export class ChipsAutocompleteComponent {
   visible = true;
@@ -21,7 +32,8 @@ export class ChipsAutocompleteComponent {
   objects: any[] = [];
   private _matLabel = '';
   private _allObjects: any[] = [];
-  private _nameObject: string;
+  private _nameObject: string = '';
+
   @Input()
   set matLabel(matLabel: string) {
     this._matLabel = matLabel || '';
@@ -46,15 +58,18 @@ export class ChipsAutocompleteComponent {
     return this._allObjects;
   }
 
-  @Output() returnObjects = new EventEmitter< any[] >();
+  @Output() returnObjects = new EventEmitter<any[]>();
 
-  @ViewChild('objectInput') fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('objectInput') fruitInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
   constructor() {
     this.filteredObjects = this.objectControl.valueChanges.pipe(
-        startWith(null),
-        map((object: string | null) => object ? this._filter(object) : this.allObjects.slice()));
+      startWith(null),
+      map((object: string | null) =>
+        object ? this._filter(object) : this.allObjects.slice()
+      )
+    );
   }
 
   add(event: MatChipInputEvent): void {
@@ -98,6 +113,9 @@ export class ChipsAutocompleteComponent {
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
 
-    return this.allObjects.filter(object => object[this.nameObject].toLowerCase().indexOf(filterValue) === 0);
+    return this.allObjects.filter(
+      (object) =>
+        object[this.nameObject].toLowerCase().indexOf(filterValue) === 0
+    );
   }
 }

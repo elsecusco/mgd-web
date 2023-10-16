@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DetalleDocumento } from '@models/tramite/detalle-documento';
+import { DetalleDocumento } from '../../../@models/tramite/detalle-documento';
 import { TramiteService } from '../tramite-documentario.service';
 
 @Component({
   selector: 'documento-detalle',
   templateUrl: './documento-detalle.html',
-  styleUrls: ['./documento-detalle.scss']
+  styleUrls: ['./documento-detalle.scss'],
 })
 export class DocumentoDetalle implements OnInit {
-  @Input() codigoDocumento: number;
+  @Input() codigoDocumento: number = 0;
 
-  doc: DetalleDocumento;
+  doc!: DetalleDocumento;
 
   constructor(private api: TramiteService) {}
 
@@ -20,10 +20,9 @@ export class DocumentoDetalle implements OnInit {
   }
 
   detalleDocumento() {
-    this.api
-      .detalleDocumento(this.codigoDocumento)
-      .subscribe(docs => {this.doc = docs[0]
-        //console.log(JSON.stringify(this.doc))
-      });
+    this.api.detalleDocumento(this.codigoDocumento).subscribe((docs) => {
+      this.doc = docs[0];
+      // console.log(JSON.stringify(this.doc))
+    });
   }
 }

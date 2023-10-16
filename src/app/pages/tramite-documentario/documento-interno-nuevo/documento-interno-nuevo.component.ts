@@ -1,40 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentoInternoState } from '../states/documento-interno.state';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
-import { BandejaDocumento } from '@models/tramite/bandeja-documento';
+// import { BandejaDocumento } from '@models/tramite/bandeja-documento';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DocumentoInterno } from '@models/tramite/documento-interno';
+import { DocumentoInterno } from '../../../@models/tramite/documento-interno';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'documento-interno-nuevo',
   templateUrl: './documento-interno-nuevo.component.html',
-  styleUrls: ['./documento-interno-nuevo.component.scss']
+  styleUrls: ['./documento-interno-nuevo.component.scss'],
 })
 export class DocumentoInternoNuevoComponent implements OnInit {
-  codigoDocumento = 0;//alli coloca un codigo de documento q existe
-  tipoDocumento = 0;
-  numeroValorizaciones = 0;
+  codigoDocumento: any; //alli coloca un codigo de documento q existe
+  tipoDocumento: any;
+  numeroValorizaciones: any;
   @Emitter(DocumentoInternoState.setDocument)
-  private setDocument: Emittable<{
+  private setDocument!: Emittable<{
     documento: DocumentoInterno;
     vista: string;
   }>;
 
   doc: DocumentoInterno = new DocumentoInterno();
   @Select(DocumentoInternoState.documento)
-  public doc$: Observable<DocumentoInterno>;
-  
+  public doc$!: Observable<DocumentoInterno>;
+
   constructor(private router: Router, private route: ActivatedRoute) {
-    this.doc$.subscribe(d => {
-                this.doc = d;
-                this.codigoDocumento=this.doc.codigoDocumentoTramite;
-              });
+    this.doc$.subscribe((d) => {
+      this.doc = d;
+      this.codigoDocumento = this.doc.codigoDocumentoTramite;
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   ngOnDestroy() {
     const doc = new DocumentoInterno();
     this.setDocument.emit({ documento: doc, vista: '' });

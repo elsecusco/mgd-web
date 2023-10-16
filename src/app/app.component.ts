@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { IconService } from '@core/icon.service';
-import { ThemeService } from '@core/theme-picker/theme.service';
+import { IconService } from './@core/icon.service';
+import { ThemeService } from './@core/theme-picker/theme.service';
 import {
   ThemeStorage,
   SiteTheme,
-  Themes
-} from '@core/theme-picker/theme-storage.service';
+  Themes,
+} from './@core/theme-picker/theme-storage.service';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>'
+  template: '<router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
   constructor(
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.installDefaultTheme();
-    this.themeService.recibir().subscribe(theme => this.setTheme(theme));
+    this.themeService.recibir().subscribe((theme) => this.setTheme(theme));
   }
 
   private installDefaultTheme() {
@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
     this.setTheme(newTheme);
   }
   private setTheme(theme: SiteTheme) {
+
+
     const body = document.getElementsByTagName('body')[0];
     const classList = body.classList;
     const toRemove = Array.from(classList).filter((item: string) =>

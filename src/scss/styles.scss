@@ -1,47 +1,49 @@
-@import 'styles-app-loading';
+@use "@angular/material" as mat;
+mat.$theme-ignore-duplication-warnings: true;
 
-@import 'styles-reset';
-@import 'colors';
-@import '~@angular/material/theming';
+@use "sass:map";
 
+@include mat.core();
 
-@include mat-core();
+@import "styles-app-loading";
+@import "styles-reset";
+@import "colors";
 
 // temas
-@import './themes/default-theme';
-@import './themes/light-theme';
-@import './themes/black-theme';
-@import './themes/blue-theme';
-
+@import "./themes/default-theme";
+@import "./themes/light-theme";
+@import "./themes/black-theme";
+@import "./themes/blue-theme";
 
 //estilo elementos
-@import './themes/elements/button-theme';
-@import './themes/elements/button-toggle-theme';
-@import './themes/elements/form-field-theme';
-@import './themes/elements/dialog-theme';
-@import './themes/elements/card-theme';
-@import './themes/elements/table-theme';
+@import "./themes/elements/button-theme";
+@import "./themes/elements/button-toggle-theme";
+@import "./themes/elements/form-field-theme";
+@import "./themes/elements/dialog-theme";
+@import "./themes/elements/card-theme";
+@import "./themes/elements/table-theme";
 
 //mixins components
-@import 'styles-reset.scss-theme';
-@import '../app/@core/loading/loading.component-theme';
+@import "styles-reset.scss-theme";
+@import "../app/@core/loading/loading.component-theme";
 
-@import '../app/@core/toolbar/toolbar.component.scss-theme.scss';
-@import '../app/@core/side-nav/sidenav.component.scss-theme.scss';
-@import '../app/@core/breadcrumbs/breadcrumbs.component-theme.scss';
+@import "../app/@core/toolbar/toolbar.component.scss-theme.scss";
+@import "../app/@core/side-nav/sidenav.component.scss-theme.scss";
+@import "../app/@core/breadcrumbs/breadcrumbs.component-theme.scss";
 
 // @import '../app/@shared/nav-bar/nav-bar-theme';
-
-@import "~ng-pick-datetime/assets/style/picker.min.css";
-
+@import "@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+// @import "ng-pick-datetime/assets/style/picker.min.css";
 
 //clases tema
-@import 'class-theme';
+@import "class-theme";
+
+@import "../../src/scss/themes/elements/menu-item-them.scss";
 
 @mixin snackbar-cargando-app-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
 
   .cargando-app {
     .mat-simple-snackbar {
@@ -49,7 +51,7 @@
       font-weight: bold;
     }
 
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 }
 
@@ -58,7 +60,7 @@
   @include ngx-toolbar-component-theme($theme);
   @include ngx-sidenav-component-theme($theme);
   @include ngx-breadcrumbs-component-theme($theme);
-  // @include menu-item-theme($theme);
+  // // @include menu-item-theme($theme);
   @include loading-component-theme($theme);
   @include snackbar-cargando-app-theme($theme);
 
@@ -72,28 +74,37 @@
 
   //clases
   @include class-theme($theme);
+
+  @include menu-item-theme($theme);
 }
 
 .default-theme {
-  @include angular-material-theme($app-default-theme);
+  @include mat.all-component-themes($app-default-theme);
   @include custom-components-theme($app-default-theme);
 }
 
 .light-theme {
-  @include angular-material-theme($app-light-theme);
+  @include mat.all-component-colors($app-light-theme);
   @include custom-components-theme($app-light-theme);
 }
 
 .black-theme {
-  @include angular-material-theme($app-black-theme);
+  @include mat.all-component-colors($app-black-theme);
+  // @include angular-material-theme($app-black-theme);
   @include custom-components-theme($app-black-theme);
 }
 
 .blue-theme {
-  @include angular-material-theme($app-blue-theme);
+  @include mat.all-component-colors($app-blue-theme);
+  // @include angular-material-theme($app-blue-theme);
   @include custom-components-theme($app-blue-theme);
 }
 
-.custom-size-btn .mat-button-wrapper{
+.custom-size-btn .mat-button-wrapper {
   padding: 0 !important;
+}
+
+mat-card {
+  padding: 15px;
+  margin: 10px;
 }

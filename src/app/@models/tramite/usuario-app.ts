@@ -1,10 +1,8 @@
-export class  UsuarioApp{
-    loginUsuario: string;
-    nombreUsuario: string;
+export class UsuarioApp {
+  loginUsuario: string;
+  nombreUsuario: string;
   constructor() {
-      this.loginUsuario = null;
-      this.nombreUsuario = null;
-      
-    }
+    this.loginUsuario = '';
+    this.nombreUsuario = '';
   }
-  
+}

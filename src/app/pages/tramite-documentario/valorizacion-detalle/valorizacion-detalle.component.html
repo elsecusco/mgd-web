@@ -31,7 +31,7 @@
             formControlName="porRazonSocial"
             placeholder="Digite Razon Social...">
           <mat-icon matSuffix>edit</mat-icon>
-      </mat-form-field>      
+      </mat-form-field>
       <mat-form-field class="campoRuc"
                       appearance="outline"
                       color="primary">
@@ -40,18 +40,18 @@
             formControlName="porRuc"
             placeholder="Digite Ruc...">
           <mat-icon matSuffix>edit</mat-icon>
-      </mat-form-field>      
-    </row-container> 
+      </mat-form-field>
+    </row-container>
     <row-container>
       <mat-form-field class="campoDescripcion"
                       appearance="outline"
                       color="primary">
           <mat-label>Descripción del Contrato</mat-label>
-          <input matInput 
+          <input matInput
             formControlName="porDescripcionContrato"
             placeholder="Digite parte de la descripcion...">
           <mat-icon matSuffix>edit</mat-icon>
-      </mat-form-field>      
+      </mat-form-field>
     </row-container>
     <row-container>
       <two-picker class="campoFecha"
@@ -59,20 +59,20 @@
               [fechaFin]="form.value.porFechaFin"
               (changeFecha)="changeFecha($event)">
      </two-picker>
-   </row-container> 
-    
+   </row-container>
+
     </p>
     <div class="botonBuscar">
       <button class="boton"
               type="submit"
               mat-raised-button
-              [disabled]="form.get('porDescripcionContrato').value ==='' && form.get('porRuc').value ==='' && form.get('porRazonSocial').value ===''"
+              [disabled]="form.get('porDescripcionContrato')!.value ==='' && form.get('porRuc')!.value ==='' && form.get('porRazonSocial')!.value ===''"
               color="primary">BUSCAR
         <mat-icon>find_in_page</mat-icon>
       </button>
   </div>
-  
-  <table-container 
+
+  <table-container
                 [heightSub]="10"
                 [loading]="false">
     <table mat-table

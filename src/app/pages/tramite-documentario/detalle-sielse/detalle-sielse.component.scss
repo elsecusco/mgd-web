@@ -1,47 +1,49 @@
-.contenido{
-    font-size: 12px;
-    font-weight: bold;
-  
+.mat-card {
+  padding: 50px 10px 10px 10px;
+  margin: 20px;
+}
+.contenido {
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .cuadro {
-    max-width: 500px;
-    width: 80vw;
-}   
-
-.titulo{
-    font: size 12px;
-    font-weight: bold;
-    font-style: italic;
-    color: #1a405a
+  max-width: 500px;
+  width: 80vw;
 }
 
-.subtitulo{
-    font-weight: bold;
-    font-size: 12px;
-    font-style: italic;
-    color: #1a405a
+.titulo {
+  font: size 12px;
+  font-weight: bold;
+  font-style: italic;
+  color: #1a405a;
 }
 
-.mat-icon{
-    color: #1a405a
+.subtitulo {
+  font-weight: bold;
+  font-size: 12px;
+  font-style: italic;
+  color: #1a405a;
+}
+
+.mat-icon {
+  color: #1a405a;
 }
 
 .atendido {
-    font-weight: bold;
-    font-size: 12px;
-    font-style: italic;
-    color: #e69605 !important; 
-
-  }
- .lectura {
-    font-weight: bold;
-    font-size: 12px;
-    font-style: italic;
-    color: #92412d !important;
- }
- .circle-btn {
-    border: none;
-    padding: 12px 34px;
-    background: url('../../../../assets/logito.png') no-repeat;
-  }
+  font-weight: bold;
+  font-size: 12px;
+  font-style: italic;
+  color: #e69605 !important;
+}
+.lectura {
+  font-weight: bold;
+  font-size: 12px;
+  font-style: italic;
+  color: #92412d !important;
+}
+.circle-btn {
+  border: none;
+  padding: 12px 34px;
+  background: url("../../../../assets/logito.png") no-repeat;
+}

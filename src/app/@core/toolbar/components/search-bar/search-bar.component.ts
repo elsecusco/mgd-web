@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuItem } from '@core/navigator/menu-item.model';
-import { MenuService } from '@core/navigator/menu.service';
+import { MenuItem } from '../../../../@core/navigator/menu-item.model';
+import { MenuService } from '../../../../@core/navigator/menu.service';
 
 @Component({
   selector: 'ngx-search-bar',
@@ -9,8 +9,8 @@ import { MenuService } from '@core/navigator/menu.service';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  input: string;
-  focused: boolean;
+  input: string = '';
+  focused: boolean = true;//-- boolean;
 
   recentlyVisited: MenuItem[] = [];
 

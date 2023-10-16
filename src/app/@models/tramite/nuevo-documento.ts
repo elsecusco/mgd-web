@@ -18,7 +18,7 @@ export class NuevoDocumento {
   codigoEmpresa: number;
   codigoSucursal: number;
   codigoArea: number;
-  loginBuzonCrea:string;
+  loginBuzonCrea: string;
   constructor() {
     this.codigoDocumento = 0;
     this.codigoEstadoDocumento = 1;
@@ -31,15 +31,14 @@ export class NuevoDocumento {
     this.tieneVencimiento = 0;
     this.fechaDocumento = new Date();
     this.fechaRecepcion = new Date();
-    this.fechaCaducidad = null;
-    this.fechaVencimiento = null;
-    this.codigoTipoRecepcion = null;
-    this.codigoRemitente = null;
-    this.codigoTipoDocumento = null;
-    this.codigoEmpresa = null;
-    this.codigoSucursal = null;
-    this.codigoArea = null;
-    this.loginBuzonCrea = null;
-    
+    this.fechaCaducidad = new Date();
+    this.fechaVencimiento = new Date();
+    this.codigoTipoRecepcion = 0;
+    this.codigoRemitente = 0;
+    this.codigoTipoDocumento = 0;
+    this.codigoEmpresa = 0;
+    this.codigoSucursal = 0;
+    this.codigoArea = 0;
+    this.loginBuzonCrea = '';
   }
 }

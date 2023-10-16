@@ -4,37 +4,36 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { DocumentoMesaState } from '../state/documento-mesa.state';
-import { DocumentoMesa } from '@models/documento-mesa';
+import { DocumentoMesa } from '../../../@models/documento-mesa';
 
 @Component({
   selector: 'mesa-nuevo',
   templateUrl: './mesa-nuevo.component.html',
-  styleUrls: ['./mesa-nuevo.component.scss']
+  styleUrls: ['./mesa-nuevo.component.scss'],
 })
 export class MesaNuevoComponent implements OnInit {
-  codigoDocumento = 0;//Probar codigo de documento q existe
+  codigoDocumento: number | string = 0; //Probar codigo de documento q existe
 
   @Emitter(DocumentoMesaState.setDocument)
-  private setDocument: Emittable<{
+  private setDocument!: Emittable<{
     documento: DocumentoMesa;
   }>;
 
   doc: DocumentoMesa = new DocumentoMesa();
   @Select(DocumentoMesaState.documento)
-  public doc$: Observable<DocumentoMesa>;
-  
+  public doc$: Observable<DocumentoMesa> | undefined;
+
   constructor(private router: Router, private route: ActivatedRoute) {
-    this.doc$.subscribe(d => {
-                this.doc = d;
-                this.codigoDocumento=this.doc.codigoDocumentoTramite;
-              });
+    this.doc$?.subscribe((d: any) => {
+      this.doc = d;
+      this.codigoDocumento = this.doc.codigoDocumentoTramite;
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   ngOnDestroy() {
     const doc = new DocumentoMesa();
-    this.setDocument.emit({ documento: doc});
+    this.setDocument.emit({ documento: doc });
   }
   derivar() {
     //emitir documentovacio

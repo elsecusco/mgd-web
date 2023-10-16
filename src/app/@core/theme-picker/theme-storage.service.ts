@@ -1,10 +1,10 @@
 import { Injectable, EventEmitter, Inject } from '@angular/core';
-import { WINDOW } from '@core/window';
+import { WINDOW } from '../../@core/window';
 
 export class SiteTheme {
-  name: string;
-  accent: string;
-  primary: string;
+  name: string = '';
+  accent: string = '';
+  primary: string = '';
   isDark?: boolean;
   isDefault?: boolean;
 }

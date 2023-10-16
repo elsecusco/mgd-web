@@ -4,8 +4,9 @@
     *ngIf="isSave"
     #firma
     [f]="fields"
-    style="position:absolute;z-index:2000"
-    (resultado)="resultadoFirma($event)"></firma>
+    style="position: absolute; z-index: 2000"
+    (resultado)="resultadoFirma($event)"
+  ></firma>
   <h1 mat-dialog-title>Adjuntar Archivo</h1>
   <mat-divider class="mg-bot-8"></mat-divider>
   <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
@@ -13,41 +14,43 @@
     <mat-form-field appearance="outline" color="primary">
       <mat-label>Título del Documento</mat-label>
       <input
-        maxlength="110"
         matInput
+        maxlength="110"
         placeholder="Ingrese Título..."
-        formControlName="titulo"/>
+        formControlName="titulo"
+      />
     </mat-form-field>
-    <div  class="mensaje_documento"
-          *ngIf="titulo.errors?.maxlength"> 
-          <mat-icon>report</mat-icon>
-           No es posible cargar el archivo, máximo 110 caracteres en el título
-    </div> 
+    <!-- cambio titulo.error.maxlenght -->
+    <div *ngIf="titulo?.value">
+      <div class="mensaje_documento" *ngIf="titulo?.errors">
+        <mat-icon>report</mat-icon>
+        No es posible cargar el archivo, máximo 110 caracteres en el título
+      </div>
+    </div>
     <!-- Dentro del pop up -->
-    <mat-radio-group formControlName = "codigoTipoDocumentoTramiteAdjunto" >
-        <mat-radio-button value= "1">Principal</mat-radio-button>
-        <mat-radio-button value= "2">Anexo</mat-radio-button>
+    <mat-radio-group formControlName="codigoTipoDocumentoTramiteAdjunto">
+      <mat-radio-button value="1">Principal</mat-radio-button>
+      <mat-radio-button value="2">Anexo</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field appearance="outline" color="primary">
+    <mat-form-field appearance="outline" color="primary" class="mat-tx">
       <mat-label>Descripción Documento</mat-label>
       <textarea
         matInput
         placeholder="Ingrese Descripción..."
         formControlName="descripcionArchivo"
-        rows="2">
+        rows="3"
+      >
       </textarea>
     </mat-form-field>
 
-    <mat-form-field
-                    appearance="outline"
-                    color="primary"
-                    floatLabel="always">
-      <mat-label>Razón Firma Documento (Solo si va a firmar el documento)</mat-label>
+    <mat-form-field appearance="outline" color="primary" floatLabel="always">
+      <mat-label
+        >Razón Firma Documento (Solo si va a firmar el documento)</mat-label
+      >
       <mat-select formControlName="razon">
-        <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
-                    [value]="t.nombre">                    
-          {{t.nombre}}
+        <mat-option *ngFor="let t of tipos.tiposFirmaMotivo" [value]="t.nombre">
+          {{ t.nombre }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -56,10 +59,7 @@
       <div fxLayout="row" fxLayoutAlign="end center">
         <span class="fw-400 cl-accent">{{ progress }} %</span>
       </div>
-      <mat-progress-bar
-        mode="determinate"
-        [value]="progress"
-        color="accent">
+      <mat-progress-bar mode="determinate" [value]="progress" color="accent">
       </mat-progress-bar>
     </ng-container>
   </div>

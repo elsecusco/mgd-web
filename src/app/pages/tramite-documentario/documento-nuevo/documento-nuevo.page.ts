@@ -2,36 +2,36 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { DocumentoState } from '../states/documento.state';
-import { BandejaDocumento } from '@models/tramite/bandeja-documento';
-import { BandejaFiltro } from '@models/tramite/bandeja-filtro';
+import { BandejaDocumento } from '../../../@models/tramite/bandeja-documento';
+import { BandejaFiltro } from '../../../@models/tramite/bandeja-filtro';
 import { Select } from '@ngxs/store';
 import { BandejaState } from '../states/bandeja.state';
 import { Observable } from 'rxjs';
-import { BuzonesUsuario } from '@models/tramite/buzones-usuario';
+import { BuzonesUsuario } from '../../../@models/tramite/buzones-usuario';
 
 @Component({
   selector: 'documento-nuevo-page',
   templateUrl: './documento-nuevo.page.html',
-  styleUrls: ['./documento-nuevo.page.scss']
+  styleUrls: ['./documento-nuevo.page.scss'],
 })
 export class DocumentoNuevoPage implements OnInit, OnDestroy {
   codigoDocumento = 0;
-  loginUsuarioOrigen:string;
+  loginUsuarioOrigen: string = '';
   sizeAdjuntos = 0;
 
-  bandejaf: BandejaFiltro;
+  bandejaf!: BandejaFiltro;
   @Select(BandejaState.bandejaFiltro)
-  public bandejaf$: Observable<BandejaFiltro>;
+  public bandejaf$!: Observable<BandejaFiltro>;
 
-  buzonActual:BuzonesUsuario;
+  buzonActual!: BuzonesUsuario;
   @Select(BandejaState.buzonActual)
-  public buzonActual$: Observable<BuzonesUsuario>;
+  public buzonActual$!: Observable<BuzonesUsuario>;
 
   @Emitter(BandejaState.loadDocuments)
-  private loadDocs: Emittable<BandejaFiltro>;
+  private loadDocs!: Emittable<BandejaFiltro>;
 
   @Emitter(DocumentoState.setDocument)
-  private setDocument: Emittable<{
+  private setDocument!: Emittable<{
     documento: BandejaDocumento;
     vista: string;
   }>;
@@ -39,13 +39,13 @@ export class DocumentoNuevoPage implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.bandejaf$.subscribe(b => this.bandejaf = b);
-    this.buzonActual$.subscribe(b=>this.buzonActual=b);
+    this.bandejaf$.subscribe((b) => (this.bandejaf = b));
+    this.buzonActual$.subscribe((b) => (this.buzonActual = b));
   }
-  
+
   ngOnDestroy() {
     const doc = new BandejaDocumento();
-    doc.usuarioBuzon=this.buzonActual.loginUsuarioBuzon;
+    doc.usuarioBuzon = this.buzonActual.loginUsuarioBuzon;
     this.setDocument.emit({ documento: doc, vista: '' });
   }
 

@@ -1,6 +1,13 @@
 /*.graph .panning-rect{
   cursor: default;
 }*/
+mat-card {
+  padding: 10px;
+  margin: 5px;
+}
+mat-slide-toggle{
+  padding: 10px;
+}
 .graph .edge{
   cursor: pointer;
 }

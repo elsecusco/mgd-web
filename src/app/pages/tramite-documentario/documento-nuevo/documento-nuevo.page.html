@@ -6,7 +6,7 @@
         <a mat-flat-button
            color="primary"
            routerLink="../bandeja">
-          <mat-icon>arrow_back</mat-icon> 
+          <mat-icon>arrow_back</mat-icon>
         </a>
         <span>Registro de Documento</span>
       </mat-toolbar>
@@ -20,7 +20,7 @@
       <mat-divider> </mat-divider>
 
       <ng-container *ngIf="codigoDocumento!=0">
-        <documento-adjuntar 
+        <documento-adjuntar
         [codigoDocumento]="codigoDocumento"
         (sizeAdjuntos)="sizeAdjuntos=$event"
         ></documento-adjuntar>

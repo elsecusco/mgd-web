@@ -6,30 +6,28 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  MatAutocompleteSelectedEvent,
-  MatChipInputEvent,
-  MatAutocomplete
-} from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, of } from 'rxjs';
 import {
   startWith,
   debounceTime,
   distinctUntilChanged,
   switchMap,
-  finalize
+  finalize,
 } from 'rxjs/operators';
 
-import { Destinatario } from '@models/tramite/destinatario';
+import { Destinatario } from '../../../@models/tramite/destinatario';
 import { TramiteService } from '../tramite-documentario.service';
 
 @Component({
   selector: 'destinatario-filtro',
   templateUrl: './destinatario-filtro.component.html',
-  styleUrls: ['./destinatario-filtro.component.scss']
+  styleUrls: ['./destinatario-filtro.component.scss'],
 })
 export class DestinatarioFiltroComponent implements OnInit {
   show = 'hidden';
@@ -38,21 +36,20 @@ export class DestinatarioFiltroComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  readonlyChips=false;
+  readonlyChips = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   destinatarioCtrl = new FormControl();
-  allDestinatarios: Observable<Destinatario[]>;
+  allDestinatarios!: Observable<Destinatario[]>;
   destinatarios: Array<Destinatario> = [];
-  
 
-  private _tipoBusqueda: number;
-  private _porNombre: number;
-  private _matLabel: string;
-  private _onlyOne: boolean=false;
-  private _all: boolean=false;
+  private _tipoBusqueda: number = 0;
+  private _porNombre: number = 0;
+  private _matLabel: string = '';
+  private _onlyOne: boolean = false;
+  private _all: boolean = false;
   private _blacklist: string = '';
-  private _loginUsuario: string =null;
-  
+  private _loginUsuario: string = '';
+
   @Input()
   set tipoBusqueda(tipoBusqueda: number) {
     this._tipoBusqueda = tipoBusqueda || 1;
@@ -103,7 +100,7 @@ export class DestinatarioFiltroComponent implements OnInit {
 
   @Input()
   set loginUsuario(loginUsuario: string) {
-    this._loginUsuario = loginUsuario || null;
+    this._loginUsuario = loginUsuario || '';
   }
   get loginUsuario(): string {
     return this._loginUsuario;
@@ -111,35 +108,40 @@ export class DestinatarioFiltroComponent implements OnInit {
 
   @Output() returnDestinatarios = new EventEmitter<Destinatario[]>();
 
-  @ViewChild('destinatarioInput') destinatarioInput: ElementRef<
-    HTMLInputElement
-  >;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('destinatarioInput')
+  destinatarioInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
   constructor(private api: TramiteService) {}
 
-  displayFn = (d?: Destinatario) => (d ? d.nombreUsuario : undefined);
+  displayFn = (d?: Destinatario) => (d ? d.nombreUsuario : '');
 
   ngOnInit() {
     this.allDestinatarios = this.destinatarioCtrl.valueChanges.pipe(
       startWith(''),
       debounceTime(200),
       distinctUntilChanged(),
-      switchMap(nombre => this.buscarDestinatario(nombre))
+      switchMap((nombre) => this.buscarDestinatario(nombre))
     );
   }
-  buscarDestinatario(value): Observable<Destinatario[]> {
+  buscarDestinatario(value: any): Observable<Destinatario[]> {
     if (typeof value == 'object' || value.length < 5) return of([]);
 
     this.show = 'visible';
-    if(this.all)
+    if (this.all)
       return this.api
-      .buscarDestinatarioTodos(this.porNombre, this.tipoBusqueda, value)
-      .pipe(finalize(() => (this.show = 'hidden')));
+        .buscarDestinatarioTodos(this.porNombre, this.tipoBusqueda, value)
+        .pipe(finalize(() => (this.show = 'hidden')));
     else
-    return this.api
-      .buscarDestinatario(this.porNombre, this.tipoBusqueda, value, this.blacklist,this.loginUsuario)
-      .pipe(finalize(() => (this.show = 'hidden')));
+      return this.api
+        .buscarDestinatario(
+          this.porNombre,
+          this.tipoBusqueda,
+          value,
+          this.blacklist,
+          this.loginUsuario
+        )
+        .pipe(finalize(() => (this.show = 'hidden')));
   }
 
   //#region Funciones de Chips-AutoComplete
@@ -160,7 +162,6 @@ export class DestinatarioFiltroComponent implements OnInit {
     //   this.destinatarioCtrl.setValue(null);
     // }
   }
-  
 
   remove(destinatario: Destinatario): void {
     const index = this.destinatarios.indexOf(destinatario);
@@ -169,18 +170,20 @@ export class DestinatarioFiltroComponent implements OnInit {
       this.destinatarios.splice(index, 1);
     }
     this.returnDestinatarios.emit(this.destinatarios);
-    this.readonlyChips = (this.onlyOne && (this.destinatarios.length>0));
+    this.readonlyChips = this.onlyOne && this.destinatarios.length > 0;
   }
-  removeAll():void{
-    this.destinatarios=[];
+  removeAll(): void {
+    this.destinatarios = [];
     this.returnDestinatarios.emit(this.destinatarios);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     const destAux = <Destinatario>event.option.value;
     const dest = this.destinatarios.find(
-      d => d.nombreUsuario.toUpperCase() == destAux.nombreUsuario.toUpperCase()
+      (d) =>
+        d.nombreUsuario.toUpperCase() == destAux.nombreUsuario.toUpperCase()
     );
+
     if (dest === null || dest === undefined) {
       this.destinatarios.push(<Destinatario>event.option.value);
       this.destinatarioInput.nativeElement.value = '';
@@ -189,11 +192,11 @@ export class DestinatarioFiltroComponent implements OnInit {
       this.destinatarioInput.nativeElement.value = '';
       this.destinatarioCtrl.setValue(null);
     }
-    this.readonlyChips = (this.onlyOne && (this.destinatarios.length>0));
+    this.readonlyChips = this.onlyOne && this.destinatarios.length > 0;
     this.returnDestinatarios.emit(this.destinatarios);
   }
-  public setDefault(destinatarioDefault:Destinatario){
-    this.destinatarios=[destinatarioDefault];
+  public setDefault(destinatarioDefault: Destinatario) {
+    this.destinatarios = [destinatarioDefault];
     this.returnDestinatarios.emit(this.destinatarios);
   }
   // private _filter(value: string): string[] {

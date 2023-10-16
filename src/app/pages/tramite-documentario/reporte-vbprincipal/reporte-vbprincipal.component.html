@@ -3,12 +3,17 @@
   [src]="pdf"
   [height]="'90vh'"
   [useBrowserLocale]="false"
-  [showUnverifiedSignatures]="true">
+  [showUnverifiedSignatures]="true"
+>
 </ngx-extended-pdf-viewer>
 
-  <button mat-stroked-button color="primary" mat-dialog-close
-          (click)="descargarPdf()">Descargar
-  </button>
-    <a #link style="display: none" class="a-link-file"></a>
-  <button mat-stroked-button color="accent" mat-dialog-close>Cerrar</button>
-
+<button
+  mat-stroked-button
+  color="primary"
+  mat-dialog-close
+  (click)="descargarPdf()"
+>
+  Descargar
+</button>
+<a #link style="display: none" class="a-link-file"></a>
+<button mat-stroked-button color="accent" mat-dialog-close>Cerrar</button>

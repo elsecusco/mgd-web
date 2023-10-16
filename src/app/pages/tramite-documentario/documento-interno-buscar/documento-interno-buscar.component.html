@@ -1,6 +1,7 @@
 <row-container [formGroup]="form">
   <mat-form-field *ngIf="group.value=='filtrar'"
                   fxFlex
+                  class="mat-sm"
                   appearance="outline"
                   color="primary">
     <input matInput
@@ -36,7 +37,7 @@
   </mat-form-field>
 
   <button *ngIf="group.value=='buscar'"
-          [disabled]="form.get('tipoBusqueda').value==null || form.get('valorBusqueda').value.length<2"
+          [disabled]="form.get('tipoBusqueda')!.value==null || form.get('valorBusqueda')!.value.length<2"
           (click)="search()"
           mat-mini-fab>
     <mat-icon>search</mat-icon>

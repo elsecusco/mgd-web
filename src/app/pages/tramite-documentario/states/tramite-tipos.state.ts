@@ -1,4 +1,4 @@
-import { Injector } from '@angular/core';
+import { Injector, Injectable } from '@angular/core';
 import { State, StateContext, Selector } from '@ngxs/store';
 import { Receiver } from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 
 import { TramiteService } from '../tramite-documentario.service';
 
-import { TramiteTipos } from '@models/tramite/tramite-tipos';
+import { TramiteTipos } from '../../../@models/tramite/tramite-tipos';
 
 export interface TramiteTiposStateModel {
   tipos: TramiteTipos;
@@ -19,13 +19,14 @@ type Context = StateContext<TramiteTiposStateModel>;
 const defaultStateTramiteTipos = {
   tipos: new TramiteTipos(),
   loaded: false,
-  loading: false
+  loading: false,
 };
 
 @State<TramiteTiposStateModel>({
   name: 'tramiteTipos',
-  defaults: defaultStateTramiteTipos
+  defaults: defaultStateTramiteTipos,
 })
+@Injectable()
 export class TramiteTiposState {
   private static api: TramiteService;
 
@@ -55,8 +56,8 @@ export class TramiteTiposState {
     ctx.patchState({ loading: true });
 
     return this.api.tiposTramite().pipe(
-      tap(tipos => ctx.patchState({ tipos, loaded: true, loading: false })),
-      catchError(_err => {
+      tap((tipos) => ctx.patchState({ tipos, loaded: true, loading: false })),
+      catchError((_err) => {
         ctx.patchState(defaultStateTramiteTipos);
         return of(new TramiteTipos());
       })

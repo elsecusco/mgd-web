@@ -4,18 +4,18 @@
     *ngIf="isSave"
     #firma
     [f]="fields"
-    style="position:absolute;z-index:2000"
-    (resultado)="resultadoFirma($event)"></firma>
-  <h1 mat-dialog-title>{{titulo}}</h1>
+    style="position: absolute; z-index: 2000"
+    (resultado)="resultadoFirma($event)"
+  ></firma>
+  <h1 mat-dialog-title>{{ titulo }}</h1>
   <mat-divider class="mg-bot-8"></mat-divider>
   <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
-    <ng-container *ngIf="data.doc.tipoDerivacion!='D'">
-    <upload-file (file)="changeFile($event)"></upload-file>
-    <div class="mensaje_documento"
-         *ngIf="errorMaxlength"> 
-         <mat-icon>report</mat-icon>
-         No es posible cargar el archivo, máximo 110 caracteres en el título
-    </div>
+    <ng-container *ngIf="data.doc.tipoDerivacion != 'D'">
+      <upload-file (file)="changeFile($event)"></upload-file>
+      <div class="mensaje_documento" *ngIf="errorMaxlength">
+        <mat-icon>report</mat-icon>
+        No es posible cargar el archivo, máximo 110 caracteres en el título
+      </div>
     </ng-container>
     <mat-form-field appearance="outline" color="primary">
       <mat-label>Tipo de Aprobación</mat-label>
@@ -23,57 +23,56 @@
         matInput
         readonly
         placeholder="Aprobación"
-        formControlName="aprobacion"/>
+        formControlName="aprobacion"
+      />
     </mat-form-field>
-    <ng-container *ngIf="data.tipo=='Derivar';else desBlock">
+    <ng-container *ngIf="data.tipo == 'Derivar'; else desBlock">
       <destinatario-buscar-interno
-                 (para)="para($event)"
-                 [matLabel]="'Destinatario'"
-                 [onlyOne]="true"></destinatario-buscar-interno>
-      <mat-form-field appearance="outline" color="primary">
-      <mat-label>Proveido Documento</mat-label>
-      <textarea
-        matInput
-        placeholder="Ingrese Proveido..."
-        formControlName="proveidoDocumento"
-        rows="2">
-      </textarea>
-    </mat-form-field>
+        (para)="para($event)"
+        [matLabel]="'Destinatario'"
+        [onlyOne]="true"
+      ></destinatario-buscar-interno>
+      <mat-form-field appearance="outline" color="primary" class="mat-tx">
+        <mat-label>Proveido Documento</mat-label>
+        <textarea
+          matInput
+          placeholder="Ingrese Proveido..."
+          formControlName="proveidoDocumento"
+          rows="3"
+        >
+        </textarea>
+      </mat-form-field>
     </ng-container>
     <ng-template #desBlock>
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Descripción Documento</mat-label>
-      <textarea
-        matInput
-        placeholder="Ingrese Descripción..."
-        formControlName="descripcionAprobacion"
-        rows="2">
-      </textarea>
-    </mat-form-field>
-  </ng-template>
+      <mat-form-field appearance="outline" color="primary" class="mat-tx">
+        <mat-label>Descripción Documento</mat-label>
+        <textarea
+          matInput
+          placeholder="Ingrese Descripción..."
+          formControlName="descripcionAprobacion"
+          rows="3"
+        >
+        </textarea>
+      </mat-form-field>
+    </ng-template>
     <!-- PARA FIRMAR , DESBLOQUEADO -->
-    <mat-form-field
-                    appearance="outline"
-                    color="primary"
-                    floatLabel="always">
-      <mat-label>Razón Firma Documento (Solo si va a firmar el documento)</mat-label>
+    <mat-form-field appearance="outline" color="primary" floatLabel="always">
+      <mat-label
+        >Razón Firma Documento (Solo si va a firmar el documento)</mat-label
+      >
       <mat-select formControlName="razon">
-        <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
-                    [value]="t.nombre">                    
-          {{t.nombre}}
+        <mat-option *ngFor="let t of tipos.tiposFirmaMotivo" [value]="t.nombre">
+          {{ t.nombre }}
         </mat-option>
       </mat-select>
-       </mat-form-field>
+    </mat-form-field>
     <!-- FIN E FIRMAR  -->
 
     <ng-container *ngIf="file">
       <div fxLayout="row" fxLayoutAlign="end center">
         <span class="fw-400 cl-accent">{{ progress }} %</span>
       </div>
-      <mat-progress-bar
-        mode="determinate"
-        [value]="progress"
-        color="accent">
+      <mat-progress-bar mode="determinate" [value]="progress" color="accent">
       </mat-progress-bar>
     </ng-container>
   </div>
@@ -106,20 +105,22 @@
     >
       Subir Archivo y Derivar
     </button>
-      <button
+    <button
       *ngIf="aprovarSubir"
       mat-raised-button
       color="primary"
       (click)="aprobarArchivo()"
-      [disabled]="form.invalid || file == undefined">
+      [disabled]="form.invalid || file == undefined"
+    >
       Subir Archivo y Aprobar
-      </button>
+    </button>
 
-      <button
-              mat-raised-button
-              color="primary"
-              (click)="guardarArchivo()"
-              [disabled]="form.invalid || file == undefined">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="guardarArchivo()"
+      [disabled]="form.invalid || file == undefined"
+    >
       Firmar y Subir Archivo
     </button>
 

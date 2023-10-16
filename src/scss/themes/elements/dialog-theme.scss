@@ -1,7 +1,9 @@
+@use "sass:map";
+
 @mixin dialog-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
 
   .dialog .mat-dialog-container {
     max-width: 100%;

@@ -1,37 +1,46 @@
-<mat-card fxLayout="row"
-          fxLayoutAlign="space-between"
-          fxLayoutGap="16px"
-          fxLayout.xs="column"
-          fxLayoutAlign.xs="start">
- 
-     <!--Filtro de Usuario de Bandeja-->
+<mat-card
+  fxLayout="row"
+  fxLayoutAlign="space-between"
+  fxLayoutGap="16px"
+  fxLayout.xs="column"
+  fxLayoutAlign.xs="start"
+>
+  <!--Filtro de Usuario de Bandeja-->
 
-        <mat-form-field fxFlex="22"
-                        fxFlex.xs="auto"
-                        class="mg-bot-8"
-                        appearance="outline"
-                        color="primary">
-            <mat-label>Buzones de Usuario</mat-label>
-            <mat-select placeholder="Buzon"
-                        [(value)]="buzonActual"
-                        (selectionChange)="changeBuzon()">
-                <mat-option *ngFor="let t of listaBuzones"
-                            [value]="t">
-                    {{t.nombreUsuarioBuzon}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+  <mat-form-field
+    fxFlex="22"
+    fxFlex.xs="auto"
+    class="mat-sm"
+    appearance="outline"
+    color="primary"
+  >
+    <mat-label>Buzones de Usuario</mat-label>
+    <mat-select
+      placeholder="Buzon"
+      [(value)]="buzonActual"
+      (selectionChange)="changeBuzon()"
+    >
+      <mat-option *ngFor="let t of listaBuzones" [value]="t">
+        {{ t.nombreUsuarioBuzon }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <!--Bandejas del usuario-->
-  <mat-form-field fxFlex
-                  fxFlex="22"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  color="primary">
+  <mat-form-field
+    fxFlex
+    fxFlex="22"
+    fxFlex.xs="auto"
+    appearance="outline"
+    color="primary"
+    class="mat-sm"
+  >
     <mat-label>Bandeja</mat-label>
-    <mat-select placeholder="Bandeja"
-                [(value)]="bandejaf.bandeja"
-                (selectionChange)="actualizar()">
+    <mat-select
+      placeholder="Bandeja"
+      [(value)]="bandejaf.bandeja"
+      (selectionChange)="actualizar()"
+    >
       <!-- <mat-option value="1"> Mesa de Partes</mat-option> -->
       <mat-option value="e"> Bandeja de Entrada</mat-option>
       <mat-option value="a"> Documentos Atendidos</mat-option>
@@ -41,13 +50,13 @@
   </mat-form-field>
 
   <!--Formato dentro de la fecha-->
-      <!-- <div fxLayout="row"
+  <!-- <div fxLayout="row"
           fxLayoutAlign="start center"
           fxLayoutGap="8px"
           fxLayout.xs="column"
           fxLayoutAlign.xs="start end"> -->
-      <!--Cambio de filtro de fechas-->
-      <!--   <mat-form-field fxFlex
+  <!--Cambio de filtro de fechas-->
+  <!--   <mat-form-field fxFlex
                         [style.width]="'250px'"
                         appearance="outline"
                         color="primary">
@@ -60,49 +69,51 @@
               <owl-date-time [pickerType]="'calendar'"#dtRange1></owl-date-time>
         </mat-form-field>
  -->
-              <two-picker class="wd-100"
-                          fxFlex
-                          fxFlex="46"
-                          fxFlex.xs="auto"
-                          appearance="outline"
-                          [fechaInicio]="bandejaf.fechaInicio"
-                          [fechaFin]="bandejaf.fechaFin"
-                          (changeFecha)="changeFecha($event)"></two-picker>
+  <two-picker
+    class="wd-100"
+    fxFlex
+    fxFlex="46"
+    fxFlex.xs="auto"
+    appearance="outline"
+    [fechaInicio]="bandejaf.fechaInicio"
+    [fechaFin]="bandejaf.fechaFin"
+    (changeFecha)="changeFecha($event)"
+  ></two-picker>
 
-                <!-- [disabled]="buzonActual.permiso<3" -->
-    <div class="butons-box">
-      <button mat-mini-fab
-              matTooltip="Actualizar"
-              (click)="actualizar()">
-        <mat-icon>refresh</mat-icon>
-      </button>
-      <button mat-mini-fab
-      *ngIf="buzonActual.mesaPartes!=null"
-              matTooltip="Nuevo Documento"
-            (click)="documentoNuevo()">
-        <mat-icon>description</mat-icon>
-      </button>
+  <!-- [disabled]="buzonActual.permiso<3" -->
+  <div class="butons-box">
+    <button mat-mini-fab matTooltip="Actualizar" (click)="actualizar()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      *ngIf="buzonActual.mesaPartes != null"
+      matTooltip="Nuevo Documento"
+      (click)="documentoNuevo()"
+    >
+      <mat-icon>description</mat-icon>
+    </button>
     <!-- </div> -->
-      <!-- <button mat-mini-fab class="pulse-button btnBandeja" -->
+    <!-- <button mat-mini-fab class="pulse-button btnBandeja" -->
     <!-- <button class="pulse-button"
               *ngIf='internos'
               matTooltip="Bandeja de internos"
               (click)="openInternos()">{{internos}}
       </button> -->
-      <!--<span>{{internos}}</span>-->
-    <button  
-        [ngClass]="{'pulse-inactive': internos === '0', 'pulse-button': true}"
-        *ngIf="internos"
-        matTooltip="Bandeja de internos"
-        (click)="openInternos()">
-        <span class="badge-btn">{{internos}}</span>
-      </button>
-    </div>
+    <!--<span>{{internos}}</span>-->
+    <button
+      [ngClass]="{ 'pulse-inactive': internos === 0, 'pulse-button': true }"
+      *ngIf="internos"
+      matTooltip="Bandeja de internos"
+      (click)="openInternos()"
+    >
+      <span class="badge-btn">{{ internos }}</span>
+    </button>
+  </div>
 </mat-card>
 
-
 <!-- Orden de Restriccion -->
-<!-- 0- sin permiso 
+<!-- 0- sin permiso
      1- lectura
      2- derivar y atender
      3- derivar y atender y crear nuevo documento -->

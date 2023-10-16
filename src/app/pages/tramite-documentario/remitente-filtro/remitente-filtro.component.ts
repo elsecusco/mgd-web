@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TramiteService } from '../tramite-documentario.service';
-import { Remitente, IRemitente, TipoRemitente } from '@models/tramite/remitente';
+import { Remitente, IRemitente, TipoRemitente } from '../../../@models/tramite/remitente';
 import { Observable, of } from 'rxjs';
 import {
   startWith,
@@ -11,7 +11,7 @@ import {
   finalize
 } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { notifyOk } from '@core/swal';
+// import { notifyOk } from '@core/swal';
 import { RemitenteUpdateAddComponent } from '../remitente-update-add/remitente-update-add.component';
 
 @Component({
@@ -23,10 +23,10 @@ export class RemitenteFiltroComponent implements OnInit {
   // para cambiar por donde empiezan a buscar el remitente
   tipoBusqueda = 2;
   nombreRemitente = new FormControl();
-  remitentes: Observable<Remitente[]>;
+  remitentes!: Observable<Remitente[]>;
   show = 'hidden';
 
-  private _disabled: boolean;
+  private _disabled!: boolean;
   @Input()
   set disabled(disabled: boolean) {
     this._disabled = disabled || false;
@@ -43,7 +43,7 @@ export class RemitenteFiltroComponent implements OnInit {
   //constructor(private api: TramiteService) {}
   constructor(private api: TramiteService,public dialog: MatDialog) {}
 
-  displayFn = (r?: Remitente) => (r ? r.nombreRemitenteDocumento : undefined);
+  displayFn = (r?: Remitente) => (r ? r.nombreRemitenteDocumento : '');
 
   ngOnInit() {
     this.remitentes = this.nombreRemitente.valueChanges.pipe(
@@ -54,8 +54,8 @@ export class RemitenteFiltroComponent implements OnInit {
       );
     this.clear();
   }
-  
-  buscarRemitente(value): Observable<Remitente[]> {
+
+  buscarRemitente(value: any): Observable<Remitente[]> {
     if (typeof value == 'object' || value.length < 5) return of([]);
 
     this.show = 'visible';
@@ -72,15 +72,15 @@ export class RemitenteFiltroComponent implements OnInit {
     this.nombreRemitente.setValue('');
     this.remitente.emit(new Remitente());
   }
-  
+
 addRemitente() {
   const dialogRef = this.dialog.open(
     RemitenteUpdateAddComponent, {
     width: '440px',
     height:'450px',
-    data: 
+    data:
     {codigoRemitenteDocumento:0}
-    // PARA RECUPERAR EL MODIFICAR DEL REMITENTE 81-83 
+    // PARA RECUPERAR EL MODIFICAR DEL REMITENTE 81-83
     // data: (this.nombreRemitente.value == "")?
     //   {codigoRemitenteDocumento:0}:
     //     this.nombreRemitente.value

@@ -1,58 +1,63 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from '@angular/core';
 import { TramiteTiposState } from '../states/tramite-tipos.state';
 import { TramiteService } from '../tramite-documentario.service';
 import { DocumentoState } from '../states/documento.state';
-import { BandejaDocumento } from '@models/tramite/bandeja-documento';
+import { BandejaDocumento } from '../../../@models/tramite/bandeja-documento';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DocumentoAtencionDialog } from './documento-atencion.dialog';
-import { AtenderDocumento } from '@models/tramite/atender-documento';
-import { notifyOk } from '@core/swal';
+import { AtenderDocumento } from '../../../@models/tramite/atender-documento';
+import { notifyOk } from '../../../@core/swal';
 import { ReporteGraficoComponent } from '../reporte-grafico/reporte-grafico.component';
-import { SeguimientoDocumento } from '@models/tramite/seguimiento-documento';
+import { SeguimientoDocumento } from '../../../@models/tramite/seguimiento-documento';
 import { DetalleAtencionComponent } from '../detalle-atencion/detalle-atencion.component';
-import { BuzonesUsuario } from '@models/tramite/buzones-usuario';
+import { BuzonesUsuario } from '../../../@models/tramite/buzones-usuario';
 import { BandejaState } from '../states/bandeja.state';
-import { BandejaFiltro } from '@models/tramite/bandeja-filtro';
+import { BandejaFiltro } from '../../../@models/tramite/bandeja-filtro';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { DetalleSielseComponent } from '../detalle-sielse/detalle-sielse.component';
-import { TramiteTipos } from '@models/tramite/tramite-tipos';
+import { TramiteTipos } from '../../../@models/tramite/tramite-tipos';
 import { DetalleSielseGuardarComponent } from '../detalle-sielse-guardar/detalle-sielse-guardar.component';
-import { Sielse } from '@models/tramite/sielse';
+import { Sielse } from '../../../@models/tramite/sielse';
 
-export enum tipoClases{
-  A='atencionLectura',
-  F='atencionFinal',
-  P='derivadoPrincipal',
-  C='derivadoConCopia',
-  D='sinValores'
+export enum tipoClases {
+  A = 'atencionLectura',
+  F = 'atencionFinal',
+  P = 'derivadoPrincipal',
+  C = 'derivadoConCopia',
+  D = 'sinValores',
 }
 @Component({
   selector: 'documento-atencion',
   templateUrl: './documento-atencion.component.html',
-  styleUrls: ['./documento-atencion.component.scss']
+  styleUrls: ['./documento-atencion.component.scss'],
 })
-
 export class DocumentoAtencion implements OnInit {
- //Actualizar  
- bandejaf: BandejaFiltro;
- @Select(BandejaState.bandejaFiltro)
- public bandejaf$: Observable<BandejaFiltro>;
+  //Actualizar
+  bandejaf!: BandejaFiltro;
+  @Select(BandejaState.bandejaFiltro)
+  public bandejaf$!: Observable<BandejaFiltro>;
 
- @Emitter(BandejaState.loadDocuments)
-  private loadDocs: Emittable<BandejaFiltro>;
-  // Fin de actualizar 
+  @Emitter(BandejaState.loadDocuments)
+  private loadDocs!: Emittable<BandejaFiltro>;
+  // Fin de actualizar
   //bandera para mostrar el combo
-  verSIELSEcombo=false;
+  verSIELSEcombo = false;
   // currentUserBuzon:BuzonesUsuario;
   // @Select(BandejaState.currentUserBuzon)
   // public currentUserBuzon$: Observable<BuzonesUsuario>;
 
-  buzonActual:BuzonesUsuario;
+  buzonActual!: BuzonesUsuario;
   @Select(BandejaState.buzonActual)
-  public buzonActual$: Observable<BuzonesUsuario>;
-  
+  public buzonActual$!: Observable<BuzonesUsuario>;
+
   @Output() atender = new EventEmitter<any>();
   columnas = [
     'nombreUsuarioOrigen',
@@ -61,43 +66,41 @@ export class DocumentoAtencion implements OnInit {
     'descripcionSolicitudAtencion',
     'plazoAtencion',
     'fechaAtencion',
-    'masDetalle'
+    'masDetalle',
   ];
   atenciones: any[] = [];
   atencion = false;
 
-  tipos: TramiteTipos;
+  tipos!: TramiteTipos;
   @Select(TramiteTiposState.tipos)
-  public tipos$: Observable<TramiteTipos>;
+  public tipos$!: Observable<TramiteTipos>;
 
   @Emitter(TramiteTiposState.loadTipos)
-  private loadTipos: Emittable<TramiteTipos>;
+  private loadTipos!: Emittable<TramiteTipos>;
 
-  loaded: Boolean;
+  loaded!: Boolean;
   @Select(TramiteTiposState.loaded)
-  public loaded$: Observable<Boolean>;
-
+  public loaded$!: Observable<Boolean>;
 
   doc: BandejaDocumento = new BandejaDocumento();
   @Select(DocumentoState.documento)
-  public doc$: Observable<BandejaDocumento>;
+  public doc$!: Observable<BandejaDocumento>;
 
-  detalleSielse:Sielse;
+  detalleSielse!: Sielse;
   constructor(private api: TramiteService, public dialog: MatDialog) {
-    this.doc$.subscribe(d => {
+    this.doc$.subscribe((d) => {
       this.doc = { ...d };
     });
   }
 
   ngOnInit() {
-
-    this.bandejaf$.subscribe(b =>this.bandejaf = b); 
-    this.buzonActual$.subscribe(u=>this.buzonActual=u);
-    this.tipos$.subscribe(tipos => (this.tipos = tipos));
-    this.loaded$.subscribe(l => {
-      if (!l) this.loadTipos.emit();
+    this.bandejaf$.subscribe((b) => (this.bandejaf = b));
+    this.buzonActual$.subscribe((u) => (this.buzonActual = u));
+    this.tipos$.subscribe((tipos) => (this.tipos = tipos));
+    this.loaded$.subscribe((l) => {
+      if (!l) this.loadTipos.emit({} as TramiteTipos);
     });
-       
+
     if (this.doc.codigoDocumentoTramite != null)
       this.atencion =
         this.doc.recibido == 0 &&
@@ -107,119 +110,131 @@ export class DocumentoAtencion implements OnInit {
         this.buzonActual.permiso > 1;
 
     this.getListarAtenciones();
+  }
 
- }
- 
   getListarAtenciones() {
     if (this.doc.codigoDocumentoTramite != null)
       this.api
         .listarAtenciones(
-          this.doc.codigoDocumentoTramite,
+          this.doc.codigoDocumentoTramite
           // this.doc.numeroAtencion
         )
-        .subscribe(res => (this.atenciones = res));
+        .subscribe((res) => (this.atenciones = res));
   }
   guardarAtencion() {
     const dialogRef = this.dialog.open(DocumentoAtencionDialog, {
       width: '600px',
-      data:this.doc.tipoDerivacion
+      data: this.doc.tipoDerivacion,
     });
-    dialogRef.afterClosed().subscribe(form => {
+    dialogRef.afterClosed().subscribe((form) => {
       if (form) this.guardar(form);
     });
   }
 
-  guardar(form) {
+  guardar(form: any) {
     let doc = new AtenderDocumento();
-        doc.codigoDocumento = this.doc.codigoDocumentoTramite;
-        doc.numeroAtencion = this.doc.numeroAtencion;
+    doc.codigoDocumento = this.doc.codigoDocumentoTramite;
+    doc.numeroAtencion = this.doc.numeroAtencion ? this.doc.numeroAtencion : 0;
     const body = { ...doc, ...form };
-    this.api.atenderDocumento(body).subscribe(res => {
+    this.api.atenderDocumento(body).subscribe((res) => {
       if (res.id == 0) notifyOk(res.mensaje);
       this.atender.emit();
     });
   }
- 
-  atenderAutomaticamente(){
-      if (this.doc.bandeja == 'e')
-      {
-          this.api.atencionesAutomaticas(this.doc.codigoDocumentoTramite,this.doc.numeroAtencion).subscribe(res => {
-           if (res.id == 0 && res.mensaje!= ''){
-             notifyOk(res.mensaje);
-             //this.atender.emit();
-             this.actualizar();
-            }
-          });
-        }  
-      }
-  esCopia(t: string){
-  switch(t){
-      case "P": return "#0b643a";
-      case "C": return "#185175";
+
+  atenderAutomaticamente() {
+    if (this.doc.bandeja == 'e') {
+      this.api
+        .atencionesAutomaticas(
+          this.doc.codigoDocumentoTramite,
+          this.doc.numeroAtencion
+        )
+        .subscribe((res) => {
+          if (res.id == 0 && res.mensaje != '') {
+            notifyOk(res.mensaje);
+            //this.atender.emit();
+            this.actualizar();
+          }
+        });
     }
   }
-  esColor(t: string){
-    switch(t){
-      case "A": return "#d187de";
-      case "F": return "#e69605";
-     }
+  esCopia(t: string) {
+    switch (t) {
+      case 'P':
+        return '#0b643a';
+      case 'C':
+        return '#185175';
+      default:
+        return;
     }
-  verDetalleAtencion(detalle,fila){
-      const data={
-        detalle:detalle
-        ,de:fila.de
-        ,fechaDerivacion:fila.fechaDerivacion
-        ,descripcionSolicitudAtencion:fila.descripcionSolicitudAtencion
-        ,plazoAtencion:fila.plazoAtencion
-      }
-      this.dialog.open(
-        DetalleAtencionComponent, {
-          width: '350px',
-          //height:'400px',
-          data: data
-        }
-      );
+  }
+  esColor(t: string) {
+    switch (t) {
+      case 'A':
+        return '#d187de';
+      case 'F':
+        return '#e69605';
+      default:
+        return;
     }
-  verReporteGrafo(){
-    const detalleSeguimiento:SeguimientoDocumento={
-      codigoDocumentoTramite:this.doc.codigoDocumentoTramite,
-      fechaDocumento:this.doc.fecha,
-      contenidoDocumento:this.doc.asunto,
-      nombreRemitenteDocumento:this.doc.nombreRemitenteDocumento      
-    }
-    this.api.graphReport(this.doc.codigoDocumentoTramite)
-      .subscribe(gr =>{
-          const dialogRef = this.dialog.open(
-            ReporteGraficoComponent, {
-              // width: '750px',
-              // height:'750px',
-              data: {detalle:detalleSeguimiento,
-                     nodos:gr.nodos,
-                     flechas:gr.flechas}
-            }
-          );
-          dialogRef.afterClosed().subscribe(result => {});
-        }
-      );
+  }
+  verDetalleAtencion(detalle: any, fila: any) {
+    const data = {
+      detalle: detalle,
+      de: fila.de,
+      fechaDerivacion: fila.fechaDerivacion,
+      descripcionSolicitudAtencion: fila.descripcionSolicitudAtencion,
+      plazoAtencion: fila.plazoAtencion,
+    };
+    this.dialog.open(DetalleAtencionComponent, {
+      width: '350px',
+      //height:'400px',
+      data: data,
+    });
+  }
+  verReporteGrafo() {
+    const detalleSeguimiento: SeguimientoDocumento = {
+      codigoDocumentoTramite: this.doc.codigoDocumentoTramite,
+      fechaDocumento: this.doc.fecha,
+      contenidoDocumento: this.doc.asunto,
+      nombreRemitenteDocumento: this.doc.nombreRemitenteDocumento,
+    };
+    this.api.graphReport(this.doc.codigoDocumentoTramite).subscribe((gr) => {
+      const dialogRef = this.dialog.open(ReporteGraficoComponent, {
+        // width: '750px',
+        // height:'750px',
+        data: {
+          detalle: detalleSeguimiento,
+          nodos: gr.nodos,
+          flechas: gr.flechas,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {});
+    });
   }
   ngOnDestroy() {
-    this.atenderAutomaticamente()
+    this.atenderAutomaticamente();
   }
 
-  selectClass(tipo : string){
-    let classValue: string;
-    switch(tipo){
-      case 'A':classValue='atencionLectura';
-      break;
-      case 'F':classValue='atencionFinal';
-      break;
-      case 'P':classValue='derivadoPrincipal';
-      break;
-      case 'C':classValue='derivadoConCopia';
-      break;
-      case 'D':classValue='sinValores';
-      break;
-     }
+  selectClass(tipo: string) {
+    let classValue: string = '';
+    switch (tipo) {
+      case 'A':
+        classValue = 'atencionLectura';
+        break;
+      case 'F':
+        classValue = 'atencionFinal';
+        break;
+      case 'P':
+        classValue = 'derivadoPrincipal';
+        break;
+      case 'C':
+        classValue = 'derivadoConCopia';
+        break;
+      case 'D':
+        classValue = 'sinValores';
+        break;
+    }
     return classValue;
   }
   actualizar() {
@@ -227,55 +242,49 @@ export class DocumentoAtencion implements OnInit {
   }
 
   //#endregion **********************************
-  openCargo(){
-    this.api.getCargo(this.doc.codigoDocumentoTramite).subscribe(res => {
+  openCargo() {
+    this.api.getCargo(this.doc.codigoDocumentoTramite).subscribe((res) => {
       const fileURL = URL.createObjectURL(res);
       window.open(fileURL, '_blank');
-      });
+    });
   }
-  
-  controlSielse(){
-    this.api.getDetalleSielse(this.doc.codigoDocumentoTramite).subscribe(
-      s=>{
-        if (s.length>0)
-        this.detalleSielse=s[0]
-        else this.detalleSielse=null
+
+  controlSielse() {
+    this.api
+      .getDetalleSielse(this.doc.codigoDocumentoTramite)
+      .subscribe((s) => {
+        if (s.length > 0) this.detalleSielse = s[0];
+        else this.detalleSielse = {} as Sielse;
         // console.log(JSON.stringify(this.detalleSielse))
-        if(this.detalleSielse)
-          this.verSielse()
-        else
-          this.verSIELSEcombo=true;
-      }
-    )
-    
-  }
-
-  verSielse(){
-    const dialogRef = this.dialog.open( 
-      DetalleSielseComponent,{
-        // width: '450px',
-        //height: '700px',
-        data: this.detalleSielse
+        if (this.detalleSielse.codigoMGD != undefined) this.verSielse();
+        else this.verSIELSEcombo = true;
       });
-        dialogRef.afterClosed().subscribe(result => {
-        //this.clear();
-     });
   }
 
-  guardarSielse(opcion){    
-    if(opcion==1){
-      const dialogRef = this.dialog.open( 
-      DetalleSielseGuardarComponent,{
+  verSielse() {
+    const dialogRef = this.dialog.open(DetalleSielseComponent, {
+      // width: '450px',
+      //height: '700px',
+      data: this.detalleSielse,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      //this.clear();
+    });
+  }
+
+  guardarSielse(opcion: any) {
+    if (opcion == 1) {
+      const dialogRef = this.dialog.open(DetalleSielseGuardarComponent, {
         width: '600px',
-        data: this.doc.codigoDocumentoTramite
+        data: this.doc.codigoDocumentoTramite,
       });
-        dialogRef.afterClosed().subscribe(result => {
-          if(result){
-            //this.doc.usuarioMantenimiento=this.doc.usuarioBuzon
-            this.verSIELSEcombo=false;
-          }
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          //this.doc.usuarioMantenimiento=this.doc.usuarioBuzon
+          this.verSIELSEcombo = false;
+        }
         //this.clear();
-     });
+      });
     }
-  }  
+  }
 }

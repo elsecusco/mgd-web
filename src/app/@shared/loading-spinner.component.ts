@@ -25,5 +25,5 @@ import { Component, Input } from '@angular/core';
   ]
 })
 export class LoadingSpinnerComponent {
-  @Input() loading: boolean;
+  @Input() loading!: boolean;
 }

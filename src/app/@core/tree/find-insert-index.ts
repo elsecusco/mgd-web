@@ -5,7 +5,7 @@
  * @param {array} arr The sorted array.
  * @param {object} el The element to insert.
  */
-export function findInsertIndex(comparatorFn, arr, el) {
+export function findInsertIndex(comparatorFn: any, arr: any, el: any) {
   let i, len;
   for (i = 0, len = arr.length; i < len; i++) {
     if (comparatorFn(arr[i], el) > 0) {

@@ -5,13 +5,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: 'table-toggle-column.html'
 })
 export class TableToggleColumn implements OnInit {
-  @Input() headers: string[];
-  @Input() columnas: string[];
+  @Input() headers: string[]=[];
+  @Input() columnas: string[]=[];
   @Output() changeSelect = new EventEmitter<any>();
   constructor() {}
 
   ngOnInit() {}
-  changeDisplayColumn(checked, index) {
+  changeDisplayColumn(checked:any, index:any) {
     this.changeSelect.emit({ checked, index });
   }
 }

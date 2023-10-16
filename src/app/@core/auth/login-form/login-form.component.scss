@@ -1,20 +1,29 @@
-.logo{
+.logo {
   text-align: center;
   margin-bottom: 1em;
-  }
+}
 :host {
   display: flex;
   justify-content: center;
   margin: 72px 0;
 }
+
 mat-toolbar {
   display: flex;
   justify-content: space-between;
+
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
 }
 
 mat-card-content,
 mat-card-actions {
-   margin-bottom: 0px;
+  margin-bottom: 0px;
   div {
     display: flex;
     justify-content: flex-end;
@@ -23,12 +32,17 @@ mat-card-actions {
 }
 
 .mat-toolbar {
-  min-height: 48px; 
+  min-height: 48px;
 }
 
 mat-card {
   z-index: 1;
   padding-bottom: 0px;
+
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: relative;
+  padding: 16px;
 }
 
 .full-width {
@@ -66,3 +80,4 @@ button.active {
 .mat-card-actions .mat-raised-button {
   margin: 0;
 }
+

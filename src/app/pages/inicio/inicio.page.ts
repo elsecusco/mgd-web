@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 import { MenuItemService } from '../menu-item.service';
-import { MenuService } from '@core/navigator/menu.service';
+import { MenuService } from '../../@core/navigator/menu.service';
 
 @Component({
   selector: 'inicio-page',
@@ -11,7 +11,7 @@ import { MenuService } from '@core/navigator/menu.service';
 })
 export class InicioPage implements OnInit {
   items: any;
-  pending$: Observable<boolean>;
+  pending$!: Observable<boolean>;
 
   constructor(private service: MenuItemService, private menu: MenuService) {}
 

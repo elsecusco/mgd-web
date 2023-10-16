@@ -1,14 +1,13 @@
-export class DetalleSielse  {
-    nombre: string;
-    fecha:string;
-    descripcion:string;
-    responsable:string;
+export class DetalleSielse {
+  nombre: string;
+  fecha: string;
+  descripcion: string;
+  responsable: string;
 
-   constructor() {
-       this.nombre = null;
-       this.fecha = null;
-       this.descripcion = null;
-       this.responsable = null;
-       
-   }
+  constructor() {
+    this.nombre = '';
+    this.fecha = '';
+    this.descripcion = '';
+    this.responsable = '';
+  }
 }

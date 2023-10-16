@@ -1,35 +1,47 @@
 .mat-cell {
   font-size: 11px;
 }
-div{
-  font-size: 12px;
 
+mat-header-cell {
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
-span{
+.mat-mdc-table .mat-mdc-header-cell {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+div {
+  font-size: 12px;
+}
+span {
   font-weight: bold;
 }
 
-.izquierda{
-  float:left
+.izquierda {
+  float: left;
 }
- .derecha{
- float:right;
- padding-right:10px;
- }
+.derecha {
+  float: right;
+  padding-right: 10px;
+}
 
- .clearfix{
-   font-weight: bold;
-   font-size: 10px;
- }
+.clearfix {
+  font-weight: bold;
+  font-size: 10px;
+}
 
- .izquierda>p,.derecha>p{
-  margin:0;
-  padding:0;
-  }
+.izquierda > p,
+.derecha > p {
+  margin: 0;
+  padding: 0;
+}
 // .titulo{
 //   font-family: "segoe UI";
 // }
-.mat-column-fechaDerivacion{
+.mat-column-fechaDerivacion {
   justify-content: center;
   text-align: center;
 }
@@ -50,18 +62,18 @@ span{
 //   .mat-header-cell{
 //     justify-content: center;
 //   }
-  .P{
-    color: #0b643a !important;
-  }
-  .C{
-    color: #185175 !important;
-  }
-  .A{
-    color: #905835 !important;
-  }
-  .F{
-    color: #e69605 !important;
-  }
+.P {
+  color: #0b643a !important;
+}
+.C {
+  color: #185175 !important;
+}
+.A {
+  color: #905835 !important;
+}
+.F {
+  color: #e69605 !important;
+}
 
 .mat-column-nombreUsuarioDestino {
   word-wrap: break-word !important;
@@ -121,7 +133,7 @@ li span {
   width: 25px;
   border-radius: 50%;
   border: none;
-  background: url('../../../../assets/logito.png') no-repeat;
+  background: url("../../../../assets/logito.png") no-repeat;
   background-size: cover;
   cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -11,19 +11,21 @@ import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
+@Injectable()
 export class LoginPage implements OnInit {
-  titulo: string;
-  subtitulo:string;
-  footer: string;
 
-  @Select(state => state.auth.pending)
-  pending$: Observable<boolean>;
+  titulo: string = '';
+  subtitulo: string = '';
+  footer: string = '';
 
-  @Select(state => state.auth.errorMessage)
-  error$: Observable<string>;
+  @Select((state: any) => state.auth.pending)
+  pending$!: Observable<boolean>
 
+  @Select((state: any) => state.auth.errorMessage)
+  error$!: Observable<string>
   constructor(private store: Store) {
-    pdfDefaultOptions.renderInteractiveForms = false;
+    // pdfDefaultOptions.renderInteractiveForms = false; upgrade version
+    pdfDefaultOptions.renderForms = false;
   }
 
   ngOnInit() {

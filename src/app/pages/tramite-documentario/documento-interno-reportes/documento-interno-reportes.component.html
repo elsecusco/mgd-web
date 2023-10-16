@@ -1,205 +1,236 @@
 <page-container class="column">
-<mat-card fxLayout="row"
-          fxLayoutAlign="center"
-          fxLayoutGap="16px"
-          fxLayout.xs="column"
-          fxLayoutAlign.xs="start">
-<div fxFlex = "100" >
-  <span class="fs-16 fw-500 mg-bot-8">Filtro del Documento</span>
-  <div class="bloque">
-  <row-container>
-    <two-picker
+  <mat-card
+    fxLayout="row"
+    fxLayoutAlign="center"
+    fxLayoutGap="16px"
+    fxLayout.xs="column"
+    fxLayoutAlign.xs="start"
+  >
+    <div fxFlex="100">
+      <div style="padding-top: 20px">
+        <span class="fs-16 fw-500 mg-bot-8">Filtro del Documento</span>
+      </div>
+      <div class="bloque">
+        <row-container>
+          <two-picker
             [fechaInicio]="documentoFiltro.fechaInicio"
             [fechaFin]="documentoFiltro.fechaFin"
-            (changeFecha)="changeFecha($event)">
-   </two-picker>
-    <mat-form-field appearance="outline"
-                    color="primary">
-        <mat-label>Por Tipo de Documento</mat-label>
-         <mat-icon matSuffix>description</mat-icon>
-         <mat-select placeholder="codigos"
-            [(ngModel)]="documentoFiltro.codigoTipoDocumento">
-            <mat-option *ngFor="let t of tiposDocumentoInterno"
-                [value]="t.codigo">
-                {{t.nombre}}
-            </mat-option>
-         </mat-select>
-    </mat-form-field> 
-  <!--Asignando el valor-->
-  <mat-form-field appearance="outline"
-                  color="primary">
-    <mat-label>Status del Doc</mat-label>
-    <mat-icon matSuffix>description</mat-icon>
-    <mat-select placeholder="codigos"
-                [(ngModel)]="documentoFiltro.codigoEstado">
-                <!-- 0 en tramite, 2 aprovado final, 6 rechazado, 10, todos, 11 anulados  -->
-           <mat-option [value] ="0">En tramite</mat-option>
-            <mat-option [value] ="2">Aprobados</mat-option>
-            <mat-option [value] ="6">Rechazados</mat-option>
-            <mat-option [value] ="10">Todos</mat-option>
-            <mat-option [value] ="11">Anulados</mat-option>
-      </mat-select>
-    </mat-form-field>
-   </row-container>
-  </div>
-  <span class="fs-16 fw-500 mg-bot-8 subtitulo">Emisor del Documento</span>
-  <div class="bloque">
-    <mat-radio-group 
-                  [(ngModel)]="documentoFiltro.tipoEmisor"
-                  aria-label="Select an option">
-    <row-container> 
-     <mat-radio-button
-                  fxFlex="15"
-                  fxFlex.xs="auto"
-                  class="mg-bot-8"
-                  appearance="outline"
-                  color="primary"
-                  value="0">Por Gerencia:</mat-radio-button>
-     <mat-form-field
-                  fxFlex="40"
-                  fxFlex.xs="auto"
-                  class="mg-bot-8"
-                  appearance="outline"
-                  color="primary">
-        <mat-label>Nombre Gerencia</mat-label>
-        <mat-icon matSuffix>description</mat-icon>
-        <mat-select placeholder="codigos"
-                    [(ngModel)]="documentoFiltro.prefijoGerencia">
-                <mat-option *ngFor="let t of tipos.tiposGerencias"
-                    [value]="t.codigo">
-                    {{t.nombre}}
-                </mat-option>
-        </mat-select>
-    </mat-form-field>      
-    </row-container>
-    
-    <row-container> 
-       <mat-radio-button
-                      fxFlex="15"
-                      fxFlex.xs="auto"
-                      class="mg-bot-8"
-                      appearance="outline"
-                      color="primary"
-                      value="1">Por Area:</mat-radio-button>
-       <area-filtro
-                    fxFlex="40"
-                    fxFlex.xs="auto"
-                    class="mg-bot-8"
-                    appearance="outline"
-                    color="primary"
-                  [matLabel]="'Area'"
-                  (returnAreas)="areasPara($event)"></area-filtro>    
-      </row-container>
-
-    <row-container> 
-        <mat-radio-button
-                    fxFlex="15"
-                    fxFlex.xs="auto"
-                    class="mg-bot-8"
-                    appearance="outline"
-                    color="primary"
-                    value="2">Por Personal :</mat-radio-button>
-        <destinatario-filtro
-                            fxFlex="40"
-                            fxFlex.xs="auto"
-                            class="mg-bot-8"
-                            appearance="outline"
-                            color="primary"
-                            [matLabel]="'Personal'"
-                            [porNombre]='1'
-                            [tipoBusqueda]='1'
-                            [onlyOne]="true"
-                            [all]="true"
-                       (returnDestinatarios)="destinatariosPara($event)"></destinatario-filtro>
-        <mat-form-field *ngIf="documentoFiltro.loginUsuario"
-                       fxFlex="25"
-                       fxFlex.xs="auto"
-                       appearance="outline"
-                       class="mg-bot-8"
-                       color="primary">
-           <mat-label>Tipo Correlativo</mat-label>
-           <mat-select [(ngModel)]="documentoFiltro.prefijoUser">
-              <mat-option *ngFor="let t of tiposCorrelativos | async"
-                           [value]="t.codigo">                           
-                   {{t.nombre}}
+            (changeFecha)="changeFecha($event)"
+          >
+          </two-picker>
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Por Tipo de Documento</mat-label>
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-select
+              placeholder="codigos"
+              [(ngModel)]="documentoFiltro.codigoTipoDocumento"
+            >
+              <mat-option
+                *ngFor="let t of tiposDocumentoInterno"
+                [value]="t.codigo"
+              >
+                {{ t.nombre }}
               </mat-option>
-           </mat-select> 
-       </mat-form-field>
-    </row-container>
+            </mat-select>
+          </mat-form-field>
+          <!--Asignando el valor-->
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Status del Doc</mat-label>
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-select
+              placeholder="codigos"
+              [(ngModel)]="documentoFiltro.codigoEstado"
+            >
+              <!-- 0 en tramite, 2 aprovado final, 6 rechazado, 10, todos, 11 anulados  -->
+              <mat-option [value]="0">En tramite</mat-option>
+              <mat-option [value]="2">Aprobados</mat-option>
+              <mat-option [value]="6">Rechazados</mat-option>
+              <mat-option [value]="10">Todos</mat-option>
+              <mat-option [value]="11">Anulados</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </row-container>
+      </div>
+      <span class="fs-16 fw-500 mg-bot-8 subtitulo">Emisor del Documento</span>
+      <div class="bloque">
+        <mat-radio-group
+          [(ngModel)]="documentoFiltro.tipoEmisor"
+          aria-label="Select an option"
+        >
+          <row-container>
+            <mat-radio-button
+              fxFlex="15"
+              fxFlex.xs="auto"
+              class="mat-sm"
+              appearance="outline"
+              color="primary"
+              value="0"
+              >Por Gerencia:</mat-radio-button
+            >
+            <mat-form-field
+              fxFlex="40"
+              fxFlex.xs="auto"
+              class="mat-sm"
+              appearance="outline"
+              color="primary"
+            >
+              <mat-label>Nombre Gerencia</mat-label>
+              <mat-icon matSuffix>description</mat-icon>
+              <mat-select
+                placeholder="codigos"
+                [(ngModel)]="documentoFiltro.prefijoGerencia"
+              >
+                <mat-option
+                  *ngFor="let t of tipos.tiposGerencias"
+                  [value]="t.codigo"
+                >
+                  {{ t.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </row-container>
+
+          <row-container>
+            <mat-radio-button
+              fxFlex="15"
+              fxFlex.xs="auto"
+              class="mat-sm"
+              appearance="outline"
+              color="primary"
+              value="1"
+              >Por Area:</mat-radio-button
+            >
+            <area-filtro
+              fxFlex="40"
+              fxFlex.xs="auto"
+              class="mg-bot-8"
+              appearance="outline"
+              color="primary"
+              [matLabel]="'Area'"
+              (returnAreas)="areasPara($event)"
+            ></area-filtro>
+          </row-container>
+
+          <row-container>
+            <mat-radio-button
+              fxFlex="15"
+              fxFlex.xs="auto"
+              class="mg-bot-8"
+              appearance="outline"
+              color="primary"
+              value="2"
+              >Por Personal :</mat-radio-button
+            >
+            <destinatario-filtro
+              fxFlex="40"
+              fxFlex.xs="auto"
+              class="mg-bot-8"
+              appearance="outline"
+              color="primary"
+              [matLabel]="'Personal'"
+              [porNombre]="1"
+              [tipoBusqueda]="1"
+              [onlyOne]="true"
+              [all]="true"
+              (returnDestinatarios)="destinatariosPara($event)"
+            ></destinatario-filtro>
+            <mat-form-field
+              *ngIf="documentoFiltro.loginUsuario"
+              fxFlex="25"
+              fxFlex.xs="auto"
+              appearance="outline"
+              class="mat-sm"
+              color="primary"
+            >
+              <mat-label>Tipo Correlativo</mat-label>
+              <mat-select [(ngModel)]="documentoFiltro.prefijoUser">
+                <mat-option
+                  *ngFor="let t of tiposCorrelativos | async"
+                  [value]="t.codigo"
+                >
+                  {{ t.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </row-container>
         </mat-radio-group>
-      <button mat-mini-fab
-                [disabled]="documentoFiltro.tipoEmisor==-1"
-                matTooltip="Vista Previa Reporte"
-                style="margin-top: 10px; margin-right: 10px;"
-                (click)="buscarDoc()">
+        <button
+          mat-mini-fab
+          [disabled]="documentoFiltro.tipoEmisor == -1"
+          matTooltip="Vista Previa Reporte"
+          style="margin-top: 10px; margin-right: 10px"
+          (click)="buscarDoc()"
+        >
           <mat-icon>find_in_page</mat-icon>
         </button>
         <!-- Descargar pdf -->
-        <button mat-mini-fab
-                [disabled]="documentoFiltro.tipoEmisor==-1"
-                matTooltip="Descargar"
-                style="margin-top: 10px; margin-right: 10px;"
-                (click)="descargarPdf()">
-            <mat-icon>cloud_download</mat-icon>
+        <button
+          mat-mini-fab
+          [disabled]="documentoFiltro.tipoEmisor == -1"
+          matTooltip="Descargar"
+          style="margin-top: 10px; margin-right: 10px"
+          (click)="descargarPdf()"
+        >
+          <mat-icon>cloud_download</mat-icon>
         </button>
         <!-- Abrir pdf -->
-        <button mat-mini-fab
-              [disabled]="documentoFiltro.tipoEmisor==-1"
-              matTooltip="Abrir Pdf"
-              style="margin-top: 10px; margin-right: 10px;"
-              (click)="openPdf()">
-            <mat-icon>picture_as_pdf</mat-icon>
+        <button
+          mat-mini-fab
+          [disabled]="documentoFiltro.tipoEmisor == -1"
+          matTooltip="Abrir Pdf"
+          style="margin-top: 10px; margin-right: 10px"
+          (click)="openPdf()"
+        >
+          <mat-icon>picture_as_pdf</mat-icon>
         </button>
-      <a #link style="display: none" class="a-link-file"></a>
-</div>
-</div>
-</mat-card>
-<mat-card>
-  <div fxLayout="column">
-  <div fxLayout="row"
-     fxLayoutAlign="start center"
-     fxLayoutGap="8px">
-
-  <table-toggle-column [headers]="headers"
-                       [columnas]="columnas"
-                       (changeSelect)="changeDisplayColumn($event)"></table-toggle-column>
-  </div>
-<table-container [idContainer]="'tdoc'"
-                      [heightSub]="335"
-                      >
-      <table  mat-table
-              matSort
-              class="table-bordered"
-              [dataSource]="datos">
-        <ng-container [matColumnDef]="columna"
-                      *ngFor="let columna of columnas;let i=index">
-            <th mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header> {{headers[i]}}
+        <a #link style="display: none" class="a-link-file"></a>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card>
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <table-toggle-column
+          [headers]="headers"
+          [columnas]="columnas"
+          (changeSelect)="changeDisplayColumn($event)"
+        ></table-toggle-column>
+      </div>
+      <table-container [idContainer]="'tdoc'" [heightSub]="335">
+        <table mat-table matSort class="table-bordered" [dataSource]="datos">
+          <ng-container
+            [matColumnDef]="columna"
+            *ngFor="let columna of columnas; let i = index"
+          >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ headers[i] }}
             </th>
-            <td mat-cell
-                class="pointer"
-                *matCellDef="let element">
-                <ng-container *ngIf="columna=='estado'">
-                  <mat-icon
-                    [style.color] = "COLORS[element.estado]"
-                    [matTooltip] = "TOOLSTIP[element.estado]"
-                    >
-                    {{ICONS[element.estado]}}
+            <td mat-cell class="pointer" *matCellDef="let element">
+              <ng-container *ngIf="columna == 'estado'">
+                <mat-icon
+                  [style.color]="getColors(element.estado)"
+                  [matTooltip]="getToolstip(element.estado)"
+                >
+                  {{ getIcons(element.estado) }}
                 </mat-icon>
-                </ng-container>
-                {{element[columna]}}
+              </ng-container>
+              {{ element[columna] }}
             </td>
-        </ng-container>
-      <tr mat-header-row
-          *matHeaderRowDef="columnasVisibles; sticky:true"></tr>
-      <tr mat-row
-          *matRowDef="let row; columns: columnasVisibles;let entry">
-      </tr>
-      </table>
-    </table-container>
-  <mat-paginator [pageSizeOptions]="[10, 20, 50]"
-                 showFirstLastButtons></mat-paginator>
-                </div>
-              </mat-card>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="columnasVisibles; sticky: true"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: columnasVisibles; let entry"
+          ></tr>
+        </table>
+      </table-container>
+      <mat-paginator
+        [pageSizeOptions]="[10, 20, 50]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </mat-card>
 </page-container>

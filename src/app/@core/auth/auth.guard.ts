@@ -1,57 +1,67 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
-  CanActivateChild,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
 } from '@angular/router';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Store } from '@ngxs/store';
-import { Usuario } from '@core/auth/usuario';
+import { Usuario } from '../../@core/auth/usuario';
 import { Authenticated, Logout } from './state/auth.action';
+import { Observable } from 'rxjs';
 
-@Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private store: Store) {}
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard {
+  constructor(private store: Store, public router: Router) {}
 
-  canActivate(): boolean {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
     const auth = this.checkLogin();
     if (auth.isAuth) {
       this.store.dispatch(new Authenticated(auth.usuario));
       return true;
     }
-
     this.store.dispatch(new Logout());
     return false;
   }
 
-  canActivateChild(): boolean {
-    return this.canActivate();
-  }
-
   checkLogin(): { isAuth: boolean; usuario: Usuario } {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')!;
 
     const helper = new JwtHelperService();
     const isExpired = helper.isTokenExpired(token);
 
-    if (isExpired) return { isAuth: false, usuario: null };
+    if (isExpired) return { isAuth: false, usuario: {} as Usuario };
 
     const usuario = helper.decodeToken(token).usuario;
     return { isAuth: true, usuario };
   }
 }
 
-@Injectable()
-export class RoleGuard implements CanActivate, CanActivateChild {
-  constructor() {}
+@Injectable({
+  providedIn: 'root',
+})
+export class RoleGuard {
+  constructor(public router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot): boolean {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
     return this.checkRol(route);
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot): boolean {
-    return this.canActivate(route);
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
+    return this.canActivate(route, state);
   }
 
   checkRol(route: ActivatedRouteSnapshot): boolean {

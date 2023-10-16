@@ -1,30 +1,30 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SeguimientoDocumento } from '@models/tramite/seguimiento-documento';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { SeguimientoDocumento } from '../../../@models/tramite/seguimiento-documento';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 import { SeguimientoState } from '../states/seguimiento.states';
-import { SeguimientoFiltro } from '@models/tramite/seguimiento-filtro';
+import { SeguimientoFiltro } from '../../../@models/tramite/seguimiento-filtro';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { ReportePrincipalComponent } from '../reporte-principal/reporte-principal.component';
 import { ReporteGraficoComponent } from '../reporte-grafico/reporte-grafico.component';
 import { TramiteService } from '../tramite-documentario.service';
-import { tap } from 'rxjs/operators';
-import { GrafoReporte } from '@models/tramite/grafo-reporte';
-
-
+// import { tap } from 'rxjs/operators';
+// import { GrafoReporte } from '@models/tramite/grafo-reporte';
 
 @Component({
   selector: 'seguimiento-documento',
   templateUrl: './seguimiento-documento.component.html',
-  styleUrls: ['./seguimiento-documento.component.scss']
+  styleUrls: ['./seguimiento-documento.component.scss'],
 })
 export class SeguimientoDocumentoComponent implements OnInit {
-
-  datos: MatTableDataSource<SeguimientoDocumento>
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('link') public link: ElementRef;
+  datos!: MatTableDataSource<SeguimientoDocumento>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('link') public link!: ElementRef;
 
   columnas: string[] = [
     'codigoDocumentoTramite',
@@ -35,7 +35,7 @@ export class SeguimientoDocumentoComponent implements OnInit {
     'numeroExpediente',
     'contenidoDocumento',
     'nombreUsuario',
-    'acciones'
+    'acciones',
   ];
   columnasVisibles: string[] = this.columnas.slice();
   headers: string[] = [
@@ -47,47 +47,45 @@ export class SeguimientoDocumentoComponent implements OnInit {
     'N° Expediente',
     'Asunto',
     'Destinatario',
-    'Acciones'
+    'Acciones',
   ];
-    documentof: SeguimientoFiltro;
-    @Select(SeguimientoState.seguimientoFiltro)
-    public documentof$: Observable<SeguimientoFiltro>;
+  documentof!: SeguimientoFiltro;
+  @Select(SeguimientoState.seguimientoFiltro)
+  public documentof$!: Observable<SeguimientoFiltro>;
 
-    @Emitter(SeguimientoState.loadDocuments)
-    private loadDocs: Emittable<SeguimientoFiltro>;
-    //#endregion variables tabla
-    //#region ngxs - state bandeja
-    @Select(SeguimientoState.pending)
-    public pending$:Observable<boolean>;
-    @Select(SeguimientoState.documentos)
-    public docs$: Observable<SeguimientoDocumento[]>;
+  @Emitter(SeguimientoState.loadDocuments)
+  private loadDocs!: Emittable<SeguimientoFiltro>;
+  //#endregion variables tabla
+  //#region ngxs - state bandeja
+  @Select(SeguimientoState.pending)
+  public pending$!: Observable<boolean>;
+  @Select(SeguimientoState.documentos)
+  public docs$!: Observable<SeguimientoDocumento[]>;
 
-    constructor( public dialog: MatDialog ,
-      private api: TramiteService
-              ) { }
+  constructor(public dialog: MatDialog, private api: TramiteService) {}
 
   ngOnInit() {
     this.documentof = new SeguimientoFiltro();
-    this.documentof$.subscribe(b=>{
-      this.documentof ={
-        nombreRemitenteDocumento:b.nombreRemitenteDocumento,
-        asunto:b.asunto,
+    this.documentof$.subscribe((b) => {
+      this.documentof = {
+        nombreRemitenteDocumento: b.nombreRemitenteDocumento,
+        asunto: b.asunto,
         filtro: b.filtro,
-        valor:b.valor,
+        valor: b.valor,
         fechaInicio: b.fechaFin,
         fechaFin: b.fechaInicio,
         check: b.check,
-        nombreArchivo: b.nombreArchivo
-         };
-     });
+        nombreArchivo: b.nombreArchivo,
+      };
+    });
     //Línea que resume todo
     //this.documentof$.subscribe(b => this.documentof = b);
     this.setTable();
-    this.docs$.subscribe(datos => this.setTable(datos));
+    this.docs$.subscribe((datos) => this.setTable(datos));
   }
 
-   //#region METODOS TABLA
-    setTable(data?: SeguimientoDocumento[]) {
+  //#region METODOS TABLA
+  setTable(data?: SeguimientoDocumento[]) {
     this.datos = new MatTableDataSource<SeguimientoDocumento>(data);
     this.datos.sort = this.sort;
     this.datos.paginator = this.paginator;
@@ -105,45 +103,44 @@ export class SeguimientoDocumentoComponent implements OnInit {
   }
   removeColumn(index: number) {
     this.columnasVisibles = this.columnasVisibles.filter(
-      h => h != this.columnas[index]
+      (h) => h != this.columnas[index]
     );
   }
-  verReporte(codigoDocumento: number){
-    const dialogRef = this.dialog.open( 
-      ReportePrincipalComponent, {
-        width: '1200px',
-        height:'100vh',
-        data: codigoDocumento
-      });
-        dialogRef.afterClosed().subscribe(result => {
-        //this.clear();
-     });
+  verReporte(codigoDocumento: number) {
+    const dialogRef = this.dialog.open(ReportePrincipalComponent, {
+      width: '1200px',
+      height: '100vh',
+      data: codigoDocumento,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      //this.clear();
+    });
   }
-  verReporteGrafo(detalleSeguimiento: SeguimientoDocumento){
-    this.api.graphReport(detalleSeguimiento.codigoDocumentoTramite)
-            .subscribe(gr =>{
-            const dialogRef = this.dialog.open(
-            ReporteGraficoComponent, {
-            width: '850px',
-            //height:'500px',
-            data: {detalle:detalleSeguimiento,
-            nodos:gr.nodos,
-            flechas:gr.flechas}
-        }
-        );
-        dialogRef.afterClosed().subscribe(result => {
+  verReporteGrafo(detalleSeguimiento: SeguimientoDocumento) {
+    this.api
+      .graphReport(detalleSeguimiento.codigoDocumentoTramite)
+      .subscribe((gr) => {
+        const dialogRef = this.dialog.open(ReporteGraficoComponent, {
+          width: '850px',
+          //height:'500px',
+          data: {
+            detalle: detalleSeguimiento,
+            nodos: gr.nodos,
+            flechas: gr.flechas,
+          },
+        });
+        dialogRef.afterClosed().subscribe((result) => {
           this.clear();
         });
-      }
-    )
+      });
   }
-    clear(){}
-    openCargo(codigoDocumento){
-      this.api.getCargo(codigoDocumento).subscribe(res => {
-        const fileURL = URL.createObjectURL(res);
-        window.open(fileURL, '_blank');
-        });
-    }
+  clear() {}
+  openCargo(codigoDocumento: any) {
+    this.api.getCargo(codigoDocumento).subscribe((res) => {
+      const fileURL = URL.createObjectURL(res);
+      window.open(fileURL, '_blank');
+    });
+  }
   // verReporteGrafo(detalleSeguimiento: SeguimientoDocumento){
   //   const gr:GrafoReporte={"flechas":[{"id":"a","source":"desarrollador01","de":"Yessenia Baca","target":"cchevarria","para":"CHRISTIAN HELER CHEVARRIA MAR","label":"(1) Ago 28, 19","tipo":"P","descripcionAtencion":"ATENDER"},
   //   {"id":"b","source":"desarrollador01","de":"Yessenia Baca","target":"promanh","para":"Pedro Roman Huaman","label":"(2) Ago 28, 19","tipo":"P","descripcionAtencion":"ATENDER"},
@@ -167,6 +164,4 @@ export class SeguimientoDocumentoComponent implements OnInit {
   //         //this.clear();
   //       });
   // }
-  }
-
-  
+}

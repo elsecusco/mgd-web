@@ -17,7 +17,7 @@
 
     <div mat-dialog-content fxLayout="column" fxLayoutGap="8px">
       <destinatario-buscar-interno
-                *ngIf="data.tipo=='Derivar'"          
+                *ngIf="data.tipo=='Derivar'"
                 (para)="para($event)"
                 [matLabel]="'Destinatario'"
                 [onlyOne]="true">
@@ -26,21 +26,21 @@
       <mat-form-field
         fxFlex="60"
         appearance="outline"
-        class="mg-bot-8"
+        class="mat-tx"
         color="primary">
         <mat-label>Proveido Documento</mat-label>
         <textarea
           matInput
           placeholder="Ingrese Proveido..."
           formControlName="proveidoDocumento"
-          rows="2">
+          rows="3">
         </textarea>
-      </mat-form-field> 
+      </mat-form-field>
       <mat-form-field
         *ngIf="data.nombreDerivacion; else razon"
         fxFlex="40"
         appearance="outline"
-        class="mg-bot-8"
+        class="mat-sm"
         color="primary">
         <mat-label>Razón Firma</mat-label>
         <input matInput
@@ -52,12 +52,12 @@
         *ngIf="data.estadoDerivacion !='FD'"
         fxFlex="40"
         appearance="outline"
-        class="mg-bot-8"
+        class="mat-sm"
         color="primary">
         <mat-label>Razón Firma</mat-label>
         <mat-select formControlName="razon">
           <mat-option *ngFor="let t of tipos.tiposFirmaMotivo"
-                      [value]="t.nombre">                    
+                      [value]="t.nombre">
             {{t.nombre}}
           </mat-option>
         </mat-select>
@@ -104,7 +104,7 @@
         [disabled]="form.invalid">
         Atencion Final
       </button>
-      <button 
+      <button
         mat-button
         color="warn"
         [mat-dialog-close]="" cdkFocusInitial>

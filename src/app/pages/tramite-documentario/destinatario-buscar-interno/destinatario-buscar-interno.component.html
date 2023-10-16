@@ -9,7 +9,7 @@
                      fxLayout.xs="column"
                      fxLayoutGap="4px"
                      (change)="porNombre=$event.value"
-                     [(value)]="porNombre">
+                     [value]="porNombre">
       <mat-radio-button [value]="1">Trabajador:</mat-radio-button>
       <mat-radio-button [value]="3">CAP:</mat-radio-button>
     </mat-radio-group>
@@ -22,6 +22,6 @@
                        [matLabel]="matLabel"
                        [onlyOne]="onlyOne"
                        [blacklist]="blacklist"
-                       (returnDestinatarios)="destinatariosPara($event)"></destinatario-filtro>                                       
+                       (returnDestinatarios)="destinatariosPara($event)"></destinatario-filtro>
   <div style="font-size: 10px">(Ingrese las 5 primeras letras del nombre o apellido)</div>
 </div>

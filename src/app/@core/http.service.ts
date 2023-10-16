@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { LoadingService } from './loading/loading.service';
 
-import { setUrl } from '@core/functions';
+import { setUrl } from '../@core/functions';
 
 @Injectable()
 export class HttpService {
@@ -54,10 +54,10 @@ export class HttpService {
     return http.pipe(
       finalize(() => {
         if (options.close) this.loading.close();
-        }),
-      catchError(e => {
+      }),
+      catchError((e) => {
         this.loading.close();
-        return throwError(e);
+        return throwError(() => e);
       })
     );
   }

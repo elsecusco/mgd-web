@@ -24,24 +24,24 @@ export class BandejaDocumento {
   // descripcionIntegracion?:string;
   // usuarioMantenimiento?:string;
   constructor() {
-    this.asunto = null;
-    this.atendido = null;
-    this.bandeja = null;
-    this.codigoDocumentoTramite = null;
-    this.de = null;
-    this.emitido = null;
+    this.asunto = '';
+    this.atendido = 0;
+    this.bandeja = '';
+    this.codigoDocumentoTramite = 0;
+    this.de = '';
+    this.emitido = 0;
     //this.fecha = null;
     ///this.fechaDerivacion = null;
-    this.leido = null;
-    this.nombreRemitenteDocumento = null;
-    this.numeroAtencion = null;
-    this.numeroDocumento = null;
-    this.numeroExpediente = null;
-    this.para = null;
-    this.recibido = null;
-    this.usuarioBuzon = null;
-    this.tipoDerivacion= null;
-    this.estiloCelda = null;
+    this.leido = 0;
+    this.nombreRemitenteDocumento = '';
+    this.numeroAtencion = 0;
+    this.numeroDocumento = '';
+    this.numeroExpediente = '';
+    this.para = '';
+    this.recibido = 0;
+    this.usuarioBuzon = '';
+    this.tipoDerivacion= '';
+    this.estiloCelda = '';
   }
 }
 

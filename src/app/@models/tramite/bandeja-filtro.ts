@@ -19,9 +19,9 @@ export class BuscarBandeja {
 
   constructor() {
     this.filtro = '';
-    this.tipoBusqueda = null;
+    this.tipoBusqueda = 0;
     this.valorBusqueda = '';
-   
+
   }
 }
 

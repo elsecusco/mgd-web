@@ -1,22 +1,25 @@
-@import '~@angular/material/theming';
+@use "@angular/material" as mat;
+@use "sass:map";
+
+$swift-ease-out-duration: 400ms !default;
+$swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 
 @mixin ngx-breadcrumbs-component-theme($theme) {
-  $config: mat-typography-config();
+  $config: mat.define-typography-config();
 
   $spacing: 24px;
   // $theme-foreground-map: map-get($theme, foreground);
   // $theme-secondary-text: mat-color($theme-foreground-map, secondary-text);
   // $theme-text: mat-color($theme-foreground-map, text);
 
-  $primary: map-get($theme, primary);
-  $theme-secondary-text: mat-color($primary, default-contrast);
-  $theme-text: mat-color($primary, default-contrast);
-
-
+  $primary: map.get($theme, primary);
+  $theme-secondary-text: mat.get-color-from-palette($primary, default-contrast);
+  $theme-text: mat.get-color-from-palette($primary, default-contrast);
 
   ngx-breadcrumbs {
     .title {
-      @include mat-typography-level-to-styles($config, title);
+      // @include mat.define-typography-level($font-size: 20px, $font-weight: 400, $font-family: Rubik);
+      // @include mat.typography-level($config, title);
       font-weight: 400;
     }
 
@@ -27,7 +30,7 @@
       transition: color $swift-ease-out-duration $swift-ease-out-timing-function;
       text-transform: capitalize;
 
-      @include mat-typography-level-to-styles($config, caption);
+      // @include mat.typography-level($config, caption);
 
       &:hover {
         color: $theme-text;
@@ -43,8 +46,8 @@
       font-size: 18px;
       height: 18px;
       width: 18px;
-      margin-left: $spacing/4;
-      margin-right: $spacing/4;
+      margin-left: calc($spacing/4);
+      margin-right: calc($spacing/4);
     }
 
     .crumb.current,

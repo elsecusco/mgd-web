@@ -2,12 +2,12 @@ export const defaultMenu: MenuItem[] = [
   {
     name: 'Home',
     icon: 'home',
-    link: '/home'
+    link: '/home',
   },
   {
     name: 'Dashboard',
     icon: 'dashboard',
-    link: '/dashboard'
+    link: '/dashboard',
   },
   // {
   //   name: 'Custom components',
@@ -21,14 +21,14 @@ export const defaultMenu: MenuItem[] = [
       {
         name: 'CRUD Table',
         icon: 'web_aaset',
-        link: '/dashboard/grid/crud-table'
+        link: '/dashboard/grid/crud-table',
       },
       {
         name: 'Grid List',
         icon: 'grid_on',
-        link: '/dashboard/grid/grid-list'
-      }
-    ]
+        link: '/dashboard/grid/grid-list',
+      },
+    ],
   },
   {
     name: 'Experiments',
@@ -38,38 +38,38 @@ export const defaultMenu: MenuItem[] = [
       {
         name: 'Animations',
         icon: 'view_list',
-        link: '/dashboard/experiments/animations'
+        link: '/dashboard/experiments/animations',
       },
       {
         name: 'Upload',
         icon: 'directions',
-        link: '/dashboard/experiments/file-upload'
+        link: '/dashboard/experiments/file-upload',
       },
       {
         name: 'Context Menu',
         icon: 'web_aaset',
-        link: '/dashboard/experiments/context-menu'
+        link: '/dashboard/experiments/context-menu',
       },
       {
         name: 'Virtual Scroll',
         icon: 'reorder',
-        link: '/dashboard/experiments/virtual-scroll'
+        link: '/dashboard/experiments/virtual-scroll',
       },
       {
         name: 'Sticky Table',
         icon: 'view_list',
-        link: '/dashboard/experiments/table'
+        link: '/dashboard/experiments/table',
       },
       {
         name: 'Knob',
         icon: 'directions',
-        link: '/dashboard/experiments/knob'
+        link: '/dashboard/experiments/knob',
       },
       {
         name: 'Layout',
         icon: 'apps',
-        link: '/dashboard/experiments/layout'
-      }
+        link: '/dashboard/experiments/layout',
+      },
       // {
       //   name: 'Microinteractions',
       //   icon: 'casino',
@@ -92,7 +92,7 @@ export const defaultMenu: MenuItem[] = [
       //     },
       //   ],
       // },
-    ]
+    ],
   },
   {
     name: 'Micro-Interactions',
@@ -102,19 +102,19 @@ export const defaultMenu: MenuItem[] = [
       {
         name: 'Clap',
         icon: 'pan_tool',
-        link: '/dashboard/experiments/clap'
+        link: '/dashboard/experiments/clap',
       },
       {
         name: 'Led',
         icon: 'highlight',
-        link: '/dashboard/experiments/led'
+        link: '/dashboard/experiments/led',
       },
       {
         name: 'Image Comp',
         icon: 'tonality',
-        link: '/dashboard/experiments/image-comp'
-      }
-    ]
+        link: '/dashboard/experiments/image-comp',
+      },
+    ],
   },
   {
     name: 'Multi-Level Menu',
@@ -139,38 +139,38 @@ export const defaultMenu: MenuItem[] = [
                     children: [
                       {
                         name: 'Level 5',
-                        link: '/level1/level2/level3/level4/level5'
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                        link: '/level1/level2/level3/level4/level5',
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-// ngrx
-// import { NavigatorModule } from '@core/navigator/navigator.module';
-import { SharedModule } from '@shared/shared.module';
-import { PagesRouting } from './pages.routing';
+import { PagesRoutingModule } from './pages-routing.module';
+
 import { Pages } from './pages';
-import { MenuItem } from '@core/navigator/menu-item.model';
+import { MenuItem } from '../@core/navigator/menu-item.model';
 import { InicioPage, InicioComponent } from './inicio';
 import { MenuItemService } from './menu-item.service';
+import { SharedModule } from '../@shared/shared.module';
+
+
 
 const MODULES = [
   CommonModule,
   FormsModule,
-
-  PagesRouting,
+  PagesRoutingModule,
   SharedModule,
   // NavigatorModule.forRoot([])
 ];
@@ -179,6 +179,6 @@ const PROVIDERS = [MenuItemService];
 @NgModule({
   imports: [...MODULES],
   declarations: [...COMPONENTS],
-  providers: [...PROVIDERS]
+  providers: [...PROVIDERS],
 })
 export class PagesModule {}

@@ -1,45 +1,72 @@
-// Cree un tema principal 
+@use "@angular/material" as mat;
+@include mat.core();
+// Cree un tema principal
+
 $yess-pallete: (
-50: #e4f0f4,
-100: #bddae5,
-200: #97c3d5,
-300: #75abc4,
-400: #5e9bba,
-500: #4a8cb1,
-600: #3f7fa5,
-700: #346f95,
-800: #2b5f83,
-900: #1e4364,
-A100: #cfd8dc,
-A200: #b0bec5,
-A400: #78909c,
-A700: #455a64,
-contrast: (
-50: $dark-primary-text,
-100: $dark-primary-text,
-200: $dark-primary-text,
-300: $dark-primary-text,
-400: $light-primary-text,
-500: $light-primary-text,
-600: $light-primary-text,
-700: $light-primary-text,
-800: $light-primary-text,
-900: $light-primary-text,
-A100: $dark-primary-text,
-A200: $dark-primary-text,
-A400: $light-primary-text,
-A700: $light-primary-text,
-)
+  50: #e4f0f4,
+  100: #bddae5,
+  200: #97c3d5,
+  300: #75abc4,
+  400: #5e9bba,
+  500: #4a8cb1,
+  600: #3f7fa5,
+  700: #346f95,
+  800: #2b5f83,
+  900: #1e4364,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: mat.$private-dark-primary-text,
+    100: mat.$private-dark-primary-text,
+    200: mat.$private-dark-primary-text,
+    300: mat.$private-dark-primary-text,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: mat.$private-dark-primary-text,
+    A200: mat.$private-dark-primary-text,
+    A400: white,
+    A700: white,
+  ),
 );
-$app-default-primary: mat-palette($yess-pallete, 900);
+$app-default-primary: mat.define-palette($yess-pallete, 900);
 //$app-default-primary: mat-palette($yess-pallete,900, 300, 700);
 
 //$app-default-primary: mat-palette($mat-blue, 900);
-$app-default-accent: mat-palette($mat-orange, 800);
-$app-default-warn: mat-palette($mat-red, 500);
+$app-default-accent: mat.define-palette(mat.$orange-palette, 800);
+$app-default-warn: mat.define-palette(mat.$red-palette, 500);
 
-$app-default-theme: mat-light-theme(
-  $app-default-primary,
-  $app-default-accent,
-  $app-default-warn
+$app-default-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-default-primary,
+      accent: $app-default-accent,
+      warn: $app-default-warn,
+    ),
+  )
 );
+
+.mat-mdc-text-field-wrapper {
+  flex: none !important;
+  // height: 50px !important;
+}
+.mat-sm > .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  height: 45px !important;
+}
+
+.mat-tx > .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  height: 95px !important;
+}
+// .mat-mdc-text-field-wrapper {
+//   // height: 50px !important;
+//   display: flex !important;
+//   align-items: center !important;
+//   flex: none !important;
+// }
+
+

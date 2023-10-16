@@ -36,7 +36,7 @@
       <mat-label>SIELSE - Atención</mat-label>
       <mat-select (selectionChange)="guardarSielse($event.value)">
           <mat-option *ngFor="let t of tipos.tiposAnaliticoIntegracion"
-                      [value]="t.codigo">                    
+                      [value]="t.codigo">
           {{t.nombre}}
         </mat-option>
       </mat-select>

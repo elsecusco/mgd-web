@@ -4,7 +4,7 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Tree } from '@core/tree';
+import { Tree } from '../../@core/tree';
 import { MenuItem } from './menu-item.model';
 import { SidenavState } from './sidenav-state.enum';
 import { MENU_ITEMS } from './symbols';
@@ -16,12 +16,18 @@ export class MenuService {
    */
   private _tree: Tree<MenuItem>;
 
-  private _items = new BehaviorSubject<MenuItem[]>([{ name: 'dummy' }]);
+  private _items = new BehaviorSubject<MenuItem[] | undefined>([
+    { name: 'dummy' },
+  ]);
+
+  // private _items = new BehaviorSubject<MenuItem[]>([
+  //   { name: 'dummy' },
+  // ]);
 
   items$ = this._items.asObservable();
 
-  get items(): MenuItem[] {
-    return this._items.getValue();
+  get items(): MenuItem[]  { // --- add | undefined
+    return this._items.getValue() as any;
   }
 
   set items(items: MenuItem[]) {
@@ -64,15 +70,15 @@ export class MenuService {
   set sidenavState(sidenavState: SidenavState) {
     this._sidenavState.next(sidenavState);
   }
-  isIconSidenav: boolean;
-  isLowerThanLarge: boolean;
+  isIconSidenav!: boolean;
+  isLowerThanLarge!: boolean;
 
   constructor(
     @Inject(MENU_ITEMS) private menuItems: MenuItem[],
     private router: Router,
     mediaObserver: MediaObserver
   ) {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.setCurrentlyOpenByRoute(event.url);
 
@@ -83,16 +89,17 @@ export class MenuService {
       }
     });
 
-    mediaObserver.media$
+    mediaObserver
+      .asObservable()
       .pipe(
         map(
-          (change: MediaChange) =>
-            change.mqAlias === 'xs' ||
-            change.mqAlias === 'sm' ||
-            change.mqAlias === 'md'
+          (change: MediaChange[]) =>
+            change[0].mqAlias === 'xs' ||
+            change[0].mqAlias === 'sm' ||
+            change[0].mqAlias === 'md'
         )
       )
-      .subscribe(isLowerThanLarge => {
+      .subscribe((isLowerThanLarge) => {
         this.isLowerThanLarge = isLowerThanLarge;
         if (
           isLowerThanLarge &&
@@ -135,10 +142,10 @@ export class MenuService {
 
   // private setCurrentlyOpenByRoute(route: string) {
   public setCurrentlyOpenByRoute(route: string) {
-    const item = this._tree.findByPredicateBFS(node => {
+    const item = this._tree.findByPredicateBFS((node) => {
       return node.link === route;
     });
-    let currentlyOpen = [];
+    let currentlyOpen: any[] = [];
 
     if (item && item.parent) {
       currentlyOpen = this.getParents(item);
@@ -150,7 +157,7 @@ export class MenuService {
   }
 
   getItemByRoute(route: string) {
-    return this._tree.findByPredicateBFS(node => {
+    return this._tree.findByPredicateBFS((node) => {
       return node.link === route;
     });
   }
@@ -180,7 +187,7 @@ export class MenuService {
   //   this._tree = new Tree<MenuItem>({ name: 'root', children: menuItems });
   //   this._items.next(this._tree.root.children);
   // }
-  publishMenuChange(menuItems) {
+  publishMenuChange(menuItems: MenuItem[]) {
     this._tree = new Tree<MenuItem>({ name: 'root', children: menuItems });
     this._items.next(this._tree.root.children);
   }

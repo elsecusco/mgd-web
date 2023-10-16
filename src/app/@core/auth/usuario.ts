@@ -17,12 +17,12 @@ export class Usuario {
   cargo: string;
 
   constructor(obj: DataObj) {
-    this.loginUsuario = (obj && obj.loginUsuario) || null;
-    this.nombreUsuario = (obj && obj.nombreUsuario) || null;
-    this.estadoUsuario = (obj && obj.estadoUsuario) || null;
+    this.loginUsuario = (obj && obj.loginUsuario) || '';
+    this.nombreUsuario = (obj && obj.nombreUsuario) || '';
+    this.estadoUsuario = (obj && obj.estadoUsuario) || 0;
     this.rol = (obj && obj.rol) || [];
-    this.mesaPartes=(obj && obj.mesaPartes)||null;
-    this.cargo=(obj && obj.cargo)||null;
+    this.mesaPartes = (obj && obj.mesaPartes) || '';
+    this.cargo = (obj && obj.cargo) || '';
   }
 }
 
@@ -32,5 +32,5 @@ interface DataObj {
   estadoUsuario?: number;
   rol?: string[];
   mesaPartes?: string;
-  cargo?:string;
+  cargo?: string;
 }

@@ -8,7 +8,8 @@ import {
 } from '@ngxs/store';
 import { MenuItem } from '../menu-item.model';
 import { MenuService } from '../menu.service';
-import { Tree } from '@core/tree';
+import { Tree } from '../../../@core/tree';
+import { Injectable } from '@angular/core';
 
 export class NextCurrentlyOpened {
   static readonly type = '[Menu] Next Currently Opened';
@@ -39,11 +40,12 @@ export interface MenuStateModel {
 @State<MenuStateModel>({
   name: 'menu',
   defaults: {
-    tree: null,
+    tree: {} as Tree<MenuItem>,//--- tree: null
     currentlyOpened: [],
     iconMode: false
   }
 })
+@Injectable()
 export class MenuState implements NgxsOnInit {
   constructor(private menuService: MenuService) {}
 
@@ -69,7 +71,7 @@ export class MenuState implements NgxsOnInit {
     });
   }
 
-  private getParents(tree, item: MenuItem): MenuItem[] {
+  private getParents(tree: any, item: MenuItem): MenuItem[] {
     const ancestors = tree.getAllParents(item);
     ancestors.shift();
     return ancestors;

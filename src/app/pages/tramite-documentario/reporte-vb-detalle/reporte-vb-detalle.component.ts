@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SeguimientoDocumento } from '@models/tramite/seguimiento-documento';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog} from '@angular/material';
+import { SeguimientoDocumento } from '../../../@models/tramite/seguimiento-documento';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { SeguimientoFiltroVb } from '@models/tramite/seguimiento-filtro-vb';
+import { SeguimientoFiltroVb } from '../../../@models/tramite/seguimiento-filtro-vb';
 import { TramiteService } from '../tramite-documentario.service';
 import { ReporteVBprincipalComponent } from '../reporte-vbprincipal/reporte-vbprincipal.component';
 import { FormGroup } from '@angular/forms';
@@ -16,26 +19,26 @@ import { ReporteVbState } from '../states/reporte-vb.state';
 })
 export class ReporteVBDetalleComponent implements OnInit {
 
-  datos: MatTableDataSource<SeguimientoDocumento>
+  datos!: MatTableDataSource<SeguimientoDocumento>
 
 
   @Select(ReporteVbState.pending)
-  public pending$:Observable<boolean>;
+  public pending$!:Observable<boolean>;
 
-  documentof: SeguimientoFiltroVb;
+  documentof!: SeguimientoFiltroVb;
   @Select(ReporteVbState.seguimientoFiltroVb)
-  public documentof$: Observable<SeguimientoFiltroVb>;
-  
-  
+  public documentof$!: Observable<SeguimientoFiltroVb>;
+
+
   @Select(ReporteVbState.documentos)
-  public docs$: Observable<SeguimientoDocumento[]>;
+  public docs$!: Observable<SeguimientoDocumento[]>;
 
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('link') public link: ElementRef;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('link') public link!: ElementRef;
 
-  form: FormGroup;
+  form!: FormGroup;
   @ViewChild('f') f: any;
 
   columnas: string[] = [
@@ -81,7 +84,7 @@ export class ReporteVBDetalleComponent implements OnInit {
       if (value.checked) this.addColumn(value.index);
       else this.removeColumn(value.index);
     }
-  
+
     addColumn(index: number) {
       this.columnasVisibles.splice(index, 0, this.columnas[index]);
     }
@@ -92,20 +95,20 @@ export class ReporteVBDetalleComponent implements OnInit {
     }
     // Listo para usar es el componente es el model que abre que EL PDF del reporte
     verReporte(codigoDocumento: number){
-    const dialogRef = this.dialog.open( 
+    const dialogRef = this.dialog.open(
       ReporteVBprincipalComponent, {
         width: '1200px',
         height:'100vh',
         data: codigoDocumento
       });
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result: any) => {
         //this.clear();
      });
   }
 
   clear(){}
-   
+
 }
 
-  
+
 

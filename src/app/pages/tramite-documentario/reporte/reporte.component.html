@@ -11,7 +11,7 @@
 </div>
 <table-container [idContainer]="'tdoc'"
                  [heightSub]="335"
-                 [loading]="pending$ | async">
+                 [loading]="!!(pending$ | async)">
   <table mat-table
          matSort
          class="table-bordered"

@@ -14,7 +14,7 @@
     </div>
   <table-container [idContainer]="'tdoc'"
                       [heightSub]="335"
-                      [loading]="pending$ | async">
+                      [loading]="!!(pending$ | async)">
       <table  mat-table
               matSort
               class="table-bordered"
@@ -30,10 +30,10 @@
                 *matCellDef="let element">
                 <ng-container *ngIf="columna=='estado'">
                   <mat-icon
-                    [style.color] = "COLORS[element.estado]"
-                    [matTooltip] = "TOOLSTIP[element.estado]"
+                    [style.color] = "getColors(element.estado)"
+                    [matTooltip] = "getToolstip(element.estado)"
                     >
-                    {{ICONS[element.estado]}}
+                    {{getIcons(element.estado)}}
                 </mat-icon>
                 </ng-container>
                 {{element[columna]}}
@@ -50,7 +50,7 @@
     </table-container>
   <mat-paginator [pageSizeOptions]="[10, 20, 50]"
                  showFirstLastButtons></mat-paginator>
-  
+
     </div>
   </mat-card>
   </page-container>

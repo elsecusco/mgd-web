@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { LoadingComponent } from './loading.component';
 
@@ -12,7 +12,7 @@ export class LoadingService {
   /**
    *Dialog de tipo LoadingComponent
    */
-  dialogRef: MatDialogRef<LoadingComponent>;
+  dialogRef!: MatDialogRef<LoadingComponent>;
 
   /**
    * Representa una instancia de LoadingService
@@ -42,7 +42,7 @@ export class LoadingService {
     try {
       //console.log('Aquí')
       this.dialogRef.close();
-    } 
+    }
     catch (error) {}
   }
 

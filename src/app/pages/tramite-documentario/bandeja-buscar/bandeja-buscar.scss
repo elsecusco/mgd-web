@@ -1,27 +1,34 @@
-.botones{ 
-text-align: right;
+.botones {
+  text-align: right;
 }
 mat-button-toggle-group {
-    text-align: right;
+  text-align: right;
 }
 // .mat-button-toggle {
-//     background-color: crimson !important; 
+//     background-color: crimson !important;
 // }
 
 // .mat-button-toggle-group {
-//     background-color: crimson !important; 
+//     background-color: crimson !important;
 // }
 
-span.bandeja{
-    font-size: xx-small;
-    display: inline-grid;
-    position: absolute;
-    bottom: -13px;
-    left: 9px;
+span.bandeja {
+  font-size: xx-small;
+  display: inline-grid;
+  position: absolute;
+  bottom: -13px;
+  left: 9px;
 }
 
+mat-mdc-form-field-subscript-wrapper {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: none !important;
+}
 
-
-.mat-button-toggle{
-    font-weight: bold;
+.mat-button-toggle {
+  font-weight: bold;
+}
+.centrar {
+  padding-top: 15px !important;
 }

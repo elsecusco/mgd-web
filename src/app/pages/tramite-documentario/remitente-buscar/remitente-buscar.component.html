@@ -3,7 +3,7 @@
                  fxLayoutGap="4px"
                  [disabled]="disabled"
                  (change)="tipoBusqueda=$event.value"
-                 [(value)]="tipoBusqueda">
+                 [value]="tipoBusqueda">
   <mat-radio-button [value]="2">Contiene:</mat-radio-button>
   <mat-radio-button [value]="1">Empieza con:</mat-radio-button>
 </mat-radio-group>
@@ -26,7 +26,7 @@
                     [displayWith]="displayFn"
                     (optionSelected)="selectRemitente()">
     <mat-option *ngFor="let r of remitentes | async"
-                [value]="r">       
+                [value]="r">
       <span>{{ r.nombreRemitenteDocumento }}</span>
     </mat-option>
   </mat-autocomplete>
@@ -38,7 +38,7 @@
           (click)="clear()">
     <mat-icon>close</mat-icon>
   </button>
-  <mat-hint align="start">
+  <mat-hint align="start" style="margin-top: 0 !important; font-size: 12px;">
     (mínimo 5 caracteres)
   </mat-hint>
 </mat-form-field>

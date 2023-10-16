@@ -1,22 +1,20 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'detalle-sielse',
   templateUrl: './detalle-sielse.component.html',
-  styleUrls: ['./detalle-sielse.component.scss']
+  styleUrls: ['./detalle-sielse.component.scss'],
 })
 export class DetalleSielseComponent implements OnInit {
+  constructor(
+    public dialogRef: MatDialogRef<DetalleSielseComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
-  constructor(public dialogRef: MatDialogRef<DetalleSielseComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) { }
-  
   // onNoClick(): void {
   //   this.dialogRef.close();
   // }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
-

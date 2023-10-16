@@ -1,123 +1,149 @@
-<form [formGroup]="form"
-      (ngSubmit)="guardar()"
-      #f="ngForm"
-      novalidate
-      class="wd-100"
-      fxLayout="column"
-      fxLayoutGap="8px">
-  
-      <mat-card fxLayout="column"
-                  fxLayoutAlign="center"
-                  fxLayoutGap 
-                  fxLayout.xs="row"
-                  fxLayoutAlign.xs="start">
-            <div class="cuadro">
-                <span class="titulo circle-btn" matSuffix>Guardar Orden de Trabajo</span>
-                <!-- <mat-icon matSuffix>assignment_turned_in</mat-icon>  -->
-                <!--<mat-divider class="mg-bot-8" 
+<form
+  [formGroup]="form"
+  (ngSubmit)="guardar()"
+  #f="ngForm"
+  novalidate
+  class="wd-100"
+  fxLayout="column"
+  fxLayoutGap="8px"
+>
+  <mat-card
+    fxLayout="column"
+    fxLayoutAlign="center"
+    fxLayoutGap
+    fxLayout.xs="row"
+    fxLayoutAlign.xs="start"
+  >
+    <div class="cuadro">
+      <span class="titulo circle-btn" matSuffix>Guardar Orden de Trabajo</span>
+      <!-- <mat-icon matSuffix>assignment_turned_in</mat-icon>  -->
+      <!--<mat-divider class="mg-bot-8"
                               style="height:2px;"></mat-divider>-->
-                <!-- <ul>
+      <!-- <ul>
                  <li class = "contenido">{{data.detalle.usuarioDestino}}</li>
                </ul> -->
-                <!--<mat-divider class="mg-bot-8"
+      <!--<mat-divider class="mg-bot-8"
                               style="height:2px; margin: 10px 0"></mat-divider>-->
-                <hr style="border-top: 2px solid #1a405a;" />
-                <!-- combos-->
-                <!-- sucursal -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 15px; row-gap: 3px">
-                  <mat-form-field 
-                                  appearance="outline"
-                                  color="primary">
-                  <mat-label>SUCURSAL</mat-label>
-                  <!-- <mat-icon matSuffix>phone</mat-icon> -->
-                    <mat-select formControlName="codigoSucursal"
-                      (selectionChange)="onCodigoSucursalChange($event.value)">
-                      <mat-option *ngFor="let t of tipos.tiposSucursal"
-                                  [value]="t.codigo">                    
-                        {{t.nombre}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                <!-- </row-container> -->
+      <hr style="border-top: 2px solid #1a405a" />
+      <!-- combos-->
+      <!-- sucursal -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 15px;
+          row-gap: 3px;
+        "
+      >
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>SUCURSAL</mat-label>
+          <!-- <mat-icon matSuffix>phone</mat-icon> -->
+          <mat-select
+            formControlName="codigoSucursal"
+            (selectionChange)="onCodigoSucursalChange($event.value)"
+          >
+            <mat-option
+              *ngFor="let t of tipos.tiposSucursal"
+              [value]="t.codigo"
+            >
+              {{ t.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- </row-container> -->
 
-                <!-- Tecnico -->
-                <!-- <row-container> -->
-                  <mat-form-field appearance="outline"
-                                  color="primary">
-                  <mat-label>Técnico Supervisor</mat-label>
-                    <mat-select formControlName="codigoTrabajador">
-                      <mat-option *ngFor="let t of tiposTecnicoSupervisor"
-                                  [value]="t.codigo">                    
-                        {{t.nombre}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <!-- Se quita Mantenimiento y Tipo por solicitud del usuario -->
-                  <!-- <mat-form-field appearance="outline"
+        <!-- Tecnico -->
+        <!-- <row-container> -->
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Técnico Supervisor</mat-label>
+          <mat-select formControlName="codigoTrabajador">
+            <mat-option
+              *ngFor="let t of tiposTecnicoSupervisor"
+              [value]="t.codigo"
+            >
+              {{ t.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- Se quita Mantenimiento y Tipo por solicitud del usuario -->
+        <!-- <mat-form-field appearance="outline"
                                   color="primary">
                   <mat-label>Clase OT Mantenimiento</mat-label>
                     <mat-select formControlName="claseOTMantenimiento"
                     (selectionChange)="onClaseOTMantenimientoChange($event.value)">
                       <mat-option *ngFor="let t of tipos.tiposTiposOT"
-                                  [value]="t.codigo">                    
+                                  [value]="t.codigo">
                         {{t.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field> -->
-                <!-- </row-container> -->
-                <!-- Tipo -->
-                <!-- <row-container> -->
-                  <!-- <mat-form-field appearance="outline"
+        <!-- </row-container> -->
+        <!-- Tipo -->
+        <!-- <row-container> -->
+        <!-- <mat-form-field appearance="outline"
                                   color="primary">
                   <mat-label>Tipo OT Mantenimiento</mat-label>
                     <mat-select formControlName="tipoOTMantenimiento">
                       <mat-option *ngFor="let t of tiposOTMantenimiento"
-                                  [value]="t.codigo">                    
+                                  [value]="t.codigo">
                         {{t.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field> -->
-                  <mat-form-field appearance="outline"
-                                  color="primary">
-                  <mat-label>Fecha y Hora Inspección</mat-label>
-                      <input [min]="today" matInput placeholder="Click para indicar hora y fecha"
-                      formControlName="fechaInspeccion"
-                      [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
-                      <owl-date-time  #dtRange1></owl-date-time>
-                  </mat-form-field>
-                </div>
-                <!-- Indicaciones -->
-                <mat-form-field style="width: 100%; margin-top: 5px" appearance="outline"
-                                color="primary">
-                  <mat-label>Indicaciones de Inspección</mat-label>
-                  <textarea style="text-transform:uppercase"
-                          matInput
-                          formControlName="indicaciones"
-                          rows="2"></textarea>
-                </mat-form-field>
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Fecha y Hora Inspección</mat-label>
+          <input
+            matInput
+            [min]="today"
+            placeholder="Click para indicar hora y fecha"
+            formControlName="fechaInspeccion"
+            [owlDateTimeTrigger]="dtRange1"
+            [owlDateTime]="dtRange1"
+          />
+          <owl-date-time #dtRange1></owl-date-time>
+        </mat-form-field>
+      </div>
+      <!-- Indicaciones -->
+      <mat-form-field
+        style="width: 100%; margin-top: 5px"
+        appearance="outline"
+        color="primary"
+        class="mat-tx"
+      >
+        <mat-label>Indicaciones de Inspección</mat-label>
+        <textarea
+          matInput
+          style="text-transform: uppercase"
+          formControlName="indicaciones"
+          rows="3"
+        ></textarea>
+      </mat-form-field>
 
-                <!--<mat-divider class="mg-bot-8" 
+      <!--<mat-divider class="mg-bot-8"
                               style="height:2px"></mat-divider>-->
-                              <hr style="border-top: 1px solid #1a405a;" />
-                <div style="justify-content: center;">
-                  <button fxFlex="50"
-                          type="submit"
-                          mat-raised-button
-                          [disabled]="!form.valid"
-                          color="primary">GUARDAR OT MANTENIMIENTO
-                          <mat-icon>save</mat-icon>
-                  </button>
-                </div>
-       
-                <!-- <mat-label 
+      <hr style="border-top: 1px solid #1a405a" />
+      <div style="justify-content: center">
+        <button
+          fxFlex="50"
+          type="submit"
+          mat-raised-button
+          [disabled]="!form.valid"
+          color="primary"
+        >
+          GUARDAR OT MANTENIMIENTO
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+
+      <!-- <mat-label
                     class = "lectura"
                     mat-dialog-title
                     *ngIf="data.detalle.tipoAtendido== 'A'; else elseBlock">Atención Informativa y de Lectura</mat-label> -->
-                     <!-- <ng-template class = "atendido" #elseBlock>
+      <!-- <ng-template class = "atendido" #elseBlock>
                         <span class = "atendido">
                           Atencion Final
                         </span>
                 </ng-template> -->
-              </div>
-              </mat-card>
+    </div>
+  </mat-card>
 </form>

@@ -1,10 +1,10 @@
-import { Injector } from '@angular/core';
+import { Injector, Injectable } from '@angular/core';
 import { State, StateContext, Selector } from '@ngxs/store';
 import { Receiver} from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TramiteService } from '../tramite-documentario.service';
-import { PopupPendientes } from '@models/tramite/popup-pendientes';
+import { PopupPendientes } from '../../../@models/tramite/popup-pendientes';
 
 export interface PendienteStateModel {
     count:number;
@@ -26,6 +26,7 @@ const defaultStatePendiente = {
     name: 'Pendiente',
     defaults: defaultStatePendiente
 })
+@Injectable()
 export class PendienteState {
     private static api: TramiteService;
 

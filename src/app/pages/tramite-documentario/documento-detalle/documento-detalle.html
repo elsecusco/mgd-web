@@ -1,50 +1,56 @@
-<span class="fs-16 fw-500 mg-bot-8">Datos del Ingreso</span>
+<div style="padding: 5px 0 20px 0">
+  <span s class="fs-16 fw-500 mg-bot-8">Datos del Ingreso</span>
+</div>
 <row-container>
+  <mat-form-field
+    [style.fontSize]="12"
 
-  <mat-form-field fxFlex="18"
-                  fxFlex.xs="auto"
-                  class="mg-bot-8"
-                  appearance="outline"
-                  color="primary">
+    fxFlex="18"
+    fxFlex.xs="auto"
+    class="mat-sm"
+    appearance="outline"
+    color="primary"
+  >
     <mat-label>Código Único de Expediente</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.codigoDocumento}}">
+    <input matInput readonly value="{{doc.codigoDocumento}}" />
   </mat-form-field>
 
-  <mat-form-field fxFlex="16"
-                  fxFlex.xs="auto"
-                  class="mg-bot-8"
-                  appearance="outline"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="16"
+    fxFlex.xs="auto"
+    class="mat-sm"
+    appearance="outline"
+    color="primary"
+  >
     <mat-label>Estado Trámite</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.nombreEstadoDocumento}}">
+    <input matInput readonly value="{{doc.nombreEstadoDocumento}}" />
   </mat-form-field>
 
-<!-- Aumentando Mesa Partes -->
-<mat-form-field fxFlex="18"
-          fxFlex.xs="auto"
-          class="mg-bot-8"
-          appearance="outline"
-          color="primary">
+  <!-- Aumentando Mesa Partes -->
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="18"
+    fxFlex.xs="auto"
+    class="mat-sm"
+    appearance="outline"
+    color="primary"
+  >
     <mat-label>Mesa Partes</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.mesaPartes}}">
-       </mat-form-field>
-<!-- Fin de Mesa Partes -->
+    <input matInput readonly value="{{doc.mesaPartes}}" />
+  </mat-form-field>
+  <!-- Fin de Mesa Partes -->
 
-  <mat-form-field fxFlex="18"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="18"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Tipo de Documento</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.nombreTipoDocumento}}">
+    <input matInput readonly value="{{doc.nombreTipoDocumento}}" />
   </mat-form-field>
 
   <!-- <mat-form-field fxFlex="20"
@@ -58,128 +64,146 @@
            value="{{doc.nombreTipoRecepcion}}">
   </mat-form-field> -->
 
-  <mat-form-field fxFlex="16"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="16"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Recepción</mat-label>
     <div *ngIf="doc.codigoTipoRecepcionDocumento==4; else noColor">
-       <input matInput
-              readonly
-              class="reservado"
-              value="{{doc.nombreTipoRecepcion}}">
+      <input
+        matInput
+        readonly
+        class="reservado"
+        value="{{doc.nombreTipoRecepcion}}"
+      />
     </div>
     <ng-template #noColor>
-     <input matInput
-              readonly
-              value="{{doc.nombreTipoRecepcion}}">
-     </ng-template>
-
+      <input matInput readonly value="{{doc.nombreTipoRecepcion}}" />
+    </ng-template>
   </mat-form-field>
 
-  <mat-form-field fxFlex="calc(11% - 21px)"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="calc(11% - 21px)"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Páginas</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.numeroPaginas}}">
+    <input matInput readonly value="{{doc.numeroPaginas}}" />
   </mat-form-field>
-
 </row-container>
 
 <row-container>
-
-  <mat-form-field fxFlex="60"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    fxFlex="60"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Remitente</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.nombreRemitenteDocumento}}">
+    <input matInput readonly value="{{doc.nombreRemitenteDocumento}}" />
   </mat-form-field>
 
-  <mat-form-field fxFlex="20"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    fxFlex="20"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Nro Documento</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.numeroDocumentoFisico}}">
+    <input matInput readonly value="{{doc.numeroDocumentoFisico}}" />
   </mat-form-field>
 
-  <mat-form-field fxFlex="20"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    fxFlex="20"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Nro Expediente</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.numeroExpediente}}">
+    <input matInput readonly value="{{doc.numeroExpediente}}" />
   </mat-form-field>
 </row-container>
 
 <row-container>
-  <mat-form-field fxFlex="25"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="25"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Fecha Documento</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.fechaDocumento}}">
+    <input matInput readonly value="{{doc.fechaDocumento}}" />
   </mat-form-field>
-  <mat-form-field fxFlex="25"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="25"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Recibido el</mat-label>
-    <input matInput
-           readonly
-           value="{{doc.fechaRecepcion}}">
+    <input matInput readonly value="{{doc.fechaRecepcion}}" />
   </mat-form-field>
 
-  <mat-form-field fxFlex="25"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="25"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Fecha Vencimiento</mat-label>
-    <input matInput
-           readonly
-           style="color:rgb(13, 20, 82)"
-           value="{{doc.fechaVencimiento}}">
+    <input
+      matInput
+      readonly
+      style="color: rgb(13, 20, 82)"
+      value="{{doc.fechaVencimiento}}"
+    />
   </mat-form-field>
-  <mat-form-field fxFlex="25"
-                  fxFlex.xs="auto"
-                  appearance="outline"
-                  class="mg-bot-8"
-                  color="primary">
+  <mat-form-field
+    [style.fontSize]="12"
+    fxFlex="25"
+    fxFlex.xs="auto"
+    appearance="outline"
+    class="mat-sm"
+    color="primary"
+  >
     <mat-label>Fecha Caducidad</mat-label>
-    <input matInput
-           readonly
-           style="color:rgb(13, 20, 82)"
-           value="{{doc.fechaCaducidad}}">
+    <input
+      matInput
+      readonly
+      style="color: rgb(13, 20, 82)"
+      value="{{doc.fechaCaducidad}}"
+    />
   </mat-form-field>
 </row-container>
 
-<mat-form-field appearance="outline"
-                class="mg-bot-8 wd-full"
-                color="primary">
+<mat-form-field
+  [style.fontSize]="12"
+  appearance="outline"
+  class="mat-tx wd-full"
+  color="primary"
+>
   <mat-label>Asunto</mat-label>
-  <textarea matInput
-            autosize
-            rows="2"
-            readonly
-            value="{{doc.contenidoDocumento}}"></textarea>
+  <textarea
+    matInput
+    autosize
+    [rows]="3"
+    readonly
+    value="{{doc.contenidoDocumento}}"
+  ></textarea>
 </mat-form-field>

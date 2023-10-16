@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 /**
  * Componente (dialog), spinner que sirve para indicar que una página
@@ -10,7 +10,7 @@ import { MatDialogRef } from '@angular/material';
   template: `
               <mat-spinner strokeWidth="5"></mat-spinner>
               <div class="cl-primary letra-spinner">CARGANDO</div>
-              
+
   `,
   // aqui se muetra el componente cargando
   styles: [

@@ -9,14 +9,14 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
 
 import { Store } from '@ngxs/store';
-import { MenuItem } from '@core/navigator/menu-item.model';
-import { MenuService } from '@core/navigator/menu.service';
+import { MenuItem } from '../../@core/navigator/menu-item.model';
+import { MenuService } from '../../@core/navigator/menu.service';
 
 @Directive({
   selector: '[ngxIconSidenav]'
 })
 export class IconSidenavDirective implements OnInit, OnDestroy {
-  private _mediaSubscription: Subscription;
+  private _mediaSubscription!: Subscription;
   isMobile = false;
 
   @HostBinding('class.icon-sidenav')
@@ -25,9 +25,9 @@ export class IconSidenavDirective implements OnInit, OnDestroy {
   }
 
   @HostBinding('class.collapsed')
-  collapsed: boolean;
+  collapsed: boolean = true; // --- add = true
 
-  currentlyOpen: MenuItem[];
+  currentlyOpen = [] as MenuItem[]; //-- currentlyOpen : MenuItem[];
 
   @HostListener('mouseenter')
   onMouseEnter() {
@@ -59,9 +59,9 @@ export class IconSidenavDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this._mediaSubscription = this.mediaObserver.media$.subscribe(
-      (change: MediaChange) => {
-        this.isMobile = change.mqAlias === 'xs' || change.mqAlias === 'sm';
+    this._mediaSubscription = this.mediaObserver.asObservable().subscribe(
+      (change: MediaChange[]) => {
+        this.isMobile = change[0].mqAlias === 'xs' || change[0].mqAlias === 'sm';
       }
     );
   }

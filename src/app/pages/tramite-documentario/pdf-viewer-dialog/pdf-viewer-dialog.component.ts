@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FileSave } from '@core/file-save.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FileSave } from '../../../@core/file-save.service';
 import { TramiteService } from '../tramite-documentario.service';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
@@ -13,17 +13,17 @@ export class PdfViewerDialogComponent implements OnInit {
 
   pdfSrc!: Blob;
   loadedPDF:Boolean = false;
-  constructor(public dialogRef: MatDialogRef<PdfViewerDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data,  
+  constructor(public dialogRef: MatDialogRef<PdfViewerDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private api: TramiteService,
     public dialog: MatDialog,
     private fs: FileSave ) {
-      pdfDefaultOptions.renderInteractiveForms = false;
+      pdfDefaultOptions.renderForms = false; //--  subs-renderInteractiveForms
      }
 
   ngOnInit() {
     this.loadPdf();
-    
+
 
   }
 
@@ -31,7 +31,7 @@ export class PdfViewerDialogComponent implements OnInit {
          this.api
         .descargarArchivo(this.data.codigoDocumento, this.data.codigoDocumentoAdjunto)
         .subscribe(async blob => {
-          this.pdfSrc = blob; 
+          this.pdfSrc = blob;
           this.loadedPDF = true;
           //this.pdfSrc = await blob.arrayBuffer();
           //this.pdfSrc = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';

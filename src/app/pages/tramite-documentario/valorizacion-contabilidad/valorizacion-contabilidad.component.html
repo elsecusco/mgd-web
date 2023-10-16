@@ -1,5 +1,5 @@
 <fieldset class="forma">
-    
+
       <legend>Valorización Para Contabilidad:</legend>
       <div fxLayout="row"
       fxLayoutAlign="end center">
@@ -17,27 +17,27 @@
         <mat-form-field fxFlex="70"
                         fxFlex.xs="auto"
                         appearance="outline"
-                        class="mg-bot-8"
+                        class="mat-sm"
                         color="primary">
             <mat-label>Razón Social</mat-label>
              <input matInput
                     placeholder="Razón Social"
                     autocomplete="off"
                     readonly="true"
-                    [(value)] = "detalleContrato.nombreProveedor"
+                    [value] = "detalleContrato.nombreProveedor"
                     type="text">
         </mat-form-field>
         <mat-form-field fxFlex="30"
                         fxFlex.xs="auto"
                         appearance="outline"
-                        class="mg-bot-8"
+                        class="mat-sm"
                         color="primary">
             <mat-label>RUC</mat-label>
              <input matInput
                     placeholder="RUC"
                     autocomplete="off"
                     readonly="true"
-                    [(value)] = "detalleContrato.numeroRuc"
+                    [value] = "detalleContrato.numeroRuc"
                     type="text">
         </mat-form-field>
     </row-container>
@@ -45,43 +45,43 @@
             <mat-form-field fxFlex="70"
                             fxFlex.xs="auto"
                             appearance="outline"
-                            class="mg-bot-8"
+                            class="mat-sm"
                             color="primary">
                 <mat-label> Descripción del Contrato</mat-label>
                  <input matInput
                         placeholder="Ingrese RUC"
                         autocomplete="off"
                         readonly="true"
-                        [(value)] = "detalleContrato.descripcion"
+                        [value] = "detalleContrato.descripcion"
                         type="text">
             </mat-form-field>
             <mat-form-field fxFlex="30"
                             fxFlex.xs="auto"
                             appearance="outline"
-                            class="mg-bot-8"
+                            class="mat-sm"
                             color="primary">
                 <mat-label>Monto</mat-label>
                  <input matInput
                         placeholder="Ingrese Razón Social"
                         autocomplete="off"
                         readonly="true"
-                        [(value)] = "detalleContrato.montoContrato"
+                        [value] = "detalleContrato.montoContrato"
                         type="text">
             </mat-form-field>
         </row-container>
-		
+
 	  <!-- Agregar Items de comprobante -->
 			<div fxLayout="row"
         fxLayoutAlign="start center"
         fxLayoutGap="8px"
-        class="mg-bot-8">
+        class="mat-sm">
      <span class="fs-16 fw-500">Valorizaciones</span>
    </div>
      <row-container>
       <mat-form-field fxFlex="30"
                       fxFlex.xs="auto"
                       appearance="outline"
-                      class="mg-bot-8"
+                      class="mat-sm"
                       color="primary">
       <mat-label>Serie Numero</mat-label>
       <input matInput
@@ -93,7 +93,7 @@
       <mat-form-field fxFlex="30"
                       fxFlex.xs="auto"
                       appearance="outline"
-                      class="mg-bot-8"
+                      class="mat-sm"
                       color="primary">
       <mat-label>Importe</mat-label>
       <input matInput
@@ -107,7 +107,7 @@
       <mat-form-field fxFlex="30"
                       fxFlex.xs="auto"
                       appearance="outline"
-                      class="mg-bot-8"
+                      class="mat-sm"
                       color="primary">
       <mat-label>HES</mat-label>
       <input matInput
@@ -130,7 +130,7 @@
       <!-- Finalizar agregar items de comprobante -->
     <table mat-table
           class="wd-100"
-          [dataSource]="detalleContrato.listValorizaciones">
+          [dataSource]="detalleContrato.listValorizaciones!">
     <ng-container matColumnDef="serie">
     <th mat-header-cell
         *matHeaderCellDef>Serie Numero</th>
@@ -144,28 +144,28 @@
     <td mat-cell
         *matCellDef="let e"> {{e.importe}} </td>
   </ng-container>
-    
+
     <ng-container matColumnDef="hes">
       <th mat-header-cell
           *matHeaderCellDef>HES</th>
       <td mat-cell
           *matCellDef="let e"> {{e.hes}} </td>
     </ng-container>
-    
+
   <ng-container matColumnDef="edit">
     <th mat-header-cell
         *matHeaderCellDef>Acciones</th>
     <td mat-cell
         *matCellDef="let e; let i = index">
         <button [disabled] = "guardado"
-                mat-icon-button 
+                mat-icon-button
                 matTooltip="Eliminar"
                 type="button"
                 (click)="eliminar(i)">
                 <mat-icon>delete_forever</mat-icon>
         </button>
         <button [disabled] = "guardado"
-                mat-icon-button 
+                mat-icon-button
                 matTooltip="Editar"
                 type="button"
                 (click)="editar(i)">
@@ -184,11 +184,11 @@
              fxLayout="row"
              fxLayoutAlign="end center"
              fxLayoutGap="4px"
-             class="mg-bot-8">
-            <mat-checkbox #chkFondo 
+             class="mat-sm">
+            <mat-checkbox #chkFondo
                           [disabled] = "guardado"></mat-checkbox>
                 <mat-form-field appearance="outline"
-                            class="mg-bot-8"
+                            class="mat-sm"
                             color="primary">
                 <mat-label>Fondo de Garantía</mat-label>
                  <input matInput
@@ -205,15 +205,15 @@
              fxLayout="row"
              fxLayoutAlign="end center"
              fxLayoutGap="4px"
-             class="mg-bot-8">
+             class="mat-sm">
             <mat-checkbox #chkAlquiler [disabled] = "guardado" ></mat-checkbox>
             <mat-form-field appearance="outline"
-                            class="mg-bot-8"
+                            class="mat-sm"
                             color="primary">
                 <mat-label>Alquiler</mat-label>
                  <input matInput
                  [disabled]="!chkAlquiler.checked || guardado"
-                 [(ngModel)] = "detalleContrato.alquiler"       
+                 [(ngModel)] = "detalleContrato.alquiler"
                  placeholder="Ingrese Alquiler"
                         autocomplete="off"
                         type="number"
@@ -225,12 +225,12 @@
              fxLayout="row"
              fxLayoutAlign="end center"
              fxLayoutGap="4px"
-             class="mg-bot-8">
-            <mat-checkbox #chkPenalidad 
+             class="mat-sm">
+            <mat-checkbox #chkPenalidad
                           [disabled] = "guardado" ></mat-checkbox>
-        
+
             <mat-form-field appearance="outline"
-                            class="mg-bot-8"
+                            class="mat-sm"
                             color="primary">
                 <mat-label>Penalidad</mat-label>
                  <input matInput

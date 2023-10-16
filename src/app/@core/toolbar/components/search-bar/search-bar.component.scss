@@ -1,16 +1,16 @@
-@import '../../../../../scss/var';
-@import '~@angular/material/theming';
+@use "@angular/material" as mat;
+@import "../../../../../scss/var";
 
-$config: mat-typography-config();
+$config: mat.define-typography-config();
 
 :host {
   display: block;
   width: 100%;
   //@include mat-typography-level-to-styles($config, subheading-1);
-  font: 400 16px/16px Roboto, 'Helvetica Neue', sans-serif;
+  font: 400 16px/16px Roboto, "Helvetica Neue", sans-serif;
 }
 
-input[type='search'] {
+input[type="search"] {
   -webkit-appearance: none;
 }
 
@@ -103,12 +103,13 @@ input[type='search'] {
   .search-dropdown {
     // background: white;
     position: absolute;
-    top: (($height__main_toolbar - 36px) / 2) + 36px; // 36px is the height of the search-bar
+    top: calc(($height__main_toolbar - 36px) / 2) + 36px; // 36px is the height of the search-bar
     width: 100%;
     z-index: -1;
     transform: translateY(-110%);
     visibility: hidden;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+      visibility 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     .content {
       padding: 16px;
@@ -144,12 +145,15 @@ input[type='search'] {
       }
 
       &.recents {
-        .recently {}
+        .recently {
+        }
 
-        .frequently {}
+        .frequently {
+        }
       }
 
-      &.results {}
+      &.results {
+      }
     }
   }
 }

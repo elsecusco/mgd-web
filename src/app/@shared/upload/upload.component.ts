@@ -3,21 +3,21 @@ import {
   FileError,
   NgxfUploaderService,
   UploadEvent,
-  UploadStatus
+  UploadStatus,
 } from 'ngxf-uploader';
-import { swalError, notifyOk } from '@core/swal';
-import { setUrl } from '@core/functions';
+import { swalError, notifyOk } from '../../@core/swal';
+import { setUrl } from '../../@core/functions';
 
 @Component({
   selector: 'upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent {
   progress = 0;
   fileName = '';
 
-  private _options: UploadOptions;
+  private _options!: UploadOptions;
   @Input()
   set options(options: UploadOptions) {
     this._options = options;
@@ -26,7 +26,7 @@ export class UploadComponent {
     return this._options;
   }
 
-  @Input() disabled: boolean;
+  @Input() disabled!: boolean;
 
   @Output() complete = new EventEmitter();
 
@@ -37,23 +37,29 @@ export class UploadComponent {
       this.alertError(file);
       return;
     }
-    this.fileName = file.name;
-
-    this.Upload.upload({
-      url: setUrl(this.options.uri),
-      fields: this.options.form,
-      files: file,
-      process: true
-    }).subscribe(
-      (event: UploadEvent) => {
+    const observer = {
+      next: (event: UploadEvent) => {
         this.progress = event.percent;
         if (event.status === UploadStatus.Completed && event.data) {
           notifyOk(event.data.mensaje);
           this.complete.emit();
         }
       },
-      _err => (this.progress = 0)
-    );
+      error: (_err: any) => {
+        this.progress = 0;
+      },
+      complete: () => {
+        console.log('Completed');
+      },
+    };
+    this.fileName = file.name;
+
+    this.Upload.upload({
+      url: setUrl(this.options.uri),
+      fields: this.options.form,
+      files: file,
+      process: true,
+    }).subscribe(observer);
   }
 
   alertError(msg: FileError) {

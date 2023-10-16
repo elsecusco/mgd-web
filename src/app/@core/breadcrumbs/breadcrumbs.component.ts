@@ -12,9 +12,9 @@ export interface Crumb {
 })
 export class BreadcrumbsComponent implements OnInit {
   @Input()
-  readonly title: string;
+  readonly title: string = '';
   @Input()
-  crumbs: ReadonlyArray<Crumb>;
+  crumbs: ReadonlyArray<Crumb> | undefined;
 
   constructor() {}
 

@@ -1,9 +1,29 @@
-$app-light-primary: mat-palette($mat-grey, 200, 500, 300);
-$app-light-accent: mat-palette($mat-brown, 200);
-$app-light-warn: mat-palette($mat-deep-orange, 200);
+$app-light-primary: mat.define-palette(mat.$grey-palette, 200, 500, 300);
+$app-light-accent: mat.define-palette(mat.$brown-palette, 200);
+$app-light-warn: mat.define-palette(mat.$deep-orange-palette, 200);
 
-$app-light-theme: mat-light-theme(
-  $app-light-primary,
-  $app-light-accent,
-  $app-light-warn
+$app-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-light-primary,
+      accent: $app-light-accent,
+      warn: $app-light-warn,
+    ),
+  )
 );
+
+.mat-mdc-text-field-wrapper {
+  // height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex: none !important;
+}
+
+.mat-mdc-form-field-flex {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.sidenav-list > ngx-sidenav-item .estilos {
+  height: 43px !important;
+}

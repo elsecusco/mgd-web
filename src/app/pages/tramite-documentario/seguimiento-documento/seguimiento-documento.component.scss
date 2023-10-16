@@ -1,32 +1,33 @@
-.mat-tab{
+.mat-tab {
   background: crimson;
   background-color: #4a8cb1 !important;
 }
-.mat-column-nombreUsuario{
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    //justify-content: center;
-    //font-weight: bold;
-  }
 
-.mat-column-nombreRemitenteDocumento{
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    //justify-content: center;
-    //font-weight: bold;
-  }
+.mat-column-nombreUsuario {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  //justify-content: center;
+  //font-weight: bold;
+}
+
+.mat-column-nombreRemitenteDocumento {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  //justify-content: center;
+  //font-weight: bold;
+}
 
 // .mat-column-contenidoDocumento{
 //     word-wrap: break-word !important;
@@ -41,30 +42,30 @@
 //     font-weight: bold;
 //   }
 
-  .mat-column-acciones{
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 12% !important;
-    width: 12% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    justify-content: center;
-    //font-weight: bold;
-  }
-  .mat-column-codigoDocumentoTramite{
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 7% !important;
-    width: 7% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    justify-content: center;
-    //font-weight: bold;
-  }
+.mat-column-acciones {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 12% !important;
+  width: 12% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  justify-content: center;
+  //font-weight: bold;
+}
+.mat-column-codigoDocumentoTramite {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 7% !important;
+  width: 7% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  justify-content: center;
+  //font-weight: bold;
+}
 
 //   .mat-column-fechaDocumento{
 //     word-wrap: break-word !important;

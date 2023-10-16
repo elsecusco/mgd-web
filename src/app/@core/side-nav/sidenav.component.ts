@@ -4,17 +4,17 @@ import {
   ViewEncapsulation,
   OnDestroy,
   ChangeDetectorRef,
-  Inject
+  Inject,
 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-import { untilDestroy } from '@core/untilDestroy';
-import { WINDOW } from '@core/window';
-import { MenuService } from '@core/navigator/menu.service';
-import { MenuItem } from '@core/navigator/menu-item.model';
+// import { untilDestroy } from '../../@core/untilDestroy';
+import { WINDOW } from '../../@core/window';
+import { MenuService } from '../../@core/navigator/menu.service';
+import { MenuItem } from '../../@core/navigator/menu-item.model';
 
 // import { sidenavAnimation } from '@ngx-starter-kit/animations';
 
@@ -23,12 +23,13 @@ import { MenuItem } from '@core/navigator/menu-item.model';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   // animations: [sidenavAnimation]
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidenavComponent implements OnInit, OnDestroy {
   private _destroyed$ = new Subject<void>();
 
-  items: MenuItem[];
+  items: MenuItem[] | undefined;
+  private subscription!: Subscription;
 
   constructor(
     private router: Router,
@@ -39,12 +40,12 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.menuService.items$
-      .pipe(untilDestroy(this))
-      .subscribe((items: MenuItem[]) => {
+    this.subscription = this.menuService.items$
+      .pipe()
+      .subscribe((items: any ) => {
         this.items = items;
       });
-
+    // console.log('items--->', this.items);
     // this.router.events.pipe(untilDestroy(this))
     //   .subscribe(event => {
     //   if (event instanceof NavigationEnd) {
@@ -57,7 +58,9 @@ export class SidenavComponent implements OnInit, OnDestroy {
     // });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   toggleIconSidenav() {
     setTimeout(() => {
@@ -67,7 +70,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.menuService.isIconSidenav = !this.menuService.isIconSidenav;
 
     const snackBarConfig: MatSnackBarConfig = <MatSnackBarConfig>{
-      duration: 5000
+      duration: 5000,
     };
 
     if (this.menuService.isIconSidenav) {

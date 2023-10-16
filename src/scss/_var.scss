@@ -36,7 +36,7 @@
 // $padding__sidenav-item__level4: 30px;
 // $padding__sidenav-item__level5: 40px;
 // $padding__sidenav-item__level6: 40px;
-
+$color-primary: white !important;
 $width__sidenav: 250px;
 
 $padding-left-right__sidenav-list__mat-list-item: 24px;
@@ -62,3 +62,25 @@ $height__main-toolbar: 48px;//64px;
 // Misc
 
 $height__buy-now-toolbar: 54px;
+
+
+:root,
+ :root.black-theme {
+    // --bg-color: yellow;
+    // --font-size-txt: 1em;
+    // --font-size-h1: 2em;
+    // --bg-color-sections: #009688;
+    // --font-color-sub: rgba(0, 0, 0, .54);
+    // --font-color-main: white;
+    // --bg-color-card: #fff;
+}
+
+:root.blue-theme {
+    // --bg-color: red;
+    // --font-size-txt: 1em;
+    // --font-size-h1: 2em;
+    // --bg-color-sections: 19a093;
+    // --font-color-sub: rgba(255, 255, 255, .54);
+    // --font-color-main: #fff;
+    // --bg-color-card: #0c0c0cab;
+}

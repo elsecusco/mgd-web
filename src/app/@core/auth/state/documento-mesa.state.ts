@@ -2,7 +2,8 @@ import { State, StateContext, Selector } from '@ngxs/store';
 import { Receiver, EmitterAction } from '@ngxs-labs/emitter';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { DocumentoMesa } from '@models/documento-mesa';
+import { DocumentoMesa } from '../../../@models/documento-mesa';
+import { Injectable } from '@angular/core';
 
 export interface DocumentoMesaStateModel {
   documento: DocumentoMesa;
@@ -23,6 +24,7 @@ const defaultStateDocumento = {
   name: 'documentoMesa',
   defaults: defaultStateDocumento
 })
+@Injectable()
 export class DocumentoMesaState {
   constructor() {}
 
@@ -30,7 +32,7 @@ export class DocumentoMesaState {
   static documento(state: DocumentoMesaStateModel) {
     return state.documento;
   }
-  /* 
+  /*
   @Selector()
   static vista(state: DocumentoMesaStateModel) {
     return state.vista;
