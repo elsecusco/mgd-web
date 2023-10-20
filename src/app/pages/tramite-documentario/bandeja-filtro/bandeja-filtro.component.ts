@@ -23,7 +23,7 @@ import { AuthService } from '../../../@core/auth/auth.service';
 export class BandejaFiltroComponent implements OnInit {
   //usuariosBandejas: Observable<BuzonesUsuario[]>;
   //Ahora se usa la variable listabuzones en vez de usuarioBandejas
-
+  condicion = true;
   loaded!: Boolean;
   @Select(BandejaState.loaded)
   public loaded$!: Observable<Boolean>;
@@ -70,7 +70,9 @@ export class BandejaFiltroComponent implements OnInit {
     //lista es un nombre q se da para refrenciar al dato q esta dentro de la memoria
     this.listaBuzones$.subscribe((lista) => (this.listaBuzones = lista));
     this.buzonActual$.subscribe((b) => (this.buzonActual = b));
-    this.internos$.subscribe((i) => (this.internos = i));
+    this.internos$.subscribe((i) => {
+      this.internos = i;
+    });
     //cada vez q cambia el valor de listabuzones en la memoria hace q mi variable local listaMemoria apunte a ese valor
     //this.bandejaf = new BandejaFiltro();
     // Sascando copia modificamos esa copia y despues vamos a volver a mandarle para q actualize las bandejas
@@ -80,6 +82,7 @@ export class BandejaFiltroComponent implements OnInit {
       if (!l) this.loadDocs.emit(this.bandejaf);
     });
     this.actualizar();
+    if (this.internos > 0) this.condicion = !this.condicion;
   }
   changeFecha(fechas: TwoPicker) {
     this.bandejaf = { bandeja: this.bandejaf.bandeja, ...fechas };

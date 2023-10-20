@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -20,12 +20,14 @@ import { Emitter, Emittable } from '@ngxs-labs/emitter';
   templateUrl: './bandeja.component.html',
   styleUrls: ['./bandeja.component.scss'],
 })
-export class BandejaComponent implements OnInit {
+export class BandejaComponent implements OnInit, DoCheck {
   //#region variables tabla
+  bandejaActiva: string = '';
+  contador = 0;
   filtrado: BandejaDocumento[] = [];
   buscarDocs$!: Observable<BandejaStateModel>;
   color: string = '#666';
-  datos!: MatTableDataSource<BandejaDocumento>;
+  datos = new MatTableDataSource<BandejaDocumento>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   columnas: string[] = [
@@ -92,27 +94,35 @@ export class BandejaComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store
   ) {
-    this.buscarDocs$ = this.store.select((state) => state.bandeja.bandejas);
+    this.buscarDocs$ = this.store.select((state) => state.bandeja);
+  }
+
+  ngDoCheck() {
+    this.setTable();
   }
 
   ngOnInit() {
-    this.setTable();
+    this.datos.sort = this.sort;
+    this.datos.paginator = this.paginator;
     this.docs$.subscribe((datos) => {
       if (datos === undefined) {
         this.filtro(datos);
-        this.setTable(this.filtrado);
+        this.datos.data = this.filtrado;
       } else {
-        this.setTable(datos);
+        this.datos.data = datos;
       }
     });
     this.paginator._intl.itemsPerPageLabel = 'Items por Página';
   }
-  //#region METODOS TABLA
-  setTable(data?: BandejaDocumento[]) {
-    this.datos = new MatTableDataSource<BandejaDocumento>(data);
-    this.datos.sort = this.sort;
-    this.datos.paginator = this.paginator;
-    // console.log('datos tabla', this.datos);
+
+  setTable() {
+    if (this.contador == 1) {
+      this.datos.data = this.filtrado;
+      this.datos.sort = this.sort;
+      this.paginator._intl.itemsPerPageLabel = 'Items por Página';
+      this.datos.paginator = this.paginator;
+      this.contador = 0;
+    }
   }
   filter(value: string) {
     this.datos.filter = value.trim().toLowerCase();
@@ -200,9 +210,19 @@ export class BandejaComponent implements OnInit {
   filtro(d: any) {
     if (d === undefined) {
       this.buscarDocs$.subscribe((x: any) => {
-        if (x.a.length > 0) this.filtrado = x.a;
-        if (x.e.length > 0) this.filtrado = x.e;
-        if (x.s.length > 0) this.filtrado = x.s;
+        this.bandejaActiva = x.bandejaActiva;
+        if (x.bandejaActiva === 'a') {
+          this.contador++;
+          this.filtrado = x.bandejas.a;
+        }
+        if (x.bandejaActiva === 'e') {
+          this.contador++;
+          this.filtrado = x.bandejas.e;
+        }
+        if (x.bandejaActiva === 's') {
+          this.contador++;
+          this.filtrado = x.bandejas.s;
+        }
       });
     }
   }

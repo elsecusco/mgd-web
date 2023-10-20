@@ -102,7 +102,7 @@
       </button> -->
     <!--<span>{{internos}}</span>-->
     <button
-      [ngClass]="{ 'pulse-inactive': internos === 0, 'pulse-button': true }"
+      [ngClass]="{ 'pulse-inactive': condicion, 'pulse-button': true }"
       *ngIf="internos"
       matTooltip="Bandeja de internos"
       (click)="openInternos()"
