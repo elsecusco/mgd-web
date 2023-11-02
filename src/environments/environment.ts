@@ -5,7 +5,7 @@ export const environment = {
   debugApi:true,
   protocol: 'http',
   // domain: 'appsrv.else.com.pe',
-  domain: 'localhost:9000', 
+  domain: 'localhost:8000',
   //domain: '10.1.1.80',
   //domain: '10.1.20.38',
   apiName: ''

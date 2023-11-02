@@ -102,17 +102,20 @@ export class BandejaComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    this.datos.sort = this.sort;
-    this.datos.paginator = this.paginator;
     this.docs$.subscribe((datos) => {
       if (datos === undefined) {
         this.filtro(datos);
         this.datos.data = this.filtrado;
+        this.datos.sort = this.sort;
+        this.paginator._intl.itemsPerPageLabel = 'Items por Página';
+        this.datos.paginator = this.paginator;
       } else {
         this.datos.data = datos;
+        this.datos.sort = this.sort;
+        this.paginator._intl.itemsPerPageLabel = 'Items por Página';
+        this.datos.paginator = this.paginator;
       }
     });
-    this.paginator._intl.itemsPerPageLabel = 'Items por Página';
   }
 
   setTable() {

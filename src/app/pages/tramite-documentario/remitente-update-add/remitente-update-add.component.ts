@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Input,
   Inject,
+  DoCheck,
 } from '@angular/core';
 import {
   FormControl,
@@ -32,13 +33,16 @@ import {
   MatDialog,
 } from '@angular/material/dialog';
 import { notifyOk } from '../../../@core/swal';
+import { RemitenteService } from './remitente.service';
 
 @Component({
   selector: 'remitente-update-add',
   templateUrl: './remitente-update-add.component.html',
   styleUrls: ['./remitente-update-add.component.scss'],
 })
-export class RemitenteUpdateAddComponent {
+export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
+  hidden: boolean = true;
+  validarString: string = '';
   saving!: boolean;
   @Output() save = new EventEmitter<number | string>();
 
@@ -47,12 +51,15 @@ export class RemitenteUpdateAddComponent {
   Tipo: any;
 
   constructor(
+    private remitenteService: RemitenteService,
     private fb: FormBuilder,
     private api: TramiteService,
     public dialogRef: MatDialogRef<RemitenteUpdateAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IRemitente
   ) {}
-
+  ngDoCheck() {
+    this.changeValidar(this.form.value.numeroDocumentoIdentidad);
+  }
   ngOnInit() {
     this.tiposRemitente = this.api.tiposRemitente().pipe(finalize(() => {}));
     this.initForm();
@@ -65,7 +72,11 @@ export class RemitenteUpdateAddComponent {
         tipo: [this.data.codigoTipoRemitenteDocumento, Validators.required],
         telefono: [this.data.telefonoContacto, Validators.required],
         // email: [this.data.emailContacto, Validators.required]
-        email: [this.data.emailContacto, ''],
+        email: [this.data.emailContacto, Validators.required],
+        numeroDocumentoIdentidad: [this.data.numeroDocumentoIdentidad, ''],
+        apellidoPaterno: [this.data.apellidoPaterno, ''],
+        apellidoMaterno: [this.data.apellidoMaterno, ''],
+        nombres: [this.data.nombres, ''],
       });
     else
       this.form = this.fb.group({
@@ -74,7 +85,11 @@ export class RemitenteUpdateAddComponent {
         tipo: ['', Validators.required],
         telefono: ['', Validators.required],
         // email: ['', Validators.required]
-        email: ['', ''],
+        email: ['', Validators.required],
+        numeroDocumentoIdentidad: ['', ''],
+        apellidoPaterno: ['', ''],
+        apellidoMaterno: ['', ''],
+        nombres: ['', ''],
       });
   }
   guardarRemitente() {
@@ -91,6 +106,11 @@ export class RemitenteUpdateAddComponent {
         this.data.codigoTipoRemitenteDocumento = this.form.value.tipo;
         this.data.telefonoContacto = this.form.value.telefono;
         this.data.emailContacto = this.form.value.email;
+        this.data.numeroDocumentoIdentidad =
+          this.form.value.numeroDocumentoIdentidad;
+        this.data.apellidoPaterno = this.form.value.apellidoPaterno;
+        this.data.apellidoMaterno = this.form.value.apellidoMaterno;
+        this.data.nombres = this.form.value.nombres;
         this.saving = false;
         this.save.emit(res.idItem);
         this.dialogRef.close(this.data);
@@ -107,6 +127,35 @@ export class RemitenteUpdateAddComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  validar() {
+    if (this.form.value.numeroDocumentoIdentidad.length == 8)
+      this.remitenteService
+        .getValidarDni(this.form.value.numeroDocumentoIdentidad)
+        .then((r: any) => {
+          this.form.controls['nombre'].setValue(r.data.nombre);
+          this.form.controls['apellidoPaterno'].setValue(r.data.aPaterno);
+          this.form.controls['apellidoMaterno'].setValue(r.data.aMaterno);
+          this.form.controls['nombres'].setValue(r.data.nombres);
+        });
+    if (this.form.value.numeroDocumentoIdentidad.length == 11)
+      this.remitenteService
+        .getValidarRuc(this.form.value.numeroDocumentoIdentidad)
+        .then((r: any) => {
+          this.form.controls['nombre'].setValue(r.data.razonSocial);
+        });
+  }
+  changeValidar(e: any) {
+    if (e.length == 8) {
+      this.validarString = 'validar DNI';
+      this.hidden = false;
+    } else if (e.length == 11) {
+      this.validarString = 'validar RUC';
+      this.hidden = false;
+    } else {
+      this.validarString = 'validar';
+      this.hidden = true;
+    }
   }
   // onNoClick(): void {
   //   if(this.data.codigoRemitenteDocumento==0)

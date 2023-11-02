@@ -253,7 +253,7 @@ export class DocumentoAdjuntarComponent implements OnInit {
     const archivo: Archivo = {
       nombre: e.nombreArchivo.substring(0, pos),
       archivo: blob,
-      extension: e.nombreArchivo.substring(pos),
+      extension: e.nombreArchivo.substring(pos).toLowerCase(),
       element: this.link,
     };
     this.fs.save(archivo);

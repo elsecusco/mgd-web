@@ -389,9 +389,7 @@ export class TramiteService {
     });
   }
 
-  guardarArchivoParaFirmarMemo(
-    codigoDocumento: any
-  ): Observable<{
+  guardarArchivoParaFirmarMemo(codigoDocumento: any): Observable<{
     rutaOrigen: string;
     rutaDestino: string;
     urlServicio: string;

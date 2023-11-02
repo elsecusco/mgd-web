@@ -4,6 +4,10 @@ export interface IRemitente {
   telefonoContacto?: string;
   emailContacto?: string;
   codigoTipoRemitenteDocumento?: number;
+  numeroDocumentoIdentidad?:string;
+  apellidoPaterno?:string;
+  apellidoMaterno?:string;
+  nombres?:string;
 }
 export class TipoRemitente {
   CodigoTipoRemitenteDocumento: number;

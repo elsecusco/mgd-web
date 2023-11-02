@@ -1,58 +1,80 @@
 <form [formGroup]="form" novalidate>
   <mat-label mat-dialog-title>Agregar Remitente</mat-label>
-    <!-- <mat-label mat-dialog-title
+  <!-- <mat-label mat-dialog-title
           *ngIf="data.codigoRemitenteDocumento==0; else elseBlock">Agregar Remitente</mat-label>
     <ng-template
            #elseBlock>Modificar Remitente</ng-template> -->
-        <div mat-dialog-content fxLayout="column" fxLayoutGap="16px">
-    
+  <div mat-dialog-content fxLayout="column" fxLayoutGap="16px">
+    <mat-form-field color="primary">
+      <mat-label>DNI o RUC</mat-label>
+      <input
+        matInput
+        (change)="changeValidar($event)"
+        formControlName="numeroDocumentoIdentidad"
+      />
+      <button
+        [disabled]="hidden"
+        matSuffix
+        mat-raised-button
+        color="primary"
+        (click)="validar()"
+      >
+        {{ validarString }}
+      </button>
+    </mat-form-field>
+
     <mat-form-field color="primary">
       <mat-label>Nombre del Remitente</mat-label>
       <mat-icon matSuffix>person_add</mat-icon>
-      <input
-        matInput
-        formControlName="nombre"/>
+      <input matInput formControlName="nombre" />
     </mat-form-field>
-    
+
     <mat-form-field color="primary">
       <mat-label>Tipo de Remitente:</mat-label>
       <mat-icon matSuffix>contacts</mat-icon>
-       <mat-select formControlName="tipo">
-        <mat-option *ngFor="let t of tiposRemitente | async"
-            [value]="t.CodigoTipoRemitenteDocumento">
-            {{t.NombreTipoRemitenteDocumento}}
+      <mat-select formControlName="tipo">
+        <mat-option
+          *ngFor="let t of tiposRemitente | async"
+          [value]="t.CodigoTipoRemitenteDocumento"
+        >
+          {{ t.NombreTipoRemitenteDocumento }}
         </mat-option>
-       </mat-select> 
+      </mat-select>
     </mat-form-field>
 
-      <mat-form-field  placeholder="Tipo"color="primary">
+    <mat-form-field placeholder="Tipo" color="primary">
       <mat-label>Teléfono</mat-label>
       <mat-icon matSuffix>phone</mat-icon>
-      <input matInput
-             formControlName="telefono"/>
-        </mat-form-field>
-    <mat-form-field  color="primary">
+      <input matInput formControlName="telefono" />
+    </mat-form-field>
+    <mat-form-field color="primary">
       <mat-label>E-mail</mat-label>
       <mat-icon matSuffix> email</mat-icon>
-      <input
-        matInput
-        formControlName="email"/>
-      </mat-form-field>
-</div>
-  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px">
+      <input matInput formControlName="email" />
+    </mat-form-field>
+  </div>
+  <div
+    mat-dialog-actions
+    fxLayout="row"
+    style="display: flex; justify-content: center; margin: -20px 0 20px 0"
+    fxLayoutGap="8px"
+  >
     <button
-            mat-flat-button 
-            color="primary"
-            (click)="guardarRemitente()"
-            [disabled]="form.invalid">
+      mat-flat-button
+      color="primary"
+      (click)="guardarRemitente()"
+      [disabled]="form.invalid"
+    >
       Guardar
     </button>
 
     <!-- <button mat-flat-button  color="warn" [mat-dialog-close]="" cdkFocusInitial> -->
-    <button mat-flat-button  
-            color="warn" 
-            [mat-dialog-close]="true"
-            cdkFocusInitial>  
+    <button
+      mat-flat-button
+      color="warn"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+    >
       Cancelar
     </button>
   </div>

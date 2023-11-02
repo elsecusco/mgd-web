@@ -95,8 +95,8 @@ export class RemitenteBuscarComponent implements OnInit {
 
   addRemitente() {
     const dialogRef = this.dialog.open(RemitenteUpdateAddComponent, {
-      width: '440px',
-      height: '450px',
+      width: '600px',
+      height: '600px',
       data: { codigoRemitenteDocumento: 0 },
       // PARA RECUPERAR EL MODIFICAR DEL REMITENTE 81-83
       // data: (this.nombreRemitente.value == "")?
