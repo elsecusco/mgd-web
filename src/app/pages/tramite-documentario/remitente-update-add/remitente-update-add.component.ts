@@ -183,7 +183,7 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
         console.log('complete');
       },
     };
-    this.api.guardarRemitente(remitenteRepresentate).subscribe(observer);
+    this.api.guardarRemitente(this.form.value).subscribe(observer);
   }
 
   onNoClick(): void {

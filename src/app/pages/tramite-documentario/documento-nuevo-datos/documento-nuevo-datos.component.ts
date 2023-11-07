@@ -63,6 +63,7 @@ export class DocumentoNuevoDatosComponent implements OnInit, OnDestroy {
   representanteRemitente$!: Observable<RespuestaRemitente[]>;
   validar: boolean = false;
   codigoEmpresa: string = '';
+  codigoRepresentante: string = '';
   codigoDocumentoTramite: string = '';
   constructor(
     private fb: FormBuilder,
@@ -131,14 +132,17 @@ export class DocumentoNuevoDatosComponent implements OnInit, OnDestroy {
       (state) => state.respuestaRemitente.respuesta
     );
     this.form.patchValue({ codigoRemitente: r.codigoRemitenteDocumento });
-    console.log('codigoRemitente', this.form.value.codigoRemitente);
+    // console.log('codigoRemitente', this.form.value.codigoRemitente);
     setTimeout(() => {
       if (this.representanteRemitente$) {
+        // console.log('codigoRemitente', this.form.value.codigoRemitente);
         this.representanteRemitente$.subscribe((res: any) => {
           res.map((r: any) => {
-            if (r.idItem == this.form.value.codigoRemitent + 1)
+            // console.log('list', r);
+            if (r.idItem == this.form.value.codigoRemitente) {
               this.validar = true;
-            else this.codigoEmpresa = r.idItem;
+              this.codigoEmpresa = r.idItem;
+            } else this.codigoRepresentante = r.idItem;
           });
         });
       }
@@ -148,6 +152,7 @@ export class DocumentoNuevoDatosComponent implements OnInit, OnDestroy {
   async saveDoc() {
     this.form.patchValue({
       loginBuzonCrea: this.buzonActual.loginUsuarioBuzon,
+      codigoRemitente: this.codigoRepresentante,
     });
     this.saving = true;
     const observer = {
