@@ -41,15 +41,22 @@ import { RemitenteService } from './remitente.service';
   styleUrls: ['./remitente-update-add.component.scss'],
 })
 export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
-  hidden: boolean = true;
-  validarString: string = '';
+  hiddenValidarDni: boolean = true;
+  hiddenDni: boolean = true;
+  hiddenValidarRuc: boolean = true;
+  hiddenRuc: boolean = true;
+  validarStringDni: string = '';
+  validarStringRuc: string = '';
+  valorTipoDocumento: string = 'D.N.I.';
   saving!: boolean;
+  selected: string = 'D.N.I.';
+  representante: respuestaRemitente[] = [];
   @Output() save = new EventEmitter<number | string>();
 
   form!: FormGroup;
   tiposRemitente!: Observable<TipoRemitente[]>;
   Tipo: any;
-
+  listTipoDocumento: tipoDocumento[] = [];
   constructor(
     private remitenteService: RemitenteService,
     private fb: FormBuilder,
@@ -58,11 +65,13 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
     @Inject(MAT_DIALOG_DATA) public data: IRemitente
   ) {}
   ngDoCheck() {
-    this.changeValidar(this.form.value.numeroDocumentoIdentidad);
+    this.changeValidarDni(this.form.value.numeroDocumentoIdentidad);
+    this.changeValidarRuc(this.form.value.numeroDocumentoIdentidadRuc);
   }
   ngOnInit() {
     this.tiposRemitente = this.api.tiposRemitente().pipe(finalize(() => {}));
     this.initForm();
+    this.cargarData();
   }
   initForm() {
     if (this.data.codigoRemitenteDocumento > 0)
@@ -77,6 +86,8 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
         apellidoPaterno: [this.data.apellidoPaterno, ''],
         apellidoMaterno: [this.data.apellidoMaterno, ''],
         nombres: [this.data.nombres, ''],
+        numeroDocumentoIdentidadRuc: [this.data.nombres, ''],
+        razonSocial: [this.data.nombres, ''],
       });
     else
       this.form = this.fb.group({
@@ -90,30 +101,80 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
         apellidoPaterno: ['', ''],
         apellidoMaterno: ['', ''],
         nombres: ['', ''],
+        numeroDocumentoIdentidadRuc: ['', ''],
+        razonSocial: ['', ''],
       });
   }
   guardarRemitente() {
+    let remitenteRepresentate: any = {
+      codigoRemitenteDocumento: 0,
+      nombre: this.form.value.nombre,
+      tipo: this.form.value.tipo,
+      telefono: this.form.value.telefono,
+      email: this.form.value.email,
+      NumeroDocumentoIdentidad: this.form.value.numeroDocumentoIdentidad,
+      ApellidoPaterno: this.form.value.apellidoPaterno,
+      ApellidoMaterno: this.form.value.apellidoMaterno,
+      Nombres: this.form.value.nombres,
+    };
+    let remitenteEmpresa: any = {
+      codigoRemitenteDocumento: 0,
+      nombre: this.form.value.razonSocial,
+      tipo: this.form.value.tipo,
+      telefono: this.form.value.telefono,
+      email: this.form.value.email,
+      NumeroDocumentoIdentidad: this.form.value.numeroDocumentoIdentidadRuc,
+      ApellidoPaterno: '',
+      ApellidoMaterno: '',
+      Nombres: '',
+    };
+    if (!this.hiddenRuc) {
+      this.api.guardarRemitente(remitenteEmpresa).subscribe({
+        next: (res: any) => {
+          this.representante.push(res);
+        },
+        error: (_err: any) => {
+          console.log(_err);
+        },
+        complete: () => {
+          console.log('complete');
+        },
+      });
+    }
     this.saving = true;
     const observer = {
       next: (res: any) => {
+        if (!this.hiddenRuc) this.representante.push(res);
         notifyOk(res.mensaje);
         this.form.disable();
         this.form.patchValue({
           codigoRemitenteDocumento: res.idItem,
         });
         this.data.codigoRemitenteDocumento = +res.idItem;
-        this.data.nombreRemitenteDocumento = this.form.value.nombre;
+        this.data.nombreRemitenteDocumento = this.hiddenRuc
+          ? this.form.value.nombre
+          : this.form.value.razonSocial;
         this.data.codigoTipoRemitenteDocumento = this.form.value.tipo;
         this.data.telefonoContacto = this.form.value.telefono;
         this.data.emailContacto = this.form.value.email;
-        this.data.numeroDocumentoIdentidad =
-          this.form.value.numeroDocumentoIdentidad;
-        this.data.apellidoPaterno = this.form.value.apellidoPaterno;
-        this.data.apellidoMaterno = this.form.value.apellidoMaterno;
-        this.data.nombres = this.form.value.nombres;
+        this.data.numeroDocumentoIdentidad = this.hiddenRuc
+          ? this.form.value.numeroDocumentoIdentidad
+          : this.form.value.numeroDocumentoIdentidadRuc;
+        this.data.apellidoPaterno = this.hiddenRuc
+          ? this.form.value.apellidoPaterno
+          : '';
+        this.data.apellidoMaterno = this.hiddenRuc
+          ? this.form.value.apellidoMaterno
+          : '';
+        this.data.nombres = this.hiddenRuc ? this.form.value.nombres : '';
         this.saving = false;
         this.save.emit(res.idItem);
-        this.dialogRef.close(this.data);
+        if (!this.hiddenRuc) {
+          this.dialogRef.close({
+            data: this.data,
+            remitente: this.representante,
+          });
+        } else this.dialogRef.close(this.data);
       },
       error: (_err: any) => {
         this.saving = false;
@@ -122,13 +183,13 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
         console.log('complete');
       },
     };
-    this.api.guardarRemitente(this.form.value).subscribe(observer);
+    this.api.guardarRemitente(remitenteRepresentate).subscribe(observer);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  validar() {
+  validarDni() {
     if (this.form.value.numeroDocumentoIdentidad.length == 8)
       this.remitenteService
         .getValidarDni(this.form.value.numeroDocumentoIdentidad)
@@ -138,24 +199,54 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
           this.form.controls['apellidoMaterno'].setValue(r.data.aMaterno);
           this.form.controls['nombres'].setValue(r.data.nombres);
         });
-    if (this.form.value.numeroDocumentoIdentidad.length == 11)
+  }
+  validarRuc() {
+    if (this.form.value.numeroDocumentoIdentidadRuc.length == 11)
       this.remitenteService
-        .getValidarRuc(this.form.value.numeroDocumentoIdentidad)
+        .getValidarRuc(this.form.value.numeroDocumentoIdentidadRuc)
         .then((r: any) => {
-          this.form.controls['nombre'].setValue(r.data.razonSocial);
+          this.form.controls['razonSocial'].setValue(r.data.razonSocial);
         });
   }
-  changeValidar(e: any) {
+  selectChange(e: any) {
+    this.valorTipoDocumento = e;
+    if (e != 'D.N.I.') this.hiddenDni = false;
+    else this.hiddenDni = true;
+  }
+  changeValidarDni(e: any) {
     if (e.length == 8) {
-      this.validarString = 'validar DNI';
-      this.hidden = false;
-    } else if (e.length == 11) {
-      this.validarString = 'validar RUC';
-      this.hidden = false;
+      this.validarStringDni = 'validar DNI';
+      this.hiddenValidarDni = false;
     } else {
-      this.validarString = 'validar';
-      this.hidden = true;
+      this.validarStringDni = 'validar';
+      this.hiddenValidarDni = true;
     }
+  }
+  changeValidarRuc(e: any) {
+    if (e.length == 11) {
+      this.validarStringRuc = 'validar RUC';
+      this.hiddenValidarRuc = false;
+    } else {
+      this.validarStringRuc = 'validar';
+      this.hiddenValidarRuc = true;
+    }
+  }
+  activarRuc(e: any) {
+    // console.log("change",e.target.checked);
+    this.hiddenRuc = !e.target.checked;
+  }
+  cargarData() {
+    this.api.tipoDocumento().subscribe({
+      next: (res: tipoDocumento[]) => {
+        this.listTipoDocumento = res;
+      },
+      error: (_err: any) => {
+        console.log('error', _err);
+      },
+      complete: () => {
+        console.log('complete');
+      },
+    });
   }
   // onNoClick(): void {
   //   if(this.data.codigoRemitenteDocumento==0)
@@ -163,4 +254,15 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
   //   else
   //     this.dialogRef.close(this.data);
   // }
+}
+export interface tipoDocumento {
+  CodigoTipoDocumentoIdentidad: number;
+  NombreTipoDocumentoIdentidad: string;
+  CantidadDigitos: number;
+  SoloNumero: number;
+}
+export interface respuestaRemitente {
+  id: number;
+  idItem: string;
+  mensaje: string;
 }

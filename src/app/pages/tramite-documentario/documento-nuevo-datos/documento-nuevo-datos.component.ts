@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 
 import { TramiteTiposState } from '../states/tramite-tipos.state';
 
@@ -24,6 +24,7 @@ import { BandejaState } from '../states/bandeja.state';
 // import { formatDate } from '@angular/common';
 // import { ThemePalette } from '@angular/material';
 import { BuzonesUsuario } from '../../../@models/tramite/buzones-usuario';
+import { RespuestaRemitente } from '../states/remitente.states';
 
 @Component({
   selector: 'documento-nuevo-datos',
@@ -59,7 +60,15 @@ export class DocumentoNuevoDatosComponent implements OnInit, OnDestroy {
   saving!: boolean;
   @Output() save = new EventEmitter<number>();
 
-  constructor(private fb: FormBuilder, private api: TramiteService) {}
+  representanteRemitente$!: Observable<RespuestaRemitente[]>;
+  validar: boolean = false;
+  codigoEmpresa: string = '';
+  codigoDocumentoTramite: string = '';
+  constructor(
+    private fb: FormBuilder,
+    private api: TramiteService,
+    private store: Store
+  ) {}
 
   ngOnInit() {
     this.buzonActual$.subscribe((u) => (this.buzonActual = u));
@@ -118,16 +127,32 @@ export class DocumentoNuevoDatosComponent implements OnInit, OnDestroy {
   }
 
   changeRemitente(r: Remitente | any) {
+    this.representanteRemitente$ = this.store.select(
+      (state) => state.respuestaRemitente.respuesta
+    );
     this.form.patchValue({ codigoRemitente: r.codigoRemitenteDocumento });
+    console.log('codigoRemitente', this.form.value.codigoRemitente);
+    setTimeout(() => {
+      if (this.representanteRemitente$) {
+        this.representanteRemitente$.subscribe((res: any) => {
+          res.map((r: any) => {
+            if (r.idItem == this.form.value.codigoRemitent + 1)
+              this.validar = true;
+            else this.codigoEmpresa = r.idItem;
+          });
+        });
+      }
+    }, 2000);
   }
 
-  saveDoc() {
+  async saveDoc() {
     this.form.patchValue({
       loginBuzonCrea: this.buzonActual.loginUsuarioBuzon,
     });
     this.saving = true;
     const observer = {
       next: (res: any) => {
+        this.codigoDocumentoTramite = res.idItem;
         notifyOk(res.mensaje);
         this.form.disable();
         this.form.patchValue({
@@ -144,7 +169,28 @@ export class DocumentoNuevoDatosComponent implements OnInit, OnDestroy {
         console.log('complete');
       },
     };
-    this.api.guardarDocumento(this.form.value).subscribe(observer);
+    await this.api.guardarDocumento(this.form.value).subscribe(observer);
+
+    if (this.validar) {
+      setTimeout(() => {
+        this.api
+          .actualizarRemitenteRepresentante({
+            codigoRemitenteDocumentoRepresentante: this.codigoEmpresa,
+            codigoDocumentoTramite: this.codigoDocumentoTramite,
+          })
+          .subscribe({
+            next: (res: any) => {
+              console.log(res);
+            },
+            error: (_err: any) => {
+              console.log(_err);
+            },
+            complete: () => {
+              console.log('complete');
+            },
+          });
+      }, 3000);
+    }
   }
 
   autoGrowTextZone(e: any) {

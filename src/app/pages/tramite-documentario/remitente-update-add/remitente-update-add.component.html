@@ -5,25 +5,37 @@
     <ng-template
            #elseBlock>Modificar Remitente</ng-template> -->
   <div mat-dialog-content fxLayout="column" fxLayoutGap="16px">
+    <mat-form-field>
+      <mat-label>Tipo Documento</mat-label>
+      <mat-select [value]="selected" (valueChange)="selectChange($event)">
+        <mat-option
+          *ngFor="let tipoDoc of listTipoDocumento"
+          [value]="tipoDoc.NombreTipoDocumentoIdentidad"
+        >
+          {{ tipoDoc.NombreTipoDocumentoIdentidad }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field color="primary">
-      <mat-label>DNI o RUC</mat-label>
+      <mat-label>{{ valorTipoDocumento }}</mat-label>
       <input
         matInput
-        (change)="changeValidar($event)"
+        (change)="changeValidarDni($event)"
         formControlName="numeroDocumentoIdentidad"
       />
       <button
-        [disabled]="hidden"
+        [hidden]="!hiddenDni"
+        [disabled]="hiddenValidarDni"
         matSuffix
         mat-raised-button
         color="primary"
-        (click)="validar()"
+        (click)="validarDni()"
       >
-        {{ validarString }}
+        {{ validarStringDni }}
       </button>
     </mat-form-field>
 
-    <mat-form-field color="primary">
+    <mat-form-field [disabled]="!hiddenDni" color="primary">
       <mat-label>Nombre del Remitente</mat-label>
       <mat-icon matSuffix>person_add</mat-icon>
       <input matInput formControlName="nombre" />
@@ -47,10 +59,43 @@
       <mat-icon matSuffix>phone</mat-icon>
       <input matInput formControlName="telefono" />
     </mat-form-field>
+
     <mat-form-field color="primary">
       <mat-label>E-mail</mat-label>
       <mat-icon matSuffix> email</mat-icon>
       <input matInput formControlName="email" />
+    </mat-form-field>
+
+    <span>
+      Si el documento que va a registrar es presentado por una empresa, debes
+      indicar el RUC de la empresa, para que pueda ser tramitado correctamente.
+    </span>
+    <mat-checkbox class="example-margin" (click)="activarRuc($event)"
+      >Presento a nombre una empresa</mat-checkbox
+    >
+
+    <mat-form-field [hidden]="hiddenRuc" color="primary">
+      <mat-label>RUC</mat-label>
+      <input
+        matInput
+        (change)="changeValidarRuc($event)"
+        formControlName="numeroDocumentoIdentidadRuc"
+      />
+      <button
+        matSuffix
+        [disabled]="hiddenValidarRuc"
+        mat-raised-button
+        color="primary"
+        (click)="validarRuc()"
+      >
+        {{ validarStringRuc }}
+      </button>
+    </mat-form-field>
+
+    <mat-form-field [hidden]="hiddenRuc" color="primary">
+      <mat-label>Razon Social</mat-label>
+      <mat-icon matSuffix>person_add</mat-icon>
+      <input matInput formControlName="razonSocial" />
     </mat-form-field>
   </div>
   <div

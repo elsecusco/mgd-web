@@ -20,6 +20,7 @@ import { ReporteState } from './states/reporte.state';
 import { ReporteVbState } from './states/reporte-vb.state';
 import { DocumentoInternoState } from './states/documento-interno.state';
 import { SeguimientoState } from './states/seguimiento.states';
+import { RespuestaRemitenteState } from './states/remitente.states';
 
 import { TramiteDocumentario } from './tramite-documentario.component';
 import { InicioTramitePage } from './inicio-tramite/inicio-tramite.page';
@@ -134,8 +135,9 @@ const MODULES = [
     PendienteState,
     SeguimientoState,
     ReporteVbState,
+    RespuestaRemitenteState,
   ]),
-  NgxsResetPluginModule.forRoot()
+  NgxsResetPluginModule.forRoot(),
 ];
 
 //const ENTRIES = [DocumentoAdjuntarDialog, DocumentoAtencionDialog];
@@ -232,7 +234,8 @@ const PROVIDERS = [TramiteService];
   declarations: [...COMPONENTS],
   imports: [...MODULES],
   bootstrap: [ReporteGraficoComponent],
-  providers: [...PROVIDERS,
+  providers: [
+    ...PROVIDERS,
     // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' }}
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -33,6 +33,8 @@ import {
 } from '@angular/material/dialog';
 // import { notifyOk } from '@core/swal';
 import { RemitenteUpdateAddComponent } from '../remitente-update-add/remitente-update-add.component';
+import { Store } from '@ngxs/store';
+import { ActualizarRemitente } from '../states/remitente.states';
 
 @Component({
   selector: 'remitente-buscar',
@@ -59,9 +61,8 @@ export class RemitenteBuscarComponent implements OnInit {
   }
 
   @Output() remitente = new EventEmitter<Remitente>();
-
   //constructor(private api: TramiteService) {}
-  constructor(private api: TramiteService, public dialog: MatDialog) {}
+  constructor(private api: TramiteService, public dialog: MatDialog,private store: Store) {}
 
   displayFn = (r?: Remitente) => (r ? r.nombreRemitenteDocumento : '');
 
@@ -96,7 +97,7 @@ export class RemitenteBuscarComponent implements OnInit {
   addRemitente() {
     const dialogRef = this.dialog.open(RemitenteUpdateAddComponent, {
       width: '600px',
-      height: '600px',
+      height: '750px',
       data: { codigoRemitenteDocumento: 0 },
       // PARA RECUPERAR EL MODIFICAR DEL REMITENTE 81-83
       // data: (this.nombreRemitente.value == "")?
@@ -104,10 +105,19 @@ export class RemitenteBuscarComponent implements OnInit {
       //     this.nombreRemitente.value
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.nombreRemitente.setValue(result);
-        this.remitente.emit(result);
-      } else this.clear();
+      if (result?.remitente != null) {
+        this.store.dispatch(new ActualizarRemitente(result.remitente))
+        if (result) {
+          this.nombreRemitente.setValue(result.data);
+          this.remitente.emit(result.data);
+          console.log("emit",result.data)
+        } else this.clear();
+      } else {
+        if (result) {
+          this.nombreRemitente.setValue(result);
+          this.remitente.emit(result);
+        } else this.clear();
+      }
     });
   }
 }

@@ -800,4 +800,19 @@ export class TramiteService {
       close: false,
     });
   }
+  actualizarRemitenteRepresentante(form: any): Observable<ItemResultado> {
+    return this.http.post({
+      body: form,
+      uri: `api/ActualizarRemitenteRepresentante`,
+      open: false,
+      close: false,
+    });
+  }
+  tipoDocumento(){
+    return this.http.get({
+      uri: `api/tipoDocumentoIdentidad`,
+      open: false,
+      close: false,
+    });
+  }
 }
