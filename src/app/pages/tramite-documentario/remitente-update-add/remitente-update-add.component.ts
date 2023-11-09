@@ -215,19 +215,19 @@ export class RemitenteUpdateAddComponent implements OnInit, DoCheck {
   }
   changeValidarDni(e: any) {
     if (e.length == 8) {
-      this.validarStringDni = 'validar DNI';
+      this.validarStringDni = 'Validar DNI';
       this.hiddenValidarDni = false;
     } else {
-      this.validarStringDni = 'validar';
+      this.validarStringDni = 'Validar';
       this.hiddenValidarDni = true;
     }
   }
   changeValidarRuc(e: any) {
     if (e.length == 11) {
-      this.validarStringRuc = 'validar RUC';
+      this.validarStringRuc = 'Validar RUC';
       this.hiddenValidarRuc = false;
     } else {
-      this.validarStringRuc = 'validar';
+      this.validarStringRuc = 'Validar';
       this.hiddenValidarRuc = true;
     }
   }
